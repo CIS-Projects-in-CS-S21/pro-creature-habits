@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;AACA;;AACA","sourcesContent":["export { default } from './BubbleTabBar';\nexport { default as BubbleTabBarItem } from './item';\nexport {\n  BubbleTabBarConfig,\n  BubbleTabBarItemConfig,\n  BubbleTabBarItemProps,\n  BubbleTabBarIconProps,\n} from './types';\n"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;AACA;;AACA","sourcesContent":["export { default } from './MaterialTabBar';\nexport { default as MaterialTabBarItem } from './item';\nexport {\n  MaterialTabBarConfig,\n  MaterialTabBarItemConfig,\n  MaterialTabBarItemProps,\n  MaterialTabBarIconProps,\n} from './types';\n"]}
