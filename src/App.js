@@ -10,6 +10,7 @@ import HomeTabs from "./components/HomeTabs";
 import SignInScreen from "./screens/SignIn";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
 import AccountCreationScreen from "./screens/AccountCreation";
+import ChoosePet from "./screens/ChoosePet";
 import {API_WEATHER_KEY} from "./components/Keys"
 
 
@@ -152,6 +153,9 @@ const App = () => {
 							<AccountCreationScreen {...props} onSignUp={handleSignUp} />
 						)}
 					</Stack.Screen>
+					<Stack.Screen name="Choose Pet"
+					component={ChoosePet}>
+                    </Stack.Screen>
 					</>
 				)}
 			</Stack.Navigator>

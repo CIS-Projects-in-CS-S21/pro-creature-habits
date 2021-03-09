@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/images/cutekitten.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/lizard.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/pixeldog.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AccountCreation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AccountCreation.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1pUK3suhC0nkLgSUNKQEIQTvSK2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/images" />
+      <recent name="$PROJECT_DIR$/android/app/src/main/res/drawable" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="" />
+      <created>1615232032408</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615232032408</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="334" y="125" width="1256" height="787" key="AVDManager" timestamp="1615234373672">
+      <screen x="0" y="25" width="1792" height="1026" />
+    </state>
+    <state x="334" y="125" width="1256" height="786" key="AVDManager/-1920.25.1920.1055/0.25.1792.1023@0.25.1792.1023" timestamp="1615232537413" />
+    <state x="334" y="125" width="1256" height="787" key="AVDManager/-1920.25.1920.1055/0.25.1792.1026@0.25.1792.1026" timestamp="1615234373672" />
+    <state x="1026" y="206" width="739" height="735" key="find.popup" timestamp="1615235431323">
+      <screen x="0" y="25" width="1792" height="1029" />
+    </state>
+    <state x="1026" y="206" width="739" height="735" key="find.popup/-1920.25.1920.1055/0.25.1792.1029@0.25.1792.1029" timestamp="1615235431323" />
+    <state x="627" y="237" key="run.anything.popup" timestamp="1615232236706">
+      <screen x="0" y="25" width="1792" height="1023" />
+    </state>
+    <state x="627" y="237" key="run.anything.popup/-1920.25.1920.1055/0.25.1792.1023@0.25.1792.1023" timestamp="1615232236706" />
+  </component>
+</project>
