@@ -23,13 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/images/cutekitten.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/lizard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/pixeldog.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/AccountCreation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AccountCreation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ChoosePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
