@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet, Image} from "react-native";
 import {TouchableHighlight} from "react-native";
+import { Images } from "../components/Images";
 
 
 const styles = StyleSheet.create({
@@ -15,14 +16,17 @@ const styles = StyleSheet.create({
 	cardsContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
-		marginTop: 20
+		marginTop: 20,
+		flexWrap: 'wrap',
+		alignContent: 'flex-end'
 	},
 	cardContainer: {
 		borderWidth: 2,
 		borderColor: 'white',
 		borderRadius: 20,
 		padding: 8,
-		backgroundColor: 'lightblue'
+		backgroundColor: 'lightblue',
+		margin: 10
 	},
 	cardFooter: {
 		flexDirection: 'row',
@@ -36,31 +40,46 @@ const styles = StyleSheet.create({
 	}
 });
 
-const Card = () => {
-	return (
+const shopItems = ['pizza', 'glasses', 'burger', 'cake', 'pie', 'shirt', 'water']
 
-		<TouchableHighlight
-			activeOpacity={0.6}
-			onPress={() => alert('You bought a burger :)')}
-			style={{borderRadius: 20}}
-		>
-			<View style={styles.cardContainer}>
-				<Image style={{width:75, height:75}} source={require('../test_images/burger.png')}/>
-				<View style={styles.cardFooter}>
-					<Text style={{fontSize: 20, color: 'white'}}>10</Text>
-					<Image style={styles.coin} source={require('../test_images/coin.png')}/>
-				</View>
+const Card = ({item}) => {
+	const itemDir = `../test_images/${item}.png`;
+	return (
+		<View style={styles.cardContainer}>
+			<Image style={{width:75, height:75}} source={Images[item].uri}/>
+			<View style={styles.cardFooter}>
+				<Text style={{fontSize: 20, color: 'white'}}>10</Text>
+				<Image style={styles.coin} source={require('../test_images/coin.png')}/>
 			</View>
-		</TouchableHighlight>
+		</View>
 	)
 }
 
 const Cards = () => {
+	const[items, setItems] = React.useState(shopItems);
+
+	const onPurchase = (item) => {
+		alert(`You bought ${item}!`)
+		const index = items.indexOf(item);
+		const copyItems = [...items];
+		copyItems.splice(index, 1);
+		setItems(copyItems);
+	}
+
 	return (
 		<View style={styles.cardsContainer}>
-			<Card/>
-			<Card/>
-			<Card/>
+			{items.map((item, index) => {
+				return(
+					<TouchableHighlight
+						activeOpacity={0.6}
+						onPress={() => onPurchase(item)}
+						style={{borderRadius: 20}}
+						key={index}
+					>
+						<Card key={index} item={item} />
+					</TouchableHighlight>
+				)
+			})}
 		</View>
 	)
 }
