@@ -35,12 +35,13 @@ const styles = StyleSheet.create({
 		paddingRight: 5
 	},
 	coin: {
-    	width: 22,
-		height: 26
+    	width: 25,
+		height: 25,
+		marginTop: 5
 	}
 });
 
-const shopItems = ['pizza', 'glasses', 'burger', 'cake', 'pie', 'shirt', 'water']
+const shopItems = ['pizza', 'shoes', 'burger', 'shirt', 'carrot', 'shirt', 'water']
 
 const Card = ({item}) => {
 	const itemDir = `../test_images/${item}.png`;
@@ -48,7 +49,7 @@ const Card = ({item}) => {
 		<View style={styles.cardContainer}>
 			<Image style={{width:75, height:75}} source={Images[item].uri}/>
 			<View style={styles.cardFooter}>
-				<Text style={{fontSize: 20, color: 'white'}}>10</Text>
+				<Text style={{fontSize: 20, color: 'white', marginTop: 5}}>{Math.round(10*Math.random()) + 1}</Text>
 				<Image style={styles.coin} source={require('../test_images/coin.png')}/>
 			</View>
 		</View>
