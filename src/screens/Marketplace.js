@@ -2,6 +2,9 @@ import React from 'react';
 import {Text, View, Button, StyleSheet, Image} from "react-native";
 import {TouchableHighlight} from "react-native";
 import { Images } from "../components/Images";
+import { useSelector, useDispatch } from "react-redux";
+import { BUY } from '../redux/coinBalance'
+import {PURCHASE} from "../redux/marketplaceInventory";
 
 
 const styles = StyleSheet.create({
@@ -41,15 +44,12 @@ const styles = StyleSheet.create({
 	}
 });
 
-const shopItems = ['pizza', 'shoes', 'burger', 'shirt', 'carrot', 'shirt', 'water']
-
 const Card = ({item}) => {
-	const itemDir = `../test_images/${item}.png`;
 	return (
 		<View style={styles.cardContainer}>
 			<Image style={{width:75, height:75}} source={Images[item].uri}/>
 			<View style={styles.cardFooter}>
-				<Text style={{fontSize: 20, color: 'white', marginTop: 5}}>{Math.round(10*Math.random()) + 1}</Text>
+				<Text style={{fontSize: 20, color: 'white', marginTop: 5}}>{Images[item].cost}</Text>
 				<Image style={styles.coin} source={require('../test_images/coin.png')}/>
 			</View>
 		</View>
@@ -57,14 +57,14 @@ const Card = ({item}) => {
 }
 
 const Cards = () => {
-	const[items, setItems] = React.useState(shopItems);
+	const dispatch = useDispatch();
+	const balance = useSelector(state => state.coins);
+	const items = useSelector(state => state.shopItems);
 
 	const onPurchase = (item) => {
 		alert(`You bought ${item}!`)
-		const index = items.indexOf(item);
-		const copyItems = [...items];
-		copyItems.splice(index, 1);
-		setItems(copyItems);
+		dispatch({ type: PURCHASE, data: item })
+		dispatch({ type: BUY, data: Images[item].cost })
 	}
 
 	return (
@@ -92,5 +92,6 @@ const MarketplaceScreen = () => {
         </View>
     );
 };
+
 
 export default MarketplaceScreen;
