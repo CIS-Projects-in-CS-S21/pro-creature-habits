@@ -18,6 +18,8 @@ export default class CreatureStatus extends BaseModel {
  
   static get columnMapping() {
     return {
+      id: { type: types.INTEGER, primary_key: true },
+      name: { type: types.TEXT},
       health: { type: types.INTEGER},
       hunger: { type: types.INTEGER},
       hygiene: { type: types.INTEGER},

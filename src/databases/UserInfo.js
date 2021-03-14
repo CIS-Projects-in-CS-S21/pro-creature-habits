@@ -18,7 +18,7 @@ export default class UserInfo extends BaseModel {
  
   static get columnMapping() {
     return {
-      userID: { type: types.TEXT, not_null: true },
+      id: { type: types.INTEGER, primary_key: true },
       fullName: { type: types.TEXT, not_null: true },
       email: {  type: types.TEXT, not_null: true }
       coinBalance: { type: types.INTEGER},

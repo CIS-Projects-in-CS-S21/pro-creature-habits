@@ -18,6 +18,7 @@ export default class Images extends BaseModel {
  
   static get columnMapping() {
     return {
+      id: { type: types.INTEGER, primary_key: true },
       fileName: { type: types.TEXT, not_null: true },
       imageFile: { type: types.IMAGE, not_null: true },
       isOwned: {  type: types.BOOLEAN }
