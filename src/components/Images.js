@@ -2,17 +2,17 @@ const Images = {
 	burger: {
 		uri: require('../test_images/burger.png')
 	},
-	glasses: {
-		uri: require('../test_images/glasses.png')
+	shoes: {
+		uri: require('../test_images/shoes.png')
 	},
 	pizza: {
 		uri: require('../test_images/pizza.png')
 	},
-	cake: {
-		uri: require('../test_images/cake.png')
+	carrot: {
+		uri: require('../test_images/carrot.png')
 	},
-	pie: {
-		uri: require('../test_images/pie.png')
+	ball: {
+		uri: require('../test_images/ball.png')
 	},
 	shirt: {
 		uri: require('../test_images/shirt.png')
