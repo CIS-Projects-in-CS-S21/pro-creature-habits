@@ -1,14 +1,21 @@
 import React, { useCallback, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform } from 'react-native'
-import Task from '../databases/Task'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput } from 'react-native'
+import Task from '../databases/Task';
+import { SQLite } from 'expo-sqlite';
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
 
 export default function Home() {
- Task.dropTable()
+
  const [tasks, setTasks] = useState([])
-  const createTable = useCallback(async () => {
-    await Task.createTable()
-    Alert.alert('Table created successfully')
+
+   Task.createTable()
+
+ const deleteTask = useCallback(async () => {
+	const t = await Task.findBy({ name_eq: "hi" })
+	t.destroy()
+    setTasks(await Task.query())
   }, [])
+
 
   const createTask = useCallback(async () => {
     const props = {
@@ -21,20 +28,22 @@ export default function Home() {
     setTasks(await Task.query())
   }, [])
 
-  if (Platform.OS === 'web') {
-    return <View style={styles.container}>
-      <Text>Not supported in web platform</Text>
-    </View>
-  }
 
+  const [text, onChangeText] = React.useState(null);
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ padding: 20 }} onPress={createTable}>
-        <Text>Create table</Text>
-      </TouchableOpacity>
+      <TextInput
+        onChangeText={onChangeText}
+        value={text}
+        placeholder="Enter Task Name"
+      />
       <TouchableOpacity style={{ padding: 20 }} onPress={createTask}>
-        <Text>Create Task</Text>
+        <Text>Submit New Task</Text>
       </TouchableOpacity>
+       <TouchableOpacity style={{ padding: 20 }} onPress={deleteTask}>
+        <Text>Delete Task</Text>
+      </TouchableOpacity>
+
       <ScrollView style={{ flex: 1 }}>
         {
           tasks.map(task => <Text key={task.id}>{JSON.stringify(task)}</Text>)
