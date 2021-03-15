@@ -23,8 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/images/cat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/dog.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/ChoosePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Profile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +47,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RecentsManager">
@@ -74,13 +79,20 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="334" y="125" width="1256" height="787" key="AVDManager" timestamp="1615234373672">
-      <screen x="0" y="25" width="1792" height="1026" />
+    <state x="639" y="377" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1615705147269">
+      <screen x="0" y="25" width="1792" height="1015" />
+    </state>
+    <state x="639" y="377" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.25.1792.1015@0.25.1792.1015" timestamp="1615705147269" />
+    <state x="536" y="124" width="1256" height="776" key="AVDManager" timestamp="1615769548455">
+      <screen x="0" y="25" width="1792" height="1013" />
     </state>
     <state x="334" y="125" width="1256" height="786" key="AVDManager/-1920.25.1920.1055/0.25.1792.1023@0.25.1792.1023" timestamp="1615232537413" />
     <state x="334" y="125" width="1256" height="787" key="AVDManager/-1920.25.1920.1055/0.25.1792.1026@0.25.1792.1026" timestamp="1615234373672" />
+    <state x="536" y="124" width="1256" height="776" key="AVDManager/0.25.1792.1013@0.25.1792.1013" timestamp="1615769548455" />
+    <state x="743" y="124" width="1256" height="777" key="AVDManager/0.25.1792.1015@0.25.1792.1015" timestamp="1615751744559" />
     <state x="1026" y="206" width="739" height="735" key="find.popup" timestamp="1615235431323">
       <screen x="0" y="25" width="1792" height="1029" />
     </state>

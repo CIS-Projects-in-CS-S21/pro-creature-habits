@@ -11,7 +11,8 @@ import SignInScreen from "./screens/SignIn";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
-import {API_WEATHER_KEY} from "./components/Keys"
+import Profile from "./screens/Profile";
+import {API_WEATHER_KEY} from "./components/Keys";
 
 
 const Stack = createStackNavigator();
@@ -156,7 +157,11 @@ const App = () => {
 					<Stack.Screen name="Choose Pet"
 					component={ChoosePet}>
                     </Stack.Screen>
+                    <Stack.Screen name="Profile"
+                    					component={Profile}>
+                                        </Stack.Screen>
 					</>
+
 				)}
 			</Stack.Navigator>
 		</NavigationContainer>
