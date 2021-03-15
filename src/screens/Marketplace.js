@@ -4,7 +4,8 @@ import {TouchableHighlight} from "react-native";
 import { Images } from "../components/Images";
 import { useSelector, useDispatch } from "react-redux";
 import { BUY } from '../redux/coinBalance'
-import {PURCHASE} from "../redux/marketplaceInventory";
+import {FILTER, FILTER_ALL, PURCHASE} from "../redux/marketplaceInventory";
+import DropDownPicker from "react-native-dropdown-picker";
 
 
 const styles = StyleSheet.create({
@@ -24,9 +25,7 @@ const styles = StyleSheet.create({
 		alignContent: 'flex-end'
 	},
 	cardContainer: {
-		borderWidth: 2,
-		borderColor: 'white',
-		borderRadius: 20,
+		borderRadius: 10,
 		padding: 8,
 		backgroundColor: 'lightblue',
 		margin: 10
@@ -56,20 +55,18 @@ const Card = ({item}) => {
 	)
 }
 
-const Cards = () => {
+const Cards = (items) => {
 	const dispatch = useDispatch();
-	const balance = useSelector(state => state.coins);
-	const items = useSelector(state => state.shopItems);
 
 	const onPurchase = (item) => {
 		alert(`You bought ${item}!`)
 		dispatch({ type: PURCHASE, data: item })
 		dispatch({ type: BUY, data: Images[item].cost })
 	}
-
 	return (
 		<View style={styles.cardsContainer}>
-			{items.map((item, index) => {
+			{items.items.map((item, index) => {
+				console.log(item);
 				return(
 					<TouchableHighlight
 						activeOpacity={0.6}
@@ -86,9 +83,45 @@ const Cards = () => {
 }
 
 const MarketplaceScreen = () => {
+	const dispatch = useDispatch();
+
+	const changeFilter = (category) => {
+		if(category === 'all') {
+			dispatch({type: FILTER_ALL});
+		} else {
+			dispatch({type: FILTER, data: category});
+		}
+	}
+
     return (
         <View style={styles.container}>
-			<Cards/>
+			<View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+				<Image style={{height: 100, width: 100}} source={require('../test_images/shop.png')}/>
+				<Text
+					style={{
+						color: 'white',
+						fontSize: 25,
+						marginTop: 10,
+						marginLeft: 20,
+					}}>
+					{useSelector(state => state.coins)}
+				</Text>
+				<Image
+					style={{height: 30, width: 30, marginTop: 10}}
+					source={require('../test_images/coin.png')}/>
+			</View>
+			<DropDownPicker
+				items={[
+					{label: 'All', value: 'all'},
+					{label: 'Clothes', value: 'clothes'},
+					{label: 'Food', value: 'food'},
+					{label: 'Toys', value: 'toys'}
+				]}
+				defaultValue={'all'}
+				containerStyle={{height: 40, alignSelf: 'stretch', marginLeft: 20, marginRight:20, marginTop: 20}}
+				onChangeItem={item => changeFilter(item.value)}
+			/>
+			<Cards items={useSelector(state => state.shopItems)}/>
         </View>
     );
 };

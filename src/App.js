@@ -52,7 +52,8 @@ const App = () => {
 			getWeather();
 		}, 10000);
 		return () => clearInterval(interval);
-	}, [])
+	}, []);
+
 
 	const handleSignIn = () => {
 		setIsAuthenticated(true);
@@ -97,14 +98,6 @@ const App = () => {
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
 										{getHeaderTitle(route)}
 									</Text>
-								),
-								headerRight: () => (
-									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginRight: 10}}>
-										<Text style={{color: 'white', fontSize: 25, marginTop: 10}}>{store.getState().coins}</Text>
-										<Image
-											style={{height: 30, width: 30, marginTop: 10}}
-											source={require('./test_images/coin.png')}/>
-									</View>
 								),
 								headerLeft: () => (
 									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
