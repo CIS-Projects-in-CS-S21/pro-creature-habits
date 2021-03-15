@@ -23,43 +23,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/BaseModel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/DataTypes.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/DatabaseLayer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/Repository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/__mocks__/DatabaseLayer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/__mocks__/Repository.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/create.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/destroy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/read.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/schema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/update.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/UserInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/marketplaceComponents/Card.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/marketplaceComponents/Cards.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/CreatureStatus.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/Images.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/Task.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/databases/UserInfo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/coinBalance.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/ball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/black_ball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/black_shirt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/black_shoes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/blue_shirt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/blue_shoes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/burger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/carrot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/coin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/pizza.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/red_ball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/shirt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/shoes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/shop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test_images/water.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/myReactNativeProject.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/myReactNativeProject.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ItemInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ItemInventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/marketplaceInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/marketplaceInventory.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/AccountCreation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AccountCreation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/GoogleSignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/GoogleSignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Marketplace.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Marketplace.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/UserStats.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/UserStats.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +90,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615232032408</updated>
-      <workItem from="1615839816295" duration="652000" />
+      <workItem from="1615839816295" duration="1188000" />
+      <workItem from="1615841350219" duration="421000" />
     </task>
     <servers />
   </component>

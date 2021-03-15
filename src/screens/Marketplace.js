@@ -9,8 +9,6 @@ import Cards from "../components/marketplaceComponents/Cards";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: '#406BE9',
     },
 	header: {
