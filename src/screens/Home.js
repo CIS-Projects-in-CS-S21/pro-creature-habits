@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
 import Task from '../databases/Task';
 import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
@@ -10,16 +10,18 @@ export default function Home() {
 
    Task.createTable()
 
- const deleteTask = useCallback(async () => {
-	const t = await Task.findBy({ name_eq: "hi" })
+ const deleteTask = useCallback(async (deleteText) => {
+ 	const del = deleteText
+	const t = await Task.findBy({ name_eq: del })
 	t.destroy()
+	await t.save()
     setTasks(await Task.query())
   }, [])
 
 
-  const createTask = useCallback(async () => {
+  const createTask = useCallback(async (text) => {
     const props = {
-      name: 'hi',
+      name: text,
       due: 80
     }
 
@@ -28,21 +30,25 @@ export default function Home() {
     setTasks(await Task.query())
   }, [])
 
+ 
+ const onSubmit = () => {
+ 	createTask(text);
+ }
 
-  const [text, onChangeText] = React.useState(null);
+ const onDelete = () => {
+ 	deleteTask(deleteText);
+ }
+
+
+  const [text, setText] = React.useState('');
+   const [deleteText, setDeleteText] = React.useState('');
   return (
     <View style={styles.container}>
-      <TextInput
-        onChangeText={onChangeText}
-        value={text}
-        placeholder="Enter Task Name"
-      />
-      <TouchableOpacity style={{ padding: 20 }} onPress={createTask}>
-        <Text>Submit New Task</Text>
-      </TouchableOpacity>
-       <TouchableOpacity style={{ padding: 20 }} onPress={deleteTask}>
-        <Text>Delete Task</Text>
-      </TouchableOpacity>
+      <TextInput style={{backgroundColor: 'white', width: 100}} label='name' value={text} onChangeText={text => setText(text)}/>
+      <Button title="submit" color="white" onPress={onSubmit}/>
+      <TextInput style={{backgroundColor: 'white', width: 100}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
+	  <Button title="Delete" color="white" onPress={onDelete}/>
+  
 
       <ScrollView style={{ flex: 1 }}>
         {
