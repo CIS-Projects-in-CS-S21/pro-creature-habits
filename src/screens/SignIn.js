@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
+import UserInfo from "../databases/UserInfo";
 
 const styles = StyleSheet.create({
 	container: {
@@ -43,35 +44,44 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 
 export default SignInScreen; */
 
-export default class Userlogin extends React.Component {
+const SignInScreen = ({ onSignIn, navigation }) => {
 
-	constructor(props) {
-		super(props);
-		
-		this.state = {
-		  username: '',
-		  password: '',
-		  loading:false
-		};
-	  }
-	  
-	  onLogin() {
-		const { username, password } = this.state;
-	
-	  }
-	
-	  render() {
+	const checkLogin = useCallback(async (username, password) => {
+		const t = await Task.findBy({ username_eq: username })
+
+
+	}, [])
+
+	const createUser = useCallback(async (text) => {
+		const props = {
+			username: "username",
+			password: "password",
+			email: "email",
+			coinbalance: 100
+		}
+
+		const task = new Task(props)
+		await task.save()
+		setTasks(await Task.query())
+	}, [])
+
+	const onSubmit = () => {
+		checkLogin(username, password);
+	}
+
+	const [username, setUsername] = React.useState('');
+	const [password, setPassword] = React.useState('');
 		return (
 		  <View style={styles.container}>
 			<TextInput
-			  value={this.state.username}
-			  onChangeText={(username) => this.setState({ username })}
+			  value={username}
+			  onChangeText={username => setUsername(username)}
 			  placeholder={'Username'}
 			  style={styles.input}
 			/>
 			<TextInput
-			  value={this.state.password}
-			  onChangeText={(password) => this.setState({ password })}
+			  value={password}
+			  onChangeText={password => setPassword(password)}
 			  placeholder={'Password'}
 			  secureTextEntry={true}
 			  style={styles.input}
@@ -80,7 +90,7 @@ export default class Userlogin extends React.Component {
 		   <Button
 			  title={'Login'}
 			  style={styles.button}
-			  onPress={this.onLogin.bind(this)}
+			  onPress={onSubmit}
 			/>
 			<Button
 			   title={'Singup'}
@@ -89,8 +99,7 @@ export default class Userlogin extends React.Component {
 			 />
 				
 			</View>
-		);
-	  }
+		)
 	
 	}
 
