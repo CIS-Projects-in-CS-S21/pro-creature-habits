@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text, View, Button, StyleSheet, Image} from "react-native";
+import {Text, View, ScrollView, StyleSheet, Image} from "react-native";
 import {TouchableHighlight} from "react-native";
 import { Images } from "../components/Images";
 import { useSelector, useDispatch } from "react-redux";
 import { BUY } from '../redux/coinBalance'
 import {FILTER, FILTER_ALL, PURCHASE} from "../redux/marketplaceInventory";
 import DropDownPicker from "react-native-dropdown-picker";
-
+import {TouchableOpacity} from "react-native-web";
 
 const styles = StyleSheet.create({
     container: {
@@ -20,15 +20,18 @@ const styles = StyleSheet.create({
 	cardsContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
-		marginTop: 20,
+		marginTop: 10,
 		flexWrap: 'wrap',
 		alignContent: 'flex-end'
 	},
 	cardContainer: {
-		borderRadius: 10,
+    	borderWidth: 3,
 		padding: 8,
-		backgroundColor: 'lightblue',
-		margin: 10
+		backgroundColor: 'rgba(62,78,203,0.7)',
+		shadowOffset: {width: 0, height: 5},
+		shadowOpacity: 0.8,
+		shadowRadius: 3,
+		elevation: 11
 	},
 	cardFooter: {
 		flexDirection: 'row',
@@ -57,22 +60,28 @@ const Card = ({item}) => {
 
 const Cards = (items) => {
 	const dispatch = useDispatch();
+	const balance = useSelector(state => state.coins);
+
 
 	const onPurchase = (item) => {
-		alert(`You bought ${item}!`)
-		dispatch({ type: PURCHASE, data: item })
-		dispatch({ type: BUY, data: Images[item].cost })
+		if(Images[item].cost > balance) {
+			alert(`You do not have enough money to buy ${item}`);
+		} else {
+			alert(`You have bought ${item}`);
+			dispatch({type: PURCHASE, data: item})
+			dispatch({type: BUY, data: Images[item].cost})
+		}
 	}
 	return (
 		<View style={styles.cardsContainer}>
 			{items.items.map((item, index) => {
-				console.log(item);
 				return(
 					<TouchableHighlight
-						activeOpacity={0.6}
+						activeOpacity={0.8}
+						underlayColor='#ffffff'
 						onPress={() => onPurchase(item)}
-						style={{borderRadius: 20}}
 						key={index}
+						style={{alignSelf: 'flex-end', margin: 10}}
 					>
 						<Card key={index} item={item} />
 					</TouchableHighlight>
@@ -94,21 +103,39 @@ const MarketplaceScreen = () => {
 	}
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
 			<View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+
 				<Image style={{height: 100, width: 100}} source={require('../test_images/shop.png')}/>
-				<Text
+				<View
 					style={{
-						color: 'white',
-						fontSize: 25,
-						marginTop: 10,
-						marginLeft: 20,
-					}}>
-					{useSelector(state => state.coins)}
-				</Text>
-				<Image
-					style={{height: 30, width: 30, marginTop: 10}}
-					source={require('../test_images/coin.png')}/>
+						flexDirection: 'row',
+						borderWidth: 2,
+						borderRadius: 10,
+						borderColor: 'white',
+						backgroundColor: 'lightblue',
+						marginLeft: 10,
+						shadowOffset: {width: 0, height: 5},
+						shadowOpacity: 0.8,
+						shadowRadius: 3,
+						elevation: 11
+					}}
+				>
+					<Text
+						style={{
+							color: 'white',
+							fontSize: 25,
+							marginTop: 5,
+							marginLeft: 5,
+							marginBottom: 5
+						}}>
+						{useSelector(state => state.coins)}
+					</Text>
+					<Image
+						style={{height: 30, width: 30, marginTop: 5, marginRight: 5, marginBottom: 5}}
+						source={require('../test_images/coin.png')}
+					/>
+				</View>
 			</View>
 			<DropDownPicker
 				items={[
@@ -122,7 +149,7 @@ const MarketplaceScreen = () => {
 				onChangeItem={item => changeFilter(item.value)}
 			/>
 			<Cards items={useSelector(state => state.shopItems)}/>
-        </View>
+        </ScrollView>
     );
 };
 
