@@ -28,8 +28,6 @@ const Cards = (items) => {
 	const dispatch = useDispatch();
 	const balance = useSelector(state => state.coins);
 
-	console.log(items.items);
-
 	const onPurchase = (item) => {
 		if(ItemInventory[item].cost > balance) {
 			alert(`You do not have enough money to buy ${item}`);
