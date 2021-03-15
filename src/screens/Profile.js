@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
 	}
 });
 
-const PetProfile = () => {
+const PetProfile = ({choices, navigation}) => {
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>Pet Profile Screen</Text>

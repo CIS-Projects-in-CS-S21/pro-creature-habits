@@ -7,7 +7,9 @@ import Cards from "../components/marketplaceComponents/Cards";
 
 const styles = StyleSheet.create({
     container: {
-    	flex: 1,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
         backgroundColor: '#406BE9',
     },
 	header: {
@@ -58,16 +60,6 @@ const styles = StyleSheet.create({
 });
 
 const MarketplaceScreen = () => {
-	const dispatch = useDispatch();
-
-	const changeFilter = (category) => {
-		if(category === 'all') {
-			dispatch({type: FILTER_ALL});
-		} else {
-			dispatch({type: FILTER, data: category});
-		}
-	}
-
     return (
         <ScrollView style={styles.container}>
 			<View style={styles.header}>
@@ -97,6 +89,5 @@ const MarketplaceScreen = () => {
         </ScrollView>
     );
 };
-
 
 export default MarketplaceScreen;
