@@ -6,19 +6,20 @@ export default function GoogleSignUpScreen({navigation}){
 
     async function signInWithGoogleAsync() {
       try {
-        const result = await Google.logInAsync({
+        const {type, accessToken, user}= await Google.logInAsync({
           androidClientId: "489655790104-u3khmnkeu41a64q17ljo8eq690tssn9k.apps.googleusercontent.com",
           iosClientId: "489655790104-u87055rljdeslrcfktqvjp18c622g2ma.apps.googleusercontent.com",
-          scopes: ['profile', 'email'],
         });
 
-        if (result.type === 'success') {
-           navigation.navigate('Home')
-          return result.accessToken;
+        if (type === 'success') {
+          console.log("success")
+          console.log(user, accessToken);
+
         } else {
           return { cancelled: true };
         }
       } catch (e) {
+        console.log("error")
         return { error: true };
       }
     }
