@@ -23,17 +23,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/images/cat.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/dog.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/BaseModel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/DataTypes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/DatabaseLayer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/Repository.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/__mocks__/DatabaseLayer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/__mocks__/Repository.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/create.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/destroy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/read.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/schema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/expo-sqlite-orm/src/query_builder/update.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UserInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/marketplaceComponents/Card.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/marketplaceComponents/Cards.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databases/CreatureStatus.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databases/Images.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databases/Task.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databases/UserInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/coinBalance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/myReactNativeProject.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/myReactNativeProject.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ChoosePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ItemInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ItemInventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/marketplaceInventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/marketplaceInventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AccountCreation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AccountCreation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/GoogleSignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/GoogleSignIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Marketplace.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Marketplace.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/UserStats.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/UserStats.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,9 +84,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -56,6 +97,7 @@
       <recent name="$PROJECT_DIR$/android/app/src/main/res/drawable" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -66,8 +108,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615232032408</updated>
+      <workItem from="1615839816295" duration="652000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
