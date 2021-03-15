@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Image, Text, View} from "react-native";
+import {Image, Text, View, TouchableOpacity} from "react-native";
 import 'react-native-gesture-handler';
-import coinBalance from "./redux/coinBalance";
+import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
 import { combineReducers } from "redux";
+import { MaterialIcons } from "@expo/vector-icons";
 
 
 import HomeTabs from "./components/HomeTabs";
@@ -19,7 +20,7 @@ import {API_WEATHER_KEY} from "./components/Keys"
 const Stack = createStackNavigator();
 
 const reducer = combineReducers({
-	coins: coinBalance,
+	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer
 });
 
@@ -98,6 +99,14 @@ const App = () => {
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
 										{getHeaderTitle(route)}
 									</Text>
+								),
+								headerRight: () => (
+									<TouchableOpacity style={{marginRight: 10}} onPress={() => {
+										handleSignOut();
+									}}
+									>
+										<MaterialIcons name='logout' size={36} color='white'/>
+									</TouchableOpacity>
 								),
 								headerLeft: () => (
 									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>

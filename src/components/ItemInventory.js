@@ -1,4 +1,4 @@
-const Images = {
+const ItemInventory = {
 	burger: {
 		name: 'burger',
 		uri: require('../test_images/burger.png'),
@@ -8,13 +8,13 @@ const Images = {
 	shoes: {
 		name: 'shoes',
 		uri: require('../test_images/shoes.png'),
-		cost: 6,
+		cost: 10,
 		category: 'clothes'
 	},
 	pizza: {
 		name: 'pizza',
 		uri: require('../test_images/pizza.png'),
-		cost: 2,
+		cost: 3,
 		category: 'food'
 	},
 	carrot: {
@@ -26,13 +26,13 @@ const Images = {
 	ball: {
 		name: 'ball',
 		uri: require('../test_images/ball.png'),
-		cost: 5,
+		cost: 8,
 		category: 'toys'
 	},
 	shirt: {
 		name: 'shirt',
 		uri: require('../test_images/shirt.png'),
-		cost: 5,
+		cost: 9,
 		category: 'clothes'
 	},
 	water: {
@@ -44,39 +44,39 @@ const Images = {
 	blue_shoes: {
 		name: 'blue shoes',
 		uri: require('../test_images/blue_shoes.png'),
-		cost: 5,
+		cost: 12,
 		category: 'clothes'
 	},
 	black_shirt: {
 		name: 'black shirt',
 		uri: require('../test_images/black_shirt.png'),
-		cost: 5,
+		cost: 10,
 		category: 'clothes'
 	},
 	blue_shirt: {
 		name: 'blue shirt',
 		uri: require('../test_images/blue_shirt.png'),
-		cost: 5,
+		cost: 10,
 		category: 'clothes'
 	},
 	red_ball: {
 		name: 'red ball',
 		uri: require('../test_images/red_ball.png'),
-		cost: 5,
+		cost: 10,
 		category: 'toys'
 	},
 	black_ball: {
 		name: 'black ball',
 		uri: require('../test_images/black_ball.png'),
-		cost: 5,
+		cost: 10,
 		category: 'toys'
 	},
 	black_shoes: {
 		name: 'black shoes',
 		uri: require('../test_images/black_shoes.png'),
-		cost: 5,
+		cost: 12,
 		category: 'clothes'
 	},
 }
 
-export { Images }
+export { ItemInventory }
