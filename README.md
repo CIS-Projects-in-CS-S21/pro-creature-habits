@@ -10,3 +10,8 @@ Creature Habits is an app that encourages users to stay on top of chores by crea
 * Gaurav Shinde
 * Samir Singh
 * Mulualem Wolde
+
+## Testing Demo 1
+We have a list of questions you can fill out when testing. Please let us know about anything that looks strange or buggy with the app!
+You should have access to the google spreadsheet, just create a new tab for each team member so you can fill it out separately. Thank you!
+[Click Here](https://docs.google.com/spreadsheets/d/1gmus1jSXv3FPKp5_WVzJE8u7eAKR1_DLysRtb_oGNz0/edit#gid=1494056691)
