@@ -168,8 +168,10 @@ const App = () => {
 								<AccountCreationScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
-						<Stack.Screen name="Choose Pet"
-							component={ChoosePet}>
+						<Stack.Screen name="Choose Pet">
+							{(props) => (
+								<ChoosePet {...props} onSignUp={handleSignUp} />
+							)}
 						</Stack.Screen>
 						<Stack.Screen name="Profile"
 							  component={Profile}
