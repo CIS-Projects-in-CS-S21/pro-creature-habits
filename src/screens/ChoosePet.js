@@ -106,11 +106,9 @@ const choosePetScreen = ({onSignUp}) => {
 
             <TextInput
                             style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
+                                margin: 'auto',
                                 height: 40,
                                 width: 200,
-                                margin: 20,
                                 borderColor: 'black',
                                 backgroundColor: 'gray',
                                 borderWidth: 1
