@@ -23,25 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test_images/ball.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/black_ball.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/black_shirt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/black_shoes.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/blue_shirt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/blue_shoes.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/burger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/carrot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/pizza.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/red_ball.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/shirt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/shoes.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/shop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test_images/water.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/petInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/AccountCreation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AccountCreation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Marketplace.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Marketplace.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ChoosePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Profile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +66,7 @@
       <recent name="$PROJECT_DIR$/android/app/src/main/res/drawable" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -122,13 +109,18 @@
     <state x="334" y="125" width="1256" height="787" key="AVDManager/-1920.25.1920.1055/0.25.1792.1026@0.25.1792.1026" timestamp="1615234373672" />
     <state x="536" y="124" width="1256" height="776" key="AVDManager/0.25.1792.1013@0.25.1792.1013" timestamp="1615769548455" />
     <state x="743" y="124" width="1256" height="777" key="AVDManager/0.25.1792.1015@0.25.1792.1015" timestamp="1615751744559" />
-    <state x="1026" y="206" width="739" height="735" key="find.popup" timestamp="1615235431323">
-      <screen x="0" y="25" width="1792" height="1029" />
+    <state x="1026" y="204" width="739" height="728" key="find.popup" timestamp="1615854548277">
+      <screen x="0" y="25" width="1792" height="1019" />
     </state>
     <state x="1026" y="206" width="739" height="735" key="find.popup/-1920.25.1920.1055/0.25.1792.1029@0.25.1792.1029" timestamp="1615235431323" />
+    <state x="1026" y="204" width="739" height="728" key="find.popup/0.25.1792.1019@0.25.1792.1019" timestamp="1615854548277" />
     <state x="627" y="237" key="run.anything.popup" timestamp="1615232236706">
       <screen x="0" y="25" width="1792" height="1023" />
     </state>
     <state x="627" y="237" key="run.anything.popup/-1920.25.1920.1055/0.25.1792.1023@0.25.1792.1023" timestamp="1615232236706" />
+    <state x="671" y="242" width="670" height="676" key="search.everywhere.popup" timestamp="1615849908212">
+      <screen x="0" y="25" width="1792" height="1019" />
+    </state>
+    <state x="671" y="242" width="670" height="676" key="search.everywhere.popup/0.25.1792.1019@0.25.1792.1019" timestamp="1615849908212" />
   </component>
 </project>

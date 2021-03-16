@@ -5,6 +5,7 @@ import {Image, Text, View, TouchableOpacity} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
+import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
 import { combineReducers } from "redux";
@@ -23,7 +24,8 @@ const Stack = createStackNavigator();
 
 const reducer = combineReducers({
 	coins: balanceReducer,
-	shopItems: marketplaceInventoryReducer
+	shopItems: marketplaceInventoryReducer,
+	petDetails: petInfoReducer
 });
 
 const store = createStore(reducer);
@@ -170,7 +172,8 @@ const App = () => {
 							component={ChoosePet}>
 						</Stack.Screen>
 						<Stack.Screen name="Profile"
-							  component={Profile}>
+							  component={Profile}
+							  >
 						</Stack.Screen>
 						</>
 					)}

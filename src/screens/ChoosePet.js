@@ -1,5 +1,7 @@
 import React from 'react';
 import {Text, View, Button, StyleSheet, Image, TextInput, TouchableHighlight} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import {CHANGE} from "../redux/petInfo";
 
 const styles = StyleSheet.create({
     container: {
@@ -43,22 +45,39 @@ const styles = StyleSheet.create({
 
 
 const choosePetScreen = ({navigation}) => {
-    const [value, onChangeText] = React.useState('');
+    const [text, onChangeText] = React.useState('');
     const [colorImage1, changeValue1] = React.useState('lightblue');
     const [colorImage2, changeValue2] = React.useState('lightblue');
     const [petChoice,changePet] = React.useState('');
+    const dispatch = useDispatch();
+
     const onPress = (animal) => {
 
         if (animal == "cat") {
         changeValue1("orange");
         changeValue2("lightblue");
         changePet("cat");
+
+
         } else {
         changeValue2("orange");
             changeValue1("lightblue");
             changePet("dog");
         }
     }
+
+
+    const submitData = () => {
+         console.log("test");
+         const array = [text,petChoice];
+    	dispatch({type: CHANGE, changes: array});
+    }
+
+    const onChangeHandler = event => {
+            onChangeText(event.target.value);
+
+     };
+
 
     return (
 
@@ -84,12 +103,25 @@ const choosePetScreen = ({navigation}) => {
                                 </View>
 
             <Text style={styles.text}>Please enter a name for your pet</Text>
+
             <TextInput
-                  style={styles.text2}
-                  onChangeText={text => onChangeText(text)}
-                  value={value}
-                />
-        <Button title="Submit" color="white" onPress={() => navigation.navigate('Profile',{text: petChoice})}/>
+                            style={{
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                height: 40,
+                                width: 200,
+                                margin: 20,
+                                borderColor: 'black',
+                                backgroundColor: 'gray',
+                                borderWidth: 1
+                            }}
+                            placeholder="Your Pet's Name"
+                        onChangeText={text => onChangeText(text)}
+                        value={text}
+            />
+
+        <Button title="Submit" color="white" onPress={() => {submitData(); navigation.navigate('Profile')}}/>
+
         </View>
     );
 };
