@@ -1,15 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
-import {NAME,IMAGE} from "../redux/petInfo";
-import HomeTabs from "../components/HomeTabs";
-import { AnimatedTabBarNavigator } from 'react-native-animated-nav-tab-bar';
-import HomeScreen from "../screens/Home";
-import MarketplaceScreen from "../screens/Marketplace";
-import SettingsNav from "../components/SettingsNav";
-import { Ionicons } from "@expo/vector-icons";
-
-const Tab = AnimatedTabBarNavigator();
+import {CHANGE} from "../redux/petInfo";
 
 const styles = StyleSheet.create({
     container: {
@@ -76,7 +68,7 @@ console.log(petImgChoice);
 			<View style={styles.imageContainer}>
             <Image id="img"
                 style={{width: 100,height: 100,borderWidth: 5,borderRadius: 10}}
-                source={petImgChoice ? require('../images/cat.png') : require('../images/dog.png')}
+                source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
             />
             </View>
 
