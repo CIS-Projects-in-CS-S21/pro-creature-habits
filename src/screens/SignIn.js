@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
 import UserInfo from "../databases/UserInfo";
 
@@ -44,11 +44,11 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 
 export default SignInScreen; */
 
-const SignInScreen = ({ onSignIn, navigation }) => {
+export default function SignInScreen({ onSignIn, navigation }){
 
 	const checkLogin = useCallback(async (username, password) => {
-		const t = await Task.findBy({ username_eq: username })
-
+		const user = await UserInfo.findBy({ username_eq: username })
+		console.log(user);
 
 	}, [])
 
@@ -60,9 +60,9 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 			coinbalance: 100
 		}
 
-		const task = new Task(props)
-		await task.save()
-		setTasks(await Task.query())
+		const newUser = new UserInfo(props)
+		await newUser.save()
+		setTasks(await UserInfo.query())
 	}, [])
 
 	const onSubmit = () => {
