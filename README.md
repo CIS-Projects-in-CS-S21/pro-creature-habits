@@ -5,22 +5,18 @@ Creature Habits is an app that encourages users to stay on top of chores by crea
 
 ## Installation
 
-* Either download a release version and extract or clone the repository with this command:
+1. Install Expo Go app on your IOS or Android device
 
-`git clone https://github.com/CIS-Projects-in-CS-S21/pro-creature-habits.git`
+2. Sign in with these credentials:
 
-* Install Expo CLI with `npm install -g expo-cli`
+    * username: creaturehabits
+    * password: pu2uvh@AH}
 
-* In the directory of the app run `npm install` to install dependencies
-
-* Finally, run `expo start` to run the project
+3. Open Creature Habits under Published Projects
 
 ### Running the app on your phone
 
 To run the app on your phone, first download the Expo Go app from the Google Play Store or on the Apple App Store. Then you can start the app on your computer and scan the QR code to open the application in the Expo Go app.
-
-
-
 
 ## Contributors
 * Matt Angelucci

@@ -22,7 +22,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb050bdd-6d0d-4c37-b68f-2800cbb7eba1" name="Default Changelist" comment="" />
+    <list default="true" id="fb050bdd-6d0d-4c37-b68f-2800cbb7eba1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,19 +65,20 @@
       <recent name="$PROJECT_DIR$/android/app/src/main/res/drawable" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b9288f25-0ee1-4cdb-958e-250164c4d245" name="Default Changelist" comment="" />
+      <changelist id="fb050bdd-6d0d-4c37-b68f-2800cbb7eba1" name="Default Changelist" comment="" />
       <created>1615232032408</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1615232032408</updated>
       <workItem from="1615839816295" duration="1188000" />
       <workItem from="1615841350219" duration="421000" />
+      <workItem from="1615927373596" duration="847000" />
     </task>
     <servers />
   </component>
