@@ -47,7 +47,6 @@ const dispatch = useDispatch();
 const petImgChoice = useSelector(state => state.petDetails[1]);
 
 console.log(petImgChoice);
-console.log("HELLO");
 
 const findImage = () => {
 console.log(petImgChoice);
