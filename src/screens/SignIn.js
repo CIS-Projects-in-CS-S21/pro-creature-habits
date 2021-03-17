@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
 import UserInfo from "../databases/UserInfo";
+import Task from "../databases/Task";
 
 const styles = StyleSheet.create({
 	container: {
@@ -41,28 +42,44 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 		</View>
 	);
 };
-
+		<Button
+			   title={'Singup'}
+			   style={styles.button}
+			   onPress={this.onLogin.bind(this)}
+			 />
 export default SignInScreen; */
 
 export default function SignInScreen({ onSignIn, navigation }){
-
+	const [users, setUsers] = useState([])
+	UserInfo.createTable()
 	const checkLogin = useCallback(async (username, password) => {
+		let authenticated = false
 		const user = await UserInfo.findBy({ username_eq: username })
 		console.log(user);
+		console.log(user.password);
+		if (password == user.password) {
+			console.log("Correct");
+			authenticated = true
+			onSignIn()
+		}
+		else{
+			console.log("Wrong Username/Password");
+		}
+
 
 	}, [])
 
-	const createUser = useCallback(async (text) => {
+	const createUser = useCallback(async () => {
 		const props = {
 			username: "username",
 			password: "password",
 			email: "email",
-			coinbalance: 100
+			coinBalance: 100
 		}
 
 		const newUser = new UserInfo(props)
 		await newUser.save()
-		setTasks(await UserInfo.query())
+		setUsers(await UserInfo.query())
 	}, [])
 
 	const onSubmit = () => {
@@ -92,12 +109,12 @@ export default function SignInScreen({ onSignIn, navigation }){
 			  style={styles.button}
 			  onPress={onSubmit}
 			/>
-			<Button
-			   title={'Singup'}
-			   style={styles.button}
-			   onPress={this.onLogin.bind(this)}
-			 />
-				
+			  <Button
+				  title={'SignUp'}
+				  style={styles.button}
+				  onPress={createUser()}
+			  />
+
 			</View>
 		)
 	
