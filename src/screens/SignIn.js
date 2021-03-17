@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
 import UserInfo from "../databases/UserInfo";
-import Task from "../databases/Task";
 
 const styles = StyleSheet.create({
 	container: {
@@ -40,7 +39,7 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 			<Text style={styles.text}>OR</Text>
 			<Button title="Sign In with Google" color="#7e8ffc" onPress={() => navigation.navigate('Google Sign Up')} />
 			<Text style={styles.text}>OR</Text>
-			*/}
+			}
 			<Button title="Regular Sign Up" color="#7e8ffc" onPress={() => navigation.navigate('Account Creation')}/>
 		</View>
 	);
@@ -53,40 +52,35 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 export default SignInScreen; */
 
 export default function SignInScreen({ onSignIn, navigation }){
-	const [users, setUsers] = useState([])
 	UserInfo.createTable()
 	const checkLogin = useCallback(async (username, password) => {
 		let authenticated = false
-		const user = await UserInfo.findBy({ username_eq: username })
-		console.log(user);
-		console.log(user.password);
-		if (password == user.password) {
-			console.log("Correct");
-			authenticated = true
-			onSignIn()
+		try {
+			const user = await UserInfo.findBy({username_eq: username})
+			console.log(user);
+			console.log(user.password);
+			if (password == user.password) {
+				console.log("Correct");
+				authenticated = true
+				onSignIn()
+
+			} else {
+				console.log("Wrong Username/Password");
+			}
 		}
-		else{
-			console.log("Wrong Username/Password");
-		}
-
-
-	}, [])
-
-	const createUser = useCallback(async () => {
-		const props = {
-			username: "username",
-			password: "password",
-			email: "email",
-			coinBalance: 100
+		catch{
+			console.log("User not found");
 		}
 
-		const newUser = new UserInfo(props)
-		await newUser.save()
-		setUsers(await UserInfo.query())
+
+
 	}, [])
 
 	const onSubmit = () => {
 		checkLogin(username, password);
+	}
+	const onSigningUp = () => {
+		navigation.navigate('Sign Up')
 	}
 
 	const [username, setUsername] = React.useState('');
@@ -115,7 +109,7 @@ export default function SignInScreen({ onSignIn, navigation }){
 			  <Button
 				  title={'SignUp'}
 				  style={styles.button}
-				  onPress={createUser()}
+				  onPress={onSigningUp}
 			  />
 
 			</View>

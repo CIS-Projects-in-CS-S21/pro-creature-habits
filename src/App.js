@@ -15,6 +15,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import HomeTabs from "./components/HomeTabs";
 import SignInScreen from "./screens/SignIn";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
+import SignUpScreen from "./screens/SignUp";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
@@ -148,6 +149,11 @@ const App = () => {
 						<Stack.Screen name="Google Sign Up">
 							{(props) => (
 								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
+							)}
+						</Stack.Screen>
+						<Stack.Screen name="Sign Up">
+							{(props) => (
+								<SignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
 						<Stack.Screen
