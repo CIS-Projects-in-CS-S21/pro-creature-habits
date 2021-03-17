@@ -5,9 +5,10 @@ import {FILTER, FILTER_ALL} from "../redux/marketplaceInventory";
 import DropDownPicker from "react-native-dropdown-picker";
 import Cards from "../components/marketplaceComponents/Cards";
 
+
 const styles = StyleSheet.create({
     container: {
-    	flex: 1,
+        flex: 1,
         backgroundColor: '#406BE9',
     },
 	header: {
@@ -97,6 +98,5 @@ const MarketplaceScreen = () => {
         </ScrollView>
     );
 };
-
 
 export default MarketplaceScreen;

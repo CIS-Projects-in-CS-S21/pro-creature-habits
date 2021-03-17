@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const AccountCreationScreen = ({ onSignUp }) => {
+const AccountCreationScreen = ({ onSignUp, navigation }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Account Creation Screen</Text>
@@ -40,8 +40,7 @@ const AccountCreationScreen = ({ onSignUp }) => {
                 }}
                 placeholder="Birthday"
             />
-
-            <Button color="#7e8ffc" title="Sign Up" onPress={onSignUp} />
+			<Button title="Click to Create First Pet" color="#7e8ffc" onPress={() => navigation.navigate('Choose Pet')} />
         </View>
     );
 };

@@ -5,6 +5,7 @@ import {Image, Text, View, TouchableOpacity} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
+import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
 import { combineReducers } from "redux";
@@ -15,13 +16,16 @@ import HomeTabs from "./components/HomeTabs";
 import SignInScreen from "./screens/SignIn";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
 import AccountCreationScreen from "./screens/AccountCreation";
-import {API_WEATHER_KEY} from "./components/Keys"
+import ChoosePet from "./screens/ChoosePet";
+import Profile from "./screens/Profile";
+import {API_WEATHER_KEY} from "./components/Keys";
 
 const Stack = createStackNavigator();
 
 const reducer = combineReducers({
 	coins: balanceReducer,
-	shopItems: marketplaceInventoryReducer
+	shopItems: marketplaceInventoryReducer,
+	petDetails: petInfoReducer
 });
 
 const store = createStore(reducer);
@@ -53,8 +57,7 @@ const App = () => {
 			getWeather();
 		}, 10000);
 		return () => clearInterval(interval);
-	}, []);
-
+	}, [])
 
 	const handleSignIn = () => {
 		setIsAuthenticated(true);
@@ -165,6 +168,15 @@ const App = () => {
 								<AccountCreationScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
+						<Stack.Screen name="Choose Pet">
+							{(props) => (
+								<ChoosePet {...props} onSignUp={handleSignUp} />
+							)}
+						</Stack.Screen>
+						<Stack.Screen name="Profile"
+							  component={Profile}
+							  >
+						</Stack.Screen>
 						</>
 					)}
 				</Stack.Navigator>
@@ -172,5 +184,6 @@ const App = () => {
 		</Provider>
 	);
 };
+
 
 export default App;
