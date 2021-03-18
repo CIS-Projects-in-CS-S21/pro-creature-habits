@@ -1,9 +1,10 @@
 import React from 'react';
-import {Text, View, ScrollView, StyleSheet, Image} from "react-native";
+import {Text, View, ScrollView, StyleSheet, Image, Modal, Button, Pressable} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {FILTER, FILTER_ALL} from "../redux/marketplaceInventory";
 import DropDownPicker from "react-native-dropdown-picker";
 import Cards from "../components/marketplaceComponents/Cards";
+import {OFF} from "../redux/modalVisible";
 
 
 const styles = StyleSheet.create({
@@ -56,6 +57,30 @@ const styles = StyleSheet.create({
 		marginRight:20,
 		marginTop: 20
 	},
+	centeredView: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		marginTop: 22
+	},
+	modalView: {
+		margin: 20,
+		backgroundColor: "white",
+		borderRadius: 20,
+		padding: 35,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5
+	},
+	buttonClose: {
+		backgroundColor: "#2196F3",
+	},
 });
 
 const MarketplaceScreen = () => {
@@ -94,6 +119,25 @@ const MarketplaceScreen = () => {
 				containerStyle={styles.dropdownContainer}
 				onChangeItem={item => changeFilter(item.value)}
 			/>
+			<View style={styles.centeredView}>
+				<Modal
+					animationType="slide"
+					transparent={true}
+					visible={useSelector(state=>state.modalVisible)}
+				>
+					<View style={styles.centeredView}>
+						<View style={styles.modalView}>
+							<Text>Hello World!</Text>
+							<Pressable
+								style={[styles.button, styles.buttonClose]}
+								onPress={() => dispatch({type: OFF})}
+							>
+								<Text style={styles.textStyle}>Hide Modal</Text>
+							</Pressable>
+						</View>
+					</View>
+				</Modal>
+			</View>
 			<Cards items={useSelector(state => state.shopItems)}/>
         </ScrollView>
     );
