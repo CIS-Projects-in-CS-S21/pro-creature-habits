@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text,ScrollView, StyleSheet, Image } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
+import DropDownPicker from "react-native-dropdown-picker";
+import Cards from "../components/marketplaceComponents/Cards";
+import {ADD,FILTER_PET, FILTER_ALL_PET} from "../redux/petInventory";
 
 const styles = StyleSheet.create({
     container: {
@@ -37,6 +40,32 @@ const styles = StyleSheet.create({
     		flexWrap: 'wrap',
     		alignContent: 'flex-end'
     },
+    balanceContainer: {
+    		flexDirection: 'row',
+    		borderWidth: 2,
+    		borderRadius: 10,
+    		borderColor: 'white',
+    		backgroundColor: 'lightblue',
+    		marginLeft: 10,
+    		shadowOffset: {width: 0, height: 5},
+    		shadowOpacity: 0.8,
+    		shadowRadius: 3,
+    		elevation: 11
+    	},
+    	balanceText: {
+    		color: 'white',
+    		fontSize: 25,
+    		marginTop: 5,
+    		marginLeft: 5,
+    		marginBottom: 5
+    	},
+    	dropdownContainer: {
+    		height: 40,
+    		alignSelf: 'stretch',
+    		marginLeft: 20,
+    		marginRight:20,
+    		marginTop: 20
+    	},
     }
 );
 
@@ -57,9 +86,17 @@ console.log(petImgChoice);
     	}
     }
 
-	return (
 
-		<View style={styles.container}>
+    	const changeFilter = (category) => {
+    		if(category === 'all') {
+    			dispatch({type: FILTER_ALL_PET});
+    		} else {
+    			dispatch({type: FILTER_PET, data: category});
+    		}
+    	}
+
+	return (
+<ScrollView style={styles.container}>
 			<Text style={styles.text}>Pet Profile Screen</Text>
 			<Text style={styles.text}>
 			{useSelector(state => state.petDetails[0])}
@@ -70,8 +107,20 @@ console.log(petImgChoice);
                 source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
             />
             </View>
+			<DropDownPicker
+				items={[
+					{label: 'All', value: 'all'},
+					{label: 'Clothes', value: 'clothes'},
+					{label: 'Food', value: 'food'},
+					{label: 'Toys', value: 'toys'}
+				]}
+				defaultValue={'all'}
+				containerStyle={styles.dropdownContainer}
+				onChangeItem={item => changeFilter(item.value)}
+			/>
+			<Cards items={useSelector(state => state.petInv)}/>
+        </ScrollView>
 
-		</View>
 
 	);
 };

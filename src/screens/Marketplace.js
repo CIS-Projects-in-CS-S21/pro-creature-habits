@@ -69,6 +69,7 @@ const MarketplaceScreen = () => {
 		}
 	}
 
+
     return (
         <ScrollView style={styles.container}>
 			<View style={styles.header}>

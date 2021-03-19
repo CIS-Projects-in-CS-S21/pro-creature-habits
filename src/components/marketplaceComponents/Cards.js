@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {ItemInventory} from "../ItemInventory";
 import {PURCHASE} from "../../redux/marketplaceInventory";
 import {BUY} from "../../redux/coinBalance";
+import {ADD} from "../../redux/petInventory";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import Card from "./Card";
 
@@ -35,6 +36,7 @@ const Cards = (items) => {
 			alert(`You have bought ${item}`);
 			dispatch({type: PURCHASE, data: item})
 			dispatch({type: BUY, data: ItemInventory[item].cost})
+			dispatch({type: ADD, data: item})
 		}
 	}
 	return (
