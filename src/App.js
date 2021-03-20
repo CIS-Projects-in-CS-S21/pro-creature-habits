@@ -20,6 +20,7 @@ import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
 import modalVisibleReducer from "./redux/modalVisible";
+import selectedMarketItemReducer from "./redux/selectedMarketItem";
 
 const Stack = createStackNavigator();
 
@@ -27,7 +28,8 @@ const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
-	modalVisible: modalVisibleReducer
+	modalVisible: modalVisibleReducer,
+	selectedMarketItem: selectedMarketItemReducer
 });
 
 const store = createStore(reducer);
