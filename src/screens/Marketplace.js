@@ -7,6 +7,7 @@ import Cards from "../components/marketplaceComponents/Cards";
 import {OFF} from "../redux/modalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import {BUY} from "../redux/coinBalance";
+import { showMessage } from "react-native-flash-message";
 
 
 const styles = StyleSheet.create({
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
 	},
 	textStyle: {
     	color: 'white'
-	}
+	},
 });
 
 const MarketplaceScreen = () => {
@@ -125,6 +126,11 @@ const MarketplaceScreen = () => {
 		dispatch({type: PURCHASE, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
 		dispatch({type: OFF});
+		showMessage({
+			message: `item has successfully been added to your inventory`,
+			type: "success",
+			statusBarHeight: 52,
+		})
 	}
 
     return (

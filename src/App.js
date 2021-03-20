@@ -21,6 +21,7 @@ import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
 import modalVisibleReducer from "./redux/modalVisible";
 import selectedMarketItemReducer from "./redux/selectedMarketItem";
+import FlashMessage from "react-native-flash-message";
 
 const Stack = createStackNavigator();
 
@@ -184,6 +185,7 @@ const App = () => {
 						</>
 					)}
 				</Stack.Navigator>
+				<FlashMessage position="top"/>
 			</NavigationContainer>
 		</Provider>
 	);
