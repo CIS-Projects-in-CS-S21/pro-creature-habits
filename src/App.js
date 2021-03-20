@@ -5,7 +5,7 @@ import {Image, Text, View, TouchableOpacity} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
-import petInventory from "./redux/petInventory";
+import petInventoryReducer from "./redux/petInventory";
 import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
@@ -27,7 +27,7 @@ const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
-	petInv: petInventory
+	petInv: petInventoryReducer
 
 });
 

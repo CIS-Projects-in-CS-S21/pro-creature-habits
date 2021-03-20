@@ -3,7 +3,7 @@ import { View, Text,ScrollView, StyleSheet, Image } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
-import Cards from "../components/marketplaceComponents/Cards";
+import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
 import {ADD,FILTER_PET, FILTER_ALL_PET} from "../redux/petInventory";
 
 const styles = StyleSheet.create({
@@ -59,6 +59,10 @@ const styles = StyleSheet.create({
     		marginLeft: 5,
     		marginBottom: 5
     	},
+    	healthbarContainer: {
+    	    flexDirection:'column'
+
+    	},
     	dropdownContainer: {
     		height: 40,
     		alignSelf: 'stretch',
@@ -95,6 +99,11 @@ console.log(petImgChoice);
     		}
     	}
 
+const skills = [
+  {type: "Java", level: 85},
+  {type: "Javascript", level: 75},
+];
+
 	return (
 <ScrollView style={styles.container}>
 			<Text style={styles.text}>Pet Profile Screen</Text>
@@ -103,9 +112,12 @@ console.log(petImgChoice);
 			</Text>
 			<View style={styles.imageContainer}>
             <Image id="img"
-                style={{width: 100,height: 100,borderWidth: 5,borderRadius: 10}}
+                style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10}}
                 source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
             />
+            <View style={styles.healthbarContainer}>
+
+            </View>
             </View>
 			<DropDownPicker
 				items={[
@@ -118,7 +130,7 @@ console.log(petImgChoice);
 				containerStyle={styles.dropdownContainer}
 				onChangeItem={item => changeFilter(item.value)}
 			/>
-			<Cards items={useSelector(state => state.petInv)}/>
+			<PetInventoryCards items={useSelector(state => state.petInv)}/>
         </ScrollView>
 
 
