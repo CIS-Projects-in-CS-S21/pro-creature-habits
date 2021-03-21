@@ -23,8 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb050bdd-6d0d-4c37-b68f-2800cbb7eba1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/ChoosePet.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ChoosePet.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databases/MarketItem.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/databases/MarketStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
