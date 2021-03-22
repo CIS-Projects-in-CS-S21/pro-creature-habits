@@ -19,13 +19,18 @@ import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
+import modalVisibleReducer from "./redux/modalVisible";
+import selectedMarketItemReducer from "./redux/selectedMarketItem";
+import FlashMessage from "react-native-flash-message";
 
 const Stack = createStackNavigator();
 
 const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
-	petDetails: petInfoReducer
+	petDetails: petInfoReducer,
+	modalVisible: modalVisibleReducer,
+	selectedMarketItem: selectedMarketItemReducer
 });
 
 const store = createStore(reducer);
@@ -180,6 +185,7 @@ const App = () => {
 						</>
 					)}
 				</Stack.Navigator>
+				<FlashMessage position="top"/>
 			</NavigationContainer>
 		</Provider>
 	);
