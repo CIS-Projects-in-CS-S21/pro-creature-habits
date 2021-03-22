@@ -5,6 +5,7 @@ import {CHANGE} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
 import {ADD,FILTER_PET, FILTER_ALL_PET} from "../redux/petInventory";
+import HealthBar from "../components/HealthBar";
 
 const styles = StyleSheet.create({
     container: {
@@ -116,7 +117,8 @@ const skills = [
                 source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
             />
             <View style={styles.healthbarContainer}>
-
+                <HealthBar progress=50/>
+                <HealthBar/>
             </View>
             </View>
 			<DropDownPicker
