@@ -2,8 +2,8 @@ import React from 'react';
 import MarketItem from "./MarketItem";
 import {useCallback} from "react/cjs/react.production.min";
 
-export default function MarketStorage() {
-    const createMarket = useCallback(async (deleteText) => {
+
+const createMarket = useCallback(async () => {
         const burger = {
             name: 'burger',
             uri: require('../test_images/burger.png'),
@@ -135,6 +135,7 @@ export default function MarketStorage() {
         await black_shoesItem.save()
 
     }, [])
-}
+
+export default createMarket;
 
 

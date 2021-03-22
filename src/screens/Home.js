@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
 import Task from '../databases/Task';
+import createMarket from '../databases/MarketStorage';
+import MarketItem from '../databases/MarketItem';
 import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,9 +10,9 @@ import { withSafeAreaInsets } from 'react-native-safe-area-context';
 export default function Home() {
 
  const [tasks, setTasks] = useState([])
-
-   Task.createTable()
-
+    MarketItem.createTable()
+    Task.createTable()
+    createMarket()
  const deleteTask = useCallback(async (deleteText) => {
  	const del = deleteText
 	const t = await Task.findBy({ name_eq: del })
