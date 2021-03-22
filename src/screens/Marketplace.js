@@ -122,12 +122,16 @@ const MarketplaceScreen = () => {
 		}
 	}
 
+	const upperCase = (string) => {
+		return string[0].toUpperCase() + string.slice(1);
+	}
+
 	const handlePurchase = (item) => {
 		dispatch({type: PURCHASE, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
 		dispatch({type: OFF});
 		showMessage({
-			message: `item has successfully been added to your inventory`,
+			message: `${upperCase(ItemInventory[item].name)} has been added to your inventory`,
 			type: "success",
 			statusBarHeight: 52,
 		})
