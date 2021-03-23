@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import MarketItem from "./MarketItem";
 import {useCallback} from "react/cjs/react.production.min";
 
-
-const createMarket = useCallback(async () => {
+   const CreateMarket = () => {
         const burger = {
             name: 'burger',
             uri: require('../test_images/burger.png'),
@@ -12,7 +11,7 @@ const createMarket = useCallback(async () => {
         }
 
         const burgerItem = new MarketItem(burger)
-        await burgerItem.save()
+       burgerItem.save()
 
         const shoes = {
             name: 'shoes',
@@ -22,7 +21,7 @@ const createMarket = useCallback(async () => {
         }
 
         const shoesItem = new MarketItem(shoes)
-        await shoesItem.save()
+       shoesItem.save()
 
         const pizza = {
             name: 'pizza',
@@ -32,7 +31,7 @@ const createMarket = useCallback(async () => {
         }
 
         const pizzaItem = new MarketItem(pizza)
-        await pizzaItem.save()
+       pizzaItem.save()
 
         const carrot = {
             name: 'carrot',
@@ -42,7 +41,7 @@ const createMarket = useCallback(async () => {
         }
 
         const carrotItem = new MarketItem(carrot)
-        await carrotItem.save()
+       carrotItem.save()
 
         const ball = {
             name: 'ball',
@@ -52,7 +51,7 @@ const createMarket = useCallback(async () => {
         }
 
         const ballItem = new MarketItem(ball)
-        await ballItem.save()
+       ballItem.save()
 
         const shirt = {
             name: 'shirt',
@@ -62,7 +61,7 @@ const createMarket = useCallback(async () => {
         }
 
         const shirtItem = new MarketItem(shirt)
-        await shirtItem.save()
+       shirtItem.save()
 
         const water = {
             name: 'water',
@@ -72,7 +71,7 @@ const createMarket = useCallback(async () => {
         }
 
         const waterItem = new MarketItem(water)
-        await waterItem.save()
+       waterItem.save()
 
         const blue_shoes = {
             name: 'blue shoes',
@@ -82,7 +81,7 @@ const createMarket = useCallback(async () => {
         }
 
         const blue_shoesItem = new MarketItem(blue_shoes)
-        await blue_shoesItem.save()
+       blue_shoesItem.save()
 
         const black_shirt = {
             name: 'black shirt',
@@ -92,7 +91,7 @@ const createMarket = useCallback(async () => {
         }
 
         const black_shirtItem = new MarketItem(black_shirt)
-        await black_shirtItem.save()
+       black_shirtItem.save()
 
         const blue_shirt = {
             name: 'blue shirt',
@@ -102,7 +101,7 @@ const createMarket = useCallback(async () => {
         }
 
         const blue_shirtItem = new MarketItem(blue_shirt)
-        await blue_shirtItem.save()
+       blue_shirtItem.save()
 
         const red_ball = {
             name: 'red ball',
@@ -112,7 +111,7 @@ const createMarket = useCallback(async () => {
         }
 
         const red_ballItem = new MarketItem(red_ball)
-        await red_ballItem.save()
+       red_ballItem.save()
 
         const black_ball = {
             name: 'black ball',
@@ -122,7 +121,7 @@ const createMarket = useCallback(async () => {
         }
 
         const black_ballItem = new MarketItem(black_ball)
-        await black_ballItem.save()
+       black_ballItem.save()
 
         const black_shoes = {
             name: 'black shoes',
@@ -132,10 +131,9 @@ const createMarket = useCallback(async () => {
         }
 
         const black_shoesItem = new MarketItem(black_shoes)
-        await black_shoesItem.save()
+       black_shoesItem.save()
 
-    }, [])
-
-export default createMarket;
+    }
 
 
+export default CreateMarket;

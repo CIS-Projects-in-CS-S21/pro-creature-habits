@@ -19,6 +19,7 @@ import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
+import CreateMarket from "./databases/MarketStorage";
 
 const Stack = createStackNavigator();
 
@@ -61,6 +62,7 @@ const App = () => {
 
 	const handleSignIn = () => {
 		setIsAuthenticated(true);
+		CreateMarket();
 	};
 
 	const handleSignOut = () => {

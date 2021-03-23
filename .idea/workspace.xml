@@ -22,10 +22,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fb050bdd-6d0d-4c37-b68f-2800cbb7eba1" name="Default Changelist" comment="database creation">
+    <list default="true" id="2833ac82-d956-4ffb-aaff-ca289c59ee0e" name="Default Changelist" comment="errors recognizing main">
       <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/marketplaceComponents/Card.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/marketplaceComponents/Card.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/databases/MarketStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/databases/MarketStorage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Home.js" afterDir="false" />
     </list>
@@ -42,6 +44,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1pUK3suhC0nkLgSUNKQEIQTvSK2" />

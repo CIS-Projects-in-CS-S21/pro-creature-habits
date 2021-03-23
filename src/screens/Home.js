@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
 import Task from '../databases/Task';
-import createMarket from '../databases/MarketStorage';
+import MarketStorage from '../databases/MarketStorage';
+import CreateMarket from '../databases/MarketStorage';
 import MarketItem from '../databases/MarketItem';
 import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
@@ -10,9 +11,9 @@ import { withSafeAreaInsets } from 'react-native-safe-area-context';
 export default function Home() {
 
  const [tasks, setTasks] = useState([])
+
     MarketItem.createTable()
-    Task.createTable()
-    createMarket()
+
  const deleteTask = useCallback(async (deleteText) => {
  	const del = deleteText
 	const t = await Task.findBy({ name_eq: del })
@@ -33,9 +34,15 @@ export default function Home() {
     setTasks(await Task.query())
   }, [])
 
- 
+const testMarket= useCallback(async () => {
+    const t = await MarketItem.findBy({ name_eq: 'shoes' })
+    console.log(t);
+}, [])
+
  const onSubmit = () => {
  	createTask(text);
+
+ 	testMarket();
  }
 
  const onDelete = () => {
