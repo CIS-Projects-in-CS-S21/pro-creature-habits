@@ -24,6 +24,7 @@ import selectedMarketItemReducer from "./redux/selectedMarketItem";
 import FlashMessage from "react-native-flash-message";
 import statsVisibleReducer from "./redux/statsVisible";
 import achievementsVisibleReducer from "./redux/achievementsVisible";
+import difficultyReducer from "./redux/difficulty";
 
 const Stack = createStackNavigator();
 
@@ -34,7 +35,8 @@ const reducer = combineReducers({
 	modalVisible: modalVisibleReducer,
 	selectedMarketItem: selectedMarketItemReducer,
 	statsVisible: statsVisibleReducer,
-	achievementsVisible: achievementsVisibleReducer
+	achievementsVisible: achievementsVisibleReducer,
+	difficulty: difficultyReducer
 });
 
 const store = createStore(reducer);
@@ -111,14 +113,6 @@ const App = () => {
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
 										{getHeaderTitle(route)}
 									</Text>
-								),
-								headerRight: () => (
-									<TouchableOpacity style={{marginRight: 10}} onPress={() => {
-										handleSignOut();
-									}}
-									>
-										<MaterialIcons name='logout' size={36} color='white'/>
-									</TouchableOpacity>
 								),
 								headerLeft: () => (
 									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
