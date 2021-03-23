@@ -42,12 +42,16 @@ export default function Home() {
 
  const ListItem = (props) => {
   const jsonObj = JSON.parse(props.value);
-  
+  const unixTime = jsonObj.timestamp;
+  const date = new Date(unixTime);
+  const dateString = date.toLocaleString("en-US");
   return(
     <View style={styles.listItem}>
       
-      
+
+
       <Text style={{fontWeight: 'bold', fontSize: 16}} color='white'>{jsonObj.name}</Text>
+      <Text style={{fontSize: 11, marginLeft: 'auto', marginRight: '5%'}}>{dateString}</Text>
     </View>
   );
  }
@@ -71,7 +75,7 @@ export default function Home() {
       <Button title='submit'  color="#637ed0" onPress={onSubmit} />
         
       <TextInput style={{backgroundColor: 'white', width: '50%'}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
-	  <Button title="Delete" color="#637ed0" onPress={onDelete}/>
+	    <Button title="Delete" color="#637ed0" onPress={onDelete}/>
       <View style={styles.listContainer}>
         <ScrollView>
 
