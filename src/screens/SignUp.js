@@ -1,5 +1,6 @@
-import React from 'react';
-import {Text, View, Button, StyleSheet} from "react-native";
+import React, { useCallback, useState } from 'react';
+import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
+import UserInfo from "../databases/UserInfo";
 
 const styles = StyleSheet.create({
 	container: {
@@ -9,11 +10,60 @@ const styles = StyleSheet.create({
 	},
 });
 
-const SignUpScreen = ({ onSignUp }) => {
+const SignUpScreen = ({ onSignUp, navigation }) => {
+	const [newUsername, setNewUsername] = React.useState('');
+	const [newPassword, setNewPassword] = React.useState('');
+	const [newEmail, setNewEmail] = React.useState('');
+
+	const createUser = useCallback(async (newUsername, newPassword, newEmail) => {
+		const props = {
+			username: newUsername,
+			password: newPassword,
+			email: newEmail,
+			coinBalance: 100
+		}
+
+		const newUser = new UserInfo(props)
+		await newUser.save()
+		onCreateSubmit()
+	}, [])
+
+	const onCreateUser = () => {
+		createUser(newUsername, newPassword, newEmail)
+	}
+	const onCreateSubmit= () => {
+		navigation.navigate('Account Creation')
+	}
+
 	return (
 		<View style={styles.container}>
-			<Text>Public Sign Up Screen</Text>
-			<Button title="Sign Up" onPress={onSignUp} />
+			<TextInput
+				value={newUsername}
+				onChangeText={newUsername => setNewUsername(newUsername)}
+				placeholder={'Username'}
+				style={styles.input}
+			/>
+			<TextInput
+				value={newPassword}
+				onChangeText={newPassword => setNewPassword(newPassword)}
+				placeholder={'Password'}
+				secureTextEntry={true}
+				style={styles.input}
+			/>
+			<TextInput
+				value={newEmail}
+				onChangeText={newEmail => setNewEmail(newEmail)}
+				placeholder={'Email'}
+				secureTextEntry={true}
+				style={styles.input}
+			/>
+
+			<Button
+				title={'SignUp'}
+				style={styles.button}
+				onPress={onCreateUser}
+			/>
+
 		</View>
 	);
 };
