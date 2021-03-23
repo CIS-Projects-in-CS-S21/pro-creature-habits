@@ -22,6 +22,8 @@ import {API_WEATHER_KEY} from "./components/Keys";
 import modalVisibleReducer from "./redux/modalVisible";
 import selectedMarketItemReducer from "./redux/selectedMarketItem";
 import FlashMessage from "react-native-flash-message";
+import statsVisibleReducer from "./redux/statsVisible";
+import achievementsVisibleReducer from "./redux/achievementsVisible";
 
 const Stack = createStackNavigator();
 
@@ -30,7 +32,9 @@ const reducer = combineReducers({
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
 	modalVisible: modalVisibleReducer,
-	selectedMarketItem: selectedMarketItemReducer
+	selectedMarketItem: selectedMarketItemReducer,
+	statsVisible: statsVisibleReducer,
+	achievementsVisible: achievementsVisibleReducer
 });
 
 const store = createStore(reducer);
