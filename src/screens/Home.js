@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
 import Task from '../databases/Task';
+import UserInfo from '../databases/UserInfo';
 import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,6 +9,7 @@ import { withSafeAreaInsets } from 'react-native-safe-area-context';
 export default function Home() {
 
  const [tasks, setTasks] = useState([])
+ const [users, setUserInfo] = useState([])
 
    Task.createTable()
 
@@ -31,9 +33,39 @@ export default function Home() {
     setTasks(await Task.query())
   }, [])
 
+  const awardCoins = useCallback(async() =>{
+    const user = await UserInfo.findBy({'username_eq':"Pikachu"})
+    user.coinBalance+=5
+    await user.save()
+    setUserInfo(await UserInfo.query())
+})
  
- const onSubmit = () => {
+
+const onCreate = () => {
+    const props = {
+        username: username,
+        password: "password",
+        email: email,
+        coinBalance: 100, //default balance assigned
+
+    }
+
+    const user = new UserInfo(props)
+    user.save()
+    alert("User Created!");
+
+}
+
+
+
+ const onSubmit = async () => {
  	createTask(text);
+     awardCoins();
+
+     const user = await UserInfo.findBy({'username_eq':"Pikachu"})
+     alert("Task created and coins awarded!\nYour current coin balance: "+user.coinBalance);
+    //  await user.save()
+    // setUserInfo(await UserInfo.query())
  }
 
  const onDelete = () => {
@@ -65,6 +97,10 @@ export default function Home() {
 
   const [text, setText] = React.useState('');
    const [deleteText, setDeleteText] = React.useState('');
+   const[username, setUsername] = React.useState('');
+   const[email, setEmail] = React.useState('');
+
+
   return (
     <View style={styles.container}>
       <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='name' value={text} onChangeText={text => setText(text)}/>
@@ -74,6 +110,8 @@ export default function Home() {
 	  <Button title="Delete" color="#637ed0" onPress={onDelete}/>
       <View style={styles.listContainer}>
         <ScrollView>
+
+       
 
           <ListOfTasks />
           
@@ -85,6 +123,10 @@ export default function Home() {
                 uri: 'https://i.imgur.com/tkSiusr.gif',
               }}
             />
+         <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getUsername' value={username} onChangeText={username => setUsername(username)}/>
+            <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getEmail' value={email} onChangeText={email => setEmail(email)}/>
+            <Button title='create'  color="#637ed0" onPress={onCreate} />
+          
         </View>
       </View>
     </View>
