@@ -25,10 +25,10 @@ import selectedMarketItemReducer from "./redux/selectedMarketItem";
 import FlashMessage from "react-native-flash-message";
 
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+//import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
-import { RootComponent, LoadingView } from './components';
+import { AsyncStorage } from 'react-native'
 
 const Stack = createStackNavigator();
 
@@ -43,7 +43,7 @@ const reducer = combineReducers({
 
 const persistConfig = {
 	key: 'root',
-	storage: storage,
+	storage: AsyncStorage,
 	stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
 };
 
@@ -112,7 +112,7 @@ const App = () => {
 
 	return (
 		<Provider store={store}>
-			<PersistGate loading={<LoadingView />} persistor={persistor}>
+			<PersistGate persistor={persistor}>
 				<NavigationContainer>
 					<Stack.Navigator>
 						{isAuthenticated ? (
