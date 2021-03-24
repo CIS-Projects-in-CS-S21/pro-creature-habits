@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import Card from "./Card";
 import {ON} from "../../redux/modalVisible";
@@ -8,7 +8,6 @@ import {SELECT} from "../../redux/selectedMarketItem";
 const styles = StyleSheet.create({
 	text: {
 		color: 'white'
-
 	},
 	cardsContainer: {
 		flexDirection: 'row',
@@ -28,7 +27,7 @@ const Cards = (items) => {
 
 	const onPress = (item) => {
 		dispatch({type: ON});
-		dispatch({type: SELECT, data: item})
+		dispatch({type: SELECT, data: item});
 	}
 
 	return (

@@ -8,6 +8,7 @@ import {OFF} from "../redux/modalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import {BUY} from "../redux/coinBalance";
 import { showMessage } from "react-native-flash-message";
+import {ACH_PROGRESS} from "../redux/achievementsComplete";
 
 
 const styles = StyleSheet.create({
@@ -130,6 +131,15 @@ const MarketplaceScreen = () => {
 		dispatch({type: PURCHASE, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
 		dispatch({type: OFF});
+		dispatch({type: ACH_PROGRESS, data: 'buy_item'});
+		if(ItemInventory[item].category === 'food') {
+			dispatch({type: ACH_PROGRESS, data: 'buy_food'});
+		} else if (ItemInventory[item].category === 'toys') {
+			dispatch({type: ACH_PROGRESS, data: 'buy_toy'});
+		} else {
+			dispatch({type: ACH_PROGRESS, data: 'buy_clothes'})
+		}
+
 		showMessage({
 			message: `${upperCase(ItemInventory[item].name)} has been added to your inventory`,
 			type: "success",

@@ -25,6 +25,8 @@ import FlashMessage from "react-native-flash-message";
 import statsVisibleReducer from "./redux/statsVisible";
 import achievementsVisibleReducer from "./redux/achievementsVisible";
 import difficultyReducer from "./redux/difficulty";
+import achievementsCompleteReducer from "./redux/achievementsComplete";
+import achievementFilterReducer from "./redux/achievementFilter";
 
 const Stack = createStackNavigator();
 
@@ -36,7 +38,9 @@ const reducer = combineReducers({
 	selectedMarketItem: selectedMarketItemReducer,
 	statsVisible: statsVisibleReducer,
 	achievementsVisible: achievementsVisibleReducer,
-	difficulty: difficultyReducer
+	difficulty: difficultyReducer,
+	achievements: achievementsCompleteReducer,
+	achievementsFilter: achievementFilterReducer
 });
 
 const store = createStore(reducer);

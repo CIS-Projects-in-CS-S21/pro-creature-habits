@@ -14,7 +14,6 @@ const marketplaceInventoryReducer = (state=defaultState, action) => {
 			if(ItemInventory[action.data].category === 'food') {
 				return state;
 			}
-			console.log(action.data);
 			const index = state.indexOf(action.data);
 			const copyItems = [...state];
 			copyItems.splice(index, 1);
