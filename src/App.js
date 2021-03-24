@@ -24,6 +24,12 @@ import modalVisibleReducer from "./redux/modalVisible";
 import selectedMarketItemReducer from "./redux/selectedMarketItem";
 import FlashMessage from "react-native-flash-message";
 
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { RootComponent, LoadingView } from './components';
+
 const Stack = createStackNavigator();
 
 const reducer = combineReducers({
@@ -31,10 +37,19 @@ const reducer = combineReducers({
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
 	modalVisible: modalVisibleReducer,
-	selectedMarketItem: selectedMarketItemReducer
+	selectedMarketItem: selectedMarketItemReducer,
+//	perReducer: persistReducer(persistConfig, rootReducer)
 });
 
-const store = createStore(reducer);
+const persistConfig = {
+	key: 'root',
+	storage: storage,
+	stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+};
+
+const pReducer = persistReducer(persistConfig, reducer);
+const store = createStore(pReducer);
+const persistor = persistStore(store);
 
 const App = () => {
 	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -97,102 +112,104 @@ const App = () => {
 
 	return (
 		<Provider store={store}>
-			<NavigationContainer>
-				<Stack.Navigator>
-					{isAuthenticated ? (
-						<Stack.Screen
-							name="Home"
-							component={HomeTabs}
-							options={ ({ route}) => ({
-								headerTitle: () => (
-									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										{getHeaderTitle(route)}
-									</Text>
-								),
-								headerRight: () => (
-									<TouchableOpacity style={{marginRight: 10}} onPress={() => {
-										handleSignOut();
-									}}
-									>
-										<MaterialIcons name='logout' size={36} color='white'/>
-									</TouchableOpacity>
-								),
-								headerLeft: () => (
-									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
-										<Image style={{width: 40, height: 40, marginTop: 5 }}  source={{uri: `https://openweathermap.org/img/wn/${weather}@2x.png`}}/>
-										<Text style={{color: 'white', fontSize: 25, marginTop: 10, }}>{Math.round(temperature)}&deg;F</Text>
-									</View>
-								),
-								headerStyle : {
-									backgroundColor: '#402688',
-									shadowOpacity: 0,
-									height: 100
-								},
-							})}
-						/>
-					) : (
-						<>
-						<Stack.Screen
-							name="Sign In"
-							options={{
-								animationTypeForReplace: 'pop',
-								headerTitle: () => (
-									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Sign In
-									</Text>
-								),
-								headerStyle : {
-									backgroundColor: '#402688',
-									shadowOpacity: 0,
-									height: 100
-								},
-							}}>
-							{(props) => (
-								<SignInScreen {...props} onSignIn={handleSignIn} />
-							)}
-						</Stack.Screen>
-						<Stack.Screen name="Google Sign Up">
-							{(props) => (
-								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
-							)}
-						</Stack.Screen>
-						<Stack.Screen name="Sign Up">
-							{(props) => (
-								<SignUpScreen {...props} onSignUp={handleSignUp} />
-							)}
-						</Stack.Screen>
-						<Stack.Screen
-							name="Account Creation"
-							options={{
-								headerTitle: () => (
-									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Account Creation
-									</Text>
-								),
-								headerStyle : {
-									backgroundColor: '#402688',
-									shadowOpacity: 0,
-									height: 100
-								},
-							}}>
-							{(props) => (
-								<AccountCreationScreen {...props} onSignUp={handleSignUp} />
-							)}
-						</Stack.Screen>
-						<Stack.Screen name="Choose Pet">
-							{(props) => (
-								<ChoosePet {...props} onSignUp={handleSignUp} />
-							)}
-						</Stack.Screen>
-						<Stack.Screen name="Profile"
-							  component={Profile}
-							  >
-						</Stack.Screen>
-						</>
-					)}
-				</Stack.Navigator>
-				<FlashMessage position="top"/>
-			</NavigationContainer>
+			<PersistGate loading={<LoadingView />} persistor={persistor}>
+				<NavigationContainer>
+					<Stack.Navigator>
+						{isAuthenticated ? (
+							<Stack.Screen
+								name="Home"
+								component={HomeTabs}
+								options={ ({ route}) => ({
+									headerTitle: () => (
+										<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
+											{getHeaderTitle(route)}
+										</Text>
+									),
+									headerRight: () => (
+										<TouchableOpacity style={{marginRight: 10}} onPress={() => {
+											handleSignOut();
+										}}
+										>
+											<MaterialIcons name='logout' size={36} color='white'/>
+										</TouchableOpacity>
+									),
+									headerLeft: () => (
+										<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
+											<Image style={{width: 40, height: 40, marginTop: 5 }}  source={{uri: `https://openweathermap.org/img/wn/${weather}@2x.png`}}/>
+											<Text style={{color: 'white', fontSize: 25, marginTop: 10, }}>{Math.round(temperature)}&deg;F</Text>
+										</View>
+									),
+									headerStyle : {
+										backgroundColor: '#402688',
+										shadowOpacity: 0,
+										height: 100
+									},
+								})}
+							/>
+						) : (
+							<>
+							<Stack.Screen
+								name="Sign In"
+								options={{
+									animationTypeForReplace: 'pop',
+									headerTitle: () => (
+										<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
+											Sign In
+										</Text>
+									),
+									headerStyle : {
+										backgroundColor: '#402688',
+										shadowOpacity: 0,
+										height: 100
+									},
+								}}>
+								{(props) => (
+									<SignInScreen {...props} onSignIn={handleSignIn} />
+								)}
+							</Stack.Screen>
+							<Stack.Screen name="Google Sign Up">
+								{(props) => (
+									<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
+								)}
+							</Stack.Screen>
+							<Stack.Screen name="Sign Up">
+								{(props) => (
+									<SignUpScreen {...props} onSignUp={handleSignUp} />
+								)}
+							</Stack.Screen>
+							<Stack.Screen
+								name="Account Creation"
+								options={{
+									headerTitle: () => (
+										<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
+											Account Creation
+										</Text>
+									),
+									headerStyle : {
+										backgroundColor: '#402688',
+										shadowOpacity: 0,
+										height: 100
+									},
+								}}>
+								{(props) => (
+									<AccountCreationScreen {...props} onSignUp={handleSignUp} />
+								)}
+							</Stack.Screen>
+							<Stack.Screen name="Choose Pet">
+								{(props) => (
+									<ChoosePet {...props} onSignUp={handleSignUp} />
+								)}
+							</Stack.Screen>
+							<Stack.Screen name="Profile"
+								  component={Profile}
+								  >
+							</Stack.Screen>
+							</>
+						)}
+					</Stack.Navigator>
+					<FlashMessage position="top"/>
+				</NavigationContainer>
+			</PersistGate>
 		</Provider>
 	);
 };
