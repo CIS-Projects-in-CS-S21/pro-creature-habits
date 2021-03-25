@@ -29,6 +29,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { AsyncStorage } from 'react-native'
+export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
+
 
 const Stack = createStackNavigator();
 
@@ -41,13 +43,21 @@ const reducer = combineReducers({
 //	perReducer: persistReducer(persistConfig, rootReducer)
 });
 
+const rootReducer = (state, action) => {
+	if (action.type === RESET_BUTTON_PRESSED) {
+		persistConfig.storage.removeItem('persist:root')
+		state = undefined;
+	}
+	return reducer(state, action);
+};
+
 const persistConfig = {
 	key: 'root',
 	storage: AsyncStorage,
 	stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
 };
 
-const pReducer = persistReducer(persistConfig, reducer);
+const pReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(pReducer);
 const persistor = persistStore(store);
 
