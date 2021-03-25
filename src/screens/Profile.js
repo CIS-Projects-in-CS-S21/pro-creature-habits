@@ -117,7 +117,7 @@ const skills = [
                 source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
             />
             <View style={styles.healthbarContainer}>
-                <HealthBar progress=50/>
+                <HealthBar/>
                 <HealthBar/>
             </View>
             </View>

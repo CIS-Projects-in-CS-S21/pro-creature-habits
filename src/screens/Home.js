@@ -31,31 +31,11 @@ export default function Home() {
     setTasks(await Task.query())
   }, [])
 
- 
-  const awardCoins = useCallback(async() =>{
-      const user = await UserInfo.findBy({'fullName_eq':"Pikachu"})
-      user.coinBalance-=5
-      await user.save()
-      setUserInfo(await UserInfo.query())
-  })
 
-
-const onCreate = async() => {
-    const props = {
-        fullName: username,
-        email: email,
-        coinBalance: 100, //default balance assigned
-
-    }
-
-    const user = new UserInfo(props)
-    await user.save()
-
-}
 
  const onSubmit = () => {
  	createTask(text);
-    awardCoins();
+    //awardCoins();
  }
 
  const onDelete = () => {
