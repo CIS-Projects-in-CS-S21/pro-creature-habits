@@ -103,14 +103,12 @@ const choosePetScreen = ({onSignUp}) => {
                                 </View>
 
             <Text style={styles.text}>Please enter a name for your pet</Text>
-
+            <View style={styles.imageContainer}>
             <TextInput
                             style={{
-                                justifyContent: 'center',
-                                alignItems: 'center',
+                                margin: 'auto',
                                 height: 40,
                                 width: 200,
-                                margin: 20,
                                 borderColor: 'black',
                                 backgroundColor: 'gray',
                                 borderWidth: 1
@@ -119,7 +117,7 @@ const choosePetScreen = ({onSignUp}) => {
                         onChangeText={text => onChangeText(text)}
                         value={text}
             />
-
+        </View>
         <Button title="Submit" color="white" onPress={() => {submitData(); onSignUp();}}/>
 
         </View>
