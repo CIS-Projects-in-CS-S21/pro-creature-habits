@@ -10,6 +10,7 @@ import {BUY} from "../redux/coinBalance";
 import { showMessage } from "react-native-flash-message";
 import {ACH_PROGRESS} from "../redux/achievementsComplete";
 import {PURCHASE_GRAY} from "../redux/marketplaceItemsBought";
+import AnimatedNumbers from "react-native-animated-numbers";
 
 
 const styles = StyleSheet.create({
@@ -42,8 +43,6 @@ const styles = StyleSheet.create({
 		elevation: 11
 	},
 	balanceText: {
-		color: 'white',
-		fontSize: 25,
 		marginTop: 5,
 		marginLeft: 5,
 		marginBottom: 5
@@ -153,9 +152,13 @@ const MarketplaceScreen = () => {
 			<View style={styles.header}>
 				<Image style={styles.shopImage} source={require('../test_images/shop.png')}/>
 				<View style={styles.balanceContainer}>
-					<Text style={styles.balanceText}>
-						{useSelector(state => state.coins)}
-					</Text>
+					<View style={styles.balanceText}>
+						<AnimatedNumbers
+							includeComma
+							animateToNumber={useSelector(state=>state.coins)}
+							fontStyle={{fontSize: 25, color: 'white'}}
+						/>
+					</View>
 					<Image
 						style={styles.coinImage}
 						source={require('../test_images/coin.png')}

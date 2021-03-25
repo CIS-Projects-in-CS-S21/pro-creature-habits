@@ -27,6 +27,7 @@
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
     "react-native-animated-nav-tab-bar": "^3.1.2",
+    "react-native-animated-numbers": "^0.2.0",
     "react-native-dropdown-picker": "^4.0.2",
     "react-native-flash-message": "^0.1.23",
     "react-native-gesture-handler": "^1.8.0",
