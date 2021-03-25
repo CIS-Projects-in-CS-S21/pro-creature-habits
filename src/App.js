@@ -16,10 +16,17 @@ import { MaterialIcons } from "@expo/vector-icons";
 import HomeTabs from "./components/HomeTabs";
 import SignInScreen from "./screens/SignIn";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
+import SignUpScreen from "./screens/SignUp";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
+import modalVisibleReducer from "./redux/modalVisible";
+import selectedMarketItemReducer from "./redux/selectedMarketItem";
+import FlashMessage from "react-native-flash-message";
+import statsVisibleReducer from "./redux/statsVisible";
+import achievementsVisibleReducer from "./redux/achievementsVisible";
+import difficultyReducer from "./redux/difficulty";
 
 const Stack = createStackNavigator();
 
@@ -27,8 +34,12 @@ const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
-	petInv: petInventoryReducer
-
+	petInv: petInventoryReducer,
+	modalVisible: modalVisibleReducer,
+	selectedMarketItem: selectedMarketItemReducer,
+	statsVisible: statsVisibleReducer,
+	achievementsVisible: achievementsVisibleReducer,
+	difficulty: difficultyReducer
 });
 
 const store = createStore(reducer);
@@ -106,14 +117,6 @@ const App = () => {
 										{getHeaderTitle(route)}
 									</Text>
 								),
-								headerRight: () => (
-									<TouchableOpacity style={{marginRight: 10}} onPress={() => {
-										handleSignOut();
-									}}
-									>
-										<MaterialIcons name='logout' size={36} color='white'/>
-									</TouchableOpacity>
-								),
 								headerLeft: () => (
 									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
 										<Image style={{width: 40, height: 40, marginTop: 5 }}  source={{uri: `https://openweathermap.org/img/wn/${weather}@2x.png`}}/>
@@ -153,6 +156,11 @@ const App = () => {
 								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
+						<Stack.Screen name="Sign Up">
+							{(props) => (
+								<SignUpScreen {...props} onSignUp={handleSignUp} />
+							)}
+						</Stack.Screen>
 						<Stack.Screen
 							name="Account Creation"
 							options={{
@@ -183,6 +191,7 @@ const App = () => {
 						</>
 					)}
 				</Stack.Navigator>
+				<FlashMessage position="top"/>
 			</NavigationContainer>
 		</Provider>
 	);

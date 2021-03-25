@@ -6,6 +6,8 @@ import {BUY} from "../../redux/coinBalance";
 import {ADD} from "../../redux/petInventory";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import Card from "./Card";
+import {ON} from "../../redux/modalVisible";
+import {SELECT} from "../../redux/selectedMarketItem";
 
 const styles = StyleSheet.create({
 	text: {
@@ -22,12 +24,11 @@ const styles = StyleSheet.create({
 	highlightContainer: {
 		alignSelf: 'flex-end',
 		margin: 10
-	}
+	},
 });
 
 const Cards = (items) => {
 	const dispatch = useDispatch();
-	const balance = useSelector(state => state.coins);
 
 	const onPurchase = (item) => {
 		if(ItemInventory[item].cost > balance) {
@@ -37,8 +38,11 @@ const Cards = (items) => {
 			dispatch({type: PURCHASE, data: item})
 			dispatch({type: BUY, data: ItemInventory[item].cost})
 			dispatch({type: ADD, data: item})
+			dispatch({type: ON});
+			dispatch({type: SELECT, data: item})
 		}
 	}
+
 	return (
 		<View style={styles.cardsContainer}>
 			{items.items.map((item, index) => {
@@ -46,7 +50,7 @@ const Cards = (items) => {
 					<TouchableHighlight
 						activeOpacity={0.8}
 						underlayColor='#000'
-						onPress={() => onPurchase(item)}
+						onPress={() => onPress(item)}
 						key={index}
 						style={styles.highlightContainer}
 					>
