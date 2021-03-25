@@ -1,5 +1,5 @@
 import React from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import Card from "./Card";
 import {ON} from "../../redux/modalVisible";
@@ -24,10 +24,13 @@ const styles = StyleSheet.create({
 
 const Cards = (items) => {
 	const dispatch = useDispatch();
+	const itemsBought = useSelector(state => state.itemsBought);
 
 	const onPress = (item) => {
-		dispatch({type: ON});
-		dispatch({type: SELECT, data: item});
+		if (!itemsBought.includes(item)) {
+			dispatch({type: ON});
+			dispatch({type: SELECT, data: item});
+		}
 	}
 
 	return (

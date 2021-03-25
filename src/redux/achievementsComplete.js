@@ -9,15 +9,18 @@ const achievementsCompleteReducer = (state = achievementsList, action) => {
 			newState[action.data].completed += 1;
 			if(newState[action.data].completed >= newState[action.data].beginner.to_complete) {
 				newState[action.data].beginner.complete = true;
-			} else if(newState[action.data].completed >= newState[action.data].intermediate.to_complete) {
+			}
+			if(newState[action.data].completed >= newState[action.data].intermediate.to_complete) {
 				newState[action.data].intermediate.complete = true;
-			} else if(newState[action.data].completed >= newState[action.data].hard.to_complete) {
+			}
+			if(newState[action.data].completed >= newState[action.data].hard.to_complete) {
 				newState[action.data].hard.complete = true;
 			}
 			return newState;
 		case ACH_REWARD:
 			let newState2 = {...state};
-			newState2[action.data].beginner.reward_taken = true;
+
+			newState2[action.data[0]][action.data[1]].reward_taken = true;
 			return newState2;
 		default:
 			return state;

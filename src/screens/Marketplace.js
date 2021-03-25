@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, ScrollView, StyleSheet, Image, Modal, Pressable} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import {FILTER, FILTER_ALL, PURCHASE} from "../redux/marketplaceInventory";
+import {FILTER, FILTER_ALL} from "../redux/marketplaceInventory";
 import DropDownPicker from "react-native-dropdown-picker";
 import Cards from "../components/marketplaceComponents/Cards";
 import {OFF} from "../redux/modalVisible";
@@ -9,6 +9,7 @@ import {ItemInventory} from "../components/ItemInventory";
 import {BUY} from "../redux/coinBalance";
 import { showMessage } from "react-native-flash-message";
 import {ACH_PROGRESS} from "../redux/achievementsComplete";
+import {PURCHASE_GRAY} from "../redux/marketplaceItemsBought";
 
 
 const styles = StyleSheet.create({
@@ -128,7 +129,7 @@ const MarketplaceScreen = () => {
 	}
 
 	const handlePurchase = (item) => {
-		dispatch({type: PURCHASE, data: item});
+		dispatch({type: PURCHASE_GRAY, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
 		dispatch({type: OFF});
 		dispatch({type: ACH_PROGRESS, data: 'buy_item'});

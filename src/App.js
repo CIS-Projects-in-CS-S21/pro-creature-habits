@@ -27,6 +27,7 @@ import achievementsVisibleReducer from "./redux/achievementsVisible";
 import difficultyReducer from "./redux/difficulty";
 import achievementsCompleteReducer from "./redux/achievementsComplete";
 import achievementFilterReducer from "./redux/achievementFilter";
+import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 
 const Stack = createStackNavigator();
 
@@ -40,7 +41,8 @@ const reducer = combineReducers({
 	achievementsVisible: achievementsVisibleReducer,
 	difficulty: difficultyReducer,
 	achievements: achievementsCompleteReducer,
-	achievementsFilter: achievementFilterReducer
+	achievementsFilter: achievementFilterReducer,
+	itemsBought: marketplaceItemsBoughtReducer
 });
 
 const store = createStore(reducer);

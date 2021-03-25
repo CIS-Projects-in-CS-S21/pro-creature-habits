@@ -30,7 +30,7 @@ const AchievementsContainer = () => {
 
 	const onPress = (achievement) => {
 		if(ach[achievement][filter].complete) {
-			dispatch({type: ACH_REWARD, data: achievement});
+			dispatch({type: ACH_REWARD, data: [achievement, filter]});
 			dispatch({type: REWARD, data: ach[achievement][filter].reward});
 		}
 	}
@@ -43,7 +43,7 @@ const AchievementsContainer = () => {
 					{label: 'Intermediate', value: 'intermediate'},
 					{label: 'Hard', value: 'hard'}
 				]}
-				defaultValue={'beginner'}
+				defaultValue={filter}
 				containerStyle={styles.dropdownContainer}
 				onChangeItem={item => dispatch({type: FILTER_CHANGE, data: item.value})}
 			/>
