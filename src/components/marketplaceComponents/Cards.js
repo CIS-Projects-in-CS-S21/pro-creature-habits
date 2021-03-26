@@ -8,7 +8,6 @@ import {SELECT} from "../../redux/selectedMarketItem";
 const styles = StyleSheet.create({
 	text: {
 		color: 'white'
-
 	},
 	cardsContainer: {
 		flexDirection: 'row',
@@ -25,10 +24,13 @@ const styles = StyleSheet.create({
 
 const Cards = (items) => {
 	const dispatch = useDispatch();
+	const itemsBought = useSelector(state => state.itemsBought);
 
 	const onPress = (item) => {
-		dispatch({type: ON});
-		dispatch({type: SELECT, data: item})
+		if (!itemsBought.includes(item)) {
+			dispatch({type: ON});
+			dispatch({type: SELECT, data: item});
+		}
 	}
 
 	return (

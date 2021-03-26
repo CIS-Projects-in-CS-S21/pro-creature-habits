@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {Ionicons, MaterialIcons} from "@expo/vector-icons";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {ACH_ON} from "../redux/achievementsVisible";
 import {STAT_ON} from "../redux/statsVisible";
 import AchievementsScreen from "./Achievements";

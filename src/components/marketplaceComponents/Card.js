@@ -1,6 +1,8 @@
 import React from "react";
 import {Image, Text, View, StyleSheet} from "react-native";
 import {ItemInventory} from "../ItemInventory";
+import {useSelector} from "react-redux";
+import {Ionicons} from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
 	cardContainer: {
@@ -41,13 +43,26 @@ const styles = StyleSheet.create({
 });
 
 const Card = ({item}) => {
+	const itemsBought = useSelector(state=>state.itemsBought);
+
 	return (
-		<View style={styles.cardContainer}>
-			<Image style={styles.itemImage} source={ItemInventory[item].uri}/>
-			<View style={styles.cardFooter}>
-				<Text style={styles.cardFooterText}>{ItemInventory[item].cost}</Text>
-				<Image style={styles.coin} source={require('../../test_images/coin.png')}/>
-			</View>
+		<View>
+			{!itemsBought.includes(item) ? (
+				<View style={styles.cardContainer}>
+					<Image style={styles.itemImage} source={ItemInventory[item].uri}/>
+					<View style={styles.cardFooter}>
+						<Text style={styles.cardFooterText}>{ItemInventory[item].cost}</Text>
+						<Image style={styles.coin} source={require('../../test_images/coin.png')}/>
+					</View>
+				</View>
+			) : (
+				<View style={[styles.cardContainer, {backgroundColor: '#2a2a2a'}]}>
+					<Image style={styles.itemImage} source={ItemInventory[item].uri}/>
+					<View style={styles.cardFooter}>
+						<Ionicons name="checkmark" color="white" size={28}/>
+					</View>
+				</View>
+			)}
 		</View>
 	)
 }
