@@ -30,18 +30,11 @@ const styles = StyleSheet.create({
 const Cards = (items) => {
 	const dispatch = useDispatch();
 
-	const onPurchase = (item) => {
-		if(ItemInventory[item].cost > balance) {
-			alert(`You do not have enough money to buy ${item}`);
-		} else {
-			alert(`You have bought ${item}`);
-			dispatch({type: PURCHASE, data: item})
-			dispatch({type: BUY, data: ItemInventory[item].cost})
+	const onPress = (item) => {
+    		dispatch({type: ON});
+    		dispatch({type: SELECT, data: item})
 			dispatch({type: ADD, data: item})
-			dispatch({type: ON});
-			dispatch({type: SELECT, data: item})
 		}
-	}
 
 	return (
 		<View style={styles.cardsContainer}>

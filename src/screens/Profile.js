@@ -80,7 +80,8 @@ const PetProfile = ({choices, navigation}) => {
 const dispatch = useDispatch();
 const petImgChoice = useSelector(state => state.petDetails[1]);
 
-console.log(petImgChoice);
+/*TODO create selected pet item*/
+const selectedItem = useSelector(state=>state.selectedMarketItem);
 
 const findImage = () => {
 console.log(petImgChoice);
@@ -99,11 +100,6 @@ console.log(petImgChoice);
     			dispatch({type: FILTER_PET, data: category});
     		}
     	}
-
-const skills = [
-  {type: "Java", level: 85},
-  {type: "Javascript", level: 75},
-];
 
 	return (
 <ScrollView style={styles.container}>
@@ -132,6 +128,51 @@ const skills = [
 				containerStyle={styles.dropdownContainer}
 				onChangeItem={item => changeFilter(item.value)}
 			/>
+			<Modal
+            	animationType="slide"
+            	transparent={true}
+            	//TODO create new modalVisible state for pet inventory
+            	visible={useSelector(state=>state.modalVisible)}
+            >
+            	{ItemInventory[selectedItem].cost <= useSelector(state=>state.coins) ? (
+            		<View style={styles.centeredView}>
+            		    <View style={styles.modalView}>
+            			<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
+            			<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10}}>{ItemInventory[selectedItem].buyText}</Text>
+            			<View style={styles.modalFooter}>
+            			<Pressable
+            			   style={[styles.button, styles.buttonClose, {left: -30}]}
+            			      onPress={() => dispatch({type: OFF})}
+            			>
+            										<Text style={styles.textStyle}>Cancel</Text>
+            									</Pressable>
+            									<Pressable
+            										style={[styles.button, styles.buttonClose, {right: -30}]}
+            										onPress={() => handlePurchase(selectedItem)}
+            									>
+            										<Text style={styles.textStyle}>Buy {ItemInventory[selectedItem].cost}</Text>
+            										<Image style={{width: 20, height: 20}} source={require('../test_images/coin.png')}/>
+            									</Pressable>
+            								</View>
+            							</View>
+            						</View>
+            							) : (
+            						<View style={styles.centeredView}>
+            							<View style={styles.modalView}>
+            								<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10, textAlign: 'center'}}>{'You do not have enough coins\n to buy this item'}</Text>
+            								<View style={styles.modalFooter}>
+            									<Pressable
+            										style={[styles.button, styles.buttonClose]}
+            										onPress={() => dispatch({type: OFF})}
+            									>
+            										<Text style={styles.textStyle}>Close</Text>
+            									</Pressable>
+            								</View>
+            							</View>
+            						</View>
+
+            					)}
+            				</Modal>
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
         </ScrollView>
 

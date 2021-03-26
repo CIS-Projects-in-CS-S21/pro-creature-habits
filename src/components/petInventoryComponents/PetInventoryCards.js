@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
-import Card from "../marketplaceComponents/Card";
+import PetCard from "./PetCard";
 
 const styles = StyleSheet.create({
 	text: {
@@ -34,7 +34,12 @@ const PetInventoryCards = (items) => {
 			dispatch({type: ADD, data: item})
 		}
 	}*/
-	console.log(items)
+
+	const onPress = (item) => {
+
+    }
+
+
 	return (
 		<View style={styles.cardsContainer}>
 			{items.items.map((item, index) => {
@@ -42,10 +47,11 @@ const PetInventoryCards = (items) => {
 					<TouchableHighlight
 						activeOpacity={0.8}
 						underlayColor='#000'
+						onPress={() => onPress(item)}
 						key={index}
 						style={styles.highlightContainer}
 					>
-						<Card key={index} item={item} />
+						<PetCard key={index} item={item} />
 					</TouchableHighlight>
 				)
 			})}
