@@ -116,6 +116,12 @@ export default function SignInScreen({ onSignIn, navigation }){
 				  onPress={() => dispatch({type: RESET_BUTTON_PRESSED})}
 			  />
 
+			  <Button
+				  title={'SignUp'}
+				  style={styles.button}
+				  onPress={onSigningUp}
+			  />
+
 			</View>
 		)
 	
