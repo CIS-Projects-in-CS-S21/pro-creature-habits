@@ -29,6 +29,14 @@ import achievementsCompleteReducer from "./redux/achievementsComplete";
 import achievementFilterReducer from "./redux/achievementFilter";
 import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 
+import { persistStore, persistReducer } from 'redux-persist';
+//import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { AsyncStorage } from 'react-native'
+export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
+
+
 const Stack = createStackNavigator();
 
 const reducer = combineReducers({
@@ -45,7 +53,23 @@ const reducer = combineReducers({
 	itemsBought: marketplaceItemsBoughtReducer
 });
 
-const store = createStore(reducer);
+const rootReducer = (state, action) => {
+	if (action.type === RESET_BUTTON_PRESSED) {
+		persistConfig.storage.removeItem('persist:root')
+		state = undefined;
+	}
+	return reducer(state, action);
+};
+
+const persistConfig = {
+	key: 'root',
+	storage: AsyncStorage,
+	stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+};
+
+const pReducer = persistReducer(persistConfig, rootReducer);
+const store = createStore(pReducer);
+const persistor = persistStore(store);
 
 const App = () => {
 	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -108,6 +132,7 @@ const App = () => {
 
 	return (
 		<Provider store={store}>
+  <PersistGate persistor={persistor}>
 			<NavigationContainer>
 				<Stack.Navigator>
 					{isAuthenticated ? (
@@ -196,6 +221,7 @@ const App = () => {
 				</Stack.Navigator>
 				<FlashMessage position="top"/>
 			</NavigationContainer>
+</PersistGate>
 		</Provider>
 	);
 };
