@@ -1,4 +1,3 @@
-export const PURCHASE = 'PURCHASE';
 export const FILTER_ALL = 'FILTER_ALL'
 export const FILTER = 'FILTER';
 
@@ -10,16 +9,6 @@ defaultState.sort();
 
 const marketplaceInventoryReducer = (state=defaultState, action) => {
 	switch (action.type) {
-		case PURCHASE:
-			if(ItemInventory[action.data].category === 'food') {
-				return state;
-			}
-			console.log(action.data);
-			const index = state.indexOf(action.data);
-			const copyItems = [...state];
-			copyItems.splice(index, 1);
-			defaultState = defaultState.filter(e => e !== action.data);
-			return copyItems;
 		case FILTER_ALL:
 			return defaultState
 		case FILTER:
