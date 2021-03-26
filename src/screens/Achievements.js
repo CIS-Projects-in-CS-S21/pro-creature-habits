@@ -1,7 +1,9 @@
 import React from 'react';
-import {Text, View, StyleSheet, Modal, TouchableOpacity} from "react-native";
+import {Text, View, StyleSheet, Modal, TouchableOpacity } from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {ACH_OFF} from "../redux/achievementsVisible";
+import AchievementsContainer from "../components/achievementsComponents/AchievementsContainer";
+
 
 const styles = StyleSheet.create({
     text: {
@@ -27,12 +29,13 @@ const styles = StyleSheet.create({
 	modalHeaderText: {
 		color: 'white',
 		fontSize: 30
-	}
+	},
 });
+
+
 
 const AchievementsScreen = () => {
 	const dispatch = useDispatch();
-
     return (
 		<View style={styles.modalContainer}>
 			<Modal
@@ -43,8 +46,8 @@ const AchievementsScreen = () => {
 				<View style={styles.modalHeader}>
 					<Text style={styles.modalHeaderText}>Achievements</Text>
 				</View>
+				<AchievementsContainer/>
 				<View style={styles.modalContainer}>
-
 					<TouchableOpacity
 						onPress={() => dispatch({type: ACH_OFF})}
 						style={styles.modalButton}

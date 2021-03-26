@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Image, Text, View, TouchableOpacity} from "react-native";
+import {Image, Text, View} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
@@ -9,7 +9,6 @@ import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
 import { combineReducers } from "redux";
-import { MaterialIcons } from "@expo/vector-icons";
 
 
 import HomeTabs from "./components/HomeTabs";
@@ -26,6 +25,9 @@ import FlashMessage from "react-native-flash-message";
 import statsVisibleReducer from "./redux/statsVisible";
 import achievementsVisibleReducer from "./redux/achievementsVisible";
 import difficultyReducer from "./redux/difficulty";
+import achievementsCompleteReducer from "./redux/achievementsComplete";
+import achievementFilterReducer from "./redux/achievementFilter";
+import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 
 const Stack = createStackNavigator();
 
@@ -37,7 +39,10 @@ const reducer = combineReducers({
 	selectedMarketItem: selectedMarketItemReducer,
 	statsVisible: statsVisibleReducer,
 	achievementsVisible: achievementsVisibleReducer,
-	difficulty: difficultyReducer
+	difficulty: difficultyReducer,
+	achievements: achievementsCompleteReducer,
+	achievementsFilter: achievementFilterReducer,
+	itemsBought: marketplaceItemsBoughtReducer
 });
 
 const store = createStore(reducer);
