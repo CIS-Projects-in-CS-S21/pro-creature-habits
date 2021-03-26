@@ -5,20 +5,20 @@ export const FILTER_PET = 'FILTER_PET';
 
 import {ItemInventory} from "../components/ItemInventory";
 
-let defaultState = [];
-defaultState.sort();
+let test = [];
+test.sort();
+let currentFilter = "All";
 
-const petInventoryReducer = (state=defaultState, action) => {
+const petInventoryReducer = (state=test, action) => {
 	switch (action.type) {
 		case ADD:
-			const copyItems = [...state];
-			copyItems.push(action.data);
-			defaultState.push(action.data);
-			return copyItems;
+			test.push(action.data);
+			return test; //.filter(item => currentFilter === action.data);
 		case FILTER_ALL_PET:
-			return defaultState
+			return test
 		case FILTER_PET:
-			return defaultState.filter(item => ItemInventory[item].category === action.data);
+		    currentFilter = action.data;
+			return test.filter(item => ItemInventory[item].category === action.data);
 		default:
 			return state;
 	}

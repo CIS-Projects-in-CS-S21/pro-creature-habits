@@ -128,7 +128,7 @@ console.log(petImgChoice);
 				containerStyle={styles.dropdownContainer}
 				onChangeItem={item => changeFilter(item.value)}
 			/>
-			<Modal
+			{/**<Modal
             	animationType="slide"
             	transparent={true}
             	//TODO create new modalVisible state for pet inventory
@@ -172,7 +172,7 @@ console.log(petImgChoice);
             						</View>
 
             					)}
-            				</Modal>
+            				</Modal>**/}
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
         </ScrollView>
 
