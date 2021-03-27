@@ -33,10 +33,7 @@ export default function Home() {
 
   
   const updateTask = useCallback(async (editText) => { 
-      const t = await Task.findBy({ name_eq: editText })
-      await t.save()
-      setTasks(await Task.query())
-
+     
   }, [])
  
  const onSubmit = () => {
