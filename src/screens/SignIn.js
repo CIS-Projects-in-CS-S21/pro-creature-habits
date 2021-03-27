@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
 import UserInfo from "../databases/UserInfo";
-
+import {OFF} from "../redux/modalVisible";
+import {RESET_BUTTON_PRESSED} from "../App";
+import {useDispatch} from "react-redux";
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -52,6 +54,7 @@ const SignInScreen = ({ onSignIn, navigation }) => {
 export default SignInScreen; */
 
 export default function SignInScreen({ onSignIn, navigation }){
+	const dispatch = useDispatch();
 	UserInfo.createTable()
 	const checkLogin = useCallback(async (username, password) => {
 		let authenticated = false
@@ -83,6 +86,7 @@ export default function SignInScreen({ onSignIn, navigation }){
 		navigation.navigate('Sign Up')
 	}
 
+
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
 		return (
@@ -107,9 +111,9 @@ export default function SignInScreen({ onSignIn, navigation }){
 			  onPress={onSubmit}
 			/>
 			  <Button
-				  title={'SignUp'}
+				  title={'RESET'}
 				  style={styles.button}
-				  onPress={onSigningUp}
+				  onPress={() => dispatch({type: RESET_BUTTON_PRESSED})}
 			  />
 
 			</View>
