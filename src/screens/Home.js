@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
 import Task from '../databases/Task';
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,8 +13,7 @@ export default function Home() {
    Task.createTable()
 
  const deleteTask = useCallback(async (deleteText) => {
- 	const del = deleteText
-	const t = await Task.findBy({ name_eq: del })
+   const t = await Task.findBy({ name_eq: deleteText })
 	t.destroy()
 	await t.save()
     setTasks(await Task.query())
@@ -32,6 +32,9 @@ export default function Home() {
   }, [])
 
 
+  const updateTask = useCallback(async (editText) => {
+
+  }, [])
 
  const onSubmit = () => {
  	createTask(text);
@@ -42,14 +45,24 @@ export default function Home() {
  	deleteTask(deleteText);
  }
 
+ const onUpdate = () =>{
+   updateTask(editText);
+ }
  const ListItem = (props) => {
   const jsonObj = JSON.parse(props.value);
-  
+
   return(
     <View style={styles.listItem}>
-      
-      
-      <Text style={{fontWeight: 'bold', fontSize: 16}} color='white'>{jsonObj.name}</Text>
+      <Text style={{fontWeight: 'bold', fontSize: 16, maxWidth:'77%'}} color='white'>{jsonObj.name}</Text>
+
+      <View style = {{flexDirection:'row'}}>
+      <TouchableOpacity onPress={onUpdate}>
+        <MaterialCommunityIcons
+        name = "pencil"
+        size = {30}
+        style={{color:"#637ed0"}}/>
+        </TouchableOpacity>
+        </View>
     </View>
   );
  }
@@ -57,28 +70,31 @@ export default function Home() {
  const ListOfTasks = () => {
    return tasks.map(task => {
      return(
-       <ListItem key = {task.id} value={JSON.stringify(task)} />
-     )
+       <ListItem key = {task.id}
+       updateTask = {()=> updateTask(task.id)}
+       value={JSON.stringify(task)} />
+
+       )
    })
  }
 
 
 
 
-  const [text, setText] = React.useState('');
+   const [text, setText] = React.useState('');
    const [deleteText, setDeleteText] = React.useState('');
+   const[editText, setEditText]= React.useState({id: null, value: ''});
   return (
     <View style={styles.container}>
       <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='name' value={text} onChangeText={text => setText(text)}/>
       <Button title='submit'  color="#637ed0" onPress={onSubmit} />
-        
       <TextInput style={{backgroundColor: 'white', width: '50%'}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
-	  <Button title="Delete" color="#637ed0" onPress={onDelete}/>
+	    <Button title="Delete" color="#637ed0" onPress={onDelete}/>
       <View style={styles.listContainer}>
         <ScrollView>
 
           <ListOfTasks />
-          
+
         </ScrollView>
         <View style={styles.listFooter}>
           <Image
@@ -116,26 +132,25 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     marginBottom: '5%',
   },
-
   listItem:{
     paddingTop: '5%',
     paddingBottom: '5%',
     paddingLeft: '5%',
     margin: '3%',
-    
     borderRadius: 10,
     backgroundColor: 'white',
+    alignContent: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
-
   listFooter:{
     borderTopColor: '#FFFFFF',
     paddingLeft: '2%',
     paddingTop: '5%',
   },
 	text: {
-		color: 'white'
-
-	},
+		color: 'white',
+  	},
 	weather: {
 		color: 'white',
 		fontSize: 30,
@@ -149,4 +164,3 @@ const HomeScreen = () => {
 		</View>
 	);
 };
-
