@@ -33,11 +33,10 @@ const styles = StyleSheet.create({
 });
 
 const PetCard = ({item}) => {
-console.log(item+" dddd "+item.uri)
 	return (
 		<View style={styles.cardContainer}>
 		    <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-		      <Text style={styles.circle}> {item.bought} </Text>
+		     {(!item.wear) ? <Text style={styles.circle}> {item.bought} </Text> : <Text style={styles.circle}> √ </Text>}
 		    </View>
 			<Image style={styles.itemImage} source={item.uri}/>
 		</View>

@@ -55,8 +55,19 @@ let copy = JSON.parse(JSON.stringify(state));
 	        } else if (action.data == "select_toys") {
                 copy[action.thing].wear = true;
 	        } else {
-                copy[action.thing].wear = true;
-	        }
+	            let type = "hat";
+                 if (action.thing.includes('shirt')) {
+                    type = "shirt"
+                 } else if (action.thing.includes('shoes')) {
+                    type = "shoes";
+                 }
+                 for (const [key, value] of Object.entries(copy)) {
+                     if (copy[key].name.includes(type)) {
+                         copy[key].wear = false;
+                     }
+                 }
+                 copy[action.thing].wear = true;
+             }
 	        return copy;
 		default:
 			return state;
