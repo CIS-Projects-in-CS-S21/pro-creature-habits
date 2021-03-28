@@ -29,7 +29,8 @@ import difficultyReducer from "./redux/difficulty";
 import achievementsCompleteReducer from "./redux/achievementsComplete";
 import achievementFilterReducer from "./redux/achievementFilter";
 import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
-
+import petMVR from "./redux/petModalVisible";
+import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -52,7 +53,9 @@ const reducer = combineReducers({
 	difficulty: difficultyReducer,
 	achievements: achievementsCompleteReducer,
 	achievementsFilter: achievementFilterReducer,
-	itemsBought: marketplaceItemsBoughtReducer
+	itemsBought: marketplaceItemsBoughtReducer,
+	petMV: petMVR,
+	selectedPetItem: selectedPetItemReducer
 });
 
 const rootReducer = (state, action) => {

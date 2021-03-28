@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Text,ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
-import {ADD,FILTER_PET, FILTER_ALL_PET} from "../redux/petInventory";
+import {ADD,FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
 import HealthBar from "../components/HealthBar";
+import {OFF_PET} from "../redux/petModalVisible";
+import {ItemInventory} from "../components/ItemInventory";
+import { showMessage } from "react-native-flash-message";
 
 const styles = StyleSheet.create({
     container: {
@@ -71,6 +74,54 @@ const styles = StyleSheet.create({
     		marginRight:20,
     		marginTop: 20
     	},
+    	modalView: {
+        		margin: 10,
+        		backgroundColor: '#402688',
+        		borderRadius: 10,
+        		padding: 35,
+        		alignItems: "center",
+        		shadowColor: "#000",
+        		shadowOffset: {
+        			width: 0,
+        			height: 2
+        		},
+        		shadowOpacity: 0.25,
+        		shadowRadius: 4,
+        		elevation: 5
+        	},
+        	buttonClose: {
+        		backgroundColor: "#2196F3",
+        	},
+        	button: {
+        		borderRadius: 7,
+        		width: 80,
+        		alignItems: 'center',
+        		padding: 10,
+        		elevation: 2,
+        		justifyContent: 'center',
+        		flexDirection: 'row',
+        	},
+        	modalFooter: {
+            	flexDirection: 'row',
+        		paddingTop: 15
+        	},
+        	itemImage: {
+            		width:75,
+            		height:75,
+            		shadowOffset: {width: 0, height: 1},
+            		shadowOpacity: 0.8,
+            		shadowRadius: 3,
+            		padding: 3
+            	},
+            	textStyle: {
+                	color: 'white'
+            	},
+            	centeredView: {
+                		flex: 1,
+                		justifyContent: "center",
+                		alignItems: "center",
+                		marginTop: 22
+                	},
     }
 );
 
@@ -81,7 +132,7 @@ const dispatch = useDispatch();
 const petImgChoice = useSelector(state => state.petDetails[1]);
 
 /*TODO create selected pet item*/
-const selectedItem = useSelector(state=>state.selectedMarketItem);
+const selectedItem = useSelector(state=>state.selectedPetItem);
 
 const findImage = () => {
 console.log(petImgChoice);
@@ -94,12 +145,34 @@ console.log(petImgChoice);
 
 
     	const changeFilter = (category) => {
+    	console.log("CHANGE FILTER")
     		if(category === 'all') {
     			dispatch({type: FILTER_ALL_PET});
     		} else {
     			dispatch({type: FILTER_PET, data: category});
     		}
     	}
+
+    	const upperCase = (string) => {
+        		return string[0].toUpperCase() + string.slice(1);
+        	}
+
+    	const handlePurchase = (item) => {
+        		dispatch({type: OFF_PET});
+        		if(ItemInventory[item].category === 'food') {
+        			dispatch({type: SELECTED, data: 'select_food',thing: item});
+        		} else if (ItemInventory[item].category === 'toys') {
+        			dispatch({type: SELECTED, data: 'select_toy',thing: item});
+        		} else {
+        			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
+        		}
+
+        		showMessage({
+        			message: `${upperCase(ItemInventory[item].name)} has been used`,
+        			type: "success",
+        			statusBarHeight: 52,
+        		})
+        	}
 
 	return (
 <ScrollView style={styles.container}>
@@ -128,21 +201,21 @@ console.log(petImgChoice);
 				containerStyle={styles.dropdownContainer}
 				onChangeItem={item => changeFilter(item.value)}
 			/>
-			{/**<Modal
+			<Modal
             	animationType="slide"
             	transparent={true}
-            	//TODO create new modalVisible state for pet inventory
-            	visible={useSelector(state=>state.modalVisible)}
+            	visible={useSelector(state=>state.petMV)}
             >
-            	{ItemInventory[selectedItem].cost <= useSelector(state=>state.coins) ? (
+            {/*If food, Would you like to feed this item to your pet? Yes or No
+            If clothing, would you like your pet to wear this item? Yes or no*/}
             		<View style={styles.centeredView}>
             		    <View style={styles.modalView}>
             			<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
-            			<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10}}>{ItemInventory[selectedItem].buyText}</Text>
+            			<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10}}>{ItemInventory[selectedItem].inventoryText}</Text>
             			<View style={styles.modalFooter}>
             			<Pressable
             			   style={[styles.button, styles.buttonClose, {left: -30}]}
-            			      onPress={() => dispatch({type: OFF})}
+            			      onPress={() => dispatch({type: OFF_PET})}
             			>
             										<Text style={styles.textStyle}>Cancel</Text>
             									</Pressable>
@@ -150,29 +223,12 @@ console.log(petImgChoice);
             										style={[styles.button, styles.buttonClose, {right: -30}]}
             										onPress={() => handlePurchase(selectedItem)}
             									>
-            										<Text style={styles.textStyle}>Buy {ItemInventory[selectedItem].cost}</Text>
-            										<Image style={{width: 20, height: 20}} source={require('../test_images/coin.png')}/>
+            										<Text style={styles.textStyle}>Yes </Text>
             									</Pressable>
             								</View>
             							</View>
             						</View>
-            							) : (
-            						<View style={styles.centeredView}>
-            							<View style={styles.modalView}>
-            								<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10, textAlign: 'center'}}>{'You do not have enough coins\n to buy this item'}</Text>
-            								<View style={styles.modalFooter}>
-            									<Pressable
-            										style={[styles.button, styles.buttonClose]}
-            										onPress={() => dispatch({type: OFF})}
-            									>
-            										<Text style={styles.textStyle}>Close</Text>
-            									</Pressable>
-            								</View>
-            							</View>
-            						</View>
-
-            					)}
-            				</Modal>**/}
+            				</Modal>
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
         </ScrollView>
 

@@ -2,6 +2,8 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import PetCard from "./PetCard";
+import {ON_PET} from "../../redux/petModalVisible";
+import {SELECT_PET} from "../../redux/selectedPetItem";
 
 const styles = StyleSheet.create({
 	text: {
@@ -23,6 +25,12 @@ const styles = StyleSheet.create({
 
 const PetInventoryCards = (items) => {
 	const dispatch = useDispatch();
+	let names = [];
+for (const [key, value] of Object.entries(items.items)) {
+  if (items.items[key].show) {
+    names.push(key);
+  }
+}
 
 	/*const onPurchase = (item) => {
 		if(ItemInventory[item].cost > balance) {
@@ -36,13 +44,15 @@ const PetInventoryCards = (items) => {
 	}*/
 
 	const onPress = (item) => {
-
+	    console.log("PRESSED ITEM "+item)
+        dispatch({type: ON_PET});
+        dispatch({type: SELECT_PET, data: item})
     }
 
 
 	return (
 		<View style={styles.cardsContainer}>
-			{items.items.map((item, index) => {
+			{names.map((item, index) => {
 				return(
 					<TouchableHighlight
 						activeOpacity={0.8}
@@ -51,7 +61,7 @@ const PetInventoryCards = (items) => {
 						key={index}
 						style={styles.highlightContainer}
 					>
-						<PetCard key={index} item={item} />
+						<PetCard key={index} item={items.items[item]} />
 					</TouchableHighlight>
 				)
 			})}

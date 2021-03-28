@@ -133,7 +133,7 @@ const MarketplaceScreen = () => {
 		dispatch({type: PURCHASE_GRAY, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
 		dispatch({type: OFF});
-		dispatch({type: ADD, data: ItemInventory[item].category});
+		dispatch({type: ADD, data: item});
 		dispatch({type: ACH_PROGRESS, data: 'buy_item'});
 		if(ItemInventory[item].category === 'food') {
 			dispatch({type: ACH_PROGRESS, data: 'buy_food'});
