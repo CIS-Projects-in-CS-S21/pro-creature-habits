@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
+import React, { useCallback } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import UserInfo from "../databases/UserInfo";
 import {OFF} from "../redux/modalVisible";
 import {RESET_BUTTON_PRESSED} from "../App";
@@ -19,39 +19,23 @@ const styles = StyleSheet.create({
 		backgroundColor: "white",
 		marginBottom: 10,
 		padding: 15,
+		borderRadius: 5
 	},
-    buttonContainer:{
+    buttonsContainer:{
 		flexDirection: "row",
 		justifyContent: "space-between",
-		marginBottom: 90%''
+		padding: 10
 	},
-	 button:{
-		padding:15,
-		width: "45%"
-	 },
+	button:{
+		padding: 10,
+		width: "25%",
+		backgroundColor: '#402688',
+		alignItems: 'center',
+		margin: 10,
+		borderRadius: 5
+	},
 });
-/*
-const SignInScreen = ({ onSignIn, navigation }) => {
-	return (
 
-		<View style={styles.container}>
-		{/*
-			<Text style={styles.text}>Public Sign In Screen</Text>
-			<Button title="Sign In" color="#7e8ffc" onPress={onSignIn} />
-			<Text style={styles.text}>OR</Text>
-			<Button title="Sign In with Google" color="#7e8ffc" onPress={() => navigation.navigate('Google Sign Up')} />
-			<Text style={styles.text}>OR</Text>
-			}
-			<Button title="Regular Sign Up" color="#7e8ffc" onPress={() => navigation.navigate('Account Creation')}/>
-		</View>
-	);
-};
-		<Button
-			   title={'Singup'}
-			   style={styles.button}
-			   onPress={this.onLogin.bind(this)}
-			 />
-export default SignInScreen; */
 
 export default function SignInScreen({ onSignIn, navigation }){
 	const dispatch = useDispatch();
@@ -90,40 +74,45 @@ export default function SignInScreen({ onSignIn, navigation }){
 	const [username, setUsername] = React.useState('');
 	const [password, setPassword] = React.useState('');
 		return (
-		  <View style={styles.container}>
-			<TextInput
-			  value={username}
-			  onChangeText={username => setUsername(username)}
-			  placeholder={'Username'}
-			  style={styles.input}
-			/>
-			<TextInput
-			  value={password}
-			  onChangeText={password => setPassword(password)}
-			  placeholder={'Password'}
-			  secureTextEntry={true}
-			  style={styles.input}
-			/>
-			
-		   <Button
-			  title={'Login'}
-			  style={styles.button}
-			  onPress={onSubmit}
-			/>
-			  <Button
-				  title={'RESET'}
-				  style={styles.button}
-				  onPress={() => dispatch({type: RESET_BUTTON_PRESSED})}
-			  />
-
-			  <Button
-				  title={'SignUp'}
-				  style={styles.button}
-				  onPress={onSigningUp}
-			  />
-
+		  	<View style={styles.container}>
+				<Text style={{color: 'white', fontSize: 40, marginTop: '-20%', marginBottom: '20%'}}>
+					Creature Habits
+				</Text>
+				<TextInput
+				  value={username}
+				  onChangeText={username => setUsername(username)}
+				  placeholder={'Username'}
+				  style={styles.input}
+				/>
+				<TextInput
+				  value={password}
+				  onChangeText={password => setPassword(password)}
+				  placeholder={'Password'}
+				  secureTextEntry={true}
+				  style={styles.input}
+				/>
+				<View style={styles.buttonsContainer}>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={onSubmit}
+					>
+						<Text style={styles.text}>Login</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={onSigningUp}
+					>
+						<Text style={styles.text}>Sign Up</Text>
+					</TouchableOpacity>
+				</View>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => dispatch({type: RESET_BUTTON_PRESSED})}
+				>
+					<Text style={styles.text}>Reset</Text>
+				</TouchableOpacity>
 			</View>
 		)
-	
+
 	}
 
