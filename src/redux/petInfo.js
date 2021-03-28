@@ -1,6 +1,6 @@
 export const CHANGE = 'CHANGE';
 
-let defaultState = ["name","image"];
+let defaultState = ["name","dog"];
 
 
 const petInfoObj = (state = defaultState, action) => {
@@ -8,8 +8,7 @@ const petInfoObj = (state = defaultState, action) => {
 
 	switch (action.type) {
     		case CHANGE:
-    			state = action.changes;
-    			return state;
+    			return action.changes;
     		default:
     			return state;
     	}

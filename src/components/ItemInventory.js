@@ -13,7 +13,8 @@ const ItemInventory = {
 		cost: 10,
 		category: 'clothes',
 		buyText: 'Would you like to buy shoes?',
-		inventoryText: 'Would you like your pet to wear these shoes?'
+		inventoryText: 'Would you like your pet to wear these shoes?',
+		wearUri: require('../images/red_shoes.png')
 
 	},
 	pizza: {
@@ -46,7 +47,8 @@ const ItemInventory = {
 		cost: 9,
 		category: 'clothes',
 		buyText: 'Would you like to buy a shirt?',
-		inventoryText: 'Would you like your pet to wear this shirt?'
+		inventoryText: 'Would you like your pet to wear this shirt?',
+		wearUri: require('../images/white_shirt.png')
 	},
 	water: {
 		name: 'water',
@@ -62,7 +64,8 @@ const ItemInventory = {
 		cost: 12,
 		category: 'clothes',
 		buyText: 'Would you like to buy blue shoes?',
-		inventoryText: 'Would you like your pet to wear these blue shoes?'
+		inventoryText: 'Would you like your pet to wear these blue shoes?',
+		wearUri: require('../images/blue_shoes.png')
 	},
 	black_shirt: {
 		name: 'black shirt',
@@ -70,7 +73,8 @@ const ItemInventory = {
 		cost: 10,
 		category: 'clothes',
 		buyText: 'Would you like to buy a black shirt?',
-		inventoryText: 'Would you like your pet to wear this black shirt?'
+		inventoryText: 'Would you like your pet to wear this black shirt?',
+		wearUri: require('../images/black_shirt.png')
 	},
 	blue_shirt: {
 		name: 'blue shirt',
@@ -78,7 +82,8 @@ const ItemInventory = {
 		cost: 10,
 		category: 'clothes',
 		buyText: 'Would you like to buy a blue shirt?',
-		inventoryText: 'Would you like your pet to wear this blue shirt?'
+		inventoryText: 'Would you like your pet to wear this blue shirt?',
+		wearUri: require('../images/blue_shirt.png')
 	},
 	red_ball: {
 		name: 'red ball',
@@ -102,7 +107,8 @@ const ItemInventory = {
 		cost: 12,
 		category: 'clothes',
 		buyText: 'Would you like to buy black shoes?',
-		inventoryText: 'Would you like your pet to wear these black shoes?'
+		inventoryText: 'Would you like your pet to wear these black shoes?',
+		wearUri: require('../images/black_shoes.png')
 	},
 }
 

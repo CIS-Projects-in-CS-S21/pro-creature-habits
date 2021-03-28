@@ -32,17 +32,6 @@ for (const [key, value] of Object.entries(items.items)) {
   }
 }
 
-	/*const onPurchase = (item) => {
-		if(ItemInventory[item].cost > balance) {
-			alert(`You do not have enough money to buy ${item}`);
-		} else {
-			alert(`You have bought ${item}`);
-			dispatch({type: PURCHASE, data: item})
-			dispatch({type: BUY, data: ItemInventory[item].cost})
-			dispatch({type: ADD, data: item})
-		}
-	}*/
-
 	const onPress = (item) => {
 	    console.log("PRESSED ITEM "+item)
         dispatch({type: ON_PET});

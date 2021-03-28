@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
+import PetImage from "../components/petInventoryComponents/PetImage";
 import {ADD,FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
 import HealthBar from "../components/HealthBar";
 import {OFF_PET} from "../redux/petModalVisible";
@@ -181,10 +182,11 @@ console.log(petImgChoice);
 			{useSelector(state => state.petDetails[0])}
 			</Text>
 			<View style={styles.imageContainer}>
-            <Image id="img"
+            {/*<Image id="img"
                 style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10}}
                 source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
-            />
+            />*/}
+            <PetImage items={useSelector(state => state.petInv)}/>
             <View style={styles.healthbarContainer}>
                 <HealthBar/>
                 <HealthBar/>
