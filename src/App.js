@@ -159,7 +159,7 @@ const App = () => {
 								animationTypeForReplace: 'pop',
 								headerTitle: () => (
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Sign In
+										Sign Up
 									</Text>
 								),
 								headerStyle : {
