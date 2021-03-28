@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, View, StyleSheet, Modal, TouchableOpacity} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {STAT_OFF} from "../redux/statsVisible";
-import { StatsData } from "../components/StatsData";
 
 const styles = StyleSheet.create({
     text: {
@@ -65,6 +64,7 @@ const styles = StyleSheet.create({
 
 const StatsScreen = () => {
 	const dispatch = useDispatch();
+	const stats = useSelector(state=>state.userStats);
     return (
 		<View style={styles.modalContainer}>
 			<Modal
@@ -77,8 +77,8 @@ const StatsScreen = () => {
 				</View>
 				<View style={styles.bodyContainer}>
 					<View style={styles.statsContainer}>
-						{Object.keys(StatsData).map((stat, index) => {
-							if (index === Object.keys(StatsData).length-1) {
+						{Object.keys(stats).map((stat, index) => {
+							if (index === Object.keys(stats).length-1) {
 								return (
 									<View key={index}
 										style={[styles.statContainer,
@@ -87,15 +87,15 @@ const StatsScreen = () => {
 												borderBottomRightRadius: 5,
 												borderBottomLeftRadius: 5
 											}]}>
-										<Text style={styles.text}>{StatsData[stat].name}:</Text>
-										<Text style={styles.text}>{StatsData[stat].count}</Text>
+										<Text style={styles.text}>{stats[stat].name}:</Text>
+										<Text style={styles.text}>{stats[stat].count}</Text>
 									</View>
 								)
 							}
 							return (
 								<View key={index} style={styles.statContainer}>
-									<Text style={styles.text}>{StatsData[stat].name}:</Text>
-									<Text style={styles.text}>{StatsData[stat].count}</Text>
+									<Text style={styles.text}>{stats[stat].name}:</Text>
+									<Text style={styles.text}>{stats[stat].count}</Text>
 								</View>
 							)
 						})}

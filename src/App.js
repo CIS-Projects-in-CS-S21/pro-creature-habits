@@ -28,6 +28,7 @@ import difficultyReducer from "./redux/difficulty";
 import achievementsCompleteReducer from "./redux/achievementsComplete";
 import achievementFilterReducer from "./redux/achievementFilter";
 import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
+import statTrackerReducer from "./redux/statTracker";
 
 import { persistStore, persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
@@ -50,7 +51,8 @@ const reducer = combineReducers({
 	difficulty: difficultyReducer,
 	achievements: achievementsCompleteReducer,
 	achievementsFilter: achievementFilterReducer,
-	itemsBought: marketplaceItemsBoughtReducer
+	itemsBought: marketplaceItemsBoughtReducer,
+	userStats: statTrackerReducer
 });
 
 const rootReducer = (state, action) => {

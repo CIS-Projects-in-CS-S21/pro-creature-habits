@@ -12,6 +12,7 @@ import { showMessage } from "react-native-flash-message";
 import {ACH_PROGRESS} from "../redux/achievementsComplete";
 import {PURCHASE_GRAY} from "../redux/marketplaceItemsBought";
 import AnimatedNumbers from "react-native-animated-numbers";
+import {ADD_TO_STAT, INCREMENT_STAT, SET_STAT} from "../redux/statTracker";
 
 
 const styles = StyleSheet.create({
@@ -115,6 +116,7 @@ const styles = StyleSheet.create({
 const MarketplaceScreen = () => {
 	const dispatch = useDispatch();
 	const selectedItem = useSelector(state=>state.selectedMarketItem);
+	const achievements = useSelector(state=>state.achievements);
 
 	const changeFilter = (category) => {
 		if(category === 'all') {
@@ -131,14 +133,19 @@ const MarketplaceScreen = () => {
 	const handlePurchase = (item) => {
 		dispatch({type: PURCHASE_GRAY, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
+		dispatch({type: ADD_TO_STAT, data: ['total_coins_spent', ItemInventory[item].cost]})
 		dispatch({type: OFF});
 		dispatch({type: ACH_PROGRESS, data: 'buy_item'});
+		dispatch({type: INCREMENT_STAT, data: 'items_bought'})
 		if(ItemInventory[item].category === 'food') {
 			dispatch({type: ACH_PROGRESS, data: 'buy_food'});
+			dispatch({type: SET_STAT, data: ['food_bought', achievements['buy_food'].completed]})
 		} else if (ItemInventory[item].category === 'toys') {
 			dispatch({type: ACH_PROGRESS, data: 'buy_toy'});
+			dispatch({type: SET_STAT, data: ['clothes_bought', achievements['buy_toy'].completed]})
 		} else {
 			dispatch({type: ACH_PROGRESS, data: 'buy_clothes'})
+			dispatch({type: SET_STAT, data: ['toys_bought', achievements['buy_clothes'].completed]})
 		}
 
 		showMessage({
