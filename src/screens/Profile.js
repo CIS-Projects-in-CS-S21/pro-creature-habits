@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable ,Animated} from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -9,7 +9,14 @@ import {ADD,FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
 import HealthBar from "../components/HealthBar";
 import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
+import {PlayingSound} from '../components/audio'
 import { showMessage } from "react-native-flash-message";
+//import SoundPlayer from 'react-native-sound-player';
+//import useSound from 'use-sound';
+//import { playCrunchSound } from '../components/audio';
+import { Audio } from 'expo-av';
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -123,26 +130,30 @@ const styles = StyleSheet.create({
                 		alignItems: "center",
                 		marginTop: 22
                 	},
+
     }
 );
 
 
+
+
 const PetProfile = ({choices, navigation}) => {
 
-const dispatch = useDispatch();
-const petImgChoice = useSelector(state => state.petDetails[1]);
+    const dispatch = useDispatch();
+    const petImgChoice = useSelector(state => state.petDetails[1]);
 
-/*TODO create selected pet item*/
-const selectedItem = useSelector(state=>state.selectedPetItem);
+    /*TODO create selected pet item*/
+    const selectedItem = useSelector(state=>state.selectedPetItem);
 
-const findImage = () => {
-console.log(petImgChoice);
+    const findImage = () => {
+        console.log(petImgChoice);
     	if (petImgChoice == "cat") {
     	    return require('../images/cat.png');
     	} else {
     	    return require('../images/dog.png');
     	}
     }
+
 
 
     	const changeFilter = (category) => {
@@ -161,7 +172,8 @@ console.log(petImgChoice);
     	const handlePurchase = (item) => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
-        			dispatch({type: SELECTED, data: 'select_food',thing: item});
+                    dispatch({type: SELECTED, data: 'select_food',thing: item});
+                    playSound();
         		} else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
         		} else {
@@ -175,9 +187,29 @@ console.log(petImgChoice);
         		})
         	}
 
+
+        	const [sound, setSound] = React.useState();
+
+              async function playSound() {
+                console.log('Loading Sound');
+                const { sound } = await Audio.Sound.createAsync(
+                   require('../components/ra.wav')
+                );
+                setSound(sound);
+
+                console.log('Playing Sound');
+                await sound.playAsync(); }
+
+              React.useEffect(() => {
+                return sound
+                  ? () => {
+                      console.log('Unloading Sound');
+                      sound.unloadAsync(); }
+                  : undefined;
+              }, [sound]);
+
 	return (
 <ScrollView style={styles.container}>
-			<Text style={styles.text}>Pet Profile Screen</Text>
 			<Text style={styles.text}>
 			{useSelector(state => state.petDetails[0])}
 			</Text>
@@ -188,6 +220,7 @@ console.log(petImgChoice);
             />*/}
             <PetImage items={useSelector(state => state.petInv)}/>
             <View style={styles.healthbarContainer}>
+                <Text style={styles.text} Health Bars />
                 <HealthBar/>
                 <HealthBar/>
             </View>

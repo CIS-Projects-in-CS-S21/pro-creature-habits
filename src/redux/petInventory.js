@@ -2,6 +2,7 @@ export const ADD = 'ADD';
 export const FILTER_ALL_PET = 'FILTER_ALL_PET'
 export const FILTER_PET = 'FILTER_PET';
 export const SELECTED = 'SELECTED';
+export const EAT = 'EAT';
 //possibly add in a SELL in case we want to allow them to sell directly from their inventory
 
 import {ItemInventory} from "../components/ItemInventory";
@@ -50,6 +51,7 @@ let copy = JSON.parse(JSON.stringify(state));
 	    case SELECTED:
 	        if (action.data == "select_food") {
                 		    copy[action.thing].bought = copy[action.thing].bought - 1;
+                		    copy[action.thing].wear = true;
                 		    if (copy[action.thing].bought != 0) {copy[action.thing].show = true;}
                 		    else {copy[action.thing].show = false;}
 	        } else if (action.data == "select_toys") {
@@ -69,6 +71,9 @@ let copy = JSON.parse(JSON.stringify(state));
                  copy[action.thing].wear = true;
              }
 	        return copy;
+	        case EAT:
+	            copy[action.thing].wear = false;
+	            return copy;
 		default:
 			return state;
 	}

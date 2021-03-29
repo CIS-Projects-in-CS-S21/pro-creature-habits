@@ -1,7 +1,8 @@
-import React from "react";
-import {Image, Text, View, StyleSheet,ImageBackground} from "react-native";
+import React, { useRef } from "react";
+import {Image, Text, View, StyleSheet,ImageBackground, Animated} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import ImageOverlay from "react-native-image-overlay";
+import {EAT} from "../../redux/petInventory";
 
 const styles = StyleSheet.create({
 	cardContainer: {
@@ -37,14 +38,31 @@ const styles = StyleSheet.create({
 });
 
 const PetImage = (props) => {
+
+    const dispatch = useDispatch();
+
     const petImgChoice = useSelector(state => state.petDetails[1]);
     const items = useSelector(state => state.petInv);
 	let names = [];
-for (const [key, value] of Object.entries(items)) {
-  if (items[key].wear) {
-    names.push(key);
-  }
-}
+    for (const [key, value] of Object.entries(items)) {
+        if (items[key].wear) {
+            names.push(key);
+        }
+
+    }
+
+const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    const fadeOut = () => {
+    // Will change fadeAnim value to 0 in 5 seconds
+        Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 5000
+        }).start();
+    };
+
+
+
 
 	return (
 	<View>
@@ -59,9 +77,9 @@ for (const [key, value] of Object.entries(items)) {
                                    source = {items[name].wearUri}
                                    key = {name}
            />
-           )
-            })}
-           </View>
+           )})}
+
+       </View>
 	)
 }
 

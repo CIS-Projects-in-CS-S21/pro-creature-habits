@@ -70,11 +70,10 @@ const SignUpScreen = ({ onSignUp, navigation }) => {
 			/>
 
 			<Button
-				title={'SignUp'}
+				title="Click to Create First Pet"
 				style={styles.button}
-				onPress={onCreateUser}
+				onPress={() => navigation.navigate('Choose Pet')}
 			/>
-
 		</View>
 	);
 };

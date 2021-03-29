@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^5.14.2",
     "axios": "^0.21.1",
     "expo": "^40.0.1",
+    "expo-av": "~8.7.0",
     "expo-google-app-auth": "^8.1.4",
     "expo-location": "~10.0.0",
     "expo-splash-screen": "~0.8.0",
@@ -29,6 +30,7 @@
     "react-native": "~0.63.4",
     "react-native-animated-nav-tab-bar": "^3.1.2",
     "react-native-animated-numbers": "^0.2.0",
+    "react-native-audio-toolkit": "^1.0.6",
     "react-native-dropdown-picker": "^4.0.2",
     "react-native-flash-message": "^0.1.23",
     "react-native-gesture-handler": "^1.8.0",
@@ -40,12 +42,16 @@
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.15.2",
     "react-native-settings-components": "0.0.2",
+    "react-native-sound": "^0.11.0",
+    "react-native-sound-player": "^0.10.6",
+    "react-native-track-player": "^1.2.7",
     "react-native-unimodules": "~0.12.0",
     "react-native-vector-icons": "^8.0.0",
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "use-sound": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

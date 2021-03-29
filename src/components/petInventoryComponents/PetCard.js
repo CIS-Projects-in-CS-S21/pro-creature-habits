@@ -34,12 +34,23 @@ const styles = StyleSheet.create({
 
 const PetCard = ({item}) => {
 	return (
-		<View style={styles.cardContainer}>
+	<View>
+		{(!item.wear || item.category == 'food' ) ?
+		    <View style={styles.cardContainer}>
 		    <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-		     {(!item.wear) ? <Text style={styles.circle}> {item.bought} </Text> : <Text style={styles.circle}> √ </Text>}
+		     <Text style={styles.circle}> {item.bought} </Text>
 		    </View>
 			<Image style={styles.itemImage} source={item.uri}/>
 		</View>
+		:
+		<View style={[styles.cardContainer, {backgroundColor: '#2a2a2a'}]}>
+		<View style={{flexDirection: "row", justifyContent: "flex-end"}}>
+        		     <Text style={styles.circle}> √ </Text>
+        		    </View>
+        			<Image style={styles.itemImage} source={item.uri}/>
+        		</View>
+        		}
+        		</View>
 	)
 }
 
