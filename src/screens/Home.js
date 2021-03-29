@@ -48,6 +48,7 @@ export default function Home() {
  const onUpdate = () =>{
    updateTask(editText);
  }
+
  const ListItem = (props) => {
   const jsonObj = JSON.parse(props.value);
 

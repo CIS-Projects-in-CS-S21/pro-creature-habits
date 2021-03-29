@@ -35,7 +35,7 @@ for (const [key, value] of Object.entries(items.items)) {
 	const onPress = (item) => {
 	    console.log("PRESSED ITEM "+item)
 	    if (!items.items[item].wear || items.items[item].category == 'food') {
-            dispatch({type: ON_PET});
+            dispatch({type: ON_PET,data:'press'});
             dispatch({type: SELECT_PET, data: item})
         }
     }

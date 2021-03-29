@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable ,Animated} from 'react-native';
+import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable ,Animated, TouchableOpacity, TextInput} from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
-import {CHANGE} from "../redux/petInfo";
+import {CHANGE,CHANGENAME} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
 import PetImage from "../components/petInventoryComponents/PetImage";
@@ -15,6 +15,8 @@ import { showMessage } from "react-native-flash-message";
 //import useSound from 'use-sound';
 //import { playCrunchSound } from '../components/audio';
 import { Audio } from 'expo-av';
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {ON_PET} from "../redux/petModalVisible";
 
 
 
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         paddingTop: 5,
+        paddingRight:20,
     },
     text2: {
             color: 'black',
@@ -130,6 +133,12 @@ const styles = StyleSheet.create({
                 		alignItems: "center",
                 		marginTop: 22
                 	},
+                	centeredView2: {
+                	flexDirection:'row',
+                                    		justifyContent: "center",
+                                    		alignItems: "center",
+                                    		marginTop: 22
+                                    	},
 
     }
 );
@@ -144,6 +153,7 @@ const PetProfile = ({choices, navigation}) => {
 
     /*TODO create selected pet item*/
     const selectedItem = useSelector(state=>state.selectedPetItem);
+    const [textName, onChangeText] = React.useState('');
 
     const findImage = () => {
         console.log(petImgChoice);
@@ -187,6 +197,12 @@ const PetProfile = ({choices, navigation}) => {
         		})
         	}
 
+        	const editPet = (name) => {
+                dispatch({type: CHANGENAME, changes: name});
+                dispatch({type:"OFF_PET"});
+
+        	}
+
 
         	const [sound, setSound] = React.useState();
 
@@ -208,20 +224,27 @@ const PetProfile = ({choices, navigation}) => {
                   : undefined;
               }, [sound]);
 
+              const onUpdate = () =>{
+                    dispatch({type: ON_PET,data:"edit"});
+               }
+
 	return (
 <ScrollView style={styles.container}>
+            <View style = {styles.centeredView2}>
 			<Text style={styles.text}>
 			{useSelector(state => state.petDetails[0])}
 			</Text>
+			<TouchableOpacity onPress={onUpdate}>
+                    <MaterialCommunityIcons
+                    name = "pencil"
+                    size = {30}
+                    style={{color:"#637ed0"}}/>
+                    </TouchableOpacity>
+            </View>
 			<View style={styles.imageContainer}>
-            {/*<Image id="img"
-                style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10}}
-                source={(petImgChoice == "cat") ? require('../images/cat.png') : require('../images/dog.png')}
-            />*/}
+
             <PetImage items={useSelector(state => state.petInv)}/>
             <View style={styles.healthbarContainer}>
-                <Text style={styles.text} Health Bars />
-                <HealthBar/>
                 <HealthBar/>
             </View>
             </View>
@@ -239,10 +262,9 @@ const PetProfile = ({choices, navigation}) => {
 			<Modal
             	animationType="slide"
             	transparent={true}
-            	visible={useSelector(state=>state.petMV)}
+            	visible={(useSelector(state=>state.petMV) != "off")}
             >
-            {/*If food, Would you like to feed this item to your pet? Yes or No
-            If clothing, would you like your pet to wear this item? Yes or no*/}
+            {(useSelector(state=>state.petMV) == "press") ?
             		<View style={styles.centeredView}>
             		    <View style={styles.modalView}>
             			<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
@@ -252,17 +274,51 @@ const PetProfile = ({choices, navigation}) => {
             			   style={[styles.button, styles.buttonClose, {left: -30}]}
             			      onPress={() => dispatch({type: OFF_PET})}
             			>
-            										<Text style={styles.textStyle}>Cancel</Text>
-            									</Pressable>
-            									<Pressable
-            										style={[styles.button, styles.buttonClose, {right: -30}]}
-            										onPress={() => handlePurchase(selectedItem)}
-            									>
-            										<Text style={styles.textStyle}>Yes </Text>
-            									</Pressable>
-            								</View>
-            							</View>
-            						</View>
+            				<Text style={styles.textStyle}>Cancel</Text>
+            					</Pressable>
+            					    <Pressable
+            							style={[styles.button, styles.buttonClose, {right: -30}]}
+            							onPress={() => handlePurchase(selectedItem)}
+            							>
+            							<Text style={styles.textStyle}>Yes </Text>
+            						</Pressable>
+            					</View>
+            				</View>
+            			</View>
+            			:
+            			<View style={styles.centeredView}>
+                             <View style={styles.modalView}>
+                                     <Text style={styles.text}>Please enter a name for your pet</Text>
+                                                 <View style={styles.imageContainer}>
+                                                 <TextInput
+                                                                 style={{
+                                                                     width:"85%",
+                                                                     backgroundColor: "white",
+                                                                     marginBottom: 10,
+                                                                     padding: 15,
+                                                                 }}
+                                                                 placeholder="Your Pet's Name"
+                                                             onChangeText={textName => onChangeText(textName)}
+                                                             value={textName}
+                                                 />
+                                             </View>
+                                    	 <View style={styles.modalFooter}>
+                                    	 <Pressable
+                                    	     style={[styles.button, styles.buttonClose, {left: -30}]}
+                                    			 onPress={() => dispatch({type: OFF_PET})}
+                                    			>
+                                    				<Text style={styles.textStyle}>Cancel</Text>
+                                    					</Pressable>
+                                    					    <Pressable
+                                    							style={[styles.button, styles.buttonClose, {right: -30}]}
+                                    							onPress={() => editPet(textName)}
+                                    							>
+                                    							<Text style={styles.textStyle}>Finish </Text>
+                                    						</Pressable>
+                                    					</View>
+                                    				</View>
+                                    			</View>
+            						}
             				</Modal>
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
         </ScrollView>
