@@ -7,6 +7,9 @@ import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
 import { TapGestureHandler } from 'react-native-gesture-handler';
+import { Ionicons } from "@expo/vector-icons";
+import {useDispatch} from "react-redux";
+import { REWARD } from "../redux/coinBalance";
 
 export default function Home() {
 
@@ -14,7 +17,7 @@ export default function Home() {
  const [tasks, setTasks] = useState([])
  //const [users, setUserInfo] = useState([]) // there might be problem with not storing any users
 
- //create these tables during the active state 
+ //create these tables during the active state
  // this doesn't seem to be a problem for some reason
  // maybe because state is preserved
 
@@ -22,10 +25,10 @@ Task.createTable()
 UserInfo.createTable()
 
 
-  const updateTask = useCallback(async (editText) => { 
-     
+  const updateTask = useCallback(async (editText) => {
+
   }, [])
- 
+
 
    //delete a task in sqlite with specified text
  const deleteTask = useCallback(async (deleteText) => {
@@ -48,7 +51,7 @@ UserInfo.createTable()
     setTasks(await Task.query())
   }, [])
 
-  
+
 //   const taskExists = useCallback(async(text)=>{
 //     const status = 1;
 //     const task = await Task.findBy({'name_eq':text});
@@ -131,7 +134,7 @@ const parseDate = (x) => {
     if(typeof(x)!='string'){
         x = x.toString();
 
-        for(i=4; i<=20; i++){
+        for(let i=4; i<=20; i++){
             temp+=x[i];
         }
         x = temp.slice();
@@ -167,7 +170,7 @@ const parseDate = (x) => {
 const getMonthStr = (x) => {
     //x is a number eg. 3
     var newx = '';
-    var list = ['Jan','Feb', 'Mar', 
+    var list = ['Jan','Feb', 'Mar',
     'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     for(var i=0; i<list.length; i++){
@@ -181,7 +184,7 @@ const getMonthNum = (x) => {
     //x is a string eg 'Mar'
 
     var newx = 0;
-    var list = ['Jan','Feb', 'Mar', 
+    var list = ['Jan','Feb', 'Mar',
     'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     for(var i=0; i<list.length; i++){
@@ -206,7 +209,7 @@ const createDeadline = useCallback(async(year,month,day,hour,minute, taskName1) 
         'minute':minute.toString(),
 
     };
-    
+
     //props here should have name, month, day, year, hour, min
     const task = await Task.findBy({'name_eq':props.name})
     var temp = '';
@@ -225,16 +228,16 @@ const createDeadline = useCallback(async(year,month,day,hour,minute, taskName1) 
     task.due = temp.slice();
     temp = '';
     alert("Deadline created for "+props.name+" for "+task.due+"!");
-    await task.save(); 
+    await task.save();
 })
 
 
 const checkDeadline = useCallback(async(taskName2) => {
     //props should be a task object, taskName should be a string
-    
+
     const task = await Task.findBy({'name_eq':taskName2})
     var status = task.name+" was completed after the due date!"; //string
-    
+
     const x = parseDate(new Date()); //curr
     const y = parseDate(task.due); //deadline
     //alert("current date: "+x.year+" "+x.month+" "+x.day+" "+x.hour+" "+x.minute);
@@ -242,28 +245,28 @@ const checkDeadline = useCallback(async(taskName2) => {
     //alert('curr month '+getMonthNum(x.month)+" and the deadline month is "+getMonthNum(y.month));
     if(x.year<y.year){
         status= task.name+" was completed before the due date!";
-        
+
     }
     else if(x.year==y.year){
         if(getMonthNum(x.month)<getMonthNum(y.month)){
-           
+
             status= task.name+" was completed before the due date!";
-            
+
         }
         else if(getMonthNum(x.month)==getMonthNum(y.month)){
             if(x.day<y.day){
                 status= task.name+" was completed before the due date!";
-                
+
             }
             else if(x.day==y.day){
                 if(x.hour<y.hour){
                     status= task.name+" was completed before the due date!";
-                    
+
                 }
                 else if(x.hour==y.hour){
                     if(x.minute<=y.minute){
                         status= task.name+" was completed before the due date!";
-                        
+
                     }
                 }
             }
@@ -276,9 +279,9 @@ const checkDeadline = useCallback(async(taskName2) => {
         awardCoins();
     }
 
-    
+
 })
- 
+
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -312,6 +315,7 @@ const onCreate = () => {
 //does something with submit button is pressed
  const onSubmit = async () => {
  	createTask(text);
+ 	setText('');
     //awardCoins();
 
      //const user = await UserInfo.findBy({'username_eq':"Pikachu"})
@@ -323,10 +327,15 @@ const onCreate = () => {
  const onUpdate = () =>{
   updateTask(editText);
 }
-
+const dispatch = useDispatch();
 //does something when delete button is pressed
- const onDelete = () => {
- 	deleteTask(deleteText);
+ const onComplete = (task) => {
+ 	deleteTask(task);
+ 	dispatch({type: REWARD, data: 5});
+ }
+
+ const onDelete= (task) => {
+	 deleteTask(task);
  }
 
  const onEditButton = (jsonObj) => {
@@ -338,20 +347,34 @@ const onCreate = () => {
 //given props object, returns a view for a props
  const ListItem = (props) => {
   const jsonObj = JSON.parse(props.value);
-  
+
   return(
     <View style={styles.listItem}>
-      
-      
+
+
       <Text style={{marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold', fontSize: 16, color: 'white'}} >{jsonObj.name}</Text>
-    
+
       <View style={{flexDirection:'row', marginLeft: 'auto'}}>
-        <TouchableOpacity style={{marginRight: '5%'}} onPress={() => onEditButton(jsonObj)}>
+        <TouchableOpacity style={{paddingRight: '5%'}} onPress={() => onEditButton(jsonObj)}>
           <MaterialCommunityIcons
           name = "pencil"
           size = {30}
           style={{color:"#637ed0"}}/>
         </TouchableOpacity>
+		<TouchableOpacity onPress={() => onComplete(jsonObj.name)}>
+			<Ionicons
+				name="checkmark"
+				size={30}
+				style={{color:"#637ed0"}}
+			/>
+		</TouchableOpacity>
+	    <TouchableOpacity onPress={() => onDelete(jsonObj.name)}>
+		    <Ionicons
+		   	    name="trash"
+			    size={30}
+			    style={{color:"#637ed0"}}
+		    />
+	    </TouchableOpacity>
       </View>
     </View>
   );
@@ -393,29 +416,20 @@ const onCreate = () => {
       {/*<Button style={{marginBottom: '1%'}} title='submit'  color="#637ed0" onPress={onSubmit} />*/}
 
       <Pressable
-        style={[styles.button, styles.buttonClose]} 
+        style={[styles.button, styles.buttonClose]}
         onPress={onSubmit}
       >
         <Text style={styles.textStyle}>Submit</Text>
       </Pressable>
 
-      <TextInput style={{backgroundColor: 'white', width: '50%'}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
-	    {/*<Button style={{}} title="Delete" color="#637ed0" onPress={onDelete}/>*/}
 
-        <Pressable
-          style={[styles.button, styles.buttonClose]} 
-          onPress={onDelete}
-        >
-          <Text style={styles.textStyle}>Delete</Text>
-        </Pressable>
-      
       <View style={styles.listContainer}>
         <ScrollView>
 
-       
+
 
           <ListOfTasks />
-          
+
         </ScrollView>
         <View style={styles.listFooter}>
           <Image
@@ -427,28 +441,28 @@ const onCreate = () => {
          {/* <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getUsername' value={username} onChangeText={username => setUsername(username)}/>
             <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getEmail' value={email} onChangeText={email => setEmail(email)}/>
             <Button title='create'  color="#637ed0" onPress={onCreate} />  */}
-          
-        </View>
-        
-        
 
-        
+        </View>
+
+
+
+
       </View>
-      
-      
+
+
 
       {/* <TextInput placeholder="task name" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='taskName1' value={taskName1} onChangeText={taskName1 => setTaskName1(taskName1)}/>
       <TextInput placeholder="year eg. 2021" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='year' value={year} onChangeText={year => setYear(year)}/>
       <TextInput placeholder="month eg. 2" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='month' value={month} onChangeText={month => setMonth(month)}/>
       <TextInput placeholder="day eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='day' value={day} onChangeText={day => setDay(day)}/>
       <TextInput placeholder="hour eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='hour' value={hour} onChangeText={hour => setHour(hour)}/>
-      <TextInput placeholder="minute eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='minute' value={minute} onChangeText={minute => setMinute(minute)}/>  
+      <TextInput placeholder="minute eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='minute' value={minute} onChangeText={minute => setMinute(minute)}/>
       <Button title='create deadline'  color="#637ed0" onPress={onCreateDeadline} /> */}
-      
+
       {/* <TextInput placeholder="task name" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='taskName2' value={taskName2} onChangeText={taskName2 => setTaskName2(taskName2)}/>
       <Button title='complete task'  color="#637ed0" onPress={onCheckDeadline} /> */}
-      
-      
+
+
       <View style={styles.centeredView}>
           <Modal
               animationType="slide"
@@ -462,14 +476,17 @@ const onCreate = () => {
                 <Text style={{marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 25}}>Edit Task</Text>
                 <Text style={{marginTop: '20%', fontWeight: 'bold', fontSize: 20, color: 'black'}}>Task Name:</Text>
 
-                <Text style={styles.modalText}>{popUpJSON.name}</Text>
-                
-                
+                <TextInput style={[styles.modalText, {borderWidth:1, paddingTop: 5, paddingBottom: 5, paddingRight: 10, paddingLeft: 10}]}>{popUpJSON.name}</TextInput>
+				<Pressable style={[styles.buttonClose, styles.button, {width: '40%'}]}>
+					<Text style={{color: 'white'}}>Change name</Text>
+				</Pressable>
+
+
                 <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Due Date:</Text>
                 <Text style={styles.modalText}>{popUpJSON.due}</Text>
-                
-                <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Time Created:</Text>
-                
+
+                <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Date Created:</Text>
+
                 {/*this needs to be changed to be dynamic!!!*/}
                 <Text style={styles.modalText}>03/30/2021</Text>
 
@@ -477,14 +494,14 @@ const onCreate = () => {
                 <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Coin Reward:</Text>
                 <View style={styles.balanceContainer}>
 					        <Text style={styles.balanceText}>
-						        100
+						        5
 					        </Text>
 					        <Image
 						      style={styles.coinImage}
 						      source={require('../test_images/coin.png')}
 					        />
 				        </View>
-                  
+
                 <Pressable
                     style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!modalVisible)}
@@ -502,7 +519,7 @@ const onCreate = () => {
                 {/* <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getUsername' value={username} onChangeText={username => setUsername(username)}/>
                 <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getEmail' value={email} onChangeText={email => setEmail(email)}/>
                 <Button title='create'  color="#637ed0" onPress={onCreate} />  */}
-          
+
                   </View>
                 </View>
             </View>
@@ -514,9 +531,6 @@ const onCreate = () => {
 }
 //test
 const styles = StyleSheet.create({
-	buttonClose: {
-		backgroundColor: "#2196F3",
-	},
 	button: {
 		borderRadius: 7,
 		width: 80,
@@ -560,7 +574,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginBottom: 5
   },
-  
+
   container: {
 		flex: 1,
 		alignItems: 'center',
@@ -620,7 +634,7 @@ const styles = StyleSheet.create({
     paddingBottom: '2%',
     paddingLeft: '5%',
     margin: '3%',
-    
+	flexDirection: 'row',
     borderRadius: 10,
     backgroundColor: '#402688',
   },
