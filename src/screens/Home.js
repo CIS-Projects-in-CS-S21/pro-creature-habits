@@ -480,7 +480,7 @@ export default function Home() {
 			<View style={styles.centeredView}>
 				<Modal
 					animationType="slide"
-					transparant={true}
+					transparent={true}
 					visible={(modalVisible)}
 
 				>

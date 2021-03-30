@@ -13,6 +13,14 @@ const styles = StyleSheet.create({
 	text: {
 		color: 'white'
 	},
+	button:{
+    		padding: 10,
+    		width: "50%",
+    		backgroundColor: '#402688',
+    		alignItems: 'center',
+    		margin: 10,
+    		borderRadius: 5
+    	},
 	input:{
 		width:"85%",
 		backgroundColor: "white",
@@ -24,13 +32,11 @@ const styles = StyleSheet.create({
 const SignUpScreen = ({ onSignUp, navigation }) => {
 	const [newUsername, setNewUsername] = React.useState('');
 	const [newPassword, setNewPassword] = React.useState('');
-	const [newEmail, setNewEmail] = React.useState('');
 
-	const createUser = useCallback(async (newUsername, newPassword, newEmail) => {
+	const createUser = useCallback(async (newUsername, newPassword) => {
 		const props = {
 			username: newUsername,
 			password: newPassword,
-			email: newEmail,
 			coinBalance: 100
 		}
 
@@ -40,10 +46,10 @@ const SignUpScreen = ({ onSignUp, navigation }) => {
 	}, [])
 
 	const onCreateUser = () => {
-		createUser(newUsername, newPassword, newEmail)
+		createUser(newUsername, newPassword)
 	}
 	const onCreateSubmit= () => {
-		navigation.navigate('Account Creation')
+		navigation.navigate('Choose Pet')
 	}
 
 	return (
@@ -61,19 +67,12 @@ const SignUpScreen = ({ onSignUp, navigation }) => {
 				secureTextEntry={true}
 				style={styles.input}
 			/>
-			<TextInput
-				value={newEmail}
-				onChangeText={newEmail => setNewEmail(newEmail)}
-				placeholder={'Email'}
-				//secureTextEntry={true}
-				style={styles.input}
-			/>
-
-			<Button
-				title="Click to Create First Pet"
-				style={styles.button}
-				onPress={() => navigation.navigate('Choose Pet')}
-			/>
+			<TouchableOpacity
+            						style={styles.button}
+            						onPress={onCreateUser}
+            					>
+            						<Text style={styles.text}>Click to Create First Pet</Text>
+            					</TouchableOpacity>
 		</View>
 	);
 };
