@@ -23,4 +23,8 @@ target 'myReactNativeProject' do
   #  end
   pod 'ReactNativeGetLocation', :path => '../node_modules/react-native-get-location'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
+  pod 'RNSoundPlayer', :path => '../node_modules/react-native-sound-player'
+
 end

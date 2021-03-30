@@ -1,0 +1,27 @@
+{
+  "name": "ReactNativeGetLocation",
+  "version": "2.0.0",
+  "description": "⚛ Simple to use React Native library to get device location for Android and iOS.",
+  "homepage": "https://github.com/douglasjunior/react-native-get-location",
+  "summary": "Simple to use React Native library to get device location",
+  "license": "MIT",
+  "authors": "Douglas Nassif Roma Junior",
+  "source": {
+    "git": "git+https://github.com/douglasjunior/react-native-get-location.git",
+    "tag": "2.0.0"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "preserve_paths": [
+    "README.md",
+    "package.json",
+    "*.js"
+  ],
+  "source_files": "ios/ReactNativeGetLocationLibrary/**/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

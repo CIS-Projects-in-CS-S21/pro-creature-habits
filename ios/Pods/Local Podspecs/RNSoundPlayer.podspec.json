@@ -1,0 +1,28 @@
+{
+  "name": "RNSoundPlayer",
+  "version": "0.10.6",
+  "summary": "Play or stream audio files in ReactNative on iOS/Android",
+  "homepage": "https://github.com/johnsonsu/react-native-sound-player",
+  "license": "MIT",
+  "authors": {
+    "Johnson Su": "johnsonsu@johnsonsu.com"
+  },
+  "platforms": {
+    "ios": "9.0",
+    "tvos": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/johnsonsu/react-native-sound-player.git",
+    "tag": "0.10.6"
+  },
+  "source_files": "ios/**/*.{h,m}",
+  "preserve_paths": [
+    "package.json",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

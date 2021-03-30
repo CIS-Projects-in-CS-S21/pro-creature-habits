@@ -7,6 +7,7 @@ import Cards from "../components/marketplaceComponents/Cards";
 import {OFF} from "../redux/modalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import {BUY} from "../redux/coinBalance";
+import {ADD} from "../redux/petInventory";
 
 import { showMessage } from "react-native-flash-message";
 import {ACH_PROGRESS} from "../redux/achievementsComplete";
@@ -135,6 +136,7 @@ const MarketplaceScreen = () => {
 		dispatch({type: BUY, data: ItemInventory[item].cost});
 		dispatch({type: ADD_TO_STAT, data: ['total_coins_spent', ItemInventory[item].cost]})
 		dispatch({type: OFF});
+		dispatch({type: ADD, data: item});
 		dispatch({type: ACH_PROGRESS, data: 'buy_item'});
 		dispatch({type: INCREMENT_STAT, data: 'items_bought'})
 		if(ItemInventory[item].category === 'food') {

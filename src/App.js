@@ -5,6 +5,7 @@ import {Image, Text, View} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
+import petInventoryReducer from "./redux/petInventory";
 import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
@@ -29,7 +30,8 @@ import achievementsCompleteReducer from "./redux/achievementsComplete";
 import achievementFilterReducer from "./redux/achievementFilter";
 import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 import statTrackerReducer from "./redux/statTracker";
-
+import petMVR from "./redux/petModalVisible";
+import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -44,6 +46,7 @@ const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
+	petInv: petInventoryReducer,
 	modalVisible: modalVisibleReducer,
 	selectedMarketItem: selectedMarketItemReducer,
 	statsVisible: statsVisibleReducer,
@@ -53,6 +56,8 @@ const reducer = combineReducers({
 	achievementsFilter: achievementFilterReducer,
 	itemsBought: marketplaceItemsBoughtReducer,
 	userStats: statTrackerReducer
+	petMV: petMVR,
+	selectedPetItem: selectedPetItemReducer
 });
 
 const rootReducer = (state, action) => {
@@ -186,7 +191,20 @@ const App = () => {
 								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
-						<Stack.Screen name="Sign Up">
+						<Stack.Screen name="Sign Up"
+						options={{
+								animationTypeForReplace: 'pop',
+								headerTitle: () => (
+									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
+										Sign Up
+									</Text>
+								),
+								headerStyle : {
+									backgroundColor: '#402688',
+									shadowOpacity: 0,
+									height: 100
+								},
+							}} >
 							{(props) => (
 								<SignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
