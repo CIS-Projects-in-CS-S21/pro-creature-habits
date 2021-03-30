@@ -1,35 +1,38 @@
-import React, { useCallback, useState } from 'react';
-import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
-import Task from '../databases/Task';
+import React, { useState } from 'react';
+import {
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	TextInput,
+	Button,
+	Modal,
+	Pressable
+} from 'react-native'
 import {MaterialCommunityIcons, Ionicons} from "@expo/vector-icons";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {REWARD} from "../redux/coinBalance";
 import {showMessage} from "react-native-flash-message";
-import {ItemInventory} from "../components/ItemInventory";
+import { FloatingAction } from "react-native-floating-action";
+import {TASK_OFF, TASK_ON} from "../redux/createTaskModal";
+
 
 //test
 const styles = StyleSheet.create({
+	scrollContainer: {
+		flex: 1,
+		backgroundColor: '#406BE9',
+	},
 	container: {
 		flex: 1,
-		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#406be9',
-
+		backgroundColor: '#406be9'
 	},
 
 	listContainer:{
-		backgroundColor: 'rgba(49,69,194,0.7)',
-		shadowOffset: {width: 0, height: 5},
-		shadowOpacity: 0.8,
-		shadowRadius: 3,
-		borderWidth: 3,
-		borderColor: 'black',
-		width: '75%',
-		height: '80%',
-		marginTop: '2%',
-		marginLeft: 'auto',
-		marginRight: 'auto',
-		marginBottom: '5%',
+		alignItems: 'stretch'
+
 	},
 	listItem:{
 		paddingTop: '5%',
@@ -37,10 +40,9 @@ const styles = StyleSheet.create({
 		paddingLeft: '5%',
 		margin: '3%',
 		borderRadius: 10,
-		backgroundColor: 'white',
-		alignContent: 'center',
-		justifyContent: 'space-between',
+		backgroundColor: '#402688',
 		flexDirection: 'row',
+		justifyContent: 'space-between'
 	},
 	listFooter:{
 		borderTopColor: '#FFFFFF',
@@ -53,7 +55,44 @@ const styles = StyleSheet.create({
 	weather: {
 		color: 'white',
 		fontSize: 30,
-	}
+	},
+	centeredView: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		marginTop: 22
+	},
+	modalView: {
+		margin: 10,
+		backgroundColor: '#402688',
+		borderRadius: 10,
+		padding: 35,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5
+	},
+	buttonClose: {
+		backgroundColor: "#2196F3",
+	},
+	button: {
+		borderRadius: 7,
+		width: '75%',
+		alignItems: 'center',
+		padding: 10,
+		elevation: 2,
+		justifyContent: 'center',
+		flexDirection: 'row',
+	},
+	modalFooter: {
+		flexDirection: 'row',
+		paddingTop: 15
+	},
 });
 
 const Home = () => {
@@ -61,13 +100,34 @@ const Home = () => {
 
 	const [tasks, setTasks] = useState([])
 
+	const actions = [
+		{
+			text: 'Daily Task',
+			icon: require("../IconImages/calendar.png"),
+			name: 'bt_daily',
+			position: 1
+		},
+		{
+			text: 'One Time Task',
+			icon: require("../IconImages/compose.png"),
+			name: 'bt_one_time',
+			position: 2
+		}
+	]
+
 	const onSubmit = (task) => {
 		setTasks([...tasks, task]);
 		setText('');
+		dispatch({type: TASK_OFF})
 	}
 
-	const onDelete = (task) => {
-		setTasks([...tasks].filter(item => item !== task));
+	const onDelete = (index) => {
+		setTasks([...tasks].splice(index));
+		showMessage({
+			message: 'task deleted',
+			type: "danger",
+			statusBarHeight: 52,
+		})
 	}
 
 	const onComplete = (task) => {
@@ -81,25 +141,38 @@ const Home = () => {
 	}
 
 
- 	const ListItem = ({taskName}) => {
+ 	const ListItem = ({taskName, index}) => {
 	  	return(
 			<View style={styles.listItem}>
-		  		<Text style={{fontWeight: 'bold', fontSize: 16, maxWidth:'77%'}} color='white'>{taskName}</Text>
-		  		<View style = {{flexDirection:'row'}}>
-					<TouchableOpacity
-						onPress={() => onDelete(taskName)}
-					>
-						<MaterialCommunityIcons
-							name = "trash-can-outline"
-							size = {24}
-						/>
-					</TouchableOpacity>
+		  		<Text style={{color: 'white', fontSize: 20, alignItems: 'center'}} color='white'>{taskName}</Text>
+		  		<View style = {{flexDirection:'row', marginRight: '5%'}}>
 					<TouchableOpacity
 						onPress={() => onComplete(taskName)}
 					>
 						<Ionicons
 							name="checkmark"
 							size={24}
+							color='white'
+							style={{paddingRight: '2%'}}
+						/>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => onDelete(index)}
+					>
+						<MaterialCommunityIcons
+							name = "pencil"
+							size = {24}
+							color='white'
+							style={{paddingRight: '2%'}}
+						/>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => onDelete(taskName)}
+					>
+						<MaterialCommunityIcons
+							name = "trash-can-outline"
+							size = {24}
+							color='white'
 						/>
 					</TouchableOpacity>
 				</View>
@@ -112,6 +185,7 @@ const Home = () => {
 		 	return(
 		   		<ListItem key = {index}
 		   			taskName={task}
+					index={index}
 				/>
 		   )
 	    })
@@ -121,29 +195,53 @@ const Home = () => {
 
 
    const [text, setText] = React.useState('');
-   const [deleteText, setDeleteText] = React.useState('');
   return (
-    <View style={styles.container}>
-      <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='name' value={text} onChangeText={text => setText(text)}/>
-      <Button title='submit'  color="#637ed0" onPress={() => onSubmit(text)} />
-      <View style={styles.listContainer}>
-        <ScrollView>
-
-          <ListOfTasks />
-
-        </ScrollView>
-        <View style={styles.listFooter}>
-          <Image
-              style={{width: 70, height: 55}}
-              source={{
-                uri: 'https://i.imgur.com/tkSiusr.gif',
-              }}
-            />
-        </View>
-      </View>
-    </View>
+  		<View style={{flex: 1}}>
+			<ScrollView style={styles.scrollContainer}>
+				<View style={styles.container}>
+					<View style={styles.listContainer}>
+						<ListOfTasks />
+					</View>
+				</View>
+			</ScrollView>
+			<FloatingAction
+				actions={actions}
+				onPressItem={() => {
+					dispatch({type: TASK_ON})
+				}}
+			/>
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={useSelector(state=>state.taskCreateVisible)}
+			>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<TextInput
+							style={{backgroundColor: 'white', color: 'black', width: 200, height: 30, borderRadius: 5}}
+							label='name'
+							maxLength={25}
+							value={text}
+							onChangeText={text => setText(text)}
+							placeholder='Type a new task'
+						/>
+						<Button title='submit'  color="#637ed0" onPress={() => onSubmit(text)} />
+						<View style={styles.modalFooter}>
+							<Pressable
+								style={[styles.button, styles.buttonClose]}
+								onPress={() => dispatch({type: TASK_OFF})}
+							>
+								<Text style={styles.textStyle}>Cancel</Text>
+							</Pressable>
+						</View>
+					</View>
+				</View>
+			</Modal>
+		</View>
   );
 }
+
+
 
 
 export default Home;

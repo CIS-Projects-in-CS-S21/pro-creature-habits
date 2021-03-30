@@ -33,6 +33,7 @@ import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
+import modalTaskReducer from "./redux/createTaskModal";
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -57,7 +58,8 @@ const reducer = combineReducers({
 	itemsBought: marketplaceItemsBoughtReducer,
 	userStats: statTrackerReducer,
 	petMV: petMVR,
-	selectedPetItem: selectedPetItemReducer
+	selectedPetItem: selectedPetItemReducer,
+	taskCreateVisible: modalTaskReducer
 });
 
 const rootReducer = (state, action) => {
