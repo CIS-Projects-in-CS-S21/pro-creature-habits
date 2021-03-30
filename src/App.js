@@ -55,7 +55,7 @@ const reducer = combineReducers({
 	achievements: achievementsCompleteReducer,
 	achievementsFilter: achievementFilterReducer,
 	itemsBought: marketplaceItemsBoughtReducer,
-	userStats: statTrackerReducer
+	userStats: statTrackerReducer,
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer
 });

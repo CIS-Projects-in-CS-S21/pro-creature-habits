@@ -44,8 +44,6 @@ export default function SignInScreen({ onSignIn, navigation }){
 		let authenticated = false
 		try {
 			const user = await UserInfo.findBy({username_eq: username})
-			console.log(user);
-			console.log(user.password);
 			if (password == user.password) {
 				console.log("Correct");
 				authenticated = true
