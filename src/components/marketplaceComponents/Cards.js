@@ -1,5 +1,8 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {ItemInventory} from "../ItemInventory";
+import {PURCHASE} from "../../redux/marketplaceInventory";
+import {BUY} from "../../redux/coinBalance";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import Card from "./Card";
 import {ON} from "../../redux/modalVisible";
@@ -23,15 +26,14 @@ const styles = StyleSheet.create({
 });
 
 const Cards = (items) => {
+    console.log("HELLO "+items.items);
 	const dispatch = useDispatch();
 	const itemsBought = useSelector(state => state.itemsBought);
 
 	const onPress = (item) => {
-		if (!itemsBought.includes(item)) {
-			dispatch({type: ON});
-			dispatch({type: SELECT, data: item});
+    		dispatch({type: ON});
+    		dispatch({type: SELECT, data: item})
 		}
-	}
 
 	return (
 		<View style={styles.cardsContainer}>

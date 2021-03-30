@@ -1,6 +1,7 @@
 export const CHANGE = 'CHANGE';
+export const CHANGENAME = 'CHANGENAME';
 
-let defaultState = ["name","image"];
+let defaultState = ["name","dog"];
 
 
 const petInfoObj = (state = defaultState, action) => {
@@ -8,8 +9,11 @@ const petInfoObj = (state = defaultState, action) => {
 
 	switch (action.type) {
     		case CHANGE:
-    			state = action.changes;
-    			return state;
+    			return action.changes;
+    	    case CHANGENAME:
+    	        let copy = state;
+    	        copy[0] = action.changes;
+    	        return copy;
     		default:
     			return state;
     	}
