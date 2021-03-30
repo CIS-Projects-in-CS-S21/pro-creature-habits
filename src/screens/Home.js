@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
-import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
+import { Image, Alert, ScrollView, Modal, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button, Pressable } from 'react-native'
 import Task from '../databases/Task';
 import UserInfo from '../databases/UserInfo';
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 import { SQLite } from 'expo-sqlite';
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
 import { withSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,9 +17,14 @@ export default function Home() {
  //create these tables during the active state 
  // this doesn't seem to be a problem for some reason
  // maybe because state is preserved
+
 Task.createTable()
 UserInfo.createTable()
 
+
+  const updateTask = useCallback(async (editText) => { 
+     
+  }, [])
  
 
    //delete a task in sqlite with specified text
@@ -42,6 +48,7 @@ UserInfo.createTable()
     setTasks(await Task.query())
   }, [])
 
+  
 //   const taskExists = useCallback(async(text)=>{
 //     const status = 1;
 //     const task = await Task.findBy({'name_eq':text});
@@ -312,10 +319,19 @@ const onCreate = () => {
     //  await user.save()
     // setUserInfo(await UserInfo.query())
  }
+// does something when the update button is pressed
+ const onUpdate = () =>{
+  updateTask(editText);
+}
 
 //does something when delete button is pressed
  const onDelete = () => {
  	deleteTask(deleteText);
+ }
+
+ const onEditButton = (jsonObj) => {
+   setPopUpJSON(jsonObj);
+   setModalVisible(true);
  }
 
 //given props object, returns a view for a props
@@ -327,6 +343,15 @@ const onCreate = () => {
       
       
       <Text style={{fontWeight: 'bold', fontSize: 16}} color='white'>{jsonObj.name}</Text>
+    
+      <View style={{flexDirection:'row', marginLeft: 'auto'}}>
+        <TouchableOpacity onPress={() => onEditButton(jsonObj)}>
+          <MaterialCommunityIcons
+          name = "pencil"
+          size = {30}
+          style={{color:"#637ed0"}}/>
+        </TouchableOpacity>
+      </View>
     </View>
   );
  }
@@ -354,6 +379,10 @@ const onCreate = () => {
    const[day, setDay] = React.useState('');
    const[hour, setHour] = React.useState('');
    const[minute, setMinute] = React.useState('');
+
+   const [modalVisible, setModalVisible] = useState(false);
+   const [popUpJSON, setPopUpJSON] = useState({});
+   const [editName, setEditName] = React.useState('');
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -396,7 +425,36 @@ const onCreate = () => {
             <Button title='create'  color="#637ed0" onPress={onCreate} />  */}
           
         </View>
+        
+        
+
+        
       </View>
+      <View style={styles.centeredView}>
+          <Modal
+              animationType="fade"
+              transparant={true}
+              visible={(modalVisible)}
+
+          >
+
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={{fontWeight: 'bold', fontSize: 16}} color='white'>Task Name:</Text>
+
+                <Text style={styles.modalText}>{popUpJSON.name}</Text>
+                <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='Edit Task Name' value={text} onChangeText={text => setText(text)}/>
+                  <Pressable
+                    style={[styles.testButton, styles.testButtonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                >
+                    <Text style={styles.testStyle}>Hide Modal</Text>
+                  </Pressable>
+                </View>
+            </View>
+
+          </Modal>
+        </View>
     </View>
   );
 }
@@ -408,6 +466,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		backgroundColor: '#406be9',
 
+	},
+  centeredView: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		marginTop: 22
 	},
 
   listContainer:{
@@ -424,6 +488,29 @@ const styles = StyleSheet.create({
     marginRight: 'auto',
     marginBottom: '5%',
   },
+
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  },
+
+  modalView: {
+		margin: 50,
+    width: '80%',
+    height: '80%',
+		backgroundColor: 'white',
+		borderRadius: 10,
+		padding: 15,
+		alignItems: "center",
+		shadowColor: "#FFF",
+		shadowOffset: {
+			width: 0,
+			height: 2
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5
+	},
 
   listItem:{
     paddingTop: '2%',
@@ -444,6 +531,23 @@ const styles = StyleSheet.create({
 		color: 'white'
 
 	},
+
+  testButton: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+
+  testButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+
 	weather: {
 		color: 'white',
 		fontSize: 30,
