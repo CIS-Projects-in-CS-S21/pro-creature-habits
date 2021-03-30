@@ -10,6 +10,9 @@ import { TapGestureHandler } from 'react-native-gesture-handler';
 import { Ionicons } from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import { REWARD } from "../redux/coinBalance";
+import {showMessage} from "react-native-flash-message";
+import {ItemInventory} from "../components/ItemInventory";
+import {ADD_TO_STAT} from "../redux/statTracker";
 
 export default function Home() {
 
@@ -332,10 +335,21 @@ export default function Home() {
 	const onComplete = (task) => {
 		deleteTask(task);
 		dispatch({type: REWARD, data: 5});
+		dispatch({type: ADD_TO_STAT, data: ['total_coins_gain', 5]})
+		showMessage({
+			message: 'Task completed! 5 coins have been added to your balance',
+			type: "success",
+			statusBarHeight: 52,
+		})
 	}
 
 	const onDelete= (task) => {
 		deleteTask(task);
+		showMessage({
+			message: 'Task deleted',
+			type: "danger",
+			statusBarHeight: 52,
+		})
 	}
 
 	const onEditButton = (jsonObj) => {
