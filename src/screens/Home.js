@@ -332,6 +332,7 @@ const onCreate = () => {
  const onEditButton = (jsonObj) => {
    setPopUpJSON(jsonObj);
    setModalVisible(true);
+   setEditName(jsonObj.name)
  }
 
 //given props object, returns a view for a props
@@ -342,10 +343,10 @@ const onCreate = () => {
     <View style={styles.listItem}>
       
       
-      <Text style={{fontWeight: 'bold', fontSize: 16}} color='white'>{jsonObj.name}</Text>
+      <Text style={{marginTop: 'auto', marginBottom: 'auto', fontWeight: 'bold', fontSize: 16, color: 'white'}} >{jsonObj.name}</Text>
     
       <View style={{flexDirection:'row', marginLeft: 'auto'}}>
-        <TouchableOpacity onPress={() => onEditButton(jsonObj)}>
+        <TouchableOpacity style={{marginRight: '5%'}} onPress={() => onEditButton(jsonObj)}>
           <MaterialCommunityIcons
           name = "pencil"
           size = {30}
@@ -388,22 +389,25 @@ const onCreate = () => {
 
   return (
     <View style={styles.container}>
-      <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='name' value={text} onChangeText={text => setText(text)}/>
-      <Button title='submit'  color="#637ed0" onPress={onSubmit} />
-        
-      <TextInput style={{backgroundColor: 'white', width: '50%'}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
-	  <Button title="Delete" color="#637ed0" onPress={onDelete}/>
+      <TextInput style={{marginTop: '10%', backgroundColor: 'white', color: 'black', width: '50%'}} label='name' value={text} onChangeText={text => setText(text)}/>
+      {/*<Button style={{marginBottom: '1%'}} title='submit'  color="#637ed0" onPress={onSubmit} />*/}
 
-      {/* <TextInput placeholder="task name" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='taskName1' value={taskName1} onChangeText={taskName1 => setTaskName1(taskName1)}/>
-      <TextInput placeholder="year eg. 2021" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='year' value={year} onChangeText={year => setYear(year)}/>
-      <TextInput placeholder="month eg. 2" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='month' value={month} onChangeText={month => setMonth(month)}/>
-      <TextInput placeholder="day eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='day' value={day} onChangeText={day => setDay(day)}/>
-      <TextInput placeholder="hour eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='hour' value={hour} onChangeText={hour => setHour(hour)}/>
-      <TextInput placeholder="minute eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='minute' value={minute} onChangeText={minute => setMinute(minute)}/>  
-      <Button title='create deadline'  color="#637ed0" onPress={onCreateDeadline} /> */}
-      
-      {/* <TextInput placeholder="task name" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='taskName2' value={taskName2} onChangeText={taskName2 => setTaskName2(taskName2)}/>
-      <Button title='complete task'  color="#637ed0" onPress={onCheckDeadline} /> */}
+      <Pressable
+        style={[styles.button, styles.buttonClose]} 
+        onPress={onSubmit}
+      >
+        <Text style={styles.textStyle}>Submit</Text>
+      </Pressable>
+
+      <TextInput style={{backgroundColor: 'white', width: '50%'}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
+	    {/*<Button style={{}} title="Delete" color="#637ed0" onPress={onDelete}/>*/}
+
+        <Pressable
+          style={[styles.button, styles.buttonClose]} 
+          onPress={onDelete}
+        >
+          <Text style={styles.textStyle}>Delete</Text>
+        </Pressable>
       
       <View style={styles.listContainer}>
         <ScrollView>
@@ -430,9 +434,24 @@ const onCreate = () => {
 
         
       </View>
+      
+      
+
+      {/* <TextInput placeholder="task name" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='taskName1' value={taskName1} onChangeText={taskName1 => setTaskName1(taskName1)}/>
+      <TextInput placeholder="year eg. 2021" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='year' value={year} onChangeText={year => setYear(year)}/>
+      <TextInput placeholder="month eg. 2" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='month' value={month} onChangeText={month => setMonth(month)}/>
+      <TextInput placeholder="day eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='day' value={day} onChangeText={day => setDay(day)}/>
+      <TextInput placeholder="hour eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='hour' value={hour} onChangeText={hour => setHour(hour)}/>
+      <TextInput placeholder="minute eg. 01" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='minute' value={minute} onChangeText={minute => setMinute(minute)}/>  
+      <Button title='create deadline'  color="#637ed0" onPress={onCreateDeadline} /> */}
+      
+      {/* <TextInput placeholder="task name" style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='taskName2' value={taskName2} onChangeText={taskName2 => setTaskName2(taskName2)}/>
+      <Button title='complete task'  color="#637ed0" onPress={onCheckDeadline} /> */}
+      
+      
       <View style={styles.centeredView}>
           <Modal
-              animationType="fade"
+              animationType="slide"
               transparant={true}
               visible={(modalVisible)}
 
@@ -440,16 +459,51 @@ const onCreate = () => {
 
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={{fontWeight: 'bold', fontSize: 16}} color='white'>Task Name:</Text>
+                <Text style={{marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 25}}>Edit Task</Text>
+                <Text style={{marginTop: '20%', fontWeight: 'bold', fontSize: 20, color: 'black'}}>Task Name:</Text>
 
                 <Text style={styles.modalText}>{popUpJSON.name}</Text>
-                <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='Edit Task Name' value={text} onChangeText={text => setText(text)}/>
-                  <Pressable
-                    style={[styles.testButton, styles.testButtonClose]}
+                
+                
+                <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Due Date:</Text>
+                <Text style={styles.modalText}>{popUpJSON.due}</Text>
+                
+                <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Time Created:</Text>
+                
+                {/*this needs to be changed to be dynamic!!!*/}
+                <Text style={styles.modalText}>03/30/2021</Text>
+
+
+                <Text style={{marginTop: '7%', marginLeft: 'auto', marginRight: 'auto', fontWeight: 'bold', fontSize: 20}} color='black'>Coin Reward:</Text>
+                <View style={styles.balanceContainer}>
+					        <Text style={styles.balanceText}>
+						        100
+					        </Text>
+					        <Image
+						      style={styles.coinImage}
+						      source={require('../test_images/coin.png')}
+					        />
+				        </View>
+                  
+                <Pressable
+                    style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!modalVisible)}
                 >
-                    <Text style={styles.testStyle}>Hide Modal</Text>
-                  </Pressable>
+                    <Text style={styles.textStyle}>Stop Editing</Text>
+                </Pressable>
+
+                <View style={styles.editFooter}>
+                  <Image
+                    style={{width: 62, height: 50, marginLeft: 'auto', transform:[{ scaleX: -1}]}}
+                    source={{
+                      uri: 'https://i.imgur.com/tkSiusr.gif',
+                    }}
+                  />
+                {/* <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getUsername' value={username} onChangeText={username => setUsername(username)}/>
+                <TextInput  style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='getEmail' value={email} onChangeText={email => setEmail(email)}/>
+                <Button title='create'  color="#637ed0" onPress={onCreate} />  */}
+          
+                  </View>
                 </View>
             </View>
 
@@ -460,7 +514,54 @@ const onCreate = () => {
 }
 //test
 const styles = StyleSheet.create({
-	container: {
+	buttonClose: {
+		backgroundColor: "#2196F3",
+	},
+	button: {
+		borderRadius: 7,
+		width: 80,
+		alignItems: 'center',
+		padding: 8,
+		elevation: 2,
+		justifyContent: 'center',
+		flexDirection: 'row',
+    marginTop: '1%',
+    marginBottom: '1%'
+	},
+
+  balanceContainer: {
+		flexDirection: 'row',
+		borderWidth: 2,
+		borderRadius: 10,
+		borderColor: 'white',
+		backgroundColor: 'lightblue',
+		marginLeft: 10,
+		marginTop: '10%',
+    marginBottom: '10%',
+    marginRight: '3%',
+    shadowOffset: {width: 0, height: 5},
+		shadowOpacity: 0.8,
+		shadowRadius: 3,
+		elevation: 11
+	},
+
+  balanceText: {
+		color: 'white',
+		fontSize: 25,
+		marginTop: 5,
+		marginLeft: 5,
+		marginBottom: 5
+	},
+
+  coinImage: {
+    height: 30,
+    width: 30,
+    marginTop: 5,
+    marginRight: 5,
+    marginBottom: 5
+  },
+  
+  container: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -479,11 +580,12 @@ const styles = StyleSheet.create({
     shadowOffset: {width: 0, height: 5},
 		shadowOpacity: 0.8,
 		shadowRadius: 3,
-    borderWidth: 3,
-    borderColor: 'black',
-    width: '75%',
-    height: '80%',
-    marginTop: '2%',
+    //borderWidth: 3,
+    //borderColor: 'black',
+    borderRadius: 7,
+    width: '84%',
+    height: '75%',
+    marginTop: '1%',
     marginLeft: 'auto',
     marginRight: 'auto',
     marginBottom: '5%',
@@ -491,7 +593,8 @@ const styles = StyleSheet.create({
 
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 16
   },
 
   modalView: {
@@ -519,7 +622,7 @@ const styles = StyleSheet.create({
     margin: '3%',
     
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor: '#402688',
   },
 
   listFooter:{
@@ -527,15 +630,25 @@ const styles = StyleSheet.create({
     paddingLeft: '2%',
     paddingTop: '5%',
   },
+
+  editFooter:{
+    borderTopColor: '#FFFFFF',
+    paddingLeft: '2%',
+    paddingTop: '5%',
+    marginLeft: 'auto'
+  },
 	text: {
 		color: 'white'
 
 	},
 
   testButton: {
-    borderRadius: 20,
+
+    backgroundColor: 'gray',
     padding: 10,
-    elevation: 2
+    elevation: 2,
+    marginTop: '10%',
+    marginBottom: '10%'
   },
 
   testButtonText: {
@@ -546,6 +659,11 @@ const styles = StyleSheet.create({
 
   buttonClose: {
     backgroundColor: "#2196F3",
+  },
+
+  textStyle: {
+    color: 'white',
+    textAlign: 'center'
   },
 
 	weather: {
