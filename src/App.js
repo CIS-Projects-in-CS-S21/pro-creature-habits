@@ -1,15 +1,15 @@
 import React from 'react';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Image, Text, View, TouchableOpacity} from "react-native";
+import {Image, Text, View} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
+import petInventoryReducer from "./redux/petInventory";
 import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
 import { Provider } from 'react-redux'
 import { combineReducers } from "redux";
-import { MaterialIcons } from "@expo/vector-icons";
 
 
 import HomeTabs from "./components/HomeTabs";
@@ -23,6 +23,22 @@ import {API_WEATHER_KEY} from "./components/Keys";
 import modalVisibleReducer from "./redux/modalVisible";
 import selectedMarketItemReducer from "./redux/selectedMarketItem";
 import FlashMessage from "react-native-flash-message";
+import statsVisibleReducer from "./redux/statsVisible";
+import achievementsVisibleReducer from "./redux/achievementsVisible";
+import difficultyReducer from "./redux/difficulty";
+import achievementsCompleteReducer from "./redux/achievementsComplete";
+import achievementFilterReducer from "./redux/achievementFilter";
+import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
+import statTrackerReducer from "./redux/statTracker";
+import petMVR from "./redux/petModalVisible";
+import selectedPetItemReducer from "./redux/selectedPetItem";
+import { persistStore, persistReducer } from 'redux-persist';
+//import storage from 'redux-persist/lib/storage';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { AsyncStorage } from 'react-native'
+export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
+
 
 const Stack = createStackNavigator();
 
@@ -30,11 +46,37 @@ const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
 	petDetails: petInfoReducer,
+	petInv: petInventoryReducer,
 	modalVisible: modalVisibleReducer,
-	selectedMarketItem: selectedMarketItemReducer
+	selectedMarketItem: selectedMarketItemReducer,
+	statsVisible: statsVisibleReducer,
+	achievementsVisible: achievementsVisibleReducer,
+	difficulty: difficultyReducer,
+	achievements: achievementsCompleteReducer,
+	achievementsFilter: achievementFilterReducer,
+	itemsBought: marketplaceItemsBoughtReducer,
+	userStats: statTrackerReducer,
+	petMV: petMVR,
+	selectedPetItem: selectedPetItemReducer
 });
 
-const store = createStore(reducer);
+const rootReducer = (state, action) => {
+	if (action.type === RESET_BUTTON_PRESSED) {
+		persistConfig.storage.removeItem('persist:root')
+		state = undefined;
+	}
+	return reducer(state, action);
+};
+
+const persistConfig = {
+	key: 'root',
+	storage: AsyncStorage,
+	stateReconciler: autoMergeLevel2 // see "Merge Process" section for details.
+};
+
+const pReducer = persistReducer(persistConfig, rootReducer);
+const store = createStore(pReducer);
+const persistor = persistStore(store);
 
 const App = () => {
 	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
@@ -97,6 +139,7 @@ const App = () => {
 
 	return (
 		<Provider store={store}>
+  <PersistGate persistor={persistor}>
 			<NavigationContainer>
 				<Stack.Navigator>
 					{isAuthenticated ? (
@@ -108,14 +151,6 @@ const App = () => {
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
 										{getHeaderTitle(route)}
 									</Text>
-								),
-								headerRight: () => (
-									<TouchableOpacity style={{marginRight: 10}} onPress={() => {
-										handleSignOut();
-									}}
-									>
-										<MaterialIcons name='logout' size={36} color='white'/>
-									</TouchableOpacity>
 								),
 								headerLeft: () => (
 									<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
@@ -156,7 +191,20 @@ const App = () => {
 								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
-						<Stack.Screen name="Sign Up">
+						<Stack.Screen name="Sign Up"
+						options={{
+								animationTypeForReplace: 'pop',
+								headerTitle: () => (
+									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
+										Sign Up
+									</Text>
+								),
+								headerStyle : {
+									backgroundColor: '#402688',
+									shadowOpacity: 0,
+									height: 100
+								},
+							}} >
 							{(props) => (
 								<SignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
@@ -193,6 +241,7 @@ const App = () => {
 				</Stack.Navigator>
 				<FlashMessage position="top"/>
 			</NavigationContainer>
+</PersistGate>
 		</Provider>
 	);
 };

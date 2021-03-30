@@ -7,6 +7,17 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
+		backgroundColor: '#406BE9',
+	},
+	
+	text: {
+		color: 'white'
+	},
+	input:{
+		width:"85%",
+		backgroundColor: "white",
+		marginBottom: 10,
+		padding: 15,
 	},
 });
 
@@ -54,16 +65,15 @@ const SignUpScreen = ({ onSignUp, navigation }) => {
 				value={newEmail}
 				onChangeText={newEmail => setNewEmail(newEmail)}
 				placeholder={'Email'}
-				secureTextEntry={true}
+				//secureTextEntry={true}
 				style={styles.input}
 			/>
 
 			<Button
-				title={'SignUp'}
+				title="Click to Create First Pet"
 				style={styles.button}
-				onPress={onCreateUser}
+				onPress={() => navigation.navigate('Choose Pet')}
 			/>
-
 		</View>
 	);
 };

@@ -1,13 +1,19 @@
 import React from 'react';
 import {Text, View, ScrollView, StyleSheet, Image, Modal, Pressable} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import {FILTER, FILTER_ALL, PURCHASE} from "../redux/marketplaceInventory";
+import {FILTER, FILTER_ALL} from "../redux/marketplaceInventory";
 import DropDownPicker from "react-native-dropdown-picker";
 import Cards from "../components/marketplaceComponents/Cards";
 import {OFF} from "../redux/modalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import {BUY} from "../redux/coinBalance";
+import {ADD} from "../redux/petInventory";
+
 import { showMessage } from "react-native-flash-message";
+import {ACH_PROGRESS} from "../redux/achievementsComplete";
+import {PURCHASE_GRAY} from "../redux/marketplaceItemsBought";
+import AnimatedNumbers from "react-native-animated-numbers";
+import {ADD_TO_STAT, INCREMENT_STAT, SET_STAT} from "../redux/statTracker";
 
 
 const styles = StyleSheet.create({
@@ -40,8 +46,6 @@ const styles = StyleSheet.create({
 		elevation: 11
 	},
 	balanceText: {
-		color: 'white',
-		fontSize: 25,
 		marginTop: 5,
 		marginLeft: 5,
 		marginBottom: 5
@@ -113,6 +117,7 @@ const styles = StyleSheet.create({
 const MarketplaceScreen = () => {
 	const dispatch = useDispatch();
 	const selectedItem = useSelector(state=>state.selectedMarketItem);
+	const achievements = useSelector(state=>state.achievements);
 
 	const changeFilter = (category) => {
 		if(category === 'all') {
@@ -127,9 +132,24 @@ const MarketplaceScreen = () => {
 	}
 
 	const handlePurchase = (item) => {
-		dispatch({type: PURCHASE, data: item});
+		dispatch({type: PURCHASE_GRAY, data: item});
 		dispatch({type: BUY, data: ItemInventory[item].cost});
+		dispatch({type: ADD_TO_STAT, data: ['total_coins_spent', ItemInventory[item].cost]})
 		dispatch({type: OFF});
+		dispatch({type: ADD, data: item});
+		dispatch({type: ACH_PROGRESS, data: 'buy_item'});
+		dispatch({type: INCREMENT_STAT, data: 'items_bought'})
+		if(ItemInventory[item].category === 'food') {
+			dispatch({type: ACH_PROGRESS, data: 'buy_food'});
+			dispatch({type: SET_STAT, data: ['food_bought', achievements['buy_food'].completed]})
+		} else if (ItemInventory[item].category === 'toys') {
+			dispatch({type: ACH_PROGRESS, data: 'buy_toy'});
+			dispatch({type: SET_STAT, data: ['clothes_bought', achievements['buy_toy'].completed]})
+		} else {
+			dispatch({type: ACH_PROGRESS, data: 'buy_clothes'})
+			dispatch({type: SET_STAT, data: ['toys_bought', achievements['buy_clothes'].completed]})
+		}
+
 		showMessage({
 			message: `${upperCase(ItemInventory[item].name)} has been added to your inventory`,
 			type: "success",
@@ -142,9 +162,13 @@ const MarketplaceScreen = () => {
 			<View style={styles.header}>
 				<Image style={styles.shopImage} source={require('../test_images/shop.png')}/>
 				<View style={styles.balanceContainer}>
-					<Text style={styles.balanceText}>
-						{useSelector(state => state.coins)}
-					</Text>
+					<View style={styles.balanceText}>
+						<AnimatedNumbers
+							includeComma
+							animateToNumber={useSelector(state=>state.coins)}
+							fontStyle={{fontSize: 25, color: 'white'}}
+						/>
+					</View>
 					<Image
 						style={styles.coinImage}
 						source={require('../test_images/coin.png')}
