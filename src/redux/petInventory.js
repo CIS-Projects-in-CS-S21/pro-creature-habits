@@ -13,11 +13,10 @@ for (const [key, value] of Object.entries(boughtItems)) {
     boughtItems[key].show = false;
     boughtItems[key].wear = false;
 }
+
+let currentFilter = "all";
+
 const petInventoryReducer = (state=boughtItems, action) => {
-    console.log("in reducer "+action.data)
-    for (const [key, value] of Object.entries(state)) {
-            console.log(key+" :? "+value.bought)
-        }
 
 let copy = JSON.parse(JSON.stringify(state));
 
@@ -25,18 +24,23 @@ let copy = JSON.parse(JSON.stringify(state));
 		case ADD:
 		    console.log(action.data);
 		    copy[action.data].bought = copy[action.data].bought + 1;
-		    copy[action.data].show = true;
+		    if (copy[action.data].category == currentFilter || currentFilter == "all") {
+		        copy[action.data].show = true;
+		    } else {
+		        copy[action.data].show = false;
+		    }
 		    return copy;
 		case FILTER_ALL_PET:
+		    currentFilter = "all";
 		    for (const [key, value] of Object.entries(copy)) {
 		        if (copy[key].bought != 0) {
 		            copy[key].show = true;
 		        }
-
 		    }
 		    console.log("trying to filter pet for all")
 			return copy;
 		case FILTER_PET:
+		    currentFilter = action.data;
 		    console.log("trying to filter pet for: "+action.data)
             for (const [key, value] of Object.entries(copy)) {
                 if (copy[key].category != action.data) {
@@ -50,10 +54,14 @@ let copy = JSON.parse(JSON.stringify(state));
 			return copy;
 	    case SELECTED:
 	        if (action.data == "select_food") {
-                		    copy[action.thing].bought = copy[action.thing].bought - 1;
-                		    copy[action.thing].wear = true;
-                		    if (copy[action.thing].bought != 0) {copy[action.thing].show = true;}
-                		    else {copy[action.thing].show = false;}
+                copy[action.thing].bought = copy[action.thing].bought - 1;
+                copy[action.thing].wear = true;
+                if (copy[action.thing].bought != 0) {
+                    copy[action.thing].show = true;
+                }
+                else {
+                    copy[action.thing].show = false;
+                }
 	        } else if (action.data == "select_toys") {
                 copy[action.thing].wear = true;
 	        } else {
