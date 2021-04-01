@@ -1,0 +1,49 @@
+{
+  "name": "react-native-track-player",
+  "version": "1.2.7",
+  "description": "A fully fledged audio module created for music apps",
+  "contributors": [
+    {
+      "name": "David Chavez",
+      "email": "david@dcvz.io",
+      "url": "http://dcvz.io"
+    },
+    {
+      "name": "Guilherme Chaguri",
+      "email": "guichaguri@gmail.com",
+      "url": "http://guichaguri.com"
+    },
+    {
+      "name": "Dustin Bahr",
+      "email": "dustin@curiousmedia.com"
+    }
+  ],
+  "keywords": [
+    "react",
+    "react-native",
+    "track-player",
+    "audio-player",
+    "audio",
+    "player",
+    "music",
+    "controls",
+    "chromecast",
+    "android",
+    "ios",
+    "windows",
+    "hooks"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/react-native-kit/react-native-track-player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/react-native-kit/react-native-track-player/issues"
+  },
+  "scripts": {},
+  "peerDependencies": {
+    "react": ">=16.8.6",
+    "react-native": ">=0.60.0-rc.2"
+  }
+}
