@@ -41,6 +41,7 @@ import pinReducer from "./redux/createPIN";
 import IntroScreen from "./screens/Intro";
 import CreatePINScreen from "./screens/CreatePIN";
 import InputPINScreen from "./screens/InputPIN";
+import hintReducer from "./redux/hint";
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -63,7 +64,8 @@ const reducer = combineReducers({
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
 	firstLogin: loginReducer,
-	pin: pinReducer
+	pin: pinReducer,
+	pintHint: hintReducer
 });
 
 const rootReducer = (state, action) => {

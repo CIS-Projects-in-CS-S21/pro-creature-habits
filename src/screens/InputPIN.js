@@ -2,6 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
 import UserInfo from "../databases/UserInfo";
 import {useSelector} from "react-redux";
+import {showMessage} from "react-native-flash-message";
+import {ItemInventory} from "../components/ItemInventory";
 
 const styles = StyleSheet.create({
 	container: {
@@ -25,16 +27,27 @@ const styles = StyleSheet.create({
 const InputPINScreen = ({ onSignUp, navigation }) => {
 	const [pinInput, setPinInput] = React.useState('');
 	const realPIN = useSelector(state => state.pin);
+	const hint = useSelector(state => state.pintHint);
 	console.log(realPIN);
 	const onSubmit= () => {
 		if(pinInput == realPIN) {
 			onSignUp()
 		}
 		else{
-			console.log(pinInput);
-			console.log(realPIN);
-			console.log("failed pin");
+			showMessage({
+				message: "Incorrect PIN",
+				type: "success",
+				statusBarHeight: 52,
+			})
 		}
+	}
+
+	const onForgot= () =>{
+		showMessage({
+			message: hint,
+			type: "success",
+			statusBarHeight: 52,
+		})
 	}
 
 	return (
@@ -51,6 +64,11 @@ const InputPINScreen = ({ onSignUp, navigation }) => {
 				title="Submit"
 				style={styles.button}
 				onPress={() => onSubmit()}
+			/>
+			<Button
+				title="Forgot PIN"
+				style={styles.button}
+				onPress={() => onForgot()}
 			/>
 		</View>
 	);

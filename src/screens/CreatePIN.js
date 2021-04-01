@@ -5,6 +5,7 @@ import {OFF} from "../redux/modalVisible";
 import {RESET_BUTTON_PRESSED} from "../App";
 import {FIRST} from "../redux/firstLogin";
 import {CREATE_PIN} from "../redux/createPIN";
+import {CREATE_HINT} from "../redux/hint";
 import {useDispatch} from "react-redux";
 const styles = StyleSheet.create({
 	container: {
@@ -48,11 +49,13 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 		console.log(newPIN);
 		dispatch({type: FIRST});
 		dispatch({type: CREATE_PIN, data: newPIN})
+		dispatch({type: CREATE_HINT, data: newHint})
 		navigation.navigate('Choose Pet')
 	}
 
 
 	const [newPIN, setNewPIN] = React.useState('');
+	const [newHint, setNewHint] = React.useState('');
 		return (
 		  	<View style={styles.container}>
 				<Text style={{color: 'white', fontSize: 40, marginTop: '-20%', marginBottom: '20%'}}>
@@ -61,6 +64,12 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 				<TextInput
 					value={newPIN}
 					onChangeText={newPIN => setNewPIN(newPIN)}
+					placeholder={'Create PIN'}
+					style={styles.input}
+				/>
+				<TextInput
+					value={newHint}
+					onChangeText={newHint => setNewHint(newHint)}
 					placeholder={'Create PIN'}
 					style={styles.input}
 				/>
