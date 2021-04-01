@@ -57,6 +57,7 @@ const InputPINScreen = ({ onSignUp, navigation }) => {
 				onChangeText={pinInput => setPinInput(pinInput)}
 				placeholder={'Type Your PIN Here'}
 				style={styles.input}
+				keyboardType="numeric"
 			/>
 
 

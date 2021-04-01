@@ -66,6 +66,7 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 					onChangeText={newPIN => setNewPIN(newPIN)}
 					placeholder={'Create PIN'}
 					style={styles.input}
+					keyboardType="numeric"
 				/>
 				<TextInput
 					value={newHint}
