@@ -241,7 +241,6 @@ const checkDeadline = useCallback(async(taskName2) => {
     //alert('curr month '+getMonthNum(x.month)+" and the deadline month is "+getMonthNum(y.month));
     if(x.year<y.year){
         status= task.name+" was completed before the due date!";
-
     }
     else if(x.year==y.year){
         if(getMonthNum(x.month)<getMonthNum(y.month)){

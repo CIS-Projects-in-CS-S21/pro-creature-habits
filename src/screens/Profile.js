@@ -17,6 +17,7 @@ import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
+import {INCREASE,DECREASE} from "../redux/hungerBar";
 
 
 
@@ -155,6 +156,10 @@ const PetProfile = ({choices, navigation}) => {
     const selectedItem = useSelector(state=>state.selectedPetItem);
     const [textName, onChangeText] = React.useState('');
 
+
+    const time = useSelector(state=>state.lastFedTime);
+
+
     const findImage = () => {
         console.log(petImgChoice);
     	if (petImgChoice == "cat") {
@@ -179,13 +184,16 @@ const PetProfile = ({choices, navigation}) => {
         		return string[0].toUpperCase() + string.slice(1);
         	}
 
-    	const handlePurchase = (item) => {
+    	const handleSelection = (item) => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
                     dispatch({type: SELECTED, data: 'select_food',thing: item});
+                    dispatch({type:INCREASE,data:2});
                     playSound();
+                    dispatch({type:CHANGE,data:currentTime})
         		} else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
+        			dispatch({type:DECREASE,data:3});
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
         		}
@@ -278,7 +286,7 @@ const PetProfile = ({choices, navigation}) => {
             					</Pressable>
             					    <Pressable
             							style={[styles.button, styles.buttonClose, {right: -30}]}
-            							onPress={() => handlePurchase(selectedItem)}
+            							onPress={() => handleSelection(selectedItem)}
             							>
             							<Text style={styles.textStyle}>Yes </Text>
             						</Pressable>

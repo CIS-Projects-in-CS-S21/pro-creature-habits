@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
 	},
 });
 
+
+
 const SignUpScreen = ({ onSignUp, navigation }) => {
 	const [newUsername, setNewUsername] = React.useState('');
 	const [newPassword, setNewPassword] = React.useState('');

@@ -37,7 +37,8 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { AsyncStorage } from 'react-native'
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
-
+import hungerBarReducer from './redux/hungerBar';
+import timeReducer from './redux/time';
 
 const Stack = createStackNavigator();
 
@@ -55,7 +56,9 @@ const reducer = combineReducers({
 	achievementsFilter: achievementFilterReducer,
 	itemsBought: marketplaceItemsBoughtReducer,
 	petMV: petMVR,
-	selectedPetItem: selectedPetItemReducer
+	selectedPetItem: selectedPetItemReducer,
+	hunger: hungerBarReducer,
+	lastFedTime: timeReducer
 });
 
 const rootReducer = (state, action) => {
