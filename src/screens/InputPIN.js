@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
 
 const InputPINScreen = ({ onSignUp, navigation }) => {
 	const [pinInput, setPinInput] = React.useState('');
-	const realPIN = useSelector(state => state.itemsBought);
+	const realPIN = useSelector(state => state.pin);
 	console.log(realPIN);
 	const onSubmit= () => {
 		if(pinInput == realPIN) {
-			navigation.navigate('Home')
+			onSignUp()
 		}
 		else{
 			console.log(pinInput);

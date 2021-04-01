@@ -1,7 +1,7 @@
 export const CREATE_PIN = 'CREATE_PIN';
 
 
-const pinReducer = (state = 0 , action) => {
+const pinReducer = (state = '' , action) => {
     switch (action.type) {
         case CREATE_PIN:
             return action.data;

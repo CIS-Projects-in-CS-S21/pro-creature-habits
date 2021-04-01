@@ -50,8 +50,7 @@ export default function IntroScreen({ onSignIn, navigation }){
         }
     }
 
-
-    const [newPIN, setNewPIN] = React.useState('');
+    
     return (
         <View style={styles.container}>
             <Text style={{color: 'white', fontSize: 40, marginTop: '-20%', marginBottom: '20%'}}>

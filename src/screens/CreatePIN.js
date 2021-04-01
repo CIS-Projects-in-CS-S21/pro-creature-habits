@@ -45,6 +45,7 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 
 
 	const onCreatePIN = () => {
+		console.log(newPIN);
 		dispatch({type: FIRST});
 		dispatch({type: CREATE_PIN, data: newPIN})
 		navigation.navigate('Choose Pet')
