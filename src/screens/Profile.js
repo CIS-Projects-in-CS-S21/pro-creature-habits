@@ -11,7 +11,9 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
-import { SoundPlayer } from "../components/audio.js";
+import { playSound } from "../components/audio.js";
+import {SOUND_LOCATION} from "../redus/soundPlayerSwitcher";
+
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 
@@ -180,7 +182,12 @@ const PetProfile = () => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
                     dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    playSound();
+                    
+					dispatch({type: SOUND_LOCATION, location: '../components/ra.wav'});
+					const soundToPlay = useSelector(state=>state.currentSound);
+					playSound(soundToPlay);
+					
+					//playSound();
         		} else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
         		} else {
@@ -226,6 +233,8 @@ const PetProfile = () => {
                } */
 
 	return (
+
+
 <ScrollView style={styles.container}>
             <View style = {styles.centeredView2}>
 			<Text style={styles.text}>
@@ -318,7 +327,8 @@ const PetProfile = () => {
             						}
             				</Modal>
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
-        </ScrollView>
+			<SoundPlayer />
+		</ScrollView>
 
 
 	);

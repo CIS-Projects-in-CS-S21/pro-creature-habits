@@ -25,12 +25,12 @@ export {PlayerObj}
 /*export function PlayingSound() {
   const [sound, setSound] = React.useState();*/
 
-  export async function playSound() {
+  export async function playSound(url) {
     console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(
-       require('../components/ra.wav')
+       require(url)
     );
-    setSound(sound);
+    
 
     console.log('Playing Sound');
     await sound.playAsync(); }

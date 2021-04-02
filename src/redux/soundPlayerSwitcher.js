@@ -9,9 +9,11 @@ const soundSwitcherReducer = (state = PlayerObj, action) => {
             state.location = action.location;
             return state.location;
 
-        case PLAY:
+        /*case PLAY:
             playSound(state.location);
             state.playing = true;
-            return state.playing;
+            return state.playing;*/
     }
 }
+
+export default soundSwitcherReducer;

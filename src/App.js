@@ -32,6 +32,8 @@ import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
+import soundSwitcherReducer from "./redux/soundPlayerSwitcher";
+
 import { persistStore, persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -57,7 +59,9 @@ const reducer = combineReducers({
 	itemsBought: marketplaceItemsBoughtReducer,
 	userStats: statTrackerReducer,
 	petMV: petMVR,
-	selectedPetItem: selectedPetItemReducer
+	selectedPetItem: selectedPetItemReducer,
+	currentSound: soundSwitcherReducer
+	
 });
 
 const rootReducer = (state, action) => {
