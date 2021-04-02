@@ -22,6 +22,7 @@ import {SET_DATE} from "../redux/selectedDate";
 import {SET_INDEX} from "../redux/taskEditIndex";
 import {SET_TASK_TEXT} from "../redux/taskInput";
 import {DAILY_TASK_OFF, DAILY_TASK_ON} from "../redux/dailyTaskModal";
+import CheckboxGroup from "../components/taskComponents/CheckboxGroup";
 
 
 //test
@@ -117,6 +118,7 @@ const Home = () => {
 
 	const [selectedButton, setSelectedButton] = React.useState(0);
 
+
 	const actions = [
 		{
 			text: 'Daily Task',
@@ -131,6 +133,8 @@ const Home = () => {
 			position: 2
 		}
 	]
+
+
 
 	const onDateChange = (date) => {
 		dispatch({type: SET_DATE, data: date});
@@ -211,6 +215,8 @@ const Home = () => {
 							onChangeText={text => dispatch({type: SET_TASK_TEXT, data: text})}
 							placeholder='Type a new task'
 						/>
+						<Text style={styles.textStyle}>Days:</Text>
+						<CheckboxGroup/>
 						<Button title='submit'  color="#637ed0" onPress={() => onSubmit(taskText)} />
 						<View style={styles.modalFooter}>
 							<Pressable
