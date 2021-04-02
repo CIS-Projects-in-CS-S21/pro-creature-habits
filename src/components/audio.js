@@ -15,13 +15,17 @@ button: {
         	},
         	})
 
+const PlayerObj = {
+  playing = false,
+  location = null
+}
 
+export {PlayerObj}
 
+/*export function PlayingSound() {
+  const [sound, setSound] = React.useState();*/
 
-export function PlayingSound() {
-  const [sound, setSound] = React.useState();
-
-  async function playSound() {
+  export async function playSound() {
     console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(
        require('../components/ra.wav')

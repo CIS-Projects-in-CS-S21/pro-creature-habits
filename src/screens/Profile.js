@@ -11,6 +11,7 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
+import { SoundPlayer } from "../components/audio.js";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 
@@ -200,7 +201,7 @@ const PetProfile = () => {
         	}
 
 
-        	const [sound, setSound] = React.useState();
+        	/*const [sound, setSound] = React.useState();
 
               async function playSound() {
                 console.log('Loading Sound');
@@ -222,7 +223,7 @@ const PetProfile = () => {
 
               const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});
-               }
+               } */
 
 	return (
 <ScrollView style={styles.container}>
