@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	ScrollView,
 	StyleSheet,
 	Text,
-	TouchableOpacity,
 	View,
 	TextInput,
 	Button,
 	Modal,
-	Pressable
+	Pressable,
+	TouchableHighlight
 } from 'react-native'
-import {MaterialCommunityIcons, Ionicons} from "@expo/vector-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {REWARD} from "../redux/coinBalance";
+
 import { FloatingAction } from "react-native-floating-action";
 import {TASK_OFF, TASK_ON} from "../redux/createTaskModal";
 import CalendarPicker from "react-native-calendar-picker";
-import { showMessage } from "react-native-flash-message";
-import {EDIT_OFF, EDIT_ON} from "../redux/editTaskModal";
+import {EDIT_OFF} from "../redux/editTaskModal";
+import {ADD_TASK_ONE, EDIT_TASK_ONE} from "../redux/oneTimeTasks";
+import ListTasks from "../components/taskComponents/ListTasks";
+import {SET_DATE} from "../redux/selectedDate";
+import {SET_INDEX} from "../redux/taskEditIndex";
+import {SET_TASK_TEXT} from "../redux/taskInput";
+import {DAILY_TASK_OFF, DAILY_TASK_ON} from "../redux/dailyTaskModal";
+
 
 //test
 const styles = StyleSheet.create({
@@ -34,16 +39,6 @@ const styles = StyleSheet.create({
 	listContainer:{
 		alignItems: 'stretch'
 
-	},
-	listItem:{
-		paddingTop: '5%',
-		paddingBottom: '5%',
-		paddingLeft: '5%',
-		margin: '3%',
-		borderRadius: 10,
-		backgroundColor: '#402688',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
 	},
 	listFooter:{
 		borderTopColor: '#FFFFFF',
@@ -93,16 +88,34 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		paddingTop: 15
 	},
+	filterButtonsContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'stretch',
+		backgroundColor: '#305ccd',
+		height: '7%',
+
+	},
+	filterButton: {
+		paddingTop: "3%",
+		flex: 1,
+		alignItems: 'center',
+		borderRadius: 10
+	},
+	filterButtonText: {
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500'
+	},
 });
 
 const Home = () => {
 	const dispatch = useDispatch();
+	const date = useSelector(state => state.selectedDate);
+	const taskEditIndex = useSelector(state => state.taskEditIndex);
+	const taskText = useSelector(state => state.taskInput);
 
-	const [tasks, setTasks] = useState([]);
-	const [date, setDate] = useState(new Date());
-	const [editIndex, setEditIndex] = useState(-1);
-	const [text, setText] = React.useState('');
-
+	const [selectedButton, setSelectedButton] = React.useState(0);
 
 	const actions = [
 		{
@@ -120,133 +133,96 @@ const Home = () => {
 	]
 
 	const onDateChange = (date) => {
-		setDate(date);
+		dispatch({type: SET_DATE, data: date});
 	}
 
 	const onSubmit = (task) => {
-		setTasks([...tasks, {task_name: task, date: date}]);
-		setText('');
-		setDate(new Date());
+		dispatch({type: ADD_TASK_ONE, data: [task, date]});
+		dispatch({type: SET_TASK_TEXT, data: ''});
+		dispatch({type: SET_DATE, data: new Date()});
 		dispatch({type: TASK_OFF});
-	}
-
-	const onDelete = (index) => {
-		setTasks([...tasks].filter((item, num) => num !== index));
-		showMessage({
-			message: 'task deleted',
-			type: "danger",
-			statusBarHeight: 52,
-		});
-	}
-
-	const onComplete = (index) => {
-		setTasks([...tasks].filter((item, num) => num !== index));
-		dispatch({type: REWARD, data: 5});
-		showMessage({
-			message: '5 coins have been added to your coin balance',
-			type: "success",
-			statusBarHeight: 52,
-		});
-
-	}
-
-	const onPressEdit = (index) => {
-		dispatch({type: EDIT_ON});
-		setText(tasks[index].task_name);
-		setDate(tasks[index].date);
-		setEditIndex(index);
+		dispatch({type: DAILY_TASK_OFF});
 	}
 
 	const onCancelEdit = () => {
 		dispatch({type: EDIT_OFF});
-		setText('');
-		setDate(new Date());
-		setEditIndex(-1);
+		dispatch({type: SET_TASK_TEXT, data: ''});
+		dispatch({type: SET_DATE, data: date});
+		dispatch({type: SET_INDEX, data: -1});
 	}
 
 	const onSubmitEdit = () => {
-		let editTasks = [...tasks];
-		editTasks[editIndex].task_name = text;
-		editTasks[editIndex].date = date;
+		dispatch({type: EDIT_TASK_ONE, data: [taskEditIndex, taskText, date]});
 
-		setText('');
-		setDate(new Date());
-		setEditIndex(-1);
+		dispatch({type: SET_TASK_TEXT, data: ''});
+		dispatch({type: SET_DATE, data: date});
+		dispatch({type: SET_INDEX, data: -1});
 
 		dispatch({type: EDIT_OFF});
 	}
 
-	const iconSize = 40;
- 	const ListItem = ({taskName, index}) => {
- 		const taskDate = new Date(tasks[index].date).toString().split(" ").slice(0,4).join(" ");
-	  	return(
-			<View style={styles.listItem}>
-				<View style={{flexDirection: 'column', flexWrap: 'wrap'}}>
-					<Text style={{color: 'white', fontSize: 20, alignItems: 'center', width: 180}} color='white'>{taskName}</Text>
-					<Text style={{color: 'white', fontSize: 12, alignItems: 'center', paddingTop: 5}} color='white'>
-						{'Due: ' + taskDate}
-					</Text>
-				</View>
-		  		<View style = {{flexDirection:'row', marginRight: '5%', alignItems: 'center'}}>
-					<TouchableOpacity
-						onPress={() => onComplete(index)}
-					>
-						<Ionicons
-							name="checkmark"
-							size={iconSize}
-							color='white'
-							style={{paddingRight: '2%'}}
-						/>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => onPressEdit(index)}
-					>
-						<MaterialCommunityIcons
-							name = "pencil"
-							size = {iconSize}
-							color='white'
-							style={{paddingRight: '2%'}}
-						/>
-					</TouchableOpacity>
-					<TouchableOpacity
-						onPress={() => onDelete(index)}
-					>
-						<MaterialCommunityIcons
-							name = "trash-can-outline"
-							size = {iconSize}
-							color='white'
-						/>
-					</TouchableOpacity>
-				</View>
-			</View>
-	  	);
+	const onFilterPress = (button) => {
+		setSelectedButton(button);
 	}
 
-	const ListOfTasks = () => {
-	    return tasks.map((task, index) => {
-		 	return(
-		   		<ListItem key = {index}
-		   			taskName={task.task_name}
-					index={index}
-				/>
-		   )
-	    })
-	}
 	return (
   		<View style={{flex: 1}}>
+			<View style={styles.filterButtonsContainer}>
+				<TouchableHighlight
+					style={[styles.filterButton, selectedButton === 0 ? {backgroundColor: 'white'} : {}]}
+					onPress={() => onFilterPress(0)}
+					underlayColor={'lightgrey'}
+				>
+					<Text style={[styles.filterButtonText, selectedButton === 0 ? {color: '#402688'} : {}]}>Daily Tasks</Text>
+				</TouchableHighlight>
+				<TouchableHighlight
+					style={[styles.filterButton, selectedButton === 1 ? {backgroundColor: 'white'} : {}]}
+					onPress={() => onFilterPress(1)}
+					underlayColor={'lightgrey'}
+				>
+					<Text style={[styles.filterButtonText, selectedButton === 1 ? {color: '#402688'} : {}]}>Dated Tasks</Text>
+				</TouchableHighlight>
+			</View>
 			<ScrollView style={styles.scrollContainer}>
 				<View style={styles.container}>
 					<View style={styles.listContainer}>
-						<ListOfTasks />
+						<ListTasks/>
 					</View>
 				</View>
 			</ScrollView>
 			<FloatingAction
 				actions={actions}
-				onPressItem={() => {
-					dispatch({type: TASK_ON})
+				onPressItem={name => {
+					name === 'bt_one_time' ? dispatch({type: TASK_ON}) : dispatch({type: DAILY_TASK_ON})
 				}}
 			/>
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={useSelector(state=>state.dailyTaskVisible)}
+			>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<TextInput
+							style={{backgroundColor: 'white', color: 'black', width: 200, height: 30, borderRadius: 5}}
+							label='name'
+							maxLength={35}
+							value={taskText}
+							onChangeText={text => dispatch({type: SET_TASK_TEXT, data: text})}
+							placeholder='Type a new task'
+						/>
+						<Button title='submit'  color="#637ed0" onPress={() => onSubmit(taskText)} />
+						<View style={styles.modalFooter}>
+							<Pressable
+								style={[styles.button, styles.buttonClose]}
+								onPress={() => dispatch({type: DAILY_TASK_OFF})}
+							>
+								<Text style={styles.textStyle}>Cancel</Text>
+							</Pressable>
+						</View>
+					</View>
+				</View>
+			</Modal>
 			<Modal
 				animationType="slide"
 				transparent={true}
@@ -258,8 +234,8 @@ const Home = () => {
 							style={{backgroundColor: 'white', color: 'black', width: 200, height: 30, borderRadius: 5}}
 							label='name'
 							maxLength={35}
-							value={text}
-							onChangeText={text => setText(text)}
+							value={taskText}
+							onChangeText={text => dispatch({type: SET_TASK_TEXT, data: text})}
 							placeholder='Type a new task'
 						/>
 						<Text style={{color: 'white', fontSize: 20, marginTop: 15}}>Select a due date:</Text>
@@ -271,7 +247,7 @@ const Home = () => {
 								textStyle={{color: 'white'}}
 							/>
 						</View>
-						<Button title='submit'  color="#637ed0" onPress={() => onSubmit(text)} />
+						<Button title='submit'  color="#637ed0" onPress={() => onSubmit(taskText)} />
 						<View style={styles.modalFooter}>
 							<Pressable
 								style={[styles.button, styles.buttonClose]}
@@ -295,8 +271,8 @@ const Home = () => {
 							style={{backgroundColor: 'white', color: 'black', width: 200, height: 30, borderRadius: 5}}
 							label='name'
 							maxLength={35}
-							value={text}
-							onChangeText={text => setText(text)}
+							value={taskText}
+							onChangeText={text => dispatch({type: SET_TASK_TEXT, data: text})}
 						/>
 						<Text style={{color: 'white', fontSize: 20, marginTop: 15}}>Select a due date:</Text>
 						<View style={{marginTop: 20, backgroundColor: '#406be9', padding: 5, borderRadius: 5}}>

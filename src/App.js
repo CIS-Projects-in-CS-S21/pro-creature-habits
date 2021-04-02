@@ -35,6 +35,11 @@ import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
 import modalTaskReducer from "./redux/createTaskModal";
 import editTaskReducer from "./redux/editTaskModal";
+import oneTimeTasksReducer from "./redux/oneTimeTasks";
+import selectedDateReducer from "./redux/selectedDate";
+import taskEditIndexReducer from "./redux/taskEditIndex";
+import taskInputReducer from "./redux/taskInput";
+import dailyTaskModalReducer from "./redux/dailyTaskModal";
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -61,7 +66,12 @@ const reducer = combineReducers({
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
 	taskCreateVisible: modalTaskReducer,
-	editTaskVisible: editTaskReducer
+	editTaskVisible: editTaskReducer,
+	oneTimeTasks: oneTimeTasksReducer,
+	selectedDate: selectedDateReducer,
+	taskEditIndex: taskEditIndexReducer,
+	taskInput: taskInputReducer,
+	dailyTaskVisible: dailyTaskModalReducer
 });
 
 const rootReducer = (state, action) => {
