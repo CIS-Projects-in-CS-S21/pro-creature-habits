@@ -1,17 +1,30 @@
 import React from "react";
-import ListItem from "./ListItem";
+import ListDatedItem from "./ListDatedItem";
 import {useSelector} from "react-redux";
 
 const ListTasks = () => {
-	const tasks = useSelector(state => state.oneTimeTasks);
-	return tasks.map((task, index) => {
-		return(
-			<ListItem key = {index}
-					  task={task}
-					  index={index}
-			/>
-		)
-	})
+	const datedTasks = useSelector(state => state.oneTimeTasks);
+	const dailyTasks = useSelector(state => state.dailyTasks);
+
+	if(useSelector(state=>state.taskFilter) === 'daily') {
+		return dailyTasks.map((task, index) => {
+			return(
+				<ListDatedItem key = {index}
+							   task={task}
+							   index={index}
+				/>
+			)
+		})
+	} else {
+		return datedTasks.map((task, index) => {
+			return(
+				<ListDatedItem key = {index}
+							   task={task}
+							   index={index}
+				/>
+			)
+		})
+	}
 }
 
 export default ListTasks;

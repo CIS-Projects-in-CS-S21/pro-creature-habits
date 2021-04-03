@@ -1,35 +1,31 @@
 import React from "react";
-import {View} from "react-native";
-import CheckBox from "@react-native-community/checkbox";
+import {View, Text, TouchableOpacity} from "react-native";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {useDispatch, useSelector} from "react-redux";
+import {TOGGLE_DAY} from "../../redux/daysChecked";
 
 
 const CheckboxGroup = () => {
-	const [days, setDays] =  React.useState({
-		Sunday: {on: true},
-		Monday: {on: true},
-		Tuesday: {on: true},
-		Wednesday: {on: true},
-		Thursday: {on: true},
-		Friday: {on: true},
-		Saturday: {on: true},
-	})
+	const days = useSelector(state => state.daysChecked);
+	const dispatch = useDispatch();
 
 	const setToggleCheckBox = (key) => {
-		let newDays = {...days};
-		newDays[key].on = !newDays[key].on;
-		setDays(newDays);
+		dispatch({type: TOGGLE_DAY, data: key});
 	}
 
 	return (
-		<View>
+		<View style={{flexDirection: 'column', padding: 10}}>
 			{Object.keys(days).map((key,index) => {
 				return(
-					<CheckBox
-						disabled={false}
-						value={days[key].on}
-						onValueChange={() => setToggleCheckBox(key)}
-						key={index}
-					/>
+					<View style={{flexDirection: 'row', padding: 5}} key={index}>
+						<TouchableOpacity
+							onPress={() => setToggleCheckBox(key)}
+							style={{paddingRight: 10}}
+						>
+							<MaterialCommunityIcons name={days[key].on ? 'checkbox-marked-outline': 'checkbox-blank-outline'} size={24} color='white'/>
+						</TouchableOpacity>
+						<Text style={{color: 'white', fontSize: 20}}>{key}</Text>
+					</View>
 				)
 			})}
 		</View>

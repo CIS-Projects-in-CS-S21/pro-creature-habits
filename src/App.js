@@ -44,6 +44,9 @@ import dailyTaskModalReducer from "./redux/dailyTaskModal";
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { AsyncStorage } from 'react-native'
+import daysCheckedReducer from "./redux/daysChecked";
+import dailyTasksReducer from "./redux/dailyTasks";
+import taskFilterReducer from "./redux/taskFilter";
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -71,7 +74,10 @@ const reducer = combineReducers({
 	selectedDate: selectedDateReducer,
 	taskEditIndex: taskEditIndexReducer,
 	taskInput: taskInputReducer,
-	dailyTaskVisible: dailyTaskModalReducer
+	dailyTaskVisible: dailyTaskModalReducer,
+	daysChecked: daysCheckedReducer,
+	dailyTasks: dailyTasksReducer,
+	taskFilter: taskFilterReducer
 });
 
 const rootReducer = (state, action) => {

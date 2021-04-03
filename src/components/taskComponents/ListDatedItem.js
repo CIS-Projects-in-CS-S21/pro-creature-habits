@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 });
 
 
-const ListItem = ({task, index}) => {
+const ListDatedItem = ({task, index}) => {
 	const iconSize = 40;
 	const taskDate = new Date(task.date).toString().split(" ").slice(0,4).join(" ");
 	const dispatch = useDispatch()
@@ -99,4 +99,4 @@ const ListItem = ({task, index}) => {
 	);
 }
 
-export default ListItem;
+export default ListDatedItem;
