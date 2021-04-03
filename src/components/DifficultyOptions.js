@@ -45,6 +45,7 @@ const DifficultyOptions = () => {
 				<Ionicons name="checkmark" color="white" size={22}/>
 				}
 			</TouchableOpacity>
+
 			<TouchableOpacity
 				style={styles.button}
 				onPress={() => dispatch({type: MEDIUM})}
@@ -55,6 +56,7 @@ const DifficultyOptions = () => {
 				<Ionicons name="checkmark" color="white" size={22}/>
 				}
 			</TouchableOpacity>
+            
 			<TouchableOpacity
 				style={[styles.button, {borderBottomWidth: 0, borderBottomLeftRadius: 5, borderBottomRightRadius: 5}]}
 				onPress={() => dispatch({type: HARD})}

@@ -50,8 +50,10 @@
     "react-native-web": "~0.13.12",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "use-sound": "^2.0.1"
+    "use-sound": "^2.0.1",
+    "expo-notifications": "~0.8.2"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",

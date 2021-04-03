@@ -13,20 +13,15 @@ import { REWARD } from "../redux/coinBalance";
 import {showMessage} from "react-native-flash-message";
 import {ItemInventory} from "../components/ItemInventory";
 import {ADD_TO_STAT} from "../redux/statTracker";
+import {Notifications, Permissions} from 'expo';
 
 export default function Home() {
 
 //global variables for storing list object
 	const [tasks, setTasks] = useState([])
-	//const [users, setUserInfo] = useState([]) // there might be problem with not storing any users
 
-	//create these tables during the active state
-	// this doesn't seem to be a problem for some reason
-	// maybe because state is preserved
 
 	Task.createTable()
-	UserInfo.createTable()
-
 
 	const updateTask = useCallback(async (editText) => {
 
@@ -55,40 +50,14 @@ export default function Home() {
 	}, [])
 
 
-//   const taskExists = useCallback(async(text)=>{
-//     const status = 1;
-//     const task = await Task.findBy({'name_eq':text});
-//     if (task==undefined){
-//         status=0;
-//     }
-//     return status;
-// })
-
-// const userExists = useCallback(async(user)=>{
-//     const status = 1;
-//     const user = await UserInfo.findBy({'username_eq':user});
-//     if (user==undefined){
-//         status=0;
-//     }
-//     return status;
-// })
-
 //award coins to a specified user
 	const awardCoins = useCallback(async() =>{
-		// if(userExists('Pikachu')){
 		const user = await UserInfo.findBy({'username_eq':"Pikachu"})
-		//alert(user.username+" was found in userinfo.db! with coin balance: "+user.coinBalance);
 		user.coinBalance+=5
-		// const temp = {
-		//     'username':user.username,
-		//     'coinBalance':user.coinBalance,
-		// }
+
 		alert(user.username+" now has coin balance of: "+user.coinBalance);
 		await user.save()
-		// }
 
-		//return temp;
-		// setUserInfo(await UserInfo.query())
 	})
 
 
@@ -98,7 +67,6 @@ export default function Home() {
 		for(var i=0; i<=2;i++){
 			temp+=x[i];
 		}
-		//alert(temp);
 		return temp;
 	}
 	const getDay = (x) => {
@@ -106,7 +74,6 @@ export default function Home() {
 		for(var i=4; i<=5;i++){
 			temp+=x[i];
 		}
-		//alert(typeof(parseInt(temp)));
 		return parseInt(temp);
 	}
 	const getYear = (x) => {
@@ -157,18 +124,17 @@ export default function Home() {
 		return props;
 	}
 
-// const convDateToString = (x) => {
-//     //x should be of type new Date()
-//     var temp="";
-//     x = String(x);
-//     for(i=4; i<=20; i++){
-//         temp+=x[i];
-//     }
-//     x = temp.slice();
-//     temp = "";
-
-//     return x;
-//  }
+const convDateToString = (x) => {
+    //x should be of type new Date()
+    var temp="";
+    x = String(x);
+    for(i=4; i<=20; i++){
+        temp+=x[i];
+    }
+    x = temp.slice();
+    temp = "";
+    return x;
+ }
 
 	const getMonthStr = (x) => {
 		//x is a number eg. 3
@@ -243,9 +209,7 @@ export default function Home() {
 
 		const x = parseDate(new Date()); //curr
 		const y = parseDate(task.due); //deadline
-		//alert("current date: "+x.year+" "+x.month+" "+x.day+" "+x.hour+" "+x.minute);
-		//alert((new Date()).toString());
-		//alert('curr month '+getMonthNum(x.month)+" and the deadline month is "+getMonthNum(y.month));
+		
 		if(x.year<y.year){
 			status= task.name+" was completed before the due date!";
 
@@ -286,17 +250,23 @@ export default function Home() {
 	})
 
 
+    sendNotificationImmediately = async () => {
+        let notificationId = await Notifications.presentLocalNotificationAsync({
+        title: "This is crazy",
+        body: "Your mind will blow after reading this"
+        });
+        console.log(notificationId); // can be saved in AsyncStorage or send to server
+    };
+
 ////////////////////////////////////////////////////////////////////////
 
 	const onCheckDeadline = () => {
 		checkDeadline(taskName2);
 		deleteTask(taskName2);
-
 	}
 
 	const onCreateDeadline = () => {
 		createDeadline(year,month,day,hour,minute, taskName1);
-		//taskName1 = setTaskName1(taskName1).clear()
 	}
 //do some thing when create button is pressed
 //here it takes textinput variables to store user object into userinfo.db
@@ -318,19 +288,13 @@ export default function Home() {
 //does something with submit button is pressed
 	const onSubmit = async () => {
 		createTask(text);
-		setText('');
-		//awardCoins();
-
-		//const user = await UserInfo.findBy({'username_eq':"Pikachu"})
-		//alert("Task created and coins awarded!\nYour current coin balance: "+user.coinBalance);
-		//  await user.save()
-		// setUserInfo(await UserInfo.query())
 	}
 // does something when the update button is pressed
 	const onUpdate = () =>{
 		updateTask(editText);
 	}
 	const dispatch = useDispatch();
+
 //does something when delete button is pressed
 	const onComplete = (task) => {
 		deleteTask(task);
@@ -458,7 +422,13 @@ export default function Home() {
 
 				</View>
 
-
+            {/*Send notification in console.log*/}
+            <View style={styles.container}>
+                <Button
+                title="Send Notification immediately"
+                onPress={() => this.sendNotificationImmediately()}
+                />
+            </View>
 
 
 			</View>
