@@ -4,6 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {Image, Text, View} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
+import hungerbarPointReduce from "./redux/hungerbarPoint";
+import funbarPointReducer from "./redux/funbarPoint";
+import hygienebarPointReducer from "./redux/hygienebarPoint"
+import timeofFeedReducer from "./redux/timeofFeed";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
 import petInventoryReducer from "./redux/petInventory";
 import petInfoReducer from "./redux/petInfo";
@@ -57,7 +61,11 @@ const reducer = combineReducers({
 	itemsBought: marketplaceItemsBoughtReducer,
 	userStats: statTrackerReducer,
 	petMV: petMVR,
-	selectedPetItem: selectedPetItemReducer
+	selectedPetItem: selectedPetItemReducer,
+	fun:funbarPointReducer,
+	hunger: hungerbarPointReduce,
+	hygiene: hygienebarPointReducer,
+	leastFeedTime: timeofFeedReducer
 });
 
 const rootReducer = (state, action) => {

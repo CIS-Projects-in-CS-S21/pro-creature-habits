@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable, TouchableOpacity, TextInput} from 'react-native';
+import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable, TouchableOpacity, TextInput, ActionSheetIOS} from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGENAME} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -13,6 +13,10 @@ import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
+import hungerbarPointReduce, { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
+import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
+import {TIMECHANGE} from "../redux/timeofFeed"
+import { StatsData } from '../components/StatsData';
 
 
 
@@ -175,13 +179,27 @@ const PetProfile = () => {
         		return string[0].toUpperCase() + string.slice(1);
         	}
 
+			const time = new Date();
+			const lastFeedhour= (time.getHours());
+			const currentHour= (time.getHours());    
+
     	const handlePurchase = (item) => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
-                    dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    playSound();
-        		} else if (ItemInventory[item].category === 'toys') {
+					dispatch({type: SELECTED, data: 'select_food',thing: item});
+					dispatch({type: TIMECHANGE, data: lastFeedhour});
+					dispatch({type: HUNGERBARINCREASE, data:2});
+					alert( lastFeedhour);
+					playSound();
+				}
+				 else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
+					dispatch({type: FUNBARINCREASE, data:3});
+			
+					if (0 >= currentHour - lastFeedhour && currentHour - lastFeedhour >= 24){
+					
+					dispatch({type: HUNGERBARDECREASE, data:2});
+					
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
         		}
@@ -191,15 +209,14 @@ const PetProfile = () => {
         			type: "success",
         			statusBarHeight: 52,
         		})
-        	}
-
+				 }
+				 
         	const editPet = (name) => {
                 dispatch({type: CHANGENAME, changes: name});
                 dispatch({type:"OFF_PET"});
 
         	}
-
-
+		}			
         	const [sound, setSound] = React.useState();
 
               async function playSound() {
