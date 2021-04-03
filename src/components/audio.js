@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
 
 
+
+
 const styles = StyleSheet.create({
 button: {
         		borderRadius: 7,
@@ -15,27 +17,48 @@ button: {
         	},
         	})
 
-const PlayerObj = {
-  playing = false,
-  location = null
-}
 
-export {PlayerObj}
+  
 
 /*export function PlayingSound() {
   const [sound, setSound] = React.useState();*/
 
-  export async function playSound(url) {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(
-       require(url)
-    );
-    
+  const SoundContext = React.createContext();
 
-    console.log('Playing Sound');
-    await sound.playAsync(); }
+  const SoundPlayer = () =>{
 
-  React.useEffect(() => {
+  
+    const [sound, setSound] = React.useState('');
+    const [location, setLocation] = React.useState('');
+
+    async function playSound (url) {
+      
+      setLocation(url);
+      console.log('Loading Sound');
+      const { sound } = await Audio.Sound.createAsync(
+
+          require(location)
+      );
+      setSound(sound);
+
+      console.log('Playing Sound');
+      await sound.playAsync(); 
+    }
+
+    return(
+      <SoundContext.Provider
+        value={{
+          sound,
+          location
+        }}
+      ></SoundContext.Provider>
+      
+      
+    )
+  }
+  export default SoundPlayer;
+
+  /*React.useEffect(() => {
     return sound
       ? () => {
           console.log('Unloading Sound');
@@ -48,7 +71,7 @@ export {PlayerObj}
       <Button title="Play Sound" onPress={playSound} />
     </View>
   );
-}
+}*/
 
 /*export function AudioPlayer() {}
 

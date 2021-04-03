@@ -11,11 +11,13 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
-import { playSound } from "../components/audio.js";
-import {SOUND_LOCATION} from "../redus/soundPlayerSwitcher";
+import SoundPlayer, { SoundContext } from "../components/audio.js";
+import {SOUND_LOCATION} from "../redux/soundPlayerSwitcher";
+
 
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
+
 
 
 
@@ -147,6 +149,8 @@ const styles = StyleSheet.create({
 
 const PetProfile = () => {
 
+	const soundPlayer = useContext(SoundContext);
+
     const dispatch = useDispatch();
     const petImgChoice = useSelector(state => state.petDetails[1]);
 
@@ -185,7 +189,7 @@ const PetProfile = () => {
                     
 					dispatch({type: SOUND_LOCATION, location: '../components/ra.wav'});
 					const soundToPlay = useSelector(state=>state.currentSound);
-					playSound(soundToPlay);
+					soundPlayer.playSound();
 					
 					//playSound();
         		} else if (ItemInventory[item].category === 'toys') {

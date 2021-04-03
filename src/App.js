@@ -32,8 +32,9 @@ import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
-import soundSwitcherReducer from "./redux/soundPlayerSwitcher";
 
+
+import {SoundPlayer} from "../src/components/audio.js";
 import { persistStore, persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -60,7 +61,6 @@ const reducer = combineReducers({
 	userStats: statTrackerReducer,
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
-	currentSound: soundSwitcherReducer
 	
 });
 
@@ -142,8 +142,10 @@ const App = () => {
 
 
 	return (
+		<SoundPlayer>
 		<Provider store={store}>
   <PersistGate persistor={persistor}>
+			
 			<NavigationContainer>
 				<Stack.Navigator>
 					{isAuthenticated ? (
@@ -245,8 +247,10 @@ const App = () => {
 				</Stack.Navigator>
 				<FlashMessage position="top"/>
 			</NavigationContainer>
+			
 </PersistGate>
 		</Provider>
+		</SoundPlayer>
 	);
 };
 
