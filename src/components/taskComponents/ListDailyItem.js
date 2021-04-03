@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
 
 const ListDailyItem = ({task, index}) => {
 	const iconSize = 40;
-	const taskDays = useSelector(state => state.dailyTasks)[index].days
-	const listDays = Object.keys(taskDays).filter(day => taskDays[day])
+	const taskDays = useSelector(state => state.dailyTasks)[index].days;
+	const listLongDays = Object.keys(taskDays).filter(day => taskDays[day].on);
+	const listDays = listLongDays.map(day => day.substring(0,3));
 	const dispatch = useDispatch();
 
 	const onDelete = (index) => {
@@ -39,6 +40,7 @@ const ListDailyItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
+		console.log(listDays);
 		showMessage({
 			message: '5 coins have been added to your coin balance',
 			type: "success",
@@ -55,7 +57,7 @@ const ListDailyItem = ({task, index}) => {
 			<View style={{flexDirection: 'column', flexWrap: 'wrap'}}>
 				<Text style={{color: 'white', fontSize: 20, alignItems: 'center', width: 180}} color='white'>{task.task_name}</Text>
 				<Text style={{color: 'white', fontSize: 12, alignItems: 'center', paddingTop: 5}} color='white'>
-					{'Due: ' + taskDate}
+					{listDays.join(' ')}
 				</Text>
 			</View>
 			<View style = {{flexDirection:'row', marginRight: '5%', alignItems: 'center'}}>
