@@ -36,6 +36,7 @@
     "react-native-bouncy-checkbox": "^2.0.0",
     "react-native-button-toggle-group": "^1.1.1",
     "react-native-calendar-picker": "^7.1.1",
+    "react-native-collapsible": "^1.5.3",
     "react-native-dropdown-picker": "^4.0.2",
     "react-native-flash-message": "^0.1.23",
     "react-native-floating-action": "^1.21.0",

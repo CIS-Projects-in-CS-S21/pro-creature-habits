@@ -47,6 +47,9 @@ import { AsyncStorage } from 'react-native'
 import daysCheckedReducer from "./redux/daysChecked";
 import dailyTasksReducer from "./redux/dailyTasks";
 import taskFilterReducer from "./redux/taskFilter";
+import editDailyReducer from "./redux/editDailyTaskModal";
+import completedDatedTasksReducer from "./redux/completedDatedTasks";
+import completedDailyTasksReducer from "./redux/completedDailyTasks";
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -77,7 +80,10 @@ const reducer = combineReducers({
 	dailyTaskVisible: dailyTaskModalReducer,
 	daysChecked: daysCheckedReducer,
 	dailyTasks: dailyTasksReducer,
-	taskFilter: taskFilterReducer
+	taskFilter: taskFilterReducer,
+	dailyEditModal: editDailyReducer,
+	completedDatedTasks: completedDatedTasksReducer,
+	completedDailyTasks: completedDailyTasksReducer
 });
 
 const rootReducer = (state, action) => {

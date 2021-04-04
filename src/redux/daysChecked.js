@@ -1,5 +1,6 @@
 export const TOGGLE_DAY = 'TOGGLE_DAY';
 export const RESET_DAYS = 'RESET_DAYS';
+export const SET_DAYS = 'SET_DAYS';
 
 const days = {
 	Sunday: {on: true},
@@ -17,6 +18,8 @@ const daysCheckedReducer = (state=days, action) => {
 			let newDays = {...state};
 			newDays[action.data].on = !newDays[action.data].on;
 			return newDays
+		case SET_DAYS:
+			return action.data;
 		case RESET_DAYS:
 			return {
 				Sunday: {on: true},

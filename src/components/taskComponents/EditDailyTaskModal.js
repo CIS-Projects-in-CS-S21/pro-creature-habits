@@ -1,11 +1,12 @@
 import {useDispatch, useSelector} from "react-redux";
 import {Button, Modal, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import {SET_TASK_TEXT} from "../../redux/taskInput";
-import CheckboxGroup from "./CheckboxGroup";
-import {DAILY_TASK_OFF} from "../../redux/dailyTaskModal";
 import React from "react";
-import {ADD_TASK_DAILY} from "../../redux/dailyTasks";
+import {SET_INDEX} from "../../redux/taskEditIndex";
+import CheckboxGroup from "./CheckboxGroup";
+import {DAILY_EDIT_OFF} from "../../redux/editDailyTaskModal";
 import {RESET_DAYS} from "../../redux/daysChecked";
+import {EDIT_TASK_DAILY} from "../../redux/dailyTasks";
 
 const styles = StyleSheet.create({
 	centeredView: {
@@ -44,47 +45,58 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		paddingTop: 15
 	}
-})
+});
 
-const DailyTaskModal = () => {
+const EditDailyTaskModal = () => {
+
 	const days = useSelector(state => state.daysChecked);
+	const taskEditIndex = useSelector(state => state.taskEditIndex);
 	const taskText = useSelector(state => state.taskInput);
+
 	const dispatch = useDispatch();
 
-	const onSubmit = (task) => {
-		dispatch({type: ADD_TASK_DAILY, data: [task, days]});
+	const onCancelEdit = () => {
+		dispatch({type: DAILY_EDIT_OFF});
 		dispatch({type: SET_TASK_TEXT, data: ''});
 		dispatch({type: RESET_DAYS});
-		dispatch({type: DAILY_TASK_OFF});
+		dispatch({type: SET_INDEX, data: -1});
 	}
+
+	const onSubmitEdit = () => {
+		dispatch({type: EDIT_TASK_DAILY, data: [taskEditIndex, taskText, days]});
+		dispatch({type: SET_TASK_TEXT, data: ''});
+		dispatch({type: RESET_DAYS});
+		dispatch({type: SET_INDEX, data: -1});
+
+		dispatch({type: DAILY_EDIT_OFF});
+	}
+
 
 	return (
 		<Modal
 			animationType="slide"
 			transparent={true}
-			visible={useSelector(state=>state.dailyTaskVisible)}
+			visible={useSelector(state=>state.dailyEditModal)}
 		>
 			<View style={styles.centeredView}>
 				<View style={styles.modalView}>
+					<Text style={{color: 'white', fontSize: 30, marginBottom: 20}}>Edit Task</Text>
 					<TextInput
 						style={{backgroundColor: 'white', color: 'black', width: 200, height: 30, borderRadius: 5}}
 						label='name'
 						maxLength={35}
 						value={taskText}
 						onChangeText={text => dispatch({type: SET_TASK_TEXT, data: text})}
-						placeholder='Type a new task'
 					/>
+					<Text style={{color: 'white', fontSize: 20, marginTop: 15}}>Days:</Text>
 					<CheckboxGroup/>
-					<Button title='submit'  color="#637ed0" onPress={() => onSubmit(taskText)} />
+					<Button title='submit'  color="#637ed0" onPress={onSubmitEdit}/>
 					<View style={styles.modalFooter}>
 						<Pressable
 							style={[styles.button, styles.buttonClose]}
-							onPress={() => {
-								dispatch({type: DAILY_TASK_OFF})
-								dispatch({type: RESET_DAYS})
-							}}
+							onPress={() => onCancelEdit()}
 						>
-							<Text style={{color: 'white'}}>Cancel</Text>
+							<Text style={styles.textStyle}>Cancel</Text>
 						</Pressable>
 					</View>
 				</View>
@@ -93,4 +105,4 @@ const DailyTaskModal = () => {
 	)
 }
 
-export default DailyTaskModal;
+export default EditDailyTaskModal;

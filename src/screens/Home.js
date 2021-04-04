@@ -15,6 +15,7 @@ import {DAILY_TASK_ON} from "../redux/dailyTaskModal";
 import DailyTaskModal from "../components/taskComponents/DailyTaskModal";
 import DatedTaskModal from "../components/taskComponents/DatedTaskModal";
 import EditDatedTaskModal from "../components/taskComponents/EditDatedTaskModal";
+import EditDailyTaskModal from "../components/taskComponents/EditDailyTaskModal"
 import {DAILY, DATED} from "../redux/taskFilter";
 
 
@@ -128,6 +129,7 @@ const Home = () => {
 			<DailyTaskModal/>
 			<DatedTaskModal/>
 			<EditDatedTaskModal/>
+			<EditDailyTaskModal/>
 		</View>
   );
 }
