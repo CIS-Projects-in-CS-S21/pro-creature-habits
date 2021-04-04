@@ -33,10 +33,23 @@ import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
+import modalTaskReducer from "./redux/createTaskModal";
+import editTaskReducer from "./redux/editTaskModal";
+import oneTimeTasksReducer from "./redux/oneTimeTasks";
+import selectedDateReducer from "./redux/selectedDate";
+import taskEditIndexReducer from "./redux/taskEditIndex";
+import taskInputReducer from "./redux/taskInput";
+import dailyTaskModalReducer from "./redux/dailyTaskModal";
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { AsyncStorage } from 'react-native'
+import daysCheckedReducer from "./redux/daysChecked";
+import dailyTasksReducer from "./redux/dailyTasks";
+import taskFilterReducer from "./redux/taskFilter";
+import editDailyReducer from "./redux/editDailyTaskModal";
+import completedDatedTasksReducer from "./redux/completedDatedTasks";
+import completedDailyTasksReducer from "./redux/completedDailyTasks";
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -57,7 +70,20 @@ const reducer = combineReducers({
 	itemsBought: marketplaceItemsBoughtReducer,
 	userStats: statTrackerReducer,
 	petMV: petMVR,
-	selectedPetItem: selectedPetItemReducer
+	selectedPetItem: selectedPetItemReducer,
+	taskCreateVisible: modalTaskReducer,
+	editTaskVisible: editTaskReducer,
+	oneTimeTasks: oneTimeTasksReducer,
+	selectedDate: selectedDateReducer,
+	taskEditIndex: taskEditIndexReducer,
+	taskInput: taskInputReducer,
+	dailyTaskVisible: dailyTaskModalReducer,
+	daysChecked: daysCheckedReducer,
+	dailyTasks: dailyTasksReducer,
+	taskFilter: taskFilterReducer,
+	dailyEditModal: editDailyReducer,
+	completedDatedTasks: completedDatedTasksReducer,
+	completedDailyTasks: completedDailyTasksReducer
 });
 
 const rootReducer = (state, action) => {
