@@ -37,6 +37,13 @@ const styles = StyleSheet.create({
     		flexWrap: 'wrap',
     		alignContent: 'flex-end'
     },
+    input:{
+    		width:"85%",
+    		backgroundColor: "white",
+    		marginBottom: 10,
+    		padding: 15,
+    		borderRadius: 5
+    	},
     }
 );
 
@@ -105,14 +112,7 @@ const choosePetScreen = ({onSignUp}) => {
             <Text style={styles.text}>Please enter a name for your pet</Text>
             <View style={styles.imageContainer}>
             <TextInput
-                            style={{
-                                margin: 'auto',
-                                height: 40,
-                                width: 200,
-                                borderColor: 'black',
-                                backgroundColor: 'gray',
-                                borderWidth: 1
-                            }}
+                            style={styles.input}
                             placeholder="Your Pet's Name"
                         onChangeText={text => onChangeText(text)}
                         value={text}
