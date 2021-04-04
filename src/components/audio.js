@@ -23,6 +23,7 @@ button: {
 /*export function PlayingSound() {
   const [sound, setSound] = React.useState();*/
 
+<<<<<<< HEAD
   const SoundContext = React.createContext();
 
   const SoundPlayer = () =>{
@@ -30,6 +31,14 @@ button: {
   
     const [sound, setSound] = React.useState('');
     const [location, setLocation] = React.useState('');
+=======
+  export async function playSound() {
+    console.log('Loading Sound');
+    const { sound } = await Audio.Sound.createAsync(
+       require('../components/ra.wav')
+    );
+    setSound(sound);
+>>>>>>> parent of 57339066 (Less broken (hopefully), tried to use redux so that current sound playing is a global variable across app. Plan on doing this for music, next)
 
     async function playSound (url) {
       

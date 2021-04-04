@@ -32,9 +32,12 @@ import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
 import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
+<<<<<<< HEAD
 
 
 import {SoundPlayer} from "../src/components/audio.js";
+=======
+>>>>>>> parent of 57339066 (Less broken (hopefully), tried to use redux so that current sound playing is a global variable across app. Plan on doing this for music, next)
 import { persistStore, persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
@@ -60,8 +63,12 @@ const reducer = combineReducers({
 	itemsBought: marketplaceItemsBoughtReducer,
 	userStats: statTrackerReducer,
 	petMV: petMVR,
+<<<<<<< HEAD
 	selectedPetItem: selectedPetItemReducer,
 	
+=======
+	selectedPetItem: selectedPetItemReducer
+>>>>>>> parent of 57339066 (Less broken (hopefully), tried to use redux so that current sound playing is a global variable across app. Plan on doing this for music, next)
 });
 
 const rootReducer = (state, action) => {
