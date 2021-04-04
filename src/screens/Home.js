@@ -4,7 +4,8 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TouchableHighlight
+	TouchableHighlight,
+	Image
 } from 'react-native'
 import {useDispatch} from "react-redux";
 
@@ -17,6 +18,7 @@ import DatedTaskModal from "../components/taskComponents/DatedTaskModal";
 import EditDatedTaskModal from "../components/taskComponents/EditDatedTaskModal";
 import EditDailyTaskModal from "../components/taskComponents/EditDailyTaskModal"
 import {DAILY, DATED} from "../redux/taskFilter";
+
 
 
 //test
@@ -126,6 +128,7 @@ const Home = () => {
 					name === 'bt_one_time' ? dispatch({type: TASK_ON}) : dispatch({type: DAILY_TASK_ON})
 				}}
 			/>
+			<Image source={require('./doggo.gif')} style={{position: 'absolute', left: 25, bottom: 25, height: 55, width: 70}}/>
 			<DailyTaskModal/>
 			<DatedTaskModal/>
 			<EditDatedTaskModal/>

@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
 		paddingLeft: '4%',
 		margin: '3%',
 		borderRadius: 10,
+		marginTop: 0,
 		backgroundColor: '#402688',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
@@ -73,7 +74,7 @@ const ListDailyItem = ({task, index}) => {
 				/>
 			</TouchableOpacity>
 			<View style={{flexDirection: 'column', flexWrap: 'wrap'}}>
-				<Text style={{color: 'white', fontSize: 20, alignItems: 'center', width: 180}} color='white'>{task.task_name}</Text>
+				<Text style={{color: 'white', fontSize: 20, alignItems: 'center', width: 195}} color='white'>{task.task_name}</Text>
 				<Text style={{color: 'white', fontSize: 12, alignItems: 'center', paddingTop: 5}} color='white'>
 					{listDays.join(' ')}
 				</Text>
