@@ -19,9 +19,6 @@ import EditDatedTaskModal from "../components/taskComponents/EditDatedTaskModal"
 import EditDailyTaskModal from "../components/taskComponents/EditDailyTaskModal"
 import {DAILY, DATED} from "../redux/taskFilter";
 
-
-
-//test
 const styles = StyleSheet.create({
 	scrollContainer: {
 		flex: 1,
