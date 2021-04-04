@@ -21,30 +21,35 @@ button: {
 
           
 
-    async function playSound(url) {
-      const [sound, setSound] = React.useState();
+    const PlaySound = () => {
+      const [sound, setSound] = React.useState(new Audio.Sound);
 
-    
-      console.log('Loading Sound');
-      const { soundProto } = await Audio.Sound.createAsync(
-        {uri: url},
-        {shouldPlay: true}
-      );
-      setSound(sound);
+      async function loadSound(url){
+        console.log('Loading Sound');
+          const soundProto = new Audio.Sound;
+          await soundProto.Sound.createAsync(
+            {uri: url},
+            {shouldPlay: true}
+          );
+          setSound(soundProto);
+      }
 
-      console.log('Playing Sound');
-      await sound.playAsync(); 
-    
+      async function playSound(){
+        console.log('Playing Sound');
+        await sound.playAsync(); 
+      }
 
-      React.useEffect(() => {
+      /*React.useEffect(() => {
         return sound
           ? () => {
               console.log('Unloading Sound');
               sound.unloadAsync(); }
           : undefined;
-      }, [sound]);
+      }, [sound]); */
+      
+      return (null);
     }
-    export {playSound};
+    export const SoundContext = React.createContext(PlaySound);
   /*return (
     <View style={styles.button}>
       <Button title="Play Sound" onPress={playSound} />

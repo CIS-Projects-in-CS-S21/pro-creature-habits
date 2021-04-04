@@ -14,7 +14,7 @@ import { Audio } from 'expo-av';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 
-import {playSound} from "../components/audio.js";
+import {SoundContext} from "../components/audio.js";
 
 
 const styles = StyleSheet.create({
@@ -177,10 +177,13 @@ const PetProfile = () => {
         	}
 
     	const handlePurchase = (item) => {
-        		dispatch({type: OFF_PET});
+        		soundItem = useContext(SoundContext);
+			
+				dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
                     dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    playSound('../components/ra.wav');
+                    soundItem.loadSound('../components/ra.wav');
+					soundItem.playSound();
         		} else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
         		} else {
@@ -220,13 +223,14 @@ const PetProfile = () => {
                       sound.unloadAsync(); }
                   : undefined;
               }, [sound]);
-
-              const onUpdate = () =>{
+			  */
+              
+				const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});
                }
-			*/
+			
 	return (
-<ScrollView style={styles.container}>
+		<ScrollView style={styles.container}>
             <View style = {styles.centeredView2}>
 			<Text style={styles.text}>
 			{useSelector(state => state.petDetails[0])}
