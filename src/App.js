@@ -14,7 +14,6 @@ import { combineReducers } from "redux";
 
 import HomeTabs from "./components/HomeTabs";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
-import SignUpScreen from "./screens/InputPIN";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
@@ -32,7 +31,13 @@ import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
-//import storage from 'redux-persist/lib/storage';
+import modalTaskReducer from "./redux/createTaskModal";
+import editTaskReducer from "./redux/editTaskModal";
+import oneTimeTasksReducer from "./redux/oneTimeTasks";
+import selectedDateReducer from "./redux/selectedDate";
+import taskEditIndexReducer from "./redux/taskEditIndex";
+import taskInputReducer from "./redux/taskInput";
+import dailyTaskModalReducer from "./redux/dailyTaskModal";
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { AsyncStorage } from 'react-native'
@@ -42,6 +47,12 @@ import IntroScreen from "./screens/Intro";
 import CreatePINScreen from "./screens/CreatePIN";
 import InputPINScreen from "./screens/InputPIN";
 import hintReducer from "./redux/hint";
+import daysCheckedReducer from "./redux/daysChecked";
+import dailyTasksReducer from "./redux/dailyTasks";
+import taskFilterReducer from "./redux/taskFilter";
+import editDailyReducer from "./redux/editDailyTaskModal";
+import completedDatedTasksReducer from "./redux/completedDatedTasks";
+import completedDailyTasksReducer from "./redux/completedDailyTasks";
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -65,7 +76,20 @@ const reducer = combineReducers({
 	selectedPetItem: selectedPetItemReducer,
 	firstLogin: loginReducer,
 	pin: pinReducer,
-	pintHint: hintReducer
+	pintHint: hintReducer,
+	taskCreateVisible: modalTaskReducer,
+	editTaskVisible: editTaskReducer,
+	oneTimeTasks: oneTimeTasksReducer,
+	selectedDate: selectedDateReducer,
+	taskEditIndex: taskEditIndexReducer,
+	taskInput: taskInputReducer,
+	dailyTaskVisible: dailyTaskModalReducer,
+	daysChecked: daysCheckedReducer,
+	dailyTasks: dailyTasksReducer,
+	taskFilter: taskFilterReducer,
+	dailyEditModal: editDailyReducer,
+	completedDatedTasks: completedDatedTasksReducer,
+	completedDailyTasks: completedDailyTasksReducer
 });
 
 const rootReducer = (state, action) => {
@@ -117,10 +141,6 @@ const App = () => {
 
 	const handleSignIn = () => {
 		setIsAuthenticated(true);
-	};
-
-	const handleSignOut = () => {
-		setIsAuthenticated(false);
 	};
 
 	const handleSignUp = () => {

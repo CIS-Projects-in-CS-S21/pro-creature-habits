@@ -1,0 +1,6 @@
+dist: xenial
+language: node_js
+node_js:
+  - "lts/*"
+  - "node"
+before_script: cd example && npm install && npm run cp
