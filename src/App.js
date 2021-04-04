@@ -13,9 +13,7 @@ import { combineReducers } from "redux";
 
 
 import HomeTabs from "./components/HomeTabs";
-import SignInScreen from "./screens/SignIn";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
-import SignUpScreen from "./screens/SignUp";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
@@ -40,10 +38,15 @@ import selectedDateReducer from "./redux/selectedDate";
 import taskEditIndexReducer from "./redux/taskEditIndex";
 import taskInputReducer from "./redux/taskInput";
 import dailyTaskModalReducer from "./redux/dailyTaskModal";
-//import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { AsyncStorage } from 'react-native'
+import loginReducer from "./redux/firstLogin";
+import pinReducer from "./redux/createPIN";
+import IntroScreen from "./screens/Intro";
+import CreatePINScreen from "./screens/CreatePIN";
+import InputPINScreen from "./screens/InputPIN";
+import hintReducer from "./redux/hint";
 import daysCheckedReducer from "./redux/daysChecked";
 import dailyTasksReducer from "./redux/dailyTasks";
 import taskFilterReducer from "./redux/taskFilter";
@@ -71,6 +74,9 @@ const reducer = combineReducers({
 	userStats: statTrackerReducer,
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
+	firstLogin: loginReducer,
+	pin: pinReducer,
+	pintHint: hintReducer,
 	taskCreateVisible: modalTaskReducer,
 	editTaskVisible: editTaskReducer,
 	oneTimeTasks: oneTimeTasksReducer,
@@ -137,10 +143,6 @@ const App = () => {
 		setIsAuthenticated(true);
 	};
 
-	const handleSignOut = () => {
-		setIsAuthenticated(false);
-	};
-
 	const handleSignUp = () => {
 		setIsAuthenticated(true);
 	};
@@ -193,13 +195,18 @@ const App = () => {
 						/>
 					) : (
 						<>
+						<Stack.Screen name="Intro">
+							{(props) => (
+								<IntroScreen {...props} onSignUp={handleSignUp} />
+							)}
+						</Stack.Screen>
 						<Stack.Screen
-							name="Sign In"
+							name="Create PIN"
 							options={{
 								animationTypeForReplace: 'pop',
 								headerTitle: () => (
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Sign In
+										Create PIN
 									</Text>
 								),
 								headerStyle : {
@@ -209,7 +216,7 @@ const App = () => {
 								},
 							}}>
 							{(props) => (
-								<SignInScreen {...props} onSignIn={handleSignIn} />
+								<CreatePINScreen {...props} onSignIn={handleSignIn} />
 							)}
 						</Stack.Screen>
 						<Stack.Screen name="Google Sign Up">
@@ -217,12 +224,12 @@ const App = () => {
 								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
-						<Stack.Screen name="Sign Up"
+						<Stack.Screen name="Input PIN"
 						options={{
 								animationTypeForReplace: 'pop',
 								headerTitle: () => (
 									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Sign Up
+										Input PIN
 									</Text>
 								),
 								headerStyle : {
@@ -232,7 +239,7 @@ const App = () => {
 								},
 							}} >
 							{(props) => (
-								<SignUpScreen {...props} onSignUp={handleSignUp} />
+								<InputPINScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
 						<Stack.Screen

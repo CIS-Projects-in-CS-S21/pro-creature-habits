@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-nativ
 import UserInfo from "../databases/UserInfo";
 import {OFF} from "../redux/modalVisible";
 import {RESET_BUTTON_PRESSED} from "../App";
+import {FIRST} from "../redux/firstLogin";
+import {CREATE_PIN} from "../redux/createPIN";
+import {CREATE_HINT} from "../redux/hint";
 import {useDispatch} from "react-redux";
 const styles = StyleSheet.create({
 	container: {
@@ -37,70 +40,46 @@ const styles = StyleSheet.create({
 });
 
 
-export default function SignInScreen({ onSignIn, navigation }){
+export default function CreatePINScreen({ onSignIn, navigation }){
 	const dispatch = useDispatch();
-	UserInfo.createTable()
-	const checkLogin = useCallback(async (username, password) => {
-		let authenticated = false
-		try {
-			const user = await UserInfo.findBy({username_eq: username})
-			if (password == user.password) {
-				console.log("Correct");
-				authenticated = true
-				onSignIn()
-
-			} else {
-				console.log("Wrong Username/Password");
-			}
-		}
-		catch{
-			console.log("User not found");
-		}
 
 
 
-	}, [])
-
-	const onSubmit = () => {
-		checkLogin(username, password);
-	}
-	const onSigningUp = () => {
-		navigation.navigate('Sign Up')
+	const onCreatePIN = () => {
+		console.log(newPIN);
+		dispatch({type: FIRST});
+		dispatch({type: CREATE_PIN, data: newPIN})
+		dispatch({type: CREATE_HINT, data: newHint})
+		navigation.navigate('Choose Pet')
 	}
 
 
-	const [username, setUsername] = React.useState('');
-	const [password, setPassword] = React.useState('');
+	const [newPIN, setNewPIN] = React.useState('');
+	const [newHint, setNewHint] = React.useState('');
 		return (
 		  	<View style={styles.container}>
 				<Text style={{color: 'white', fontSize: 40, marginTop: '-20%', marginBottom: '20%'}}>
 					Creature Habits
 				</Text>
 				<TextInput
-				  value={username}
-				  onChangeText={username => setUsername(username)}
-				  placeholder={'Username'}
-				  style={styles.input}
+					value={newPIN}
+					onChangeText={newPIN => setNewPIN(newPIN)}
+					placeholder={'Create PIN'}
+					style={styles.input}
+					keyboardType="numeric"
 				/>
 				<TextInput
-				  value={password}
-				  onChangeText={password => setPassword(password)}
-				  placeholder={'Password'}
-				  secureTextEntry={true}
-				  style={styles.input}
+					value={newHint}
+					onChangeText={newHint => setNewHint(newHint)}
+					placeholder={'Create PIN'}
+					style={styles.input}
 				/>
 				<View style={styles.buttonsContainer}>
 					<TouchableOpacity
 						style={styles.button}
-						onPress={onSubmit}
+						onPress={onCreatePIN}
 					>
-						<Text style={styles.text}>Login</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={styles.button}
-						onPress={onSigningUp}
-					>
-						<Text style={styles.text}>Sign Up</Text>
+						<Text style={styles.text}>Confirm</Text>
 					</TouchableOpacity>
 				</View>
 				<TouchableOpacity
