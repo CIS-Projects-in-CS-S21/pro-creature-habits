@@ -39,16 +39,25 @@ const styles = StyleSheet.create({
 
 
 const HealthBar = ({bar,progress}) => {
-    const hunger = useSelector(state=>state.hunger);
-
-
+  const hunger = useSelector(state=>state.hunger);
+  const fun = useSelector(state=>state.fun);
+  const hygiene = useSelector(state=>state.hygiene);
 	return (
-        <View style={styles.mainContainer}>
-            <Text style={styles.textTitle}> Hunger Bar </Text>
-	        <View style={styles.container}>
-                <Progress.Bar style={{margin: 10}} progress={hunger/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor="red"  />
+		<View style={styles.mainContainer}>
+      <Text style={styles.text}>Hunger Bar</Text>
+			<View style={styles.container}>
+					<Progress.Bar style={{margin: 10}} progress={hunger/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor = 'red' />
 			</View>
-	    </View>
+      <Text style={styles.text}>Fun Bar</Text>
+      <View style={styles.container}>
+					<Progress.Bar style={{margin: 10}} progress={fun/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor = 'red' />
+			</View>
+      <Text style={styles.text}>Hygiene Bar</Text>
+      <View style={styles.container}>
+					<Progress.Bar style={{margin: 10}} progress={hygiene/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor = 'red' />
+			</View>
+
+		</View>
 	)
 }
 

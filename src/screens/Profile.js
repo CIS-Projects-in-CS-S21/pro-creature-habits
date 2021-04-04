@@ -1,23 +1,22 @@
-import React, { useRef } from 'react';
-import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable ,Animated, TouchableOpacity, TextInput} from 'react-native';
+import React from 'react';
+import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable, TouchableOpacity, TextInput, ActionSheetIOS} from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
-import {CHANGE,CHANGENAME} from "../redux/petInfo";
+import {CHANGENAME} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
 import PetImage from "../components/petInventoryComponents/PetImage";
-import {ADD,FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
+import {FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
 import HealthBar from "../components/HealthBar";
 import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
-import {PlayingSound} from '../components/audio'
 import { showMessage } from "react-native-flash-message";
-//import SoundPlayer from 'react-native-sound-player';
-//import useSound from 'use-sound';
-//import { playCrunchSound } from '../components/audio';
 import { Audio } from 'expo-av';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
-import {INCREASE,DECREASE} from "../redux/hungerBar";
+import hungerbarPointReduce, { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
+import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
+import {TIMECHANGE} from "../redux/timeofFeed"
+import { StatsData } from '../components/StatsData';
 
 
 
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
 
 
 
-const PetProfile = ({choices, navigation}) => {
+const PetProfile = () => {
 
     const dispatch = useDispatch();
     const petImgChoice = useSelector(state => state.petDetails[1]);
@@ -162,7 +161,7 @@ const PetProfile = ({choices, navigation}) => {
 
     const findImage = () => {
         console.log(petImgChoice);
-    	if (petImgChoice == "cat") {
+    	if (petImgChoice === "cat") {
     	    return require('../images/cat.png');
     	} else {
     	    return require('../images/dog.png');
@@ -184,16 +183,27 @@ const PetProfile = ({choices, navigation}) => {
         		return string[0].toUpperCase() + string.slice(1);
         	}
 
-    	const handleSelection = (item) => {
+			const time = new Date();
+			const lastFeedhour= (time.getHours());
+			const currentHour= (time.getHours());
+
+    	const handlePurchase = (item) => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
-                    dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    dispatch({type:INCREASE,data:2});
-                    playSound();
-                    dispatch({type:CHANGE,data:currentTime})
-        		} else if (ItemInventory[item].category === 'toys') {
+					dispatch({type: SELECTED, data: 'select_food',thing: item});
+					dispatch({type: TIMECHANGE, data: lastFeedhour});
+					dispatch({type: HUNGERBARINCREASE, data:2});
+					alert( lastFeedhour);
+					playSound();
+				}
+				 else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
-        			dispatch({type:DECREASE,data:3});
+					dispatch({type: FUNBARINCREASE, data:3});
+
+					if (0 >= currentHour - lastFeedhour && currentHour - lastFeedhour >= 24){
+
+					dispatch({type: HUNGERBARDECREASE, data:2});
+
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
         		}
@@ -203,15 +213,14 @@ const PetProfile = ({choices, navigation}) => {
         			type: "success",
         			statusBarHeight: 52,
         		})
-        	}
+				 }
 
         	const editPet = (name) => {
                 dispatch({type: CHANGENAME, changes: name});
                 dispatch({type:"OFF_PET"});
 
         	}
-
-
+		}
         	const [sound, setSound] = React.useState();
 
               async function playSound() {
@@ -270,9 +279,9 @@ const PetProfile = ({choices, navigation}) => {
 			<Modal
             	animationType="slide"
             	transparent={true}
-            	visible={(useSelector(state=>state.petMV) != "off")}
+            	visible={(useSelector(state=>state.petMV) !== "off")}
             >
-            {(useSelector(state=>state.petMV) == "press") ?
+            {(useSelector(state=>state.petMV) === "press") ?
             		<View style={styles.centeredView}>
             		    <View style={styles.modalView}>
             			<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>

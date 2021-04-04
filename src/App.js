@@ -4,6 +4,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {Image, Text, View} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
+import hungerbarPointReduce from "./redux/hungerbarPoint";
+import funbarPointReducer from "./redux/funbarPoint";
+import hygienebarPointReducer from "./redux/hygienebarPoint"
+import timeofFeedReducer from "./redux/timeofFeed";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
 import petInventoryReducer from "./redux/petInventory";
 import petInfoReducer from "./redux/petInfo";
@@ -29,6 +33,7 @@ import difficultyReducer from "./redux/difficulty";
 import achievementsCompleteReducer from "./redux/achievementsComplete";
 import achievementFilterReducer from "./redux/achievementFilter";
 import marketplaceItemsBoughtReducer from "./redux/marketplaceItemsBought";
+import statTrackerReducer from "./redux/statTracker";
 import petMVR from "./redux/petModalVisible";
 import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
@@ -55,10 +60,13 @@ const reducer = combineReducers({
 	achievements: achievementsCompleteReducer,
 	achievementsFilter: achievementFilterReducer,
 	itemsBought: marketplaceItemsBoughtReducer,
+	userStats: statTrackerReducer,
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
-	hunger: hungerBarReducer,
-	lastFedTime: timeReducer
+	fun:funbarPointReducer,
+	hunger: hungerbarPointReduce,
+	hygiene: hygienebarPointReducer,
+	leastFeedTime: timeofFeedReducer
 });
 
 const rootReducer = (state, action) => {

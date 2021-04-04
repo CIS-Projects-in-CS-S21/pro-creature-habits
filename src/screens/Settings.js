@@ -26,7 +26,11 @@ const styles = StyleSheet.create({
 		marginRight: 10,
 		marginLeft: 10,
 		backgroundColor: 'white',
-		borderRadius: 5.4
+		borderRadius: 5.4,
+		shadowOffset: {width: 0, height: 5},
+		shadowOpacity: 0.8,
+		shadowRadius: 3,
+		elevation: 11,
 	},
 	button: {
 		flexDirection: 'row',
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
 	},
 	titleText: {
 		color: 'white',
-		fontSize: 20,
+		fontSize: 30,
 		padding: 20,
 		textAlign: 'center'
 	},
@@ -78,7 +82,7 @@ const SettingsScreen = () => {
 			<Text style={styles.titleText}>Difficulty</Text>
 			<DifficultyOptions />
 			<Text style={styles.titleText}>Extra</Text>
-			<View style={styles.buttonsContainer}>
+			<View style={[styles.buttonsContainer, {marginBottom: 10}]}>
 				<TouchableOpacity
 					style={[styles.button, {borderBottomWidth: 0, borderRadius: 5}]}
 					activeOpacity={0.8}

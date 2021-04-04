@@ -6,6 +6,7 @@ import {ACH_REWARD} from "../../redux/achievementsComplete";
 import DropDownPicker from "react-native-dropdown-picker";
 import {FILTER_CHANGE} from "../../redux/achievementFilter";
 import {REWARD} from "../../redux/coinBalance";
+import {ADD_TO_STAT} from "../../redux/statTracker";
 
 const styles = StyleSheet.create({
 	achievementsContainer: {
@@ -32,6 +33,7 @@ const AchievementsContainer = () => {
 		if(ach[achievement][filter].complete) {
 			dispatch({type: ACH_REWARD, data: [achievement, filter]});
 			dispatch({type: REWARD, data: ach[achievement][filter].reward});
+			dispatch({type: ADD_TO_STAT, data: ['total_coins_gain', ach[achievement][filter].reward]})
 		}
 	}
 
