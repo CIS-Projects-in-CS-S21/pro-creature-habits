@@ -11,14 +11,11 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
-<<<<<<< HEAD
-import SoundPlayer, { SoundContext } from "../components/audio.js";
+import {playSound, updateSoundLocation} from "../components/audio.js";
 import {SOUND_LOCATION} from "../redux/soundPlayerSwitcher";
 
 
-=======
-import { SoundPlayer } from "../components/audio.js";
->>>>>>> parent of 57339066 (Less broken (hopefully), tried to use redux so that current sound playing is a global variable across app. Plan on doing this for music, next)
+
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 
@@ -190,16 +187,14 @@ const PetProfile = () => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
                     dispatch({type: SELECTED, data: 'select_food',thing: item});
-<<<<<<< HEAD
                     
-					dispatch({type: SOUND_LOCATION, location: '../components/ra.wav'});
-					const soundToPlay = useSelector(state=>state.currentSound);
-					soundPlayer.playSound();
+					//dispatch({type: SOUND_LOCATION, location: '../components/ra.wav'});
+					
+					
+					//updateSoundLocation('../components/ra.wav');
+					playSound('../components/ra.wav');
 					
 					//playSound();
-=======
-                    playSound();
->>>>>>> parent of 57339066 (Less broken (hopefully), tried to use redux so that current sound playing is a global variable across app. Plan on doing this for music, next)
         		} else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
         		} else {

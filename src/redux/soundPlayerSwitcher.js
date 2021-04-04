@@ -1,17 +1,29 @@
-import {PlayingSound, PlayerObj, playSound} from '../components/audio.js';
+
 export const SOUND_LOCATION = 'SOUND_LOCATION';
-export const PLAY = 'play';
 
+/*const PlayerObj = {
+    location: '',
+    playing: false
+};
 
-const soundSwitcherReducer = (state = PlayerObj, action) => {
+const obj = new PlayerObj;
+*/
+const soundEffectPlayer = (state = " ", action) => {
     switch(action.type){
         case SOUND_LOCATION:
-            state.location = action.location;
-            return state.location;
+            state = action.location;
+            return state;
 
-        case PLAY:
-            playSound(state.location);
+        /*case PLAY:
+            
             state.playing = true;
             return state.playing;
+        */
+        default:
+            return state;
     }
+
+
 }
+
+export default soundEffectPlayer;

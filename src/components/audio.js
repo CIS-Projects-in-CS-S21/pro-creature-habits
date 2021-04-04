@@ -2,7 +2,8 @@ import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
 
-
+import {SOUND_LOCATION, PLAY} from '../redux/soundPlayerSwitcher';
+import { useSelector } from 'react-redux';
 
 
 const styles = StyleSheet.create({
@@ -23,49 +24,32 @@ button: {
 /*export function PlayingSound() {
   const [sound, setSound] = React.useState();*/
 
-<<<<<<< HEAD
-  const SoundContext = React.createContext();
 
-  const SoundPlayer = () =>{
+ // const SoundPlayer = () =>{
+
+  export function updateSoundLocation(uri) {
+    dispatch({type: SOUND_LOCATION, location: uri});
+  }
+  
+  export async function playSound(uri) {
+      
+    const location = uri;
+    console.log('Loading Sound');
+    const soundObj = await Audio.Sound.createAsync(
+
+        {uri: location}
+
+    );
+    
+  
+
+    console.log('Playing Sound');
+    await soundObj.sound.playAsync(); 
+
+    await soundObj.sound.unloadAsync();
+  }
 
   
-    const [sound, setSound] = React.useState('');
-    const [location, setLocation] = React.useState('');
-=======
-  export async function playSound() {
-    console.log('Loading Sound');
-    const { sound } = await Audio.Sound.createAsync(
-       require('../components/ra.wav')
-    );
-    setSound(sound);
->>>>>>> parent of 57339066 (Less broken (hopefully), tried to use redux so that current sound playing is a global variable across app. Plan on doing this for music, next)
-
-    async function playSound (url) {
-      
-      setLocation(url);
-      console.log('Loading Sound');
-      const { sound } = await Audio.Sound.createAsync(
-
-          require(location)
-      );
-      setSound(sound);
-
-      console.log('Playing Sound');
-      await sound.playAsync(); 
-    }
-
-    return(
-      <SoundContext.Provider
-        value={{
-          sound,
-          location
-        }}
-      ></SoundContext.Provider>
-      
-      
-    )
-  }
-  export default SoundPlayer;
 
   /*React.useEffect(() => {
     return sound
