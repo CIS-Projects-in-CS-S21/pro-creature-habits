@@ -118,7 +118,7 @@ const choosePetScreen = ({onSignup, navigation}) => {
                         value={text}
             />
         </View>
-        <Button title="Submit" color="purple" onPress={() => {submitData(); navigation.navigate('Tutorial');}}/>
+        <Button title="Submit" color="purple" onPress={() => {submitData(); navigation.navigate('App Tutorial');}}/>
 
         </View>
     );

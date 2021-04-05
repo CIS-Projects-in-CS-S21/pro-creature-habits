@@ -235,7 +235,7 @@ const App = () => {
 							)}
 						</Stack.Screen>
                         <Stack.Screen
-							name="Tutorial">
+							name="App Tutorial">
 							{(props) => (
 								<TutorialScreen {...props} onSignUp={handleSignUp} />
 							)}
