@@ -1,7 +1,7 @@
 export const HUNGERBARINCREASE = 'HUNGERBARINCREASE';
 export const HUNGERBARDECREASE = 'HUNGERBARDECREASE';
 
-const hungerbarPointReduce = (state = 10, action) => {
+const hungerbarPointReducer = (state = 10, action) => {
 	switch (action.type) {
 		case HUNGERBARINCREASE :
 			return state + action.data;
@@ -12,5 +12,5 @@ const hungerbarPointReduce = (state = 10, action) => {
 	}
 }
 
-export default hungerbarPointReduce;
+export default hungerbarPointReducer;
 

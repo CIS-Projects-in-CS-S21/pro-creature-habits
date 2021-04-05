@@ -1,8 +1,9 @@
-export const TIMECHANGE = 'TIMECHANGE';
+export const TIMEFEEDCHANGE = 'TIMEFEEDCHANGE';
 
 const timeofFeedReducer = (state = null, action) => {
 	switch (action.type) {
-		case TIMECHANGE:
+		case TIMEFEEDCHANGE:
+		    console.log("testing time "+ action.data);
 			return action.data;
 		default:
 			return state;

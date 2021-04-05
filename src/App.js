@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {Image, Text, View} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
-import hungerbarPointReduce from "./redux/hungerbarPoint";
+import hungerbarPointReducer from "./redux/hungerbarPoint";
 import funbarPointReducer from "./redux/funbarPoint";
 import hygienebarPointReducer from "./redux/hygienebarPoint"
 import timeofFeedReducer from "./redux/timeofFeed";
@@ -64,9 +64,9 @@ const reducer = combineReducers({
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
 	fun:funbarPointReducer,
-	hunger: hungerbarPointReduce,
+	hunger: hungerbarPointReducer,
 	hygiene: hygienebarPointReducer,
-	leastFeedTime: timeofFeedReducer
+	lastFedTime: timeofFeedReducer
 });
 
 const rootReducer = (state, action) => {

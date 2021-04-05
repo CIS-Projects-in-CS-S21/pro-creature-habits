@@ -15,7 +15,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 import hungerbarPointReduce, { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
-import {TIMECHANGE} from "../redux/timeofFeed"
+import {TIMEFEEDCHANGE} from "../redux/timeofFeed"
 import { StatsData } from '../components/StatsData';
 
 
@@ -156,7 +156,7 @@ const PetProfile = () => {
     const [textName, onChangeText] = React.useState('');
 
 
-    const time = useSelector(state=>state.lastFedTime);
+
 
 
     const findImage = () => {
@@ -183,15 +183,20 @@ const PetProfile = () => {
         		return string[0].toUpperCase() + string.slice(1);
         	}
 
-			const time = new Date();
-			const lastFeedhour= (time.getHours());
+            const time = useSelector(state=>state.lastFedTime);
+
+			const lastFeedHour= (time.getHours());
 			const currentHour= (time.getHours());
+
+			if (0 >= currentHour - lastFeedhour && currentHour - lastFeedhour >= 24){
+                dispatch({type: HUNGERBARDECREASE, data:2});
+            }
 
     	const handlePurchase = (item) => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
 					dispatch({type: SELECTED, data: 'select_food',thing: item});
-					dispatch({type: TIMECHANGE, data: lastFeedhour});
+					dispatch({type: TIMEFEEDCHANGE, data: lastFeedHour});
 					dispatch({type: HUNGERBARINCREASE, data:2});
 					alert( lastFeedhour);
 					playSound();
@@ -200,9 +205,7 @@ const PetProfile = () => {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
 					dispatch({type: FUNBARINCREASE, data:3});
 
-					if (0 >= currentHour - lastFeedhour && currentHour - lastFeedhour >= 24){
 
-					dispatch({type: HUNGERBARDECREASE, data:2});
 
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
@@ -244,6 +247,7 @@ const PetProfile = () => {
               const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});
                }
+
 
 	return (
 <ScrollView style={styles.container}>

@@ -2,6 +2,8 @@ import React from 'react';
 import {Text, View, Button, StyleSheet, Image, TextInput, TouchableHighlight} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
+import {TIMEFEEDCHANGE} from "../redux/timeofFeed"
+
 
 const styles = StyleSheet.create({
     container: {
@@ -51,6 +53,8 @@ const choosePetScreen = ({onSignUp}) => {
     const [petChoice,changePet] = React.useState('');
     const dispatch = useDispatch();
 
+
+
     const onPress = (animal) => {
 
         if (animal === "cat") {
@@ -71,6 +75,7 @@ const choosePetScreen = ({onSignUp}) => {
          console.log("test");
          const array = [text,petChoice];
     	dispatch({type: CHANGE, changes: array});
+    	dispatch({type: TIMEFEEDCHANGE, data: new Date()});
     }
 
     const onChangeHandler = event => {
