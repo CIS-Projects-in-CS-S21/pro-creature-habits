@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { Audio } from 'expo-av';
 
-import {SOUND_LOCATION, PLAY} from '../redux/soundPlayerSwitcher';
 import { useSelector } from 'react-redux';
 
 
@@ -25,28 +24,44 @@ button: {
   const [sound, setSound] = React.useState();*/
 
 
- // const SoundPlayer = () =>{
 
-  export function updateSoundLocation(uri) {
-    dispatch({type: SOUND_LOCATION, location: uri});
-  }
+
+  // List of sound effect require statements.
+  // Every time a new sound effect is added to the application, 
+  // a require statement needs to be added to this list
+
+
+  //Both of these are imported into whichever module needs audio, and 
+  //an element from soundEffectList is passed as a parameter from the 
+  // calling component to playSound, in which it is played.
+
+  // Unloading needs to happen here ASAP
+
+  //I am going to make this better, i promise. But for now, its a working solution to 
+  //app-wide sound effects.
   
-  export async function playSound(uri) {
-      
-    const location = uri;
-    console.log('Loading Sound');
-    const soundObj = await Audio.Sound.createAsync(
+  export const soundEffectList = {
+    ra: require('../components/ra.wav'),
+    moo: require('../components/moo.wav')
+  }
 
-        {uri: location}
+  export async function playSound(listItem) {
+    
+    const soundObj = new Audio.Sound();
+    
+    console.log('Loading Sound');
+    await soundObj.loadAsync(
+
+        listItem
 
     );
     
-  
+    
 
     console.log('Playing Sound');
-    await soundObj.sound.playAsync(); 
-
-    await soundObj.sound.unloadAsync();
+    await soundObj.playAsync(); 
+    
+    //await soundObj.unloadAsync();
   }
 
   

@@ -11,8 +11,7 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
-import {playSound, updateSoundLocation} from "../components/audio.js";
-import {SOUND_LOCATION} from "../redux/soundPlayerSwitcher";
+import {playSound, soundEffectList} from "../components/audio.js";
 
 
 
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
 
 const PetProfile = () => {
 
-	const soundPlayer = useContext(SoundContext);
+	
 
     const dispatch = useDispatch();
     const petImgChoice = useSelector(state => state.petDetails[1]);
@@ -192,7 +191,7 @@ const PetProfile = () => {
 					
 					
 					//updateSoundLocation('../components/ra.wav');
-					playSound('../components/ra.wav');
+					playSound(soundEffectList.moo);
 					
 					//playSound();
         		} else if (ItemInventory[item].category === 'toys') {
@@ -233,11 +232,11 @@ const PetProfile = () => {
                       console.log('Unloading Sound');
                       sound.unloadAsync(); }
                   : undefined;
-              }, [sound]);
+              }, [sound]); */
 
               const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});
-               } */
+               } 
 
 	return (
 <ScrollView style={styles.container}>
