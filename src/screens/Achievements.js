@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Modal, TouchableOpacity } from "react-native";
+import {Text, View, StyleSheet, Modal, TouchableOpacity, ScrollView} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {ACH_OFF} from "../redux/achievementsVisible";
 import AchievementsContainer from "../components/achievementsComponents/AchievementsContainer";
@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
 	modalButton: {
 		backgroundColor: '#402688',
 		padding: 15,
-		borderRadius: 10
+		borderRadius: 10,
+		marginBottom: 30
 	},
 	modalHeader: {
 		backgroundColor: '#406BE9',
@@ -43,18 +44,20 @@ const AchievementsScreen = () => {
 				transparent={false}
 				visible={useSelector(state=>state.achievementsVisible)}
 			>
-				<View style={styles.modalHeader}>
-					<Text style={styles.modalHeaderText}>Achievements</Text>
-				</View>
-				<AchievementsContainer/>
-				<View style={styles.modalContainer}>
-					<TouchableOpacity
-						onPress={() => dispatch({type: ACH_OFF})}
-						style={styles.modalButton}
-					>
-						<Text style={styles.text}>Close</Text>
-					</TouchableOpacity>
-				</View>
+				<ScrollView style={{backgroundColor: '#406BE9'}}>
+					<View style={styles.modalHeader}>
+						<Text style={styles.modalHeaderText}>Achievements</Text>
+					</View>
+					<AchievementsContainer/>
+					<View style={styles.modalContainer}>
+						<TouchableOpacity
+							onPress={() => dispatch({type: ACH_OFF})}
+							style={styles.modalButton}
+						>
+							<Text style={styles.text}>Close</Text>
+						</TouchableOpacity>
+					</View>
+				</ScrollView>
 			</Modal>
 		</View>
     );

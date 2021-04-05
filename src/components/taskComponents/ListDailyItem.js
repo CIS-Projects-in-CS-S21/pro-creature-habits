@@ -10,6 +10,8 @@ import {REMOVE_TASK_DAILY} from "../../redux/dailyTasks";
 import {DAILY_EDIT_ON} from "../../redux/editDailyTaskModal";
 import {SET_DAYS} from "../../redux/daysChecked";
 import {ADD_COMP_TASK_DAILY} from "../../redux/completedDailyTasks";
+import {INCREMENT_STAT} from "../../redux/statTracker";
+import {ACH_PROGRESS} from "../../redux/achievementsComplete";
 
 const styles = StyleSheet.create({
 	listItem: {
@@ -44,9 +46,11 @@ const ListDailyItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
-		dispatch({type: ADD_COMP_TASK_DAILY, data: task})
+		dispatch({type: ADD_COMP_TASK_DAILY, data: task});
 		dispatch({type: REMOVE_TASK_DAILY, data: index});
 		dispatch({type: REWARD, data: 5});
+		dispatch({type: ACH_PROGRESS, data: 'complete_daily_task'});
+		dispatch({type: INCREMENT_STAT, data: 'daily_tasks_completed'});
 		showMessage({
 			message: '5 coins have been added to your coin balance',
 			type: "success",
