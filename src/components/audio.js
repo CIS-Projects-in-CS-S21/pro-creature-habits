@@ -40,9 +40,12 @@ button: {
   //I am going to make this better, i promise. But for now, its a working solution to 
   //app-wide sound effects.
   
+
+  //maybe store this in redux?
   export const soundEffectList = {
     ra: require('../components/ra.wav'),
-    moo: require('../components/moo.wav')
+    moo: require('../components/moo.wav'),
+    something_old: require('../components/something_old.wav')
   }
 
   export async function playSound(listItem) {
