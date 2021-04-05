@@ -43,7 +43,7 @@ button: {
 
   //maybe store this in redux?
   export const soundEffectList = {
-    ra: require('../components/ra.wav'),
+    food_sound: require('../components/food_sound.wav'),
     moo: require('../components/moo.wav'),
     something_old: require('../components/something_old.wav')
   }

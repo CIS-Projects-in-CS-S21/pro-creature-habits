@@ -191,7 +191,7 @@ const PetProfile = () => {
 					
 					
 					//updateSoundLocation('../components/ra.wav');
-					playSound(soundEffectList.something_old);
+					playSound(soundEffectList.food_sound);
 					
 					//playSound();
         		} else if (ItemInventory[item].category === 'toys') {
