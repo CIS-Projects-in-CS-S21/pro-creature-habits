@@ -19,6 +19,7 @@ import SignUpScreen from "./screens/SignUp";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
+import TutorialScreen from "./screens/Tutorial"
 import {API_WEATHER_KEY} from "./components/Keys";
 import modalVisibleReducer from "./redux/modalVisible";
 import selectedMarketItemReducer from "./redux/selectedMarketItem";
@@ -186,11 +187,11 @@ const App = () => {
 								<SignInScreen {...props} onSignIn={handleSignIn} />
 							)}
 						</Stack.Screen>
-						<Stack.Screen name="Google Sign Up">
+						{/* <Stack.Screen name="Google Sign Up">
 							{(props) => (
 								<GoogleSignUpScreen {...props} onSignUp={handleSignUp} />
 							)}
-						</Stack.Screen>
+						</Stack.Screen> */}
 						<Stack.Screen name="Sign Up"
 						options={{
 								animationTypeForReplace: 'pop',
@@ -227,9 +228,16 @@ const App = () => {
 								<AccountCreationScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
+
 						<Stack.Screen name="Choose Pet">
 							{(props) => (
 								<ChoosePet {...props} onSignUp={handleSignUp} />
+							)}
+						</Stack.Screen>
+                        <Stack.Screen
+							name="Tutorial">
+							{(props) => (
+								<TutorialScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
 						<Stack.Screen name="Profile"

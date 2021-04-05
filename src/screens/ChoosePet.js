@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
 
 
 
-const choosePetScreen = ({onSignUp}) => {
+const choosePetScreen = ({onSignup, navigation}) => {
     const [text, onChangeText] = React.useState('');
     const [colorImage1, changeValue1] = React.useState('lightblue');
     const [colorImage2, changeValue2] = React.useState('lightblue');
@@ -118,7 +118,7 @@ const choosePetScreen = ({onSignUp}) => {
                         value={text}
             />
         </View>
-        <Button title="Submit" color="white" onPress={() => {submitData(); onSignUp();}}/>
+        <Button title="Submit" color="purple" onPress={() => {submitData(); navigation.navigate('Tutorial');}}/>
 
         </View>
     );

@@ -250,13 +250,13 @@ const convDateToString = (x) => {
 	})
 
 
-    sendNotificationImmediately = async () => {
-        let notificationId = await Notifications.presentLocalNotificationAsync({
-        title: "This is crazy",
-        body: "Your mind will blow after reading this"
-        });
-        console.log(notificationId); // can be saved in AsyncStorage or send to server
-    };
+    // sendNotificationImmediately = async () => {
+    //     let notificationId = await Notifications.presentLocalNotificationAsync({
+    //     title: "This is crazy",
+    //     body: "Your mind will blow after reading this"
+    //     });
+    //     console.log(notificationId); // can be saved in AsyncStorage or send to server
+    // };
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -423,12 +423,12 @@ const convDateToString = (x) => {
 				</View>
 
             {/*Send notification in console.log*/}
-            <View style={styles.container}>
+            {/* <View style={styles.container}>
                 <Button
                 title="Send Notification immediately"
                 onPress={() => this.sendNotificationImmediately()}
                 />
-            </View>
+            </View> */}
 
 
 			</View>
