@@ -13,6 +13,7 @@ import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
+import {INCREMENT_STAT} from "../redux/statTracker";
 
 
 
@@ -162,67 +163,69 @@ const PetProfile = () => {
 
 
 
-    	const changeFilter = (category) => {
-    	console.log("CHANGE FILTER")
-    		if(category === 'all') {
-    			dispatch({type: FILTER_ALL_PET});
-    		} else {
-    			dispatch({type: FILTER_PET, data: category});
-    		}
-    	}
+	const changeFilter = (category) => {
+	console.log("CHANGE FILTER")
+		if(category === 'all') {
+			dispatch({type: FILTER_ALL_PET});
+		} else {
+			dispatch({type: FILTER_PET, data: category});
+		}
+	}
 
-    	const upperCase = (string) => {
-        		return string[0].toUpperCase() + string.slice(1);
-        	}
+	const upperCase = (string) => {
+			return string[0].toUpperCase() + string.slice(1);
+		}
 
-    	const handlePurchase = (item) => {
-        		dispatch({type: OFF_PET});
-        		if(ItemInventory[item].category === 'food') {
-                    dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    playSound();
-        		} else if (ItemInventory[item].category === 'toys') {
-        			dispatch({type: SELECTED, data: 'select_toy',thing: item});
-        		} else {
-        			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
-        		}
+	const handlePurchase = (item) => {
+			dispatch({type: OFF_PET});
+			if(ItemInventory[item].category === 'food') {
+				dispatch({type: SELECTED, data: 'select_food',thing: item});
+				dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
+				playSound();
+			} else if (ItemInventory[item].category === 'toys') {
+				dispatch({type: SELECTED, data: 'select_toy',thing: item});
+			} else {
+				dispatch({type: SELECTED, data: 'select_clothes',thing: item});
+				dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
+			}
 
-        		showMessage({
-        			message: `${upperCase(ItemInventory[item].name)} has been used`,
-        			type: "success",
-        			statusBarHeight: 52,
-        		})
-        	}
+			showMessage({
+				message: `${upperCase(ItemInventory[item].name)} has been used`,
+				type: "success",
+				statusBarHeight: 52,
+			})
+		}
 
-        	const editPet = (name) => {
-                dispatch({type: CHANGENAME, changes: name});
-                dispatch({type:"OFF_PET"});
+	const editPet = (name) => {
+		dispatch({type: CHANGENAME, changes: name});
+		dispatch({type:"OFF_PET"});
 
-        	}
+	}
 
 
-        	const [sound, setSound] = React.useState();
+	const [sound, setSound] = React.useState();
 
-              async function playSound() {
-                console.log('Loading Sound');
-                const { sound } = await Audio.Sound.createAsync(
-                   require('../components/ra.wav')
-                );
-                setSound(sound);
+    async function playSound() {
+		console.log('Loading Sound');
+		const { sound } = await Audio.Sound.createAsync(
+		   require('../components/ra.wav')
+		);
+		setSound(sound);
 
-                console.log('Playing Sound');
-                await sound.playAsync(); }
+		console.log('Playing Sound');
+		await sound.playAsync(); }
 
-              React.useEffect(() => {
-                return sound
-                  ? () => {
-                      console.log('Unloading Sound');
-                      sound.unloadAsync(); }
-                  : undefined;
-              }, [sound]);
+		React.useEffect(() => {
+			return sound
+			  ? () => {
+				  console.log('Unloading Sound');
+				  sound.unloadAsync(); }
+			  : undefined;
+			}, [sound]);
 
-              const onUpdate = () =>{
-                    dispatch({type: ON_PET,data:"edit"});
-               }
+    const onUpdate = () =>{
+    	dispatch({type: ON_PET,data:"edit"});
+    }
 
 	return (
 <ScrollView style={styles.container}>

@@ -10,6 +10,8 @@ import {SET_DATE} from "../../redux/selectedDate";
 import {SET_INDEX} from "../../redux/taskEditIndex";
 import {useDispatch, useSelector} from "react-redux";
 import {ADD_COMP_TASK_ONE} from "../../redux/completedDatedTasks";
+import {INCREMENT_STAT} from "../../redux/statTracker";
+import {ACH_PROGRESS} from "../../redux/achievementsComplete";
 
 const styles = StyleSheet.create({
 	listItem: {
@@ -45,6 +47,8 @@ const ListDatedItem = ({task, index}) => {
 		dispatch({type: ADD_COMP_TASK_ONE, data: task});
 		dispatch({type: REMOVE_TASK_ONE, data: index});
 		dispatch({type: REWARD, data: 5});
+		dispatch({type: ACH_PROGRESS, data: 'complete_dated_task'});
+		dispatch({type: INCREMENT_STAT, data: 'dated_tasks_completed'});
 
 		showMessage({
 			message: '5 coins have been added to your coin balance',

@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
 const PetInventoryCards = (items) => {
 	const dispatch = useDispatch();
 	let names = [];
-for (const [key, value] of Object.entries(items.items)) {
-  if (items.items[key].show) {
-    names.push(key);
-  }
-}
+	for (const [key, value] of Object.entries(items.items)) {
+	  if (items.items[key].show) {
+		names.push(key);
+	  }
+	}
 
 	const onPress = (item) => {
 	    console.log("PRESSED ITEM "+item)

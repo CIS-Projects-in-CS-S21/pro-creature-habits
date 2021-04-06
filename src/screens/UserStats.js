@@ -6,18 +6,18 @@ import {STAT_OFF} from "../redux/statsVisible";
 const styles = StyleSheet.create({
     text: {
         color: 'white',
-		fontSize: 20
+		fontSize: 20,
     },
 	modalContainer: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#406BE9'
+		backgroundColor: '#406BE9',
 	},
 	modalButton: {
 		backgroundColor: '#402688',
 		padding: 15,
-		borderRadius: 10
+		borderRadius: 10,
 	},
 	modalHeader: {
 		backgroundColor: '#406BE9',
@@ -94,7 +94,7 @@ const StatsScreen = () => {
 							}
 							return (
 								<View key={index} style={styles.statContainer}>
-									<Text style={styles.text}>{stats[stat].name}:</Text>
+									<Text style={[styles.text, {width: '80%'}]}>{stats[stat].name}:</Text>
 									<Text style={styles.text}>{stats[stat].count}</Text>
 								</View>
 							)
