@@ -15,14 +15,15 @@ const styles = StyleSheet.create({
 		backgroundColor: '#406BE9',
 	},
 	text: {
-		color: 'white'
+		color: 'white',
+		fontSize: 20
 	},
 	input:{
 		width:"85%",
 		backgroundColor: "white",
 		marginBottom: 10,
 		padding: 15,
-		borderRadius: 5
+		borderRadius: 10
 	},
     buttonsContainer:{
 		flexDirection: "row",
@@ -31,16 +32,16 @@ const styles = StyleSheet.create({
 	},
 	button:{
 		padding: 10,
-		width: "25%",
+		width: "40%",
 		backgroundColor: '#402688',
 		alignItems: 'center',
 		margin: 10,
-		borderRadius: 5
+		borderRadius: 10
 	},
 });
 
 
-export default function CreatePINScreen({ onSignIn, navigation }){
+export default function CreatePINScreen({ navigation }){
 	const dispatch = useDispatch();
 
 
@@ -58,8 +59,8 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 	const [newHint, setNewHint] = React.useState('');
 		return (
 		  	<View style={styles.container}>
-				<Text style={{color: 'white', fontSize: 40, marginTop: '-20%', marginBottom: '20%'}}>
-					Creature Habits
+				<Text style={{color: 'white', fontSize: 40, marginTop: '-30%', marginBottom: '10%'}}>
+					PIN creation
 				</Text>
 				<TextInput
 					value={newPIN}
@@ -71,7 +72,7 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 				<TextInput
 					value={newHint}
 					onChangeText={newHint => setNewHint(newHint)}
-					placeholder={'Create PIN'}
+					placeholder={'Create Hint'}
 					style={styles.input}
 				/>
 				<View style={styles.buttonsContainer}>

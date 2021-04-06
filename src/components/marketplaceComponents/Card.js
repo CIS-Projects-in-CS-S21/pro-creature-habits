@@ -6,13 +6,15 @@ import {Ionicons} from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
 	cardContainer: {
-		borderWidth: 2,
-		padding: 8,
+		borderWidth: 3,
+		borderColor: 'lightgrey',
+		padding: 12,
 		backgroundColor: 'rgba(49,69,194,0.7)',
-		shadowOffset: {width: 0, height: 5},
+		shadowOffset: {width: 0, height: 1},
 		shadowOpacity: 0.8,
 		shadowRadius: 3,
-		elevation: 11
+		elevation: 11,
+		borderRadius: 5
 	},
 	cardFooter: {
 		flexDirection: 'row',
@@ -20,8 +22,8 @@ const styles = StyleSheet.create({
 		paddingLeft: 5,
 		paddingRight: 5,
 		marginTop: 5,
-		borderTopWidth: 1,
-		borderTopColor: 'white'
+		borderTopWidth: 2,
+		borderTopColor: 'darkgrey'
 	},
 	cardFooterText: {
 		fontSize: 20,

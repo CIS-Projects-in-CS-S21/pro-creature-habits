@@ -161,19 +161,7 @@ const MarketplaceScreen = () => {
         <ScrollView style={styles.container}>
 			<View style={styles.header}>
 				<Image style={styles.shopImage} source={require('../test_images/shop.png')}/>
-				<View style={styles.balanceContainer}>
-					<View style={styles.balanceText}>
-						<AnimatedNumbers
-							includeComma
-							animateToNumber={useSelector(state=>state.coins)}
-							fontStyle={{fontSize: 25, color: 'white'}}
-						/>
-					</View>
-					<Image
-						style={styles.coinImage}
-						source={require('../test_images/coin.png')}
-					/>
-				</View>
+
 			</View>
 			<DropDownPicker
 				items={[

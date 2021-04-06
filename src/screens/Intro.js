@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
 import {RESET_BUTTON_PRESSED} from "../App";
 import {useDispatch, useSelector} from "react-redux";
 const styles = StyleSheet.create({
@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#406BE9',
     },
     text: {
-        color: 'white'
+        color: 'white',
+		fontSize: 26
     },
     input:{
         width:"85%",
@@ -19,26 +20,22 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 5
     },
-    buttonsContainer:{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        padding: 10
-    },
     button:{
         padding: 10,
-        width: "25%",
+        width: "80%",
+		height: "7%",
         backgroundColor: '#402688',
         alignItems: 'center',
+		justifyContent: 'center',
         margin: 10,
-        borderRadius: 5
+        borderRadius: 10
     },
 });
 
 
-export default function IntroScreen({ onSignIn, navigation }){
+export default function IntroScreen({ navigation }){
     const dispatch = useDispatch();
     const first = useSelector(state => state.firstLogin);
-    console.log(first);
 
 
     const onStart = () => {
@@ -50,20 +47,18 @@ export default function IntroScreen({ onSignIn, navigation }){
         }
     }
 
-    
+
     return (
         <View style={styles.container}>
-            <Text style={{color: 'white', fontSize: 40, marginTop: '-20%', marginBottom: '20%'}}>
+            <Text style={{color: 'white', fontSize: 40, marginTop: '-30%', marginBottom: '30%'}}>
                 Creature Habits
             </Text>
-            <View style={styles.buttonsContainer}>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={onStart}
-                >
-                    <Text style={styles.text}>Get started</Text>
-                </TouchableOpacity>
-            </View>
+			<TouchableOpacity
+				style={styles.button}
+				onPress={onStart}
+			>
+				<Text style={styles.text}>Get started</Text>
+			</TouchableOpacity>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => dispatch({type: RESET_BUTTON_PRESSED})}
