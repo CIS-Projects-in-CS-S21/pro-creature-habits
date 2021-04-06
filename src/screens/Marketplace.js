@@ -6,7 +6,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import Cards from "../components/marketplaceComponents/Cards";
 import {OFF} from "../redux/modalVisible";
 import {ItemInventory} from "../components/ItemInventory";
-import {BUY} from "../redux/coinBalance";
+import {BUY, DEBUG_REVERT} from "../redux/coinBalance";
 import {ADD} from "../redux/petInventory";
 
 import { showMessage } from "react-native-flash-message";
@@ -119,6 +119,15 @@ const MarketplaceScreen = () => {
 	const selectedItem = useSelector(state=>state.selectedMarketItem);
 	const achievements = useSelector(state=>state.achievements);
 
+	//debug functionality below
+
+	const debugBalanceReset = () => {
+		dispatch({type: DEBUG_REVERT});
+	}
+
+
+
+
 	const changeFilter = (category) => {
 		if(category === 'all') {
 			dispatch({type: FILTER_ALL});
@@ -161,6 +170,11 @@ const MarketplaceScreen = () => {
         <ScrollView style={styles.container}>
 			<View style={styles.header}>
 				<Image style={styles.shopImage} source={require('../test_images/shop.png')}/>
+				
+				{// vvvvvv debug pressable, remove later vvvvv //
+				}
+
+				<Pressable onPress={() => dispatch({type: DEBUG_REVERT})}>
 				<View style={styles.balanceContainer}>
 					<View style={styles.balanceText}>
 						<AnimatedNumbers
@@ -174,6 +188,11 @@ const MarketplaceScreen = () => {
 						source={require('../test_images/coin.png')}
 					/>
 				</View>
+				</Pressable>
+				
+				{// ^^^^^^^ debug pressable, remove later ^^^^^//
+				}
+
 			</View>
 			<DropDownPicker
 				items={[

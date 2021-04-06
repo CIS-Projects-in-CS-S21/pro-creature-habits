@@ -186,19 +186,16 @@ const PetProfile = () => {
         		dispatch({type: OFF_PET});
         		if(ItemInventory[item].category === 'food') {
                     dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    
-					//dispatch({type: SOUND_LOCATION, location: '../components/ra.wav'});
-					
-					
-					//updateSoundLocation('../components/ra.wav');
 					playSound(soundEffectList.food_sound);
 					
-					//playSound();
+					
         		} else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
+					
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
-        		}
+					playSound(soundEffectList.clothes_sound);
+				}
 
         		showMessage({
         			message: `${upperCase(ItemInventory[item].name)} has been used`,
