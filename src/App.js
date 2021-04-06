@@ -16,6 +16,7 @@ import HomeTabs from "./components/HomeTabs";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
 import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
+import TutorialScreen from "./screens/Tutorial";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
 import modalVisibleReducer from "./redux/modalVisible";
@@ -263,6 +264,11 @@ const App = () => {
 						<Stack.Screen name="Choose Pet">
 							{(props) => (
 								<ChoosePet {...props} onSignUp={handleSignUp} />
+							)}
+						</Stack.Screen>
+                        <Stack.Screen name="App Tutorial">
+							{(props) => (
+								<TutorialScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
 						<Stack.Screen name="Profile"
