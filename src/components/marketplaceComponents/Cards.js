@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 	},
 	cardsContainer: {
 		flexDirection: 'row',
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
 		marginTop: 10,
 		flexWrap: 'wrap',
 	},

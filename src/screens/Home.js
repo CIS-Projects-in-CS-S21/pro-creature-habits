@@ -7,7 +7,7 @@ import {
 	TouchableHighlight,
 	Image
 } from 'react-native'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import { FloatingAction } from "react-native-floating-action";
 import {TASK_ON} from "../redux/createTaskModal";
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
 
 const Home = () => {
 	const dispatch = useDispatch();
+	const taskFilter = useSelector(state=>state.taskFilter)
 
 	const [selectedButton, setSelectedButton] = React.useState(0);
 
@@ -84,32 +85,23 @@ const Home = () => {
 		}
 	];
 
-	const onFilterPress = (button) => {
-		setSelectedButton(button);
-	}
 
 	return (
   		<View style={{flex: 1}}>
 			<View style={styles.filterButtonsContainer}>
 				<TouchableHighlight
-					style={[styles.filterButton, selectedButton === 0 ? {backgroundColor: 'white'} : {}]}
-					onPress={() => {
-						onFilterPress(0);
-						dispatch({type: DAILY})
-					}}
+					style={[styles.filterButton, taskFilter === 'daily' ? {backgroundColor: 'white'} : {}]}
+					onPress={() => dispatch({type: DAILY})}
 					underlayColor={'lightgrey'}
 				>
-					<Text style={[styles.filterButtonText, selectedButton === 0 ? {color: '#402688'} : {}]}>Daily Tasks</Text>
+					<Text style={[styles.filterButtonText, taskFilter === 'daily' ? {color: '#402688'} : {}]}>Daily Tasks</Text>
 				</TouchableHighlight>
 				<TouchableHighlight
-					style={[styles.filterButton, selectedButton === 1 ? {backgroundColor: 'white'} : {}]}
-					onPress={() => {
-						onFilterPress(1);
-						dispatch({type: DATED})
-					}}
+					style={[styles.filterButton, taskFilter === 'dated' ? {backgroundColor: 'white'} : {}]}
+					onPress={() => dispatch({type: DATED})}
 					underlayColor={'lightgrey'}
 				>
-					<Text style={[styles.filterButtonText, selectedButton === 1 ? {color: '#402688'} : {}]}>Dated Tasks</Text>
+					<Text style={[styles.filterButtonText, taskFilter === 'dated' ? {color: '#402688'} : {}]}>Dated Tasks</Text>
 				</TouchableHighlight>
 			</View>
 			<ScrollView style={styles.scrollContainer}>

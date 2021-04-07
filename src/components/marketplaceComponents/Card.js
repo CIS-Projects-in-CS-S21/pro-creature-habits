@@ -7,7 +7,7 @@ import {Ionicons} from "@expo/vector-icons";
 const styles = StyleSheet.create({
 	cardContainer: {
 		borderWidth: 3,
-		borderColor: 'lightgrey',
+		borderColor: 'white',
 		padding: 12,
 		backgroundColor: 'rgba(49,69,194,0.7)',
 		shadowOffset: {width: 0, height: 1},

@@ -80,7 +80,7 @@ const ListTasks = () => {
 					style={{padding: '4%', flexDirection: 'row', justifyContent: 'space-between'}}
 
 				>
-					<Text style={{color: 'white', fontSize: 30}}>Completed Today({completedDailyTasks.length})</Text>
+					<Text style={{color: 'white', fontSize: 30}}>Completed Today ({completedDailyTasks.length})</Text>
 					{isDailyCollapsed ? (
 						<MaterialIcons name='arrow-drop-down' color='white' size={40}/>
 					) : (

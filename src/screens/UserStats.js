@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 		flexGrow: 1,
 		paddingTop: 5,
 		borderColor: 'white',
-		shadowOffset: {width: 0, height: 5},
+		shadowOffset: {width: 0, height: 2},
 		shadowOpacity: 0.8,
 		shadowRadius: 3,
 		elevation: 11,

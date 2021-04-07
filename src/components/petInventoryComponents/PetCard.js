@@ -6,7 +6,7 @@ import {ItemInventory} from "../ItemInventory";
 const styles = StyleSheet.create({
 	cardContainer: {
 		borderWidth: 3,
-		borderColor: 'lightgrey',
+		borderColor: 'white',
 		padding: 10,
 		backgroundColor: 'rgba(49,69,194,0.7)',
 		shadowOffset: {width: 0, height: 1},
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white'
     },
 	itemImage: {
-		width:70,
-		height:70,
+		width:75,
+		height:75,
 		shadowOffset: {width: 0, height: 1},
 		shadowOpacity: 0.8,
 		shadowRadius: 3,
