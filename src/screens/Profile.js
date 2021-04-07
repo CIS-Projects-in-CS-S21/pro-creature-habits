@@ -13,9 +13,9 @@ import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
-import hungerbarPointReduce, { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
+import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
-import {TIMEFEEDCHANGE} from "../redux/timeofFeed"
+import {TIMEFEEDCHANGE} from "../redux/timeofFeed";
 import { StatsData } from '../components/StatsData';
 
 
@@ -183,6 +183,7 @@ const PetProfile = () => {
         		return string[0].toUpperCase() + string.slice(1);
         	}
 
+/*
             const time = useSelector(state=>state.lastFedTime);
 
 			const lastFeedHour= (time.getHours());
@@ -190,7 +191,13 @@ const PetProfile = () => {
 
 			if (0 >= currentHour - lastFeedhour && currentHour - lastFeedhour >= 24){
                 dispatch({type: HUNGERBARDECREASE, data:2});
-            }
+            }*/
+
+			const time = new Date();
+			const lastFeedhour= (time.getHours());
+			const currentHour= (time.getHours());
+
+
 
     	const handlePurchase = (item) => {
         		dispatch({type: OFF_PET});
@@ -198,15 +205,23 @@ const PetProfile = () => {
 					dispatch({type: SELECTED, data: 'select_food',thing: item});
 					dispatch({type: TIMEFEEDCHANGE, data: lastFeedHour});
 					dispatch({type: HUNGERBARINCREASE, data:2});
-					alert( lastFeedhour);
+					//alert( lastFeedhour);
 					playSound();
+
+					sampleVar = setTimeout(() => {
+						dispatch({type: HUNGERBARDECREASE, data:3});
+					  }, 1000*60);
 				}
 				 else if (ItemInventory[item].category === 'toys') {
         			dispatch({type: SELECTED, data: 'select_toy',thing: item});
 					dispatch({type: FUNBARINCREASE, data:3});
 
-
-
+					sample1Var = setTimeout(() => {
+						dispatch({type: FUNBARDECREASE, data:4});
+					  }, 1000*60);
+					/*
+					  if (0 >= currentHour - lastFeedhour && currentHour - lastFeedhour >= 24){
+						dispatch({type: HUNGERBARDECREASE, data:2});}*/
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
         		}
@@ -221,9 +236,7 @@ const PetProfile = () => {
         	const editPet = (name) => {
                 dispatch({type: CHANGENAME, changes: name});
                 dispatch({type:"OFF_PET"});
-
-        	}
-		}
+			}
         	const [sound, setSound] = React.useState();
 
               async function playSound() {
@@ -247,8 +260,6 @@ const PetProfile = () => {
               const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});
                }
-
-
 	return (
 <ScrollView style={styles.container}>
             <View style = {styles.centeredView2}>
