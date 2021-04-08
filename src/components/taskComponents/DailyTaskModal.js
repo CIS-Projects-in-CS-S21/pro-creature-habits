@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {Button, Modal, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
+import {Modal, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import {SET_TASK_TEXT} from "../../redux/taskInput";
 import CheckboxGroup from "./CheckboxGroup";
 import {DAILY_TASK_OFF} from "../../redux/dailyTaskModal";

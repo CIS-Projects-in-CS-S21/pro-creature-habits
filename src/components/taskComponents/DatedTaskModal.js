@@ -5,7 +5,7 @@ import CalendarPicker from "react-native-calendar-picker";
 import {TASK_OFF} from "../../redux/createTaskModal";
 import React from "react";
 import {SET_DATE} from "../../redux/selectedDate";
-import {ADD_TASK_ONE} from "../../redux/oneTimeTasks";
+import {ADD_TASK_ONE} from "../../redux/datedTasks";
 import {DAILY_TASK_OFF} from "../../redux/dailyTaskModal";
 
 const styles = StyleSheet.create({

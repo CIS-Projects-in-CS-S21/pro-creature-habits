@@ -6,7 +6,7 @@ import React from "react";
 import {EDIT_OFF} from "../../redux/editTaskModal";
 import {SET_DATE} from "../../redux/selectedDate";
 import {SET_INDEX} from "../../redux/taskEditIndex";
-import {EDIT_TASK_ONE} from "../../redux/oneTimeTasks";
+import {EDIT_TASK_ONE} from "../../redux/datedTasks";
 
 const styles = StyleSheet.create({
 	centeredView: {

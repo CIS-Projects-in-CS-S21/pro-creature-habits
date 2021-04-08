@@ -32,7 +32,7 @@ import selectedPetItemReducer from "./redux/selectedPetItem";
 import { persistStore, persistReducer } from 'redux-persist';
 import modalTaskReducer from "./redux/createTaskModal";
 import editTaskReducer from "./redux/editTaskModal";
-import oneTimeTasksReducer from "./redux/oneTimeTasks";
+import datedTasksReducer from "./redux/datedTasks"
 import selectedDateReducer from "./redux/selectedDate";
 import taskEditIndexReducer from "./redux/taskEditIndex";
 import taskInputReducer from "./redux/taskInput";
@@ -50,8 +50,7 @@ import daysCheckedReducer from "./redux/daysChecked";
 import dailyTasksReducer from "./redux/dailyTasks";
 import taskFilterReducer from "./redux/taskFilter";
 import editDailyReducer from "./redux/editDailyTaskModal";
-import completedDatedTasksReducer from "./redux/completedDatedTasks";
-import completedDailyTasksReducer from "./redux/completedDailyTasks";
+import currentDayReducer from "./redux/currentDay";
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -78,7 +77,7 @@ const reducer = combineReducers({
 	pintHint: hintReducer,
 	taskCreateVisible: modalTaskReducer,
 	editTaskVisible: editTaskReducer,
-	oneTimeTasks: oneTimeTasksReducer,
+	datedTasks: datedTasksReducer,
 	selectedDate: selectedDateReducer,
 	taskEditIndex: taskEditIndexReducer,
 	taskInput: taskInputReducer,
@@ -87,8 +86,7 @@ const reducer = combineReducers({
 	dailyTasks: dailyTasksReducer,
 	taskFilter: taskFilterReducer,
 	dailyEditModal: editDailyReducer,
-	completedDatedTasks: completedDatedTasksReducer,
-	completedDailyTasks: completedDailyTasksReducer
+	currentDay: currentDayReducer
 });
 
 const styles = StyleSheet.create({
@@ -121,6 +119,9 @@ const pReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(pReducer);
 const persistor = persistStore(store);
 
+
+
+
 const App = () => {
 	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 	const [temperature, setTemperature] = React.useState(null);
@@ -142,13 +143,16 @@ const App = () => {
 		);
 	};
 
+
+
 	React.useEffect(() => {
 		getWeather();
 		const interval = setInterval(() => {
 			getWeather();
 		}, 60000);
 		return () => clearInterval(interval);
-	}, [])
+	}, []);
+
 
 	const handleSignIn = () => {
 		setIsAuthenticated(true);

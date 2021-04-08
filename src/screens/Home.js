@@ -65,10 +65,7 @@ const styles = StyleSheet.create({
 
 const Home = () => {
 	const dispatch = useDispatch();
-	const taskFilter = useSelector(state=>state.taskFilter)
-
-	const [selectedButton, setSelectedButton] = React.useState(0);
-
+	const taskFilter = useSelector(state=>state.taskFilter);
 
 	const actions = [
 		{
@@ -114,7 +111,11 @@ const Home = () => {
 			<FloatingAction
 				actions={actions}
 				onPressItem={name => {
-					name === 'bt_one_time' ? dispatch({type: TASK_ON}) : dispatch({type: DAILY_TASK_ON})
+					if(name === 'bt_one_time') {
+						dispatch({type: TASK_ON})
+					} else {
+						dispatch({type: DAILY_TASK_ON})
+					}
 				}}
 			/>
 			<Image source={require('./doggo.gif')} style={{position: 'absolute', left: 25, bottom: 25, height: 55, width: 70}}/>

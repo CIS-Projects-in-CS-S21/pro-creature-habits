@@ -1,15 +1,14 @@
 import {Text, TouchableOpacity, View, StyleSheet} from "react-native";
-import {Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 import React from "react";
 import {showMessage} from "react-native-flash-message";
 import {REWARD} from "../../redux/coinBalance";
 import {SET_TASK_TEXT} from "../../redux/taskInput";
 import {SET_INDEX} from "../../redux/taskEditIndex";
 import {useDispatch, useSelector} from "react-redux";
-import {REMOVE_TASK_DAILY} from "../../redux/dailyTasks";
+import {COMPLETE_DAILY_TASK, REMOVE_TASK_DAILY} from "../../redux/dailyTasks";
 import {DAILY_EDIT_ON} from "../../redux/editDailyTaskModal";
 import {SET_DAYS} from "../../redux/daysChecked";
-import {ADD_COMP_TASK_DAILY} from "../../redux/completedDailyTasks";
 import {INCREMENT_STAT} from "../../redux/statTracker";
 import {ACH_PROGRESS} from "../../redux/achievementsComplete";
 
@@ -31,7 +30,8 @@ const styles = StyleSheet.create({
 
 const ListDailyItem = ({task, index}) => {
 	const iconSize = 30;
-	const taskDays = useSelector(state => state.dailyTasks)[index].days;
+	const dailyTask = useSelector(state=>state.dailyTasks)[index];
+	const taskDays = dailyTask.days;
 	const listLongDays = Object.keys(taskDays).filter(day => taskDays[day].on);
 	const listDays = listLongDays.map(day => day.substring(0,3));
 	const dispatch = useDispatch();
@@ -46,8 +46,7 @@ const ListDailyItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
-		dispatch({type: ADD_COMP_TASK_DAILY, data: task});
-		dispatch({type: REMOVE_TASK_DAILY, data: index});
+		dispatch({type: COMPLETE_DAILY_TASK, data: index});
 		dispatch({type: REWARD, data: 5});
 		dispatch({type: ACH_PROGRESS, data: 'complete_daily_task'});
 		dispatch({type: INCREMENT_STAT, data: 'daily_tasks_completed'});
