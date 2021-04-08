@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import UserInfo from "../databases/UserInfo";
 import {OFF} from "../redux/modalVisible";
-import {RESET_BUTTON_PRESSED} from "../App";
+import {RESET_BUTTON_PRESSED} from "../AppUnwrapped";
 import {FIRST} from "../redux/firstLogin";
 import {CREATE_PIN} from "../redux/createPIN";
 import {CREATE_HINT} from "../redux/hint";

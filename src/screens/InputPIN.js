@@ -4,7 +4,7 @@ import UserInfo from "../databases/UserInfo";
 import {useSelector} from "react-redux";
 import {showMessage} from "react-native-flash-message";
 import {ItemInventory} from "../components/ItemInventory";
-import {RESET_BUTTON_PRESSED} from "../App";
+import {RESET_BUTTON_PRESSED} from "../AppUnwrapped";
 
 const styles = StyleSheet.create({
 	container: {
