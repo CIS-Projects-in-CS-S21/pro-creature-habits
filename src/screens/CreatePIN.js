@@ -44,6 +44,11 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 	const dispatch = useDispatch();
 
 
+	/**
+	 * Dispatches firstLoginReducer, pinReducer, and hintReducer. Also navigates to "Choose Pet" screen
+	 * @method onCreatePIN
+	 */
+
 
 	const onCreatePIN = () => {
 		console.log(newPIN);
