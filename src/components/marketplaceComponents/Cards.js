@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
 	cardsContainer: {
 		flexDirection: 'row',
 		justifyContent: 'center',
-		marginTop: 10,
 		flexWrap: 'wrap',
+		paddingTop: '5%',
 	},
 	highlightContainer: {
 		margin: 10,
