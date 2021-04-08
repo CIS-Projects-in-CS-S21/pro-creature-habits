@@ -1,7 +1,7 @@
 export const FUNBARINCREASE = 'FUNBARINCREASE';
 export const FUNBARDECREASE = 'FUNBARDECREASE';
 
-const funbarPointReducer = (state = 10, action) => {
+const funbarPointReducer = (state = 5, action) => {
 	switch (action.type) {
 		case FUNBARINCREASE :
 			return state + action.data;

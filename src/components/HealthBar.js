@@ -38,6 +38,14 @@ const styles = StyleSheet.create({
 });
 
 
+			const currentTime = new Date();
+			const lastFedTime = useSelector(state=>state.lastFedTime);
+            if ((currentTime-lastFedTime)/1000 >= 5) {
+                console.log("updating time");
+                dispatch({type: TIMEFEEDCHANGE, data: currentTime});
+                dispatch({type: HUNGERBARDECREASE, data:2});
+            }
+
 const HealthBar = ({bar,progress}) => {
   const hunger = useSelector(state=>state.hunger);
   const fun = useSelector(state=>state.fun);

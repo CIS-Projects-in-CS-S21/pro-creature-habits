@@ -1,7 +1,7 @@
 export const HYGIENEBARINCREASE = 'HYGIENEBARINCREASE';
 export const HYGIENEBARDECREASE = 'HYGIENEBARDECREASE';
 
-const hygienebarPointReducer = (state = 10, action) => {
+const hygienebarPointReducer = (state = 5, action) => {
 	switch (action.type) {
 		case HYGIENEBARINCREASE :
 			return state + action.data;
