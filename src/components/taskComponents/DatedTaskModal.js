@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: 22
+		marginTop: 22,
 	},
 	modalView: {
 		margin: 10,
-		backgroundColor: '#402688',
+		backgroundColor: '#341f6f',
 		padding: 35,
 		alignItems: "center",
 		shadowColor: "#000",
@@ -27,23 +27,23 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 4,
-		elevation: 5
-	},
-	buttonClose: {
-		backgroundColor: "#2196F3",
+		elevation: 5,
+		borderRadius: 10,
+		borderWidth: 1,
+		borderColor: '#7276e3'
 	},
 	button: {
-		borderRadius: 7,
-		width: '75%',
-		alignItems: 'center',
+		borderRadius: 10,
 		padding: 10,
 		elevation: 2,
+		alignItems: 'center',
 		justifyContent: 'center',
-		flexDirection: 'row',
+		backgroundColor: "#2196F3"
 	},
 	modalFooter: {
 		flexDirection: 'row',
-		paddingTop: 15
+		paddingTop: 15,
+		width: "80%",
 	}
 });
 
@@ -89,13 +89,18 @@ const DatedTaskModal = () => {
 							textStyle={{color: 'white'}}
 						/>
 					</View>
-					<Button title='submit'  color="#637ed0" onPress={() => onSubmit(taskText)} />
 					<View style={styles.modalFooter}>
 						<Pressable
-							style={[styles.button, styles.buttonClose]}
+							style={[styles.button, {marginRight: '40%'}]}
 							onPress={() => dispatch({type: TASK_OFF})}
 						>
 							<Text style={{color: 'white'}}>Cancel</Text>
+						</Pressable>
+						<Pressable
+							style={styles.button}
+							onPress={() => onSubmit(taskText)}
+						>
+							<Text style={{color: 'white'}}>Submit</Text>
 						</Pressable>
 					</View>
 				</View>

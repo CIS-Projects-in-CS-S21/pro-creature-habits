@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 		margin: '3%',
 		marginTop: 0,
 		borderRadius: 10,
-		backgroundColor: '#848484',
+		backgroundColor: '#8599ff',
 		flexDirection: 'row',
 		alignItems: 'center'
 	},

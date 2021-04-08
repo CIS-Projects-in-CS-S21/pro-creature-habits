@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
 	},
 	cardsContainer: {
 		flexDirection: 'row',
-		justifyContent: 'space-evenly',
 		marginTop: 10,
 		flexWrap: 'wrap',
-		alignContent: 'flex-end'
+		justifyContent: 'center'
 	},
 	highlightContainer: {
 		alignSelf: 'flex-end',
-		margin: 10
+		margin: 10,
+		borderRadius: 5
 	}
 });
 

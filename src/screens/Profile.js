@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         paddingTop: 5,
-        paddingRight:20,
+        paddingRight: 5,
     },
     text2: {
             color: 'black',
@@ -39,18 +39,16 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderWidth: 2,
-        		borderColor: "white",
-        		borderRadius: 20,
-        		padding: 8,
-        		backgroundColor: "lightblue",
-        		margin: 10
+		borderColor: "white",
+		borderRadius: 20,
+		padding: 8,
+		backgroundColor: "lightblue",
+		margin: 10
     },
     imageContainer: {
             flexDirection: 'row',
-    		justifyContent: 'space-evenly',
+    		justifyContent: 'space-around',
     		marginTop: 20,
-    		flexWrap: 'wrap',
-    		alignContent: 'flex-end'
     },
     balanceContainer: {
     		flexDirection: 'row',
@@ -84,9 +82,9 @@ const styles = StyleSheet.create({
     	},
     	modalView: {
         		margin: 10,
-        		backgroundColor: '#402688',
+				backgroundColor: '#341f6f',
         		borderRadius: 10,
-        		padding: 35,
+        		padding: 20,
         		alignItems: "center",
         		shadowColor: "#000",
         		shadowOffset: {
@@ -95,7 +93,9 @@ const styles = StyleSheet.create({
         		},
         		shadowOpacity: 0.25,
         		shadowRadius: 4,
-        		elevation: 5
+        		elevation: 5,
+				borderWidth: 1,
+				borderColor: '#7276e3'
         	},
         	buttonClose: {
         		backgroundColor: "#2196F3",
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
             		padding: 3
             	},
             	textStyle: {
-                	color: 'white'
+                	color: 'white',
             	},
             	centeredView: {
                 		flex: 1,
@@ -230,23 +230,28 @@ const PetProfile = () => {
 	return (
 <ScrollView style={styles.container}>
             <View style = {styles.centeredView2}>
-			<Text style={styles.text}>
-			{useSelector(state => state.petDetails[0])}
-			</Text>
-			<TouchableOpacity onPress={onUpdate}>
-                    <MaterialCommunityIcons
-                    name = "pencil"
-                    size = {30}
-                    style={{color:"#637ed0"}}/>
-                    </TouchableOpacity>
-            </View>
-			<View style={styles.imageContainer}>
+				<View style={styles.imageContainer}>
+					<View style={{flexDirection: 'column', alignItems: 'center', paddingRight: 40}}>
+						<PetImage items={useSelector(state => state.petInv)}/>
+						<View style={{flexDirection: 'row', alignItems: 'center'}}>
+							<Text style={styles.text}>
+								{useSelector(state => state.petDetails[0])}
+							</Text>
+							<TouchableOpacity onPress={onUpdate}>
+								<MaterialCommunityIcons
+									name = "pencil"
+									size = {20}
+									style={{color:"white"}}/>
+							</TouchableOpacity>
+						</View>
+					</View>
+					<View style={styles.healthbarContainer}>
+						<HealthBar/>
+					</View>
+				</View>
+			</View>
 
-            <PetImage items={useSelector(state => state.petInv)}/>
-            <View style={styles.healthbarContainer}>
-                <HealthBar/>
-            </View>
-            </View>
+
 			<DropDownPicker
 				items={[
 					{label: 'All', value: 'all'},

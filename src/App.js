@@ -1,20 +1,19 @@
 import React from 'react';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Image, Text, View} from "react-native";
+import {Image, Text, View, StyleSheet} from "react-native";
 import 'react-native-gesture-handler';
 import balanceReducer from "./redux/coinBalance";
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
 import petInventoryReducer from "./redux/petInventory";
 import petInfoReducer from "./redux/petInfo";
 import { createStore } from "redux";
-import { Provider } from 'react-redux'
+import {Provider, useSelector} from 'react-redux'
 import { combineReducers } from "redux";
 
 
 import HomeTabs from "./components/HomeTabs";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
-import AccountCreationScreen from "./screens/AccountCreation";
 import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
@@ -92,6 +91,18 @@ const reducer = combineReducers({
 	completedDailyTasks: completedDailyTasksReducer
 });
 
+const styles = StyleSheet.create({
+	balanceContainer: {
+		flexDirection: 'row',
+		margin: 10,
+		marginBottom: 15
+	},
+	coinImage: {
+		height: 30,
+		width: 30,
+	},
+})
+
 const rootReducer = (state, action) => {
 	if (action.type === RESET_BUTTON_PRESSED) {
 		persistConfig.storage.removeItem('persist:root')
@@ -135,7 +146,7 @@ const App = () => {
 		getWeather();
 		const interval = setInterval(() => {
 			getWeather();
-		}, 10000);
+		}, 60000);
 		return () => clearInterval(interval);
 	}, [])
 
@@ -186,6 +197,15 @@ const App = () => {
 										<Text style={{color: 'white', fontSize: 25, marginTop: 10, }}>{Math.round(temperature)}&deg;F</Text>
 									</View>
 								),
+								headerRight: () => (
+									<View style={styles.balanceContainer}>
+										<Text style={{fontSize: 25, color: 'white'}}>{useSelector(state=>state.coins)}</Text>
+										<Image
+											style={styles.coinImage}
+											source={require('./test_images/coin.png')}
+										/>
+									</View>
+								),
 								headerStyle : {
 									backgroundColor: '#402688',
 									shadowOpacity: 0,
@@ -195,7 +215,12 @@ const App = () => {
 						/>
 					) : (
 						<>
-						<Stack.Screen name="Intro">
+						<Stack.Screen
+							name="Intro"
+							options={{
+								headerShown: false
+							}}
+						>
 							{(props) => (
 								<IntroScreen {...props} onSignUp={handleSignUp} />
 							)}
@@ -203,17 +228,7 @@ const App = () => {
 						<Stack.Screen
 							name="Create PIN"
 							options={{
-								animationTypeForReplace: 'pop',
-								headerTitle: () => (
-									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Create PIN
-									</Text>
-								),
-								headerStyle : {
-									backgroundColor: '#402688',
-									shadowOpacity: 0,
-									height: 100
-								},
+								headerShown: false
 							}}>
 							{(props) => (
 								<CreatePINScreen {...props} onSignIn={handleSignIn} />
@@ -226,41 +241,18 @@ const App = () => {
 						</Stack.Screen>
 						<Stack.Screen name="Input PIN"
 						options={{
-								animationTypeForReplace: 'pop',
-								headerTitle: () => (
-									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Input PIN
-									</Text>
-								),
-								headerStyle : {
-									backgroundColor: '#402688',
-									shadowOpacity: 0,
-									height: 100
-								},
+								headerShown: false
 							}} >
 							{(props) => (
 								<InputPINScreen {...props} onSignUp={handleSignUp} />
 							)}
 						</Stack.Screen>
 						<Stack.Screen
-							name="Account Creation"
+							name="Choose Pet"
 							options={{
-								headerTitle: () => (
-									<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
-										Account Creation
-									</Text>
-								),
-								headerStyle : {
-									backgroundColor: '#402688',
-									shadowOpacity: 0,
-									height: 100
-								},
-							}}>
-							{(props) => (
-								<AccountCreationScreen {...props} onSignUp={handleSignUp} />
-							)}
-						</Stack.Screen>
-						<Stack.Screen name="Choose Pet">
+								headerShown: false
+							}}
+						>
 							{(props) => (
 								<ChoosePet {...props} onSignUp={handleSignUp} />
 							)}
