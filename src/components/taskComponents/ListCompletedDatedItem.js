@@ -1,6 +1,9 @@
-import {Text, View, StyleSheet} from "react-native";
+import {Text, View, StyleSheet, TouchableOpacity} from "react-native";
 import React from "react";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {useDispatch} from "react-redux";
+import {showMessage} from "react-native-flash-message";
+import {REMOVE_TASK_ONE} from "../../redux/datedTasks";
 
 const styles = StyleSheet.create({
 	listItem: {
@@ -12,13 +15,14 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		backgroundColor: '#8599ff',
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'space-between'
 	},
 	taskText: {
 		color: 'white',
 		fontSize: 20,
 		alignItems: 'center',
-		width: 180,
+		width: 230,
 		textDecorationLine: 'line-through'
 	},
 	dateText: {
@@ -32,9 +36,19 @@ const styles = StyleSheet.create({
 });
 
 
-const ListCompletedDatedItem = ({task}) => {
+const ListCompletedDatedItem = ({task, index}) => {
 
 	const taskDate = new Date(task.date).toString().split(" ").slice(0,4).join(" ");
+	const dispatch = useDispatch();
+
+	const onDelete = (index) => {
+		dispatch({type: REMOVE_TASK_ONE, data: index});
+		showMessage({
+			message: 'task deleted',
+			type: "danger",
+			statusBarHeight: 52,
+		});
+	}
 
 	return(
 		<View style={styles.listItem}>
@@ -49,6 +63,17 @@ const ListCompletedDatedItem = ({task}) => {
 				<Text style={styles.dateText} color='white'>
 					{'Due: ' + taskDate}
 				</Text>
+			</View>
+			<View style = {{flexDirection:'row', marginRight: '5%', alignItems: 'center'}}>
+				<TouchableOpacity
+					onPress={() => onDelete(index)}
+				>
+					<MaterialCommunityIcons
+						name = "trash-can-outline"
+						size = {30}
+						color='white'
+					/>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);

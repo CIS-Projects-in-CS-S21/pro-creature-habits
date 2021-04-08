@@ -1,6 +1,6 @@
 import React from "react";
 import ListDatedItem from "./ListDatedItem";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import ListDailyItem from "./ListDailyItem";
 import {View, Text, TouchableOpacity} from "react-native";
 import ListCompletedDatedItem from "./ListCompletedDatedItem";
@@ -23,7 +23,7 @@ const ListTasks = () => {
 	const [isDatedCollapsed, setIsDatedCollapsed] = React.useState(true);
 	const [isDailyCollapsed, setIsDailyCollapsed] = React.useState(true);
 	const [isNotDueCollapsed, setNotDueCollapsed] = React.useState(true);
-	
+
 
 	if(useSelector(state=>state.taskFilter) === 'dated') {
 		return (
@@ -55,18 +55,21 @@ const ListTasks = () => {
 					}
 				</TouchableOpacity>
 				}
-				{datedTasksCompleted.map((task, index) => {
-					return(
-						<Collapsible
-							collapsed={isDatedCollapsed}
-							key={index}
-						>
-							<ListCompletedDatedItem
-								task={task}
+				{datedTasks.map((task, index) => {
+					if(task.completed) {
+						return (
+							<Collapsible
+								collapsed={isDatedCollapsed}
 								key={index}
-							/>
-						</Collapsible>
-					)
+							>
+								<ListCompletedDatedItem
+									task={task}
+									key={index}
+									index={index}
+								/>
+							</Collapsible>
+						)
+					}
 				})}
 			</View>
 		)
@@ -100,18 +103,21 @@ const ListTasks = () => {
 					}
 				</TouchableOpacity>
 				}
-				{dailyTasksNotDue.map((task, index) => {
-					return(
-						<Collapsible
-							collapsed={isNotDueCollapsed}
-							key={index}
-						>
-							<ListNotDueDailyItem
-								task={task}
+				{dailyTasks.map((task, index) => {
+					if (!task.status.due_today){
+						return(
+							<Collapsible
+								collapsed={isNotDueCollapsed}
 								key={index}
-							/>
-						</Collapsible>
-					)
+							>
+								<ListNotDueDailyItem
+									task={task}
+									key={index}
+									index={index}
+								/>
+							</Collapsible>
+						)
+					}
 				})}
 				{completedDailyTasks.length > 0 &&
 				<TouchableOpacity
@@ -128,18 +134,21 @@ const ListTasks = () => {
 					}
 				</TouchableOpacity>
 				}
-				{completedDailyTasks.map((task, index) => {
-					return(
-						<Collapsible
-							collapsed={isDailyCollapsed}
-							key={index}
-						>
-							<ListCompletedDailyItem
-								task={task}
+				{dailyTasks.map((task, index) => {
+					if (task.status.completed) {
+						return (
+							<Collapsible
+								collapsed={isDailyCollapsed}
 								key={index}
-							/>
-						</Collapsible>
-					)
+							>
+								<ListCompletedDailyItem
+									task={task}
+									key={index}
+									index={index}
+								/>
+							</Collapsible>
+						)
+					}
 				})}
 			</View>
 		)

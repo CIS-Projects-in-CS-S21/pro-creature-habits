@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
 	scrollContainer: {
 		flex: 1,
 		backgroundColor: '#406BE9',
+
 	},
 	container: {
 		flex: 1,
@@ -31,8 +32,8 @@ const styles = StyleSheet.create({
 	},
 
 	listContainer:{
-		alignItems: 'stretch'
-
+		alignItems: 'stretch',
+		paddingBottom: '25%'
 	},
 	listFooter:{
 		borderTopColor: '#FFFFFF',
@@ -84,7 +85,7 @@ const Home = () => {
 
 
 	return (
-  		<View style={{flex: 1}}>
+  		<View style={{flex: 1, backgroundColor: '#406be9'}}>
 			<View style={styles.filterButtonsContainer}>
 				<TouchableHighlight
 					style={[styles.filterButton, taskFilter === 'daily' ? {backgroundColor: 'white'} : {}]}
