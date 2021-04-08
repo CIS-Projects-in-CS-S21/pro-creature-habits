@@ -1,15 +1,14 @@
 import {Text, TouchableOpacity, View, StyleSheet} from "react-native";
-import {Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
+import {MaterialCommunityIcons} from "@expo/vector-icons";
 import React from "react";
-import {REMOVE_TASK_ONE} from "../../redux/oneTimeTasks";
+import {COMPLETED_TASK_ONE, REMOVE_TASK_ONE} from "../../redux/datedTasks";
 import {showMessage} from "react-native-flash-message";
 import {REWARD} from "../../redux/coinBalance";
 import {EDIT_ON} from "../../redux/editTaskModal";
 import {SET_TASK_TEXT} from "../../redux/taskInput";
 import {SET_DATE} from "../../redux/selectedDate";
 import {SET_INDEX} from "../../redux/taskEditIndex";
-import {useDispatch, useSelector} from "react-redux";
-import {ADD_COMP_TASK_ONE} from "../../redux/completedDatedTasks";
+import {useDispatch} from "react-redux";
 import {INCREMENT_STAT} from "../../redux/statTracker";
 import {ACH_PROGRESS} from "../../redux/achievementsComplete";
 
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
 const ListDatedItem = ({task, index}) => {
 	const iconSize = 30;
 	const taskDate = new Date(task.date).toString().split(" ").slice(0,4).join(" ");
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	const onDelete = (index) => {
 		dispatch({type: REMOVE_TASK_ONE, data: index});
@@ -44,8 +43,7 @@ const ListDatedItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
-		dispatch({type: ADD_COMP_TASK_ONE, data: task});
-		dispatch({type: REMOVE_TASK_ONE, data: index});
+		dispatch({type: COMPLETED_TASK_ONE, data: index});
 		dispatch({type: REWARD, data: 5});
 		dispatch({type: ACH_PROGRESS, data: 'complete_dated_task'});
 		dispatch({type: INCREMENT_STAT, data: 'dated_tasks_completed'});

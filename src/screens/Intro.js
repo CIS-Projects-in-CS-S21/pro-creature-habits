@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from "react-native";
-import {RESET_BUTTON_PRESSED} from "../App";
+import {RESET_BUTTON_PRESSED} from "../AppUnwrapped";
 import {useDispatch, useSelector} from "react-redux";
 const styles = StyleSheet.create({
     container: {

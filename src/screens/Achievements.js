@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, Modal, TouchableOpacity, ScrollView} from "react
 import {useDispatch, useSelector} from "react-redux";
 import {ACH_OFF} from "../redux/achievementsVisible";
 import AchievementsContainer from "../components/achievementsComponents/AchievementsContainer";
+import AchievementsFilter from "../components/filterComponents/AchievementsFilter";
 
 
 const styles = StyleSheet.create({
@@ -48,6 +49,7 @@ const AchievementsScreen = () => {
 					<View style={styles.modalHeader}>
 						<Text style={styles.modalHeaderText}>Achievements</Text>
 					</View>
+					<AchievementsFilter/>
 					<AchievementsContainer/>
 					<View style={styles.modalContainer}>
 						<TouchableOpacity

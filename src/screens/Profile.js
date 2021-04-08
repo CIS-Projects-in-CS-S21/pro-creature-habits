@@ -5,6 +5,7 @@ import {CHANGENAME} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
 import PetImage from "../components/petInventoryComponents/PetImage";
+import PetInventoryFilter from "../components/filterComponents/PetInventoryFilter";
 import {FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
 import HealthBar from "../components/HealthBar";
 import {OFF_PET} from "../redux/petModalVisible";
@@ -134,7 +135,8 @@ const styles = StyleSheet.create({
                 	flexDirection:'row',
                                     		justifyContent: "center",
                                     		alignItems: "center",
-                                    		marginTop: 22
+                                    		marginTop: 22,
+						paddingBottom: 22
                                     	},
 
     }
@@ -161,16 +163,6 @@ const PetProfile = () => {
     	}
     }
 
-
-
-	const changeFilter = (category) => {
-	console.log("CHANGE FILTER")
-		if(category === 'all') {
-			dispatch({type: FILTER_ALL_PET});
-		} else {
-			dispatch({type: FILTER_PET, data: category});
-		}
-	}
 
 	const upperCase = (string) => {
 			return string[0].toUpperCase() + string.slice(1);
@@ -251,18 +243,7 @@ const PetProfile = () => {
 				</View>
 			</View>
 
-
-			<DropDownPicker
-				items={[
-					{label: 'All', value: 'all'},
-					{label: 'Clothes', value: 'clothes'},
-					{label: 'Food', value: 'food'},
-					{label: 'Toys', value: 'toys'}
-				]}
-				defaultValue={'all'}
-				containerStyle={styles.dropdownContainer}
-				onChangeItem={item => changeFilter(item.value)}
-			/>
+			<PetInventoryFilter/>
 			<Modal
             	animationType="slide"
             	transparent={true}
