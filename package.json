@@ -20,8 +20,10 @@
     "axios": "^0.21.1",
     "expo": "^40.0.1",
     "expo-av": "~8.7.0",
+    "expo-constants": "^10.0.1",
     "expo-google-app-auth": "^8.1.4",
     "expo-location": "~10.0.0",
+    "expo-notifications": "~0.8.2",
     "expo-splash-screen": "~0.8.0",
     "expo-sqlite-orm": "^1.5.6",
     "expo-status-bar": "~1.0.3",
@@ -38,6 +40,7 @@
     "react-native-calendar-picker": "^7.1.1",
     "react-native-collapsible": "^1.5.3",
     "react-native-dropdown-picker": "^4.0.2",
+    "react-native-elements": "^3.3.2",
     "react-native-flash-message": "^0.1.23",
     "react-native-floating-action": "^1.21.0",
     "react-native-gesture-handler": "^1.8.0",
@@ -64,6 +67,7 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "babel-jest": "~25.2.6",
+    "expo-permissions": "^11.0.0",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1"
   },

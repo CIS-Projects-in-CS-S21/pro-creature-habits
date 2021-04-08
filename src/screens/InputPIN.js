@@ -29,6 +29,7 @@ const InputPINScreen = ({ onSignUp, navigation }) => {
 	const realPIN = useSelector(state => state.pin);
 	const hint = useSelector(state => state.pintHint);
 	console.log(realPIN);
+
 	const onSubmit= () => {
 		if(pinInput == realPIN) {
 			onSignUp()

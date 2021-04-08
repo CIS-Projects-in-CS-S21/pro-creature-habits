@@ -44,7 +44,6 @@ export default function CreatePINScreen({ onSignIn, navigation }){
 	const dispatch = useDispatch();
 
 
-
 	const onCreatePIN = () => {
 		console.log(newPIN);
 		dispatch({type: FIRST});
