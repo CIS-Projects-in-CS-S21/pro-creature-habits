@@ -35,6 +35,7 @@ import dailyTasksReducer from "./redux/dailyTasks";
 import taskFilterReducer from "./redux/taskFilter";
 import editDailyReducer from "./redux/editDailyTaskModal";
 import currentDayReducer from "./redux/currentDay";
+import weatherStatusReducer from "./redux/weatherStatus";
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
@@ -68,7 +69,8 @@ const reducer = combineReducers({
 	dailyTasks: dailyTasksReducer,
 	taskFilter: taskFilterReducer,
 	dailyEditModal: editDailyReducer,
-	currentDay: currentDayReducer
+	currentDay: currentDayReducer,
+	weatherStatus: weatherStatusReducer
 });
 
 const rootReducer = (state, action) => {

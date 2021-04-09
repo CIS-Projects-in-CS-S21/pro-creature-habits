@@ -18,6 +18,8 @@ import CreatePINScreen from "./screens/CreatePIN";
 import InputPINScreen from "./screens/InputPIN";
 import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
+import {SET} from "./redux/weatherStatus";
+
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -56,7 +58,15 @@ const AppUnwrapped = () => {
 					.then(json => {
 						setWeather(json.weather[0].icon);
 						setTemperature(json.main.temp);
+
+						dispatch({type: SET, status: json.weather[0].main});
+
+						//// DEBUG:
+						const weatherStatusLog = useSelector(state => state.weatherStatus);
+						console.log("Current weather status in reducer: " + weatherStatusLog);
 					});
+
+
 			}
 		);
 	};
