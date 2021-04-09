@@ -79,6 +79,11 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
            />
            )})}
 
+					 <Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/rain.gif')}
+					 />
+
        </View>
 	)
 }
