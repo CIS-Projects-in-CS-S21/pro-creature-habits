@@ -9,20 +9,20 @@ import {ADD_TO_STAT, INCREMENT_STAT, SET_STAT} from "../../redux/statTracker";
 import {ADD} from "../../redux/petInventory";
 import {ACH_PROGRESS} from "../../redux/achievementsComplete";
 import {showMessage} from "react-native-flash-message";
+import * as Progress from 'react-native-progress';
+import {Ionicons} from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
 	centeredView: {
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		marginTop: 22
 	},
 	modalView: {
 		margin: 10,
 		backgroundColor: '#341f6f',
 		borderRadius: 10,
-		padding: 35,
-		paddingBottom: 20,
+		padding: 20,
 		alignItems: "center",
 		shadowColor: "#000",
 		shadowOffset: {
@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
 		shadowRadius: 4,
 		elevation: 5,
 		borderWidth: 1,
-		borderColor: '#7276e3'
+		borderColor: '#7276e3',
+
 	},
 	buttonClose: {
 		backgroundColor: "#2196F3",
@@ -52,12 +53,12 @@ const styles = StyleSheet.create({
 		paddingTop: 15
 	},
 	itemImage: {
-		width:75,
-		height:75,
+		width:80,
+		height:80,
 		shadowOffset: {width: 0, height: 1},
 		shadowOpacity: 0.8,
 		shadowRadius: 3,
-		padding: 3
+		padding: 3,
 	},
 	textStyle: {
 		color: 'white'
@@ -110,7 +111,25 @@ const BuyModal = () => {
 				{ItemInventory[selectedItem].cost <= useSelector(state=>state.coins) ? (
 					<View style={styles.centeredView}>
 						<View style={styles.modalView}>
-							<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
+							<View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '75%', alignItems: 'center'}}>
+								<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
+								<View style={{alignItems: 'center', paddingBottom: 20}}>
+									<Text style={{color: 'white', marginTop: 10, fontSize: 16, marginBottom: 5, fontWeight: 'bold'}}>
+										{Object.keys(ItemInventory[selectedItem].benefits)}
+									</Text>
+									<View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
+										<Progress.Bar
+											progress={ItemInventory[selectedItem].benefits[Object.keys(ItemInventory[selectedItem].benefits)]}
+											width={50}
+											height={8}
+											color='white'
+											borderColor='white'
+											style={{marginRight: 5}}
+										/>
+										<Ionicons name='arrow-up-circle-outline' color='white' size={18}/>
+									</View>
+								</View>
+							</View>
 							<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10}}>{ItemInventory[selectedItem].buyText}</Text>
 							<View style={styles.modalFooter}>
 								<Pressable
