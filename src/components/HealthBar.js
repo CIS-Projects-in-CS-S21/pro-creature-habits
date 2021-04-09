@@ -55,7 +55,7 @@ const HealthBar = ({bar,progress}) => {
   			const lastFedTime = array[1];
   			const realCurrTime = new Date();
   			console.log("current time2 "+new Date(currTime)+" "+lastFedTime);
-              if ((new Date(currTime) - new Date(lastFedTime))/6000 >= 5) {
+              if ((new Date(currTime) - new Date(lastFedTime))/60000 >= 5) {
                   console.log("updating time "+currTime+" "+lastFedTime);
                   dispatch({type: TIME_FEED_CHANGE, data: realCurrTime});
                   dispatch({type: HUNGERBARDECREASE, data:2});

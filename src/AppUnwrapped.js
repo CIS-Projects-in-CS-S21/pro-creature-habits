@@ -67,6 +67,7 @@ const AppUnwrapped = () => {
 		getWeather();
 		const interval = setInterval(() => {
 			const day = new Date();
+			console.log("setting interval")
 			dispatch({type: TIME_CHANGE, data: day});
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
