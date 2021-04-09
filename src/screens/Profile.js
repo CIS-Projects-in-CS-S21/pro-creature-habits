@@ -12,9 +12,10 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
-import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 import {INCREMENT_STAT} from "../redux/statTracker";
+import * as Progress from "react-native-progress";
 
 
 
@@ -252,7 +253,26 @@ const PetProfile = () => {
             {(useSelector(state=>state.petMV) === "press") ?
             		<View style={styles.centeredView}>
             		    <View style={styles.modalView}>
-            			<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
+						<View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '75%', alignItems: 'center'}}>
+							<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
+							<View style={{alignItems: 'center', paddingBottom: 20}}>
+								<Text style={{color: 'white', marginTop: 10, fontSize: 20, marginBottom: 5, fontWeight: 'bold', alignSelf: 'flex-start'}}>
+									{Object.keys(ItemInventory[selectedItem].benefits)}
+								</Text>
+								<View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
+									<Progress.Bar
+										progress={ItemInventory[selectedItem].benefits[Object.keys(ItemInventory[selectedItem].benefits)]}
+										width={60}
+										height={8}
+										color='lightgreen'
+										borderColor='white'
+										borderWidth={0.8}
+										style={{marginRight: 5}}
+									/>
+									<Ionicons name='arrow-up-circle-outline' color='white' size={18}/>
+								</View>
+							</View>
+						</View>
             			<Text style={{color: 'white', paddingTop: 10, paddingBottom: 10}}>{ItemInventory[selectedItem].inventoryText}</Text>
             			<View style={styles.modalFooter}>
             			<Pressable

@@ -114,16 +114,17 @@ const BuyModal = () => {
 							<View style={{flexDirection: 'row', justifyContent: 'space-evenly', width: '75%', alignItems: 'center'}}>
 								<Image style={styles.itemImage} source={ItemInventory[selectedItem].uri}/>
 								<View style={{alignItems: 'center', paddingBottom: 20}}>
-									<Text style={{color: 'white', marginTop: 10, fontSize: 16, marginBottom: 5, fontWeight: 'bold'}}>
+									<Text style={{color: 'white', marginTop: 10, fontSize: 20, marginBottom: 5, fontWeight: 'bold', alignSelf: 'flex-start'}}>
 										{Object.keys(ItemInventory[selectedItem].benefits)}
 									</Text>
 									<View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly'}}>
 										<Progress.Bar
 											progress={ItemInventory[selectedItem].benefits[Object.keys(ItemInventory[selectedItem].benefits)]}
-											width={50}
+											width={60}
 											height={8}
-											color='white'
+											color='lightgreen'
 											borderColor='white'
+											borderWidth={0.8}
 											style={{marginRight: 5}}
 										/>
 										<Ionicons name='arrow-up-circle-outline' color='white' size={18}/>
