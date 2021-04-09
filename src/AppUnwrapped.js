@@ -44,6 +44,8 @@ const AppUnwrapped = () => {
 	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 	const [temperature, setTemperature] = React.useState(null);
 	const [weather, setWeather] = React.useState(null);
+
+	const weatherStatusLog = useSelector(state => state.weatherStatus);
 	const dispatch = useDispatch();
 	const date = useSelector(state=>state.currentDay);
 
@@ -62,7 +64,7 @@ const AppUnwrapped = () => {
 						dispatch({type: SET, status: json.weather[0].main});
 
 						//// DEBUG:
-						const weatherStatusLog = useSelector(state => state.weatherStatus);
+						
 						console.log("Current weather status in reducer: " + weatherStatusLog);
 					});
 
