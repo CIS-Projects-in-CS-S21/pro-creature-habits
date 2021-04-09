@@ -82,6 +82,7 @@ const choosePetScreen = ({onSignUp}) => {
     const submitData = () => {
          const array = [text,petChoice];
     	dispatch({type: CHANGE, changes: array});
+    	console.log("SUBMITTING DATA")
     	dispatch({type: TIME_FEED_CHANGE, data: new Date()});
     	dispatch({type: TIME_CHANGE, data: new Date()});
     }

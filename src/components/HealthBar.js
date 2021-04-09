@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     progressBar: {
        height: 20,
        width: 100,
-       backgroundColor: 'white',
-       borderColor: '#000',
+       borderColor: 'white',
        borderWidth: 2,
        borderRadius: 5,
        margin: 5
@@ -21,24 +20,24 @@ const styles = StyleSheet.create({
      mainContainer: {
             flexDirection: 'column',
      		padding: 10,
-     		paddingBottom: 15,
+     		paddingBottom: 5,
      		flexGrow: 1
      	},
      	textTitle:{
      	    color:"white",
-     	    textAlign:"center"
+     	    textAlign:"center",
+     	    fontSize:13
      	},
      container: {
      		flexDirection: 'row',
      		borderRadius: 10,
      		justifyContent: 'space-between',
      		borderColor: 'black',
-
-     		shadowOffset: {width: 0, height: 5},
+     		shadowOffset: {width: 0, height: 1},
      		shadowOpacity: 0.8,
      		shadowRadius: 3,
      		elevation: 11,
-     		marginBottom: 15,
+     		marginBottom: 10,
      },
 });
 
@@ -63,17 +62,23 @@ const HealthBar = ({bar,progress}) => {
 
 	return (
 		<View style={styles.mainContainer}>
-      <Text style={styles.text}>Hunger Bar</Text>
+      <Text style={styles.textTitle}>Hunger Bar</Text>
 			<View style={styles.container}>
-					<Progress.Bar style={{margin: 10}} progress={hunger/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor = 'red' />
+					<Progress.Bar style={{margin: 10}} progress={hunger/10} width={100} height={10}
+					color={(hunger/10 > .7) ? '#4ab125' : 	(hunger/10 > .4) ? "#FFFF00" : "red"}
+					borderColor='white'/>
 			</View>
-      <Text style={styles.text}>Fun Bar</Text>
+      <Text style={styles.textTitle}>Fun Bar</Text>
       <View style={styles.container}>
-					<Progress.Bar style={{margin: 10}} progress={fun/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor = 'red' />
+					<Progress.Bar style={{margin: 10}} progress={fun/10} width={100} height={10}
+					color={(fun/10 > .7) ? '#4ab125' : 	(fun/10 > .4) ? "#FFFF00" : "red"}
+					borderColor='white' />
 			</View>
-      <Text style={styles.text}>Hygiene Bar</Text>
+      <Text style={styles.textTitle}>Hygiene Bar</Text>
       <View style={styles.container}>
-					<Progress.Bar style={{margin: 10}} progress={hygiene/10} width={100} height={10} color='#4ab125' borderColor='black' unfilledColor = 'red' />
+					<Progress.Bar style={{margin: 10}} progress={hygiene/10} width={100} height={10}
+					color={(hygiene/10 > .7) ? '#4ab125' : 	(hygiene/10 > .4) ? "#FFFF00" : "red"}
+					borderColor='white'/>
 			</View>
 
 		</View>

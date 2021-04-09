@@ -180,7 +180,7 @@ const PetProfile = () => {
 
     	const handleSelection = (item) => {
         		dispatch({type: OFF_PET});
-        		currentTime = new Date();
+        		const currentTime = new Date();
         		if(ItemInventory[item].category === 'food') {
 					dispatch({type: SELECTED, data: 'select_food',thing: item});
 					dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
@@ -232,7 +232,7 @@ const PetProfile = () => {
                     dispatch({type: ON_PET,data:"edit"});
                }
 	return (
-<ScrollView style={styles.container}>
+        <View style = {styles.container}>
             <View style = {styles.centeredView2}>
 				<View style={styles.imageContainer}>
 					<View style={{flexDirection: 'column', alignItems: 'center', paddingRight: 40}}>
@@ -317,10 +317,10 @@ const PetProfile = () => {
                                     			</View>
             						}
             				</Modal>
+            				<ScrollView style={styles.container}>
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
-        </ScrollView>
-
-
+            </ScrollView>
+            </View>
 	);
 };
 
