@@ -43,7 +43,6 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import timeOfBarsReducer from './redux/timeOfBars';
 
-const Stack = createStackNavigator();
 
 const reducer = combineReducers({
 	coins: balanceReducer,
@@ -80,7 +79,7 @@ const reducer = combineReducers({
 	dailyEditModal: editDailyReducer,
 	currentDay: currentDayReducer,
 	currentTimeArray: timeOfBarsReducer
-})
+});
 
 const rootReducer = (state, action) => {
 	if (action.type === RESET_BUTTON_PRESSED) {

@@ -1,7 +1,12 @@
 import React from "react";
 import {Image, Text, View, StyleSheet} from "react-native";
 import * as Progress from "react-native-progress";
-import {useSelector} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
+import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
+import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
+import {TIME_FEED_CHANGE} from "../redux/timeOfBars";
+
 
 const styles = StyleSheet.create({
     progressBar: {
@@ -38,20 +43,21 @@ const styles = StyleSheet.create({
 });
 
 
-			//const currentTime = new Date();
 
 
 const HealthBar = ({bar,progress}) => {
   const hunger = useSelector(state=>state.hunger);
   const fun = useSelector(state=>state.fun);
   const hygiene = useSelector(state=>state.hygiene);
-
+  const dispatch = useDispatch();
   const array = useSelector(state=>state.currentTimeArray);
   			const currTime = array[0];
   			const lastFedTime = array[1];
-              if ((currTime - lastFedTime)/1000 >= 5) {
-                  console.log("updating time");
-                  dispatch({type: TIME_FEED_CHANGE, data: currTime});
+  			const realCurrTime = new Date();
+  			console.log("current time2 "+new Date(currTime)+" "+lastFedTime);
+              if ((new Date(currTime) - new Date(lastFedTime))/6000 >= 5) {
+                  console.log("updating time "+currTime+" "+lastFedTime);
+                  dispatch({type: TIME_FEED_CHANGE, data: realCurrTime});
                   dispatch({type: HUNGERBARDECREASE, data:2});
               }
 

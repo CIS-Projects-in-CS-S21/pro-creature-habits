@@ -80,10 +80,10 @@ const choosePetScreen = ({onSignUp}) => {
 
 
     const submitData = () => {
-         console.log("test");
          const array = [text,petChoice];
     	dispatch({type: CHANGE, changes: array});
     	dispatch({type: TIME_FEED_CHANGE, data: new Date()});
+    	dispatch({type: TIME_CHANGE, data: new Date()});
     }
 
     const onChangeHandler = event => {
