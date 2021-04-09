@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
 	},
 	achievementText: {
 		color: 'white',
-		fontSize: 20,
+		fontSize: 16,
 		paddingLeft: 10
 	},
 	textProgress: {
 		color: 'white',
-		fontSize: 20,
+		fontSize: 16,
 		paddingRight: 10
 	},
 	achievementHeader: {

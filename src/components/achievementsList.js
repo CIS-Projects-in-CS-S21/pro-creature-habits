@@ -1,44 +1,66 @@
 const achievementsList = {
 	buy_item: {
-		name: 'Buy item(s)',
+		name: 'Buy items',
 		completed: 0,
 		beginner: {
-			to_complete: 1,
-			reward: 5,
+			to_complete: 10,
+			reward: 10,
 			complete: false,
 			reward_taken: false
 		},
 		intermediate: {
-			to_complete: 20,
-			reward: 50,
+			to_complete: 100,
+			reward: 100,
 			complete: false,
 			reward_taken: false
 		},
 		hard: {
-			to_complete: 100,
+			to_complete: 300,
 			reward: 250,
 			complete: false,
 			reward_taken: false
 		}
 	},
-	complete_task: {
-		name: 'Complete task(s)',
+	complete_daily_task: {
+		name: 'Complete daily tasks',
 		completed: 0,
 		beginner: {
-			to_complete: 1,
-			reward: 5,
+			to_complete: 5,
+			reward: 10,
 			complete: false,
 			reward_taken: false
 		},
 		intermediate: {
-			to_complete: 20,
-			reward: 50,
+			to_complete: 50,
+			reward: 100,
+			complete: false,
+			reward_taken: false
+		},
+		hard: {
+			to_complete: 200,
+			reward: 250,
+			complete: false,
+			reward_taken: false
+		}
+	},
+	complete_dated_task: {
+		name: 'Complete dated tasks',
+		completed: 0,
+		beginner: {
+			to_complete: 5,
+			reward: 10,
+			complete: false,
+			reward_taken: false
+		},
+		intermediate: {
+			to_complete: 25,
+			reward: 100,
 			complete: false,
 			reward_taken: false
 		},
 		hard: {
 			to_complete: 100,
-			reward: 250,
+			reward: 200,
 			complete: false,
 			reward_taken: false
 		}
@@ -47,19 +69,19 @@ const achievementsList = {
 		name: 'Buy food',
 		completed: 0,
 		beginner: {
-			to_complete: 1,
-			reward: 5,
+			to_complete: 5,
+			reward: 10,
 			complete: false,
 			reward_taken: false
 		},
 		intermediate: {
-			to_complete: 20,
-			reward: 50,
+			to_complete: 50,
+			reward: 100,
 			complete: false,
 			reward_taken: false
 		},
 		hard: {
-			to_complete: 100,
+			to_complete: 200,
 			reward: 250,
 			complete: false,
 			reward_taken: false
@@ -69,40 +91,40 @@ const achievementsList = {
 		name: 'Buy clothes',
 		completed: 0,
 		beginner: {
-			to_complete: 1,
-			reward: 5,
+			to_complete: 3,
+			reward: 10,
 			complete: false,
 			reward_taken: false
 		},
 		intermediate: {
-			to_complete: 10,
-			reward: 50,
+			to_complete: 20,
+			reward: 100,
 			complete: false,
 			reward_taken: false
 		},
 		hard: {
-			to_complete: 40,
+			to_complete: 50,
 			reward: 250,
 			complete: false
 		}
 	},
 	buy_toy: {
-		name: 'Buy toy(s)',
+		name: 'Buy toys',
 		completed: 0,
 		beginner: {
-			to_complete: 1,
-			reward: 5,
+			to_complete: 3,
+			reward: 10,
 			complete: false,
 			reward_taken: false
 		},
 		intermediate: {
-			to_complete: 10,
-			reward: 50,
+			to_complete: 20,
+			reward: 100,
 			complete: false,
 			reward_taken: false
 		},
 		hard: {
-			to_complete: 40,
+			to_complete: 50,
 			reward: 250,
 			complete: false,
 			reward_taken: false

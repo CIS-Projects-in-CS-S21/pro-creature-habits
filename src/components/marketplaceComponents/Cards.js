@@ -1,8 +1,5 @@
 import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {ItemInventory} from "../ItemInventory";
-import {PURCHASE} from "../../redux/marketplaceInventory";
-import {BUY} from "../../redux/coinBalance";
+import {useDispatch} from "react-redux";
 import {TouchableHighlight, View, StyleSheet} from "react-native";
 import Card from "./Card";
 import {ON} from "../../redux/modalVisible";
@@ -14,21 +11,19 @@ const styles = StyleSheet.create({
 	},
 	cardsContainer: {
 		flexDirection: 'row',
-		justifyContent: 'space-evenly',
-		marginTop: 10,
+		justifyContent: 'center',
 		flexWrap: 'wrap',
-		alignContent: 'flex-end'
+		paddingTop: '5%',
 	},
 	highlightContainer: {
-		alignSelf: 'flex-end',
-		margin: 10
+		margin: 10,
+		borderRadius: 5
 	},
 });
 
 const Cards = (items) => {
     console.log("HELLO "+items.items);
 	const dispatch = useDispatch();
-	const itemsBought = useSelector(state => state.itemsBought);
 
 	const onPress = (item) => {
     		dispatch({type: ON});

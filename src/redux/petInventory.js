@@ -8,7 +8,7 @@ export const EAT = 'EAT';
 import {ItemInventory} from "../components/ItemInventory";
 
 let boughtItems = JSON.parse(JSON.stringify(ItemInventory));
-for (const [key, value] of Object.entries(boughtItems)) {
+for (const [key] of Object.entries(boughtItems)) {
     boughtItems[key].bought = 0;
     boughtItems[key].show = false;
     boughtItems[key].wear = false;
@@ -22,7 +22,6 @@ let copy = JSON.parse(JSON.stringify(state));
 
 	switch (action.type) {
 		case ADD:
-		    console.log(action.data);
 		    copy[action.data].bought = copy[action.data].bought + 1;
 		    if (copy[action.data].category == currentFilter || currentFilter == "all") {
 		        copy[action.data].show = true;
@@ -37,7 +36,6 @@ let copy = JSON.parse(JSON.stringify(state));
 		            copy[key].show = true;
 		        }
 		    }
-		    console.log("trying to filter pet for all")
 			return copy;
 		case FILTER_PET:
 		    currentFilter = action.data;
@@ -45,7 +43,7 @@ let copy = JSON.parse(JSON.stringify(state));
             for (const [key, value] of Object.entries(copy)) {
                 if (copy[key].category != action.data) {
                     copy[key].show = false;
-                } else if (copy[key].bought != 0) {
+                } else if (copy[key].bought !== 0) {
                     copy[key].show = true;
                 } else {
                     copy[key].show = false;
@@ -71,7 +69,7 @@ let copy = JSON.parse(JSON.stringify(state));
                  } else if (action.thing.includes('shoes')) {
                     type = "shoes";
                  }
-                 for (const [key, value] of Object.entries(copy)) {
+                 for (const [key] of Object.entries(copy)) {
                      if (copy[key].name.includes(type)) {
                          copy[key].wear = false;
                      }

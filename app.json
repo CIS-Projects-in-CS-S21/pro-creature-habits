@@ -1,12 +1,7 @@
 {
-  "name": "myReactNativeProject",
-  "displayName": "myReactNativeProject",
   "expo": {
-    "name": "myReactNativeProject",
-    "slug": "myReactNativeProject",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "name": "Creature Habits",
+    "slug": "creature-habits",
+    "version": "2.0.0"
   }
 }
