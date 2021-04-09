@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {Image, Text, View, StyleSheet} from "react-native";
 import 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux'
-
+import {TIME_CHANGE} from "./redux/timeOfBars";
 
 
 import HomeTabs from "./components/HomeTabs";
@@ -67,6 +67,7 @@ const AppUnwrapped = () => {
 		getWeather();
 		const interval = setInterval(() => {
 			const day = new Date();
+			dispatch({type: TIME_CHANGE});
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
 			} else {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Button, StyleSheet, Image, TextInput, TouchableHighlight, TouchableOpacity} from "react-native";
 import { useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
-import {TIMEFEEDCHANGE} from "../redux/timeofFeed"
+import {TIME_FEED_CHANGE} from "../redux/timeOfBars"
 
 
 const styles = StyleSheet.create({
@@ -83,7 +83,7 @@ const choosePetScreen = ({onSignUp}) => {
          console.log("test");
          const array = [text,petChoice];
     	dispatch({type: CHANGE, changes: array});
-    	dispatch({type: TIMEFEEDCHANGE, data: new Date()});
+    	dispatch({type: TIME_FEED_CHANGE, data: new Date()});
     }
 
     const onChangeHandler = event => {

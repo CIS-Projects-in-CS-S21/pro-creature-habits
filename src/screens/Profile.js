@@ -18,7 +18,7 @@ import {INCREMENT_STAT} from "../redux/statTracker";
 import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
-import {TIMEFEEDCHANGE} from "../redux/timeofFeed";
+import {TIME_FEED_CHANGE} from "../redux/timeOfBars";
 import { StatsData } from '../components/StatsData';
 
 
@@ -177,29 +177,15 @@ const PetProfile = () => {
 			return string[0].toUpperCase() + string.slice(1);
 		}
 
-	const handlePurchase = (item) => {
-			dispatch({type: OFF_PET});
-			if(ItemInventory[item].category === 'food') {
-				dispatch({type: SELECTED, data: 'select_food',thing: item});
-				dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
-				playSound();
-			} else if (ItemInventory[item].category === 'toys') {
-				dispatch({type: SELECTED, data: 'select_toy',thing: item});
-			} else {
-				dispatch({type: SELECTED, data: 'select_clothes',thing: item});
-				dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
-			}
-
-
-
 
     	const handleSelection = (item) => {
         		dispatch({type: OFF_PET});
+        		currentTime = new Date();
         		if(ItemInventory[item].category === 'food') {
 					dispatch({type: SELECTED, data: 'select_food',thing: item});
-					dispatch({type: TIMEFEEDCHANGE, data: currentTime});
+					dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
+					dispatch({type: TIME_FEED_CHANGE, data: currentTime});
 					dispatch({type: HUNGERBARINCREASE, data:2});
-					//alert( lastFeedhour);
 					playSound();
 
 
@@ -210,6 +196,7 @@ const PetProfile = () => {
 
         		} else {
         			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
+        			dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
         		}
 
         		showMessage({
@@ -223,26 +210,23 @@ const PetProfile = () => {
                 dispatch({type: CHANGENAME, changes: name});
                 dispatch({type:"OFF_PET"});
 			}
+
         	const [sound, setSound] = React.useState();
-
-		console.log('Playing Sound');
-		await sound.playAsync(); }
-
-		React.useEffect(() => {
-			return sound
-			  ? () => {
-				  console.log('Unloading Sound');
-				  sound.unloadAsync(); }
-			  : undefined;
-			}, [sound]);
-
-              React.useEffect(() => {
-                return sound
-                  ? () => {
-                      console.log('Unloading Sound');
-                      sound.unloadAsync(); }
-                  : undefined;
-              }, [sound]);
+                          async function playSound() {
+                            console.log('Loading Sound');
+                            const { sound } = await Audio.Sound.createAsync(
+                               require('../components/ra.wav')
+                            );
+                            setSound(sound);
+                            console.log('Playing Sound');
+                            await sound.playAsync(); }
+                          React.useEffect(() => {
+                            return sound
+                              ? () => {
+                                  console.log('Unloading Sound');
+                                  sound.unloadAsync(); }
+                              : undefined;
+                          }, [sound]);
 
               const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});

@@ -9,7 +9,6 @@ import balanceReducer from "./redux/coinBalance";
 import hungerbarPointReducer from "./redux/hungerbarPoint";
 import funbarPointReducer from "./redux/funbarPoint";
 import hygienebarPointReducer from "./redux/hygienebarPoint"
-import timeofFeedReducer from "./redux/timeofFeed";
 import healthBarReducer from './redux/healthBarPoint';
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
 import petInfoReducer from "./redux/petInfo";
@@ -42,9 +41,7 @@ import editDailyReducer from "./redux/editDailyTaskModal";
 import currentDayReducer from "./redux/currentDay";
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import { AsyncStorage } from 'react-native'
-export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
-import timeReducer from './redux/time';
+import timeOfBarsReducer from './redux/timeOfBars';
 
 const Stack = createStackNavigator();
 
@@ -64,11 +61,9 @@ const reducer = combineReducers({
 	userStats: statTrackerReducer,
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
-
 	fun:funbarPointReducer,
 	hunger: hungerbarPointReducer,
 	hygiene: hygienebarPointReducer,
-	lastFedTime: timeofFeedReducer,
 	firstLogin: loginReducer,
 	pin: pinReducer,
 	pintHint: hintReducer,
@@ -83,9 +78,9 @@ const reducer = combineReducers({
 	dailyTasks: dailyTasksReducer,
 	taskFilter: taskFilterReducer,
 	dailyEditModal: editDailyReducer,
-	currentDay: currentDayReducer
-
-
+	currentDay: currentDayReducer,
+	currentTimeArray: timeOfBarsReducer
+})
 
 const rootReducer = (state, action) => {
 	if (action.type === RESET_BUTTON_PRESSED) {

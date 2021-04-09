@@ -38,18 +38,23 @@ const styles = StyleSheet.create({
 });
 
 
-			const currentTime = new Date();
-			const lastFedTime = useSelector(state=>state.lastFedTime);
-            if ((currentTime-lastFedTime)/1000 >= 5) {
-                console.log("updating time");
-                dispatch({type: TIMEFEEDCHANGE, data: currentTime});
-                dispatch({type: HUNGERBARDECREASE, data:2});
-            }
+			//const currentTime = new Date();
+
 
 const HealthBar = ({bar,progress}) => {
   const hunger = useSelector(state=>state.hunger);
   const fun = useSelector(state=>state.fun);
   const hygiene = useSelector(state=>state.hygiene);
+
+  const array = useSelector(state=>state.currentTimeArray);
+  			const currTime = array[0];
+  			const lastFedTime = array[1];
+              if ((currTime - lastFedTime)/1000 >= 5) {
+                  console.log("updating time");
+                  dispatch({type: TIME_FEED_CHANGE, data: currTime});
+                  dispatch({type: HUNGERBARDECREASE, data:2});
+              }
+
 	return (
 		<View style={styles.mainContainer}>
       <Text style={styles.text}>Hunger Bar</Text>
