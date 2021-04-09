@@ -3,8 +3,6 @@ import {View, StyleSheet, TouchableOpacity} from "react-native";
 import Achievement from "./Achievement";
 import React from "react";
 import {ACH_REWARD} from "../../redux/achievementsComplete";
-import DropDownPicker from "react-native-dropdown-picker";
-import {FILTER_CHANGE} from "../../redux/achievementFilter";
 import {REWARD} from "../../redux/coinBalance";
 import {ADD_TO_STAT} from "../../redux/statTracker";
 
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
 const AchievementsContainer = () => {
 	const ach = useSelector(state=>state.achievements);
 	const dispatch = useDispatch();
-	const filter = useSelector(state=>state.achievementsFilter)
+	const filter = useSelector(state=>state.achievementsFilter);
 
 	const onPress = (achievement) => {
 		if(ach[achievement][filter].complete) {
@@ -39,16 +37,6 @@ const AchievementsContainer = () => {
 
 	return (
 		<View style={styles.achievementsContainer}>
-			<DropDownPicker
-				items={[
-					{label: 'Beginner', value: 'beginner'},
-					{label: 'Intermediate', value: 'intermediate'},
-					{label: 'Hard', value: 'hard'}
-				]}
-				defaultValue={filter}
-				containerStyle={styles.dropdownContainer}
-				onChangeItem={item => dispatch({type: FILTER_CHANGE, data: item.value})}
-			/>
 			{Object.keys(ach).map((item, index) => {
 				return (
 					<TouchableOpacity

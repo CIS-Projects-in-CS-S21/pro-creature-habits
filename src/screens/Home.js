@@ -1,167 +1,134 @@
-import React, { useCallback, useState } from 'react';
-import { Image, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, Platform, TextInput, Button } from 'react-native'
-import Task from '../databases/Task';
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import { SQLite } from 'expo-sqlite';
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer';
-import { withSafeAreaInsets } from 'react-native-safe-area-context';
+import React from 'react';
+import {
+	ScrollView,
+	StyleSheet,
+	Text,
+	View,
+	TouchableHighlight,
+	Image
+} from 'react-native'
+import {useDispatch, useSelector} from "react-redux";
 
-export default function Home() {
+import { FloatingAction } from "react-native-floating-action";
+import {TASK_ON} from "../redux/createTaskModal";
+import ListTasks from "../components/taskComponents/ListTasks";
+import {DAILY_TASK_ON} from "../redux/dailyTaskModal";
+import DailyTaskModal from "../components/taskComponents/DailyTaskModal";
+import DatedTaskModal from "../components/taskComponents/DatedTaskModal";
+import EditDatedTaskModal from "../components/taskComponents/EditDatedTaskModal";
+import EditDailyTaskModal from "../components/taskComponents/EditDailyTaskModal"
+import {DAILY, DATED} from "../redux/taskFilter";
 
- const [tasks, setTasks] = useState([])
-
-   Task.createTable()
-
- const deleteTask = useCallback(async (deleteText) => {
-   const t = await Task.findBy({ name_eq: deleteText })
-	t.destroy()
-	await t.save()
-    setTasks(await Task.query())
-  }, [])
-
-
-  const createTask = useCallback(async (text) => {
-    const props = {
-      name: text,
-      due: 80
-    }
-
-    const task = new Task(props)
-    await task.save()
-    setTasks(await Task.query())
-  }, [])
-
-
-  const updateTask = useCallback(async (editText) => {
-
-  }, [])
-
- const onSubmit = () => {
- 	createTask(text);
-    //awardCoins();
- }
-
- const onDelete = () => {
- 	deleteTask(deleteText);
- }
-
- const onUpdate = () =>{
-   updateTask(editText);
- }
-
- const ListItem = (props) => {
-  const jsonObj = JSON.parse(props.value);
-
-  return(
-    <View style={styles.listItem}>
-      <Text style={{fontWeight: 'bold', fontSize: 16, maxWidth:'77%'}} color='white'>{jsonObj.name}</Text>
-
-      <View style = {{flexDirection:'row'}}>
-      <TouchableOpacity onPress={onUpdate}>
-        <MaterialCommunityIcons
-        name = "pencil"
-        size = {30}
-        style={{color:"#637ed0"}}/>
-        </TouchableOpacity>
-        </View>
-    </View>
-  );
- }
-
- const ListOfTasks = () => {
-   return tasks.map(task => {
-     return(
-       <ListItem key = {task.id}
-       updateTask = {()=> updateTask(task.id)}
-       value={JSON.stringify(task)} />
-
-       )
-   })
- }
-
-
-
-
-   const [text, setText] = React.useState('');
-   const [deleteText, setDeleteText] = React.useState('');
-   const[editText, setEditText]= React.useState({id: null, value: ''});
-  return (
-    <View style={styles.container}>
-      <TextInput style={{marginTop: '2%', backgroundColor: 'white', color: 'black', width: '50%'}} label='name' value={text} onChangeText={text => setText(text)}/>
-      <Button title='submit'  color="#637ed0" onPress={onSubmit} />
-      <TextInput style={{backgroundColor: 'white', width: '50%'}} label='Delete' value={deleteText} onChangeText={deleteText => setDeleteText(deleteText)}/>
-	    <Button title="Delete" color="#637ed0" onPress={onDelete}/>
-      <View style={styles.listContainer}>
-        <ScrollView>
-
-          <ListOfTasks />
-
-        </ScrollView>
-        <View style={styles.listFooter}>
-          <Image
-              style={{width: 70, height: 55}}
-              source={{
-                uri: 'https://i.imgur.com/tkSiusr.gif',
-              }}
-            />
-        </View>
-      </View>
-    </View>
-  );
-}
-//test
 const styles = StyleSheet.create({
-	container: {
+	scrollContainer: {
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#406be9',
+		backgroundColor: '#406BE9',
 
 	},
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		backgroundColor: '#406be9'
+	},
 
-  listContainer:{
-    backgroundColor: 'rgba(49,69,194,0.7)',
-    shadowOffset: {width: 0, height: 5},
-		shadowOpacity: 0.8,
-		shadowRadius: 3,
-    borderWidth: 3,
-    borderColor: 'black',
-    width: '75%',
-    height: '80%',
-    marginTop: '2%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    marginBottom: '5%',
-  },
-  listItem:{
-    paddingTop: '5%',
-    paddingBottom: '5%',
-    paddingLeft: '5%',
-    margin: '3%',
-    borderRadius: 10,
-    backgroundColor: 'white',
-    alignContent: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  },
-  listFooter:{
-    borderTopColor: '#FFFFFF',
-    paddingLeft: '2%',
-    paddingTop: '5%',
-  },
+	listContainer:{
+		alignItems: 'stretch',
+		paddingBottom: '25%'
+	},
+	listFooter:{
+		borderTopColor: '#FFFFFF',
+		paddingLeft: '2%',
+		paddingTop: '5%',
+	},
 	text: {
 		color: 'white',
-  	},
-	weather: {
+	},
+	filterButtonsContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'stretch',
+		backgroundColor: '#305ccd',
+		height: '7%',
+
+	},
+	filterButton: {
+		paddingTop: "3%",
+		flex: 1,
+		alignItems: 'center',
+		borderRadius: 10
+	},
+	filterButtonText: {
 		color: 'white',
-		fontSize: 30,
-	}
+		fontSize: 16,
+		fontWeight: '500'
+	},
 });
 
-const HomeScreen = () => {
+const Home = () => {
+	const dispatch = useDispatch();
+	const taskFilter = useSelector(state=>state.taskFilter);
+
+	const actions = [
+		{
+			text: 'Daily Task',
+			icon: require("../IconImages/calendar.png"),
+			name: 'bt_daily',
+			position: 1
+		},
+		{
+			text: 'One Time Task',
+			icon: require("../IconImages/compose.png"),
+			name: 'bt_one_time',
+			position: 2
+		}
+	];
+
+
 	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>Home Screen</Text>
+  		<View style={{flex: 1, backgroundColor: '#406be9'}}>
+			<View style={styles.filterButtonsContainer}>
+				<TouchableHighlight
+					style={[styles.filterButton, taskFilter === 'daily' ? {backgroundColor: 'white'} : {}]}
+					onPress={() => dispatch({type: DAILY})}
+					underlayColor={'lightgrey'}
+				>
+					<Text style={[styles.filterButtonText, taskFilter === 'daily' ? {color: '#402688'} : {}]}>Daily Tasks</Text>
+				</TouchableHighlight>
+				<TouchableHighlight
+					style={[styles.filterButton, taskFilter === 'dated' ? {backgroundColor: 'white'} : {}]}
+					onPress={() => dispatch({type: DATED})}
+					underlayColor={'lightgrey'}
+				>
+					<Text style={[styles.filterButtonText, taskFilter === 'dated' ? {color: '#402688'} : {}]}>Dated Tasks</Text>
+				</TouchableHighlight>
+			</View>
+			<ScrollView style={styles.scrollContainer}>
+				<View style={styles.container}>
+					<View style={styles.listContainer}>
+						<ListTasks/>
+					</View>
+				</View>
+			</ScrollView>
+			<FloatingAction
+				actions={actions}
+				onPressItem={name => {
+					if(name === 'bt_one_time') {
+						dispatch({type: TASK_ON})
+					} else {
+						dispatch({type: DAILY_TASK_ON})
+					}
+				}}
+			/>
+			<Image source={require('./doggo.gif')} style={{position: 'absolute', left: 25, bottom: 25, height: 55, width: 70}}/>
+			<DailyTaskModal/>
+			<DatedTaskModal/>
+			<EditDatedTaskModal/>
+			<EditDailyTaskModal/>
 		</View>
-	);
-};
+  );
+}
+
+
+
+
+export default Home;

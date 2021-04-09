@@ -4,7 +4,7 @@
   "packagerPort": 19000,
   "webpackServerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://e8-hht.anonymous.pro-creature-habits.exp.direct",
+  "packagerNgrokUrl": "https://packager.e8-hht.anonymous.pro-creature-habits.exp.direct",
+  "ngrokPid": 6872
 }

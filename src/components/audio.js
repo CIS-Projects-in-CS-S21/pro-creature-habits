@@ -18,7 +18,7 @@ button: {
         	})
 
 
-  
+
 
 /*export function PlayingSound() {
   const [sound, setSound] = React.useState();*/
@@ -27,19 +27,19 @@ button: {
 
 
   // List of sound effect require statements.
-  // Every time a new sound effect is added to the application, 
+  // Every time a new sound effect is added to the application,
   // a require statement needs to be added to this list
 
 
-  //Both of these are imported into whichever module needs audio, and 
-  //an element from soundEffectList is passed as a parameter from the 
+  //Both of these are imported into whichever module needs audio, and
+  //an element from soundEffectList is passed as a parameter from the
   // calling component to playSound, in which it is played.
 
   // Unloading needs to happen here ASAP
 
-  //I am going to make this better, i promise. But for now, its a working solution to 
+  //I am going to make this better, i promise. But for now, its a working solution to
   //app-wide sound effects.
-  
+
 
   //maybe store this in redux?
   export const soundEffectList = {
@@ -48,26 +48,28 @@ button: {
     something_old: require('../components/something_old.wav')
   }
 
+  
+
   export async function playSound(listItem) {
-    
+
     const soundObj = new Audio.Sound();
-    
+
     console.log('Loading Sound');
     await soundObj.loadAsync(
 
         listItem
 
     );
-    
-    
+
+
 
     console.log('Playing Sound');
-    await soundObj.playAsync(); 
-    
+    await soundObj.playAsync();
+
     //await soundObj.unloadAsync();
   }
 
-  
+
 
   /*React.useEffect(() => {
     return sound

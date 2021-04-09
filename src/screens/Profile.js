@@ -5,6 +5,7 @@ import {CHANGENAME} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
 import PetInventoryCards from "../components/petInventoryComponents/PetInventoryCards";
 import PetImage from "../components/petInventoryComponents/PetImage";
+import PetInventoryFilter from "../components/filterComponents/PetInventoryFilter";
 import {FILTER_PET, FILTER_ALL_PET,SELECTED} from "../redux/petInventory";
 import HealthBar from "../components/HealthBar";
 import {OFF_PET} from "../redux/petModalVisible";
@@ -17,6 +18,7 @@ import {playSound, soundEffectList} from "../components/audio.js";
 
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
+import {INCREMENT_STAT} from "../redux/statTracker";
 
 
 
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         paddingTop: 5,
-        paddingRight:20,
+        paddingRight: 5,
     },
     text2: {
             color: 'black',
@@ -43,18 +45,16 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderWidth: 2,
-        		borderColor: "white",
-        		borderRadius: 20,
-        		padding: 8,
-        		backgroundColor: "lightblue",
-        		margin: 10
+		borderColor: "white",
+		borderRadius: 20,
+		padding: 8,
+		backgroundColor: "lightblue",
+		margin: 10
     },
     imageContainer: {
             flexDirection: 'row',
-    		justifyContent: 'space-evenly',
+    		justifyContent: 'space-around',
     		marginTop: 20,
-    		flexWrap: 'wrap',
-    		alignContent: 'flex-end'
     },
     balanceContainer: {
     		flexDirection: 'row',
@@ -88,9 +88,9 @@ const styles = StyleSheet.create({
     	},
     	modalView: {
         		margin: 10,
-        		backgroundColor: '#402688',
+				backgroundColor: '#341f6f',
         		borderRadius: 10,
-        		padding: 35,
+        		padding: 20,
         		alignItems: "center",
         		shadowColor: "#000",
         		shadowOffset: {
@@ -99,7 +99,9 @@ const styles = StyleSheet.create({
         		},
         		shadowOpacity: 0.25,
         		shadowRadius: 4,
-        		elevation: 5
+        		elevation: 5,
+				borderWidth: 1,
+				borderColor: '#7276e3'
         	},
         	buttonClose: {
         		backgroundColor: "#2196F3",
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
             		padding: 3
             	},
             	textStyle: {
-                	color: 'white'
+                	color: 'white',
             	},
             	centeredView: {
                 		flex: 1,
@@ -138,7 +140,8 @@ const styles = StyleSheet.create({
                 	flexDirection:'row',
                                     		justifyContent: "center",
                                     		alignItems: "center",
-                                    		marginTop: 22
+                                    		marginTop: 22,
+						paddingBottom: 22
                                     	},
 
     }
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
 
 const PetProfile = () => {
 
-	
+
 
     const dispatch = useDispatch();
     const petImgChoice = useSelector(state => state.petDetails[1]);
@@ -168,107 +171,87 @@ const PetProfile = () => {
     }
 
 
+	const upperCase = (string) => {
+			return string[0].toUpperCase() + string.slice(1);
+		}
 
-    	const changeFilter = (category) => {
-    	console.log("CHANGE FILTER")
-    		if(category === 'all') {
-    			dispatch({type: FILTER_ALL_PET});
-    		} else {
-    			dispatch({type: FILTER_PET, data: category});
-    		}
-    	}
+	const handlePurchase = (item) => {
+			dispatch({type: OFF_PET});
+			if(ItemInventory[item].category === 'food') {
+				dispatch({type: SELECTED, data: 'select_food',thing: item});
+				dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
+				playSound(soundEffectList.food_sound);
+			} else if (ItemInventory[item].category === 'toys') {
+				dispatch({type: SELECTED, data: 'select_toy',thing: item});
+			} else {
+				dispatch({type: SELECTED, data: 'select_clothes',thing: item});
+				dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
+        playSound(soundEffectList.moo);
+      }
 
-    	const upperCase = (string) => {
-        		return string[0].toUpperCase() + string.slice(1);
-        	}
+			showMessage({
+				message: `${upperCase(ItemInventory[item].name)} has been used`,
+				type: "success",
+				statusBarHeight: 52,
+			})
+		}
 
-    	const handlePurchase = (item) => {
-        		dispatch({type: OFF_PET});
-        		if(ItemInventory[item].category === 'food') {
-                    dispatch({type: SELECTED, data: 'select_food',thing: item});
-                    
-					//dispatch({type: SOUND_LOCATION, location: '../components/ra.wav'});
-					
-					
-					//updateSoundLocation('../components/ra.wav');
-					playSound(soundEffectList.food_sound);
-					
-					//playSound();
-        		} else if (ItemInventory[item].category === 'toys') {
-        			dispatch({type: SELECTED, data: 'select_toy',thing: item});
-        		} else {
-        			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
-        		}
+	const editPet = (name) => {
+		dispatch({type: CHANGENAME, changes: name});
+		dispatch({type:"OFF_PET"});
 
-        		showMessage({
-        			message: `${upperCase(ItemInventory[item].name)} has been used`,
-        			type: "success",
-        			statusBarHeight: 52,
-        		})
-        	}
-
-        	const editPet = (name) => {
-                dispatch({type: CHANGENAME, changes: name});
-                dispatch({type:"OFF_PET"});
-
-        	}
+	}
 
 
-        	/*const [sound, setSound] = React.useState();
+	//onst [sound, setSound] = React.useState();
 
-              async function playSound() {
-                console.log('Loading Sound');
-                const { sound } = await Audio.Sound.createAsync(
-                   require('../components/ra.wav')
-                );
-                setSound(sound);
+    //async function playSound() {
+		//console.log('Loading Sound');
+		//const { sound } = await Audio.Sound.createAsync(
+		  // require('../components/ra.wav')
+		//);
+		//setSound(sound);
 
-                console.log('Playing Sound');
-                await sound.playAsync(); }
+		//console.log('Playing Sound');
+		//await sound.playAsync(); }
 
-              React.useEffect(() => {
-                return sound
-                  ? () => {
-                      console.log('Unloading Sound');
-                      sound.unloadAsync(); }
-                  : undefined;
-              }, [sound]); */
+		//React.useEffect(() => {
+			//return sound
+			  //? () => {
+				  //console.log('Unloading Sound');
+				  //sound.unloadAsync(); }
+			  //: undefined;
+			//}, [sound]);
 
-              const onUpdate = () =>{
-                    dispatch({type: ON_PET,data:"edit"});
-               } 
+    const onUpdate = () =>{
+    	dispatch({type: ON_PET,data:"edit"});
+    }
 
 	return (
 <ScrollView style={styles.container}>
             <View style = {styles.centeredView2}>
-			<Text style={styles.text}>
-			{useSelector(state => state.petDetails[0])}
-			</Text>
-			<TouchableOpacity onPress={onUpdate}>
-                    <MaterialCommunityIcons
-                    name = "pencil"
-                    size = {30}
-                    style={{color:"#637ed0"}}/>
-                    </TouchableOpacity>
-            </View>
-			<View style={styles.imageContainer}>
+				<View style={styles.imageContainer}>
+					<View style={{flexDirection: 'column', alignItems: 'center', paddingRight: 40}}>
+						<PetImage items={useSelector(state => state.petInv)}/>
+						<View style={{flexDirection: 'row', alignItems: 'center'}}>
+							<Text style={styles.text}>
+								{useSelector(state => state.petDetails[0])}
+							</Text>
+							<TouchableOpacity onPress={onUpdate}>
+								<MaterialCommunityIcons
+									name = "pencil"
+									size = {20}
+									style={{color:"white"}}/>
+							</TouchableOpacity>
+						</View>
+					</View>
+					<View style={styles.healthbarContainer}>
+						<HealthBar/>
+					</View>
+				</View>
+			</View>
 
-            <PetImage items={useSelector(state => state.petInv)}/>
-            <View style={styles.healthbarContainer}>
-                <HealthBar/>
-            </View>
-            </View>
-			<DropDownPicker
-				items={[
-					{label: 'All', value: 'all'},
-					{label: 'Clothes', value: 'clothes'},
-					{label: 'Food', value: 'food'},
-					{label: 'Toys', value: 'toys'}
-				]}
-				defaultValue={'all'}
-				containerStyle={styles.dropdownContainer}
-				onChangeItem={item => changeFilter(item.value)}
-			/>
+			<PetInventoryFilter/>
 			<Modal
             	animationType="slide"
             	transparent={true}
