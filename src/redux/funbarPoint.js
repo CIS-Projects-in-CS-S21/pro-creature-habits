@@ -3,13 +3,21 @@ export const FUNBARDECREASE = 'FUNBARDECREASE';
 
 const funbarPointReducer = (state = 5, action) => {
 	switch (action.type) {
-		case FUNBARINCREASE :
-			return state + action.data;
-        case FUNBARDECREASE :
-                return state - action.data;
-		default:
-			return state;
-	}
+        case FUNBARINCREASE:
+            if (state + action.data >= 10) {
+            	return 10;
+            } else {
+            	return state + action.data;
+            }
+            case FUNBARDECREASE:
+            	if (state - action.data <= 0) {
+                    return 0;
+                } else {
+                    return state - action.data;
+                }
+            	default:
+            		return state;
+            }
 }
 
 export default funbarPointReducer;

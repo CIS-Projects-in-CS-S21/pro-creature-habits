@@ -164,7 +164,6 @@ const PetProfile = () => {
 
 
     const findImage = () => {
-        console.log(petImgChoice);
     	if (petImgChoice === "cat") {
     	    return require('../images/cat.png');
     	} else {
@@ -204,6 +203,7 @@ const PetProfile = () => {
         	statusBarHeight: 52,
             })
 		}
+
 
         const editPet = (name) => {
             dispatch({type: CHANGENAME, changes: name});
