@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
 
 const DailyTaskModal = () => {
 	const days = useSelector(state => state.daysChecked);
+
 	const taskText = useSelector(state => state.taskInput);
 	const dispatch = useDispatch();
 

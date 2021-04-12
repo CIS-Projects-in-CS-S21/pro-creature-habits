@@ -37,6 +37,7 @@ import editDailyReducer from "./redux/editDailyTaskModal";
 import currentDayReducer from "./redux/currentDay";
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import difficultyCheckedReducer from "./redux/difficultyCheckedReducer";
 
 const reducer = combineReducers({
 	coins: balanceReducer,
@@ -68,7 +69,8 @@ const reducer = combineReducers({
 	dailyTasks: dailyTasksReducer,
 	taskFilter: taskFilterReducer,
 	dailyEditModal: editDailyReducer,
-	currentDay: currentDayReducer
+	currentDay: currentDayReducer,
+	difficultyCheck: difficultyCheckedReducer
 });
 
 const rootReducer = (state, action) => {

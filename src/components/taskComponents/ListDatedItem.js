@@ -80,6 +80,9 @@ const ListDatedItem = ({task, index}) => {
 				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
 					{'Due: ' + taskDate}
 				</Text>
+				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
+					{'Difficulty: ' + task.difficulty}
+				</Text>
 			</View>
 			<View style = {{flexDirection:'row', marginRight: '5%', alignItems: 'center'}}>
 								<TouchableOpacity
