@@ -62,6 +62,11 @@ let copy = JSON.parse(JSON.stringify(state));
                 }
 	        } else if (action.data == "select_toys") {
                 copy[action.thing].wear = true;
+	        } else if (action.data === "select_grooming"){
+				copy[action.thing].bought = copy[action.thing].bought - 1;
+				//copy[action.thing].wear = true;
+				if (copy[action.thing].bought !== 0) {copy[action.thing].show = true;}
+				else {copy[action.thing].show = false;}
 	        } else {
 	            let type = "hat";
                  if (action.thing.includes('shirt')) {

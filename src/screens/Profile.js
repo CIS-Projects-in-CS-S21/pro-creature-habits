@@ -178,6 +178,8 @@ const PetProfile = () => {
 		}
 
 
+
+
     	const handleSelection = (item) => {
         		dispatch({type: OFF_PET});
         		const currentTime = new Date();
@@ -187,20 +189,18 @@ const PetProfile = () => {
 					dispatch({type: TIME_FEED_CHANGE, data: currentTime});
 					dispatch({type: HUNGERBARINCREASE, data:2});
 					playSound();
-
-
-				}
-				 else if (ItemInventory[item].category === 'toys') {
-        			dispatch({type: SELECTED, data: 'select_toy',thing: item});
-					dispatch({type: FUNBARINCREASE, data:3});
-
-        		} else {
-        			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
-        			dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
-        		}
-
-        		showMessage({
-        			message: `${upperCase(ItemInventory[item].name)} has been used`,
+      } else if (ItemInventory[item].category === 'toys') {
+      			dispatch({type: SELECTED, data: 'select_toy',thing: item});
+				dispatch({type: FUNBARINCREASE, data:3});
+      } else if (ItemInventory[item].category === 'grooming') {
+        dispatch({type: SELECTED, data: 'select_grooming',thing: item});
+        dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
+      } else {
+      			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
+      			dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
+      }
+      showMessage({
+      			message: `${upperCase(ItemInventory[item].name)} has been used`,
         			type: "success",
         			statusBarHeight: 52,
         		})

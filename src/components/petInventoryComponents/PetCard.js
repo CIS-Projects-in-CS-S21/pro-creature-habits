@@ -43,9 +43,14 @@ const styles = StyleSheet.create({
 const PetCard = ({item}) => {
 	return (
 	<View>
-		{(!item.wear || item.category === 'food') ? (
+		{(!item.wear || item.category === 'food'||item.category === 'grooming') ? (
 			<View style={styles.cardContainer}>
 				{item.category === 'food' &&
+					<View style={styles.circle}>
+						<Text style={{color: '#402688', fontSize: 12}}> {item.bought} </Text>
+					</View>
+				}
+				{item.category === 'grooming' &&
 					<View style={styles.circle}>
 						<Text style={{color: '#402688', fontSize: 12}}> {item.bought} </Text>
 					</View>
