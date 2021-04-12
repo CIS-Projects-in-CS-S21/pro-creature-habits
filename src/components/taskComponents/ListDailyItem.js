@@ -11,6 +11,7 @@ import {DAILY_EDIT_ON} from "../../redux/editDailyTaskModal";
 import {SET_DAYS} from "../../redux/daysChecked";
 import {INCREMENT_STAT} from "../../redux/statTracker";
 import {ACH_PROGRESS} from "../../redux/achievementsComplete";
+import {FILTER_CHANGE} from "../../redux/achievementFilter";
 
 const styles = StyleSheet.create({
 	listItem: {
@@ -30,10 +31,12 @@ const styles = StyleSheet.create({
 
 const ListDailyItem = ({task, index}) => {
 	const iconSize = 30;
+	let reward = 0;
 	const dailyTask = useSelector(state=>state.dailyTasks)[index];
 	const taskDays = dailyTask.days;
 	const listLongDays = Object.keys(taskDays).filter(day => taskDays[day].on);
 	const listDays = listLongDays.map(day => day.substring(0,3));
+	const difficulty = useSelector(state => state.difficultyCheck);
 	const dispatch = useDispatch();
 
 	const onDelete = (index) => {
@@ -47,11 +50,21 @@ const ListDailyItem = ({task, index}) => {
 
 	const onComplete = (index) => {
 		dispatch({type: COMPLETE_DAILY_TASK, data: index});
-		dispatch({type: REWARD, data: 5});
+
+		if(difficulty === 'easy'){
+			reward = 3;
+		}
+		else if(difficulty === 'medium'){
+			reward = 5;
+		}
+		else{
+			reward = 10;
+		}
+		dispatch({type: REWARD, data: reward});
 		dispatch({type: ACH_PROGRESS, data: 'complete_daily_task'});
 		dispatch({type: INCREMENT_STAT, data: 'daily_tasks_completed'});
 		showMessage({
-			message: '5 coins have been added to your coin balance',
+			message: reward + ' coins have been added to your coin balance',
 			type: "success",
 			statusBarHeight: 52,
 		});
