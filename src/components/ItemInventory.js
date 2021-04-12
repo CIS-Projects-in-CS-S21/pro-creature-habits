@@ -110,6 +110,22 @@ const ItemInventory = {
 		inventoryText: 'Would you like your pet to wear these black shoes?',
 		wearUri: require('../images/black_shoes.png')
 	},
+	shampoo: {
+		name: 'shampoo',
+		uri: require('../test_images/carrot.png'),
+		cost: 4,
+		category: 'grooming',
+		buyText: 'Would you like to buy shampoo?',
+		inventoryText: 'Would you like your pet to wash with shampoo?',
+	},
+	soap: {
+		name: 'soap',
+		uri: require('../test_images/carrot.png'),
+		cost: 4,
+		category: 'grooming',
+		buyText: 'Would you like to buy soap?',
+		inventoryText: 'Would you like your pet to wash with soap?',
+	},
 }
 
 export { ItemInventory }

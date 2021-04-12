@@ -130,6 +130,28 @@ const achievementsList = {
 			reward_taken: false
 		}
 	},
+	buy_grooming: {
+		name: 'Buy grooming supplies',
+		completed: 0,
+		beginner: {
+			to_complete: 2,
+			reward: 10,
+			complete: false,
+			reward_taken: false
+		},
+		intermediate: {
+			to_complete: 20,
+			reward: 100,
+			complete: false,
+			reward_taken: false
+		},
+		hard: {
+			to_complete: 50,
+			reward: 250,
+			complete: false,
+			reward_taken: false
+		}
+	},
 };
 
 export {achievementsList}
