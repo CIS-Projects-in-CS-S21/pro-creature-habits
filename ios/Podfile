@@ -27,4 +27,6 @@ target 'myReactNativeProject' do
 
   pod 'RNSoundPlayer', :path => '../node_modules/react-native-sound-player'
 
+  pod 'RNCPushNotificationIOS', :path => '../node_modules/@react-native-community/push-notification-ios'
+
 end

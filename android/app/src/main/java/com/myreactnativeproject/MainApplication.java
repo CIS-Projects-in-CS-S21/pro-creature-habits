@@ -6,6 +6,8 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.johnsonsu.rnsoundplayer.RNSoundPlayerPackage;
