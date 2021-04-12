@@ -81,6 +81,9 @@ const ListDailyItem = ({task, index}) => {
 				<Text style={{color: 'white', fontSize: 12, alignItems: 'center', paddingTop: 5}} color='white'>
 					{listDays.join(' ')}
 				</Text>
+				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
+					{'Difficulty: ' + task.difficulty}
+				</Text>
 			</View>
 			<View style = {{flexDirection:'row', marginRight: '5%', alignItems: 'center'}}>
 				<TouchableOpacity

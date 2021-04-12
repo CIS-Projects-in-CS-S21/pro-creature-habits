@@ -23,6 +23,7 @@ const datedTasksReducer = (state = [], action) => {
 			let editTasks = [...state];
 			editTasks[action.data[0]].task_name = action.data[1];
 			editTasks[action.data[0]].date = action.data[2];
+			editTasks[action.data[0]].difficulty = action.data[3];
 			return editTasks;
 		default:
 			return state;

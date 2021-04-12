@@ -7,6 +7,7 @@ import {EDIT_OFF} from "../../redux/editTaskModal";
 import {SET_DATE} from "../../redux/selectedDate";
 import {SET_INDEX} from "../../redux/taskEditIndex";
 import {EDIT_TASK_ONE} from "../../redux/datedTasks";
+import DifficultySelect from "./DifficultySelect";
 
 const styles = StyleSheet.create({
 	centeredView: {
@@ -55,6 +56,7 @@ const EditDatedTaskModal = () => {
 	const date = useSelector(state => state.selectedDate);
 	const taskEditIndex = useSelector(state => state.taskEditIndex);
 	const taskText = useSelector(state => state.taskInput);
+	const difficulty = useSelector(state => state.difficultyCheck);
 
 	const dispatch = useDispatch();
 
@@ -66,8 +68,7 @@ const EditDatedTaskModal = () => {
 	}
 
 	const onSubmitEdit = () => {
-		dispatch({type: EDIT_TASK_ONE, data: [taskEditIndex, taskText, date]});
-
+		dispatch({type: EDIT_TASK_ONE, data: [taskEditIndex, taskText, date, difficulty]});
 		dispatch({type: SET_TASK_TEXT, data: ''});
 		dispatch({type: SET_DATE, data: date});
 		dispatch({type: SET_INDEX, data: -1});
@@ -105,6 +106,7 @@ const EditDatedTaskModal = () => {
 							initialDate={date}
 						/>
 					</View>
+					<DifficultySelect/>
 					<View style={styles.modalFooter}>
 						<Pressable
 							style={[styles.button, {marginRight: '40%'}]}

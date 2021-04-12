@@ -18,7 +18,8 @@ const dailyTasksReducer = (state = [], action) => {
 					status: {
 						due_today: action.data[1][day].on,
 						completed: false
-					}
+					},
+					difficulty: action.data[2]
 				}];
 		case REMOVE_TASK_DAILY:
 			return state.filter((element, index) => action.data !== index);
@@ -29,6 +30,7 @@ const dailyTasksReducer = (state = [], action) => {
 			let editTasks = [...state];
 			editTasks[action.data[0]].task_name = action.data[1];
 			editTasks[action.data[0]].days = action.data[2];
+			editTasks[action.data[0]].difficulty = action.data[3];
 			editTasks[action.data[0]].status = {due_today: action.data[2][day1].on, completed: false}
 			return editTasks;
 		case COMPLETE_DAILY_TASK:
