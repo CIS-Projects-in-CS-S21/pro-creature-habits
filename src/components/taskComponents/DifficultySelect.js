@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 3,
         elevation: 11,
+        width: 290,
+        marginTop: 10,
+        marginBottom: 15
     },
     button: {
         flexDirection: 'row',
