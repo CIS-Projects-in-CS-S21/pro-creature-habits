@@ -11,7 +11,6 @@ const timeOfBarsReducer = (state = [new Date(),new Date(),new Date(),new Date()]
 	let temp = [...state]
 	switch (action.type) {
 		case TIME_FEED_CHANGE:
-
 		    temp[1] = action.data;
 			return temp;
 		case TIME_TOY_CHANGE:

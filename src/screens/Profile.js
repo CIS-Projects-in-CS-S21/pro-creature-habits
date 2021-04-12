@@ -177,48 +177,47 @@ const PetProfile = () => {
 			return string[0].toUpperCase() + string.slice(1);
 		}
 
+    const handleSelection = (item) => {
+        dispatch({type: OFF_PET});
+        const currentTime = new Date();
+        if(ItemInventory[item].category === 'food') {
+			dispatch({type: SELECTED, data: 'select_food',thing: item});
+			dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
+			dispatch({type: TIME_FEED_CHANGE, data: currentTime});
+			dispatch({type: HUNGERBARINCREASE, data:2});
+			playSound();
+        } else if (ItemInventory[item].category === 'toys') {
+      	    dispatch({type: SELECTED, data: 'select_toy',thing: item});
+			dispatch({type: FUNBARINCREASE, data:3});
+        } else if (ItemInventory[item].category === 'grooming') {
+            dispatch({type: SELECTED, data: 'select_grooming',thing: item});
+            dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
+            dispatch({type: HYGIENEBARINCREASE, data:3});
+        } else {
+      		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
+      		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
+        }
 
+        showMessage({
+      		message: `${upperCase(ItemInventory[item].name)} has been used`,
+        	type: "success",
+        	statusBarHeight: 52,
+            })
+		}
 
+        const editPet = (name) => {
+            dispatch({type: CHANGENAME, changes: name});
+            dispatch({type:"OFF_PET"});
+		}
 
-    	const handleSelection = (item) => {
-        		dispatch({type: OFF_PET});
-        		const currentTime = new Date();
-        		if(ItemInventory[item].category === 'food') {
-					dispatch({type: SELECTED, data: 'select_food',thing: item});
-					dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
-					dispatch({type: TIME_FEED_CHANGE, data: currentTime});
-					dispatch({type: HUNGERBARINCREASE, data:2});
-					playSound();
-      } else if (ItemInventory[item].category === 'toys') {
-      			dispatch({type: SELECTED, data: 'select_toy',thing: item});
-				dispatch({type: FUNBARINCREASE, data:3});
-      } else if (ItemInventory[item].category === 'grooming') {
-        dispatch({type: SELECTED, data: 'select_grooming',thing: item});
-        dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
-      } else {
-      			dispatch({type: SELECTED, data: 'select_clothes',thing: item})
-      			dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
-      }
-      showMessage({
-      			message: `${upperCase(ItemInventory[item].name)} has been used`,
-        			type: "success",
-        			statusBarHeight: 52,
-        		})
-		    }
-
-        	const editPet = (name) => {
-                dispatch({type: CHANGENAME, changes: name});
-                dispatch({type:"OFF_PET"});
-			}
-
-        	const [sound, setSound] = React.useState();
-                          async function playSound() {
-                            console.log('Loading Sound');
-                            const { sound } = await Audio.Sound.createAsync(
-                               require('../components/ra.wav')
-                            );
-                            setSound(sound);
-                            console.log('Playing Sound');
+        const [sound, setSound] = React.useState();
+            async function playSound() {
+            console.log('Loading Sound');
+            const { sound } = await Audio.Sound.createAsync(
+                 require('../components/ra.wav')
+             );
+             setSound(sound);
+              console.log('Playing Sound');
                             await sound.playAsync(); }
                           React.useEffect(() => {
                             return sound
