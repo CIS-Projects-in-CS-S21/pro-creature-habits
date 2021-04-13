@@ -18,11 +18,6 @@ import {INCREMENT_STAT} from "../redux/statTracker";
 import * as Progress from "react-native-progress";
 import {playSound, soundEffectList} from "../components/audio.js";
 
-
-
-import {MaterialCommunityIcons} from "@expo/vector-icons";
-import {ON_PET} from "../redux/petModalVisible";
-import {INCREMENT_STAT} from "../redux/statTracker";
 import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
