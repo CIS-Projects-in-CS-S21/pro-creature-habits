@@ -5,7 +5,8 @@ const ItemInventory = {
 		cost: 3,
 		category: 'food',
 		buyText: 'Would you like to buy a burger?',
-		inventoryText: 'Would you like to feed this burger to your pet?'
+		inventoryText: 'Would you like to feed this burger to your pet?',
+		pointValue: 3
 	},
 	shoes: {
 		name: 'shoes',
@@ -109,6 +110,22 @@ const ItemInventory = {
 		buyText: 'Would you like to buy black shoes?',
 		inventoryText: 'Would you like your pet to wear these black shoes?',
 		wearUri: require('../images/black_shoes.png')
+	},
+	shampoo: {
+		name: 'shampoo',
+		uri: require('../test_images/carrot.png'),
+		cost: 4,
+		category: 'grooming',
+		buyText: 'Would you like to buy shampoo?',
+		inventoryText: 'Would you like your pet to wash with shampoo?',
+	},
+	soap: {
+		name: 'soap',
+		uri: require('../test_images/carrot.png'),
+		cost: 4,
+		category: 'grooming',
+		buyText: 'Would you like to buy soap?',
+		inventoryText: 'Would you like your pet to wash with soap?',
 	},
 }
 

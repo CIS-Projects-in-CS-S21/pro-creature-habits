@@ -41,7 +41,12 @@ const PetImage = (props) => {
 
     const dispatch = useDispatch();
 
-    const petImgChoice = useSelector(state => state.petDetails[1]);
+    const petImgChoice = useSelector(state => state.petDetails.type);
+		const petEmote = useSelector(state => state.petDetails.emote);
+
+		console.log("PetEmote: " + petEmote);
+		console.log("\nPetImg: " + petImgChoice);
+
     const items = useSelector(state => state.petInv);
 	let names = [];
     for (const [key, value] of Object.entries(items)) {
@@ -61,15 +66,59 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
         }).start();
     };
 
+const EmoteImg = () => {
+
+	//const retImg;
+	console.log("PetEmote: " + petEmote);
+	console.log("\nPetImg: " + petImgChoice);
+
+
+	if(petEmote == "happy"){
+		if(petImgChoice == "cat"){
+			return(
+				<Image
+											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/cat_happy.gif")}
+			  />
+			)
+
+		}
+		if(petImgChoice == "dog"){
+			return(
+				<Image
+											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/dog_happy.gif")}
+				/>
+			)
+		}
+	}
+
+	if(petEmote == "neutral"){
+		if(petImgChoice == "cat"){
+			return(
+				<Image
+										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+										source={require("../../images/cat.png")}
+				/>
+			)
+		}
+		if(petImgChoice == "dog"){
+			return(
+				<Image
+										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+										source={require("../../images/dog.png")}
+				/>
+			)
+		}
+	}
+}
+
 
 
 
 	return (
 	<View>
-		<Image
-                        style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10}}
-                        source={(petImgChoice == "cat") ? require('../../images/cat.png') : require('../../images/dog.png')}
-         />
+		<EmoteImg />
          {names.map((name, index) => {
          return (
            <Image
@@ -78,6 +127,11 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
                                    key = {name}
            />
            )})}
+
+					 <Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/rain.gif')}
+					 />
 
        </View>
 	)

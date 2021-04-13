@@ -15,6 +15,10 @@ const StatsData = {
 		name: 'Toys bought',
 		count: 0
 	},
+	grooming_bought:{
+		name: 'Grooming supply bougth',
+		count: 0
+	},
 	dated_tasks_completed: {
 		name: 'Dated tasks completed',
 		count: 0
@@ -29,6 +33,10 @@ const StatsData = {
 	},
 	pet_fed: {
 		name: 'Number of times pet has been fed',
+		count: 0
+	},
+	pet_wash: {
+		name: 'Number of times pet has been wash',
 		count: 0
 	},
 	clothes_changed: {
