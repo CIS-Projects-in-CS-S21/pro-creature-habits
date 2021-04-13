@@ -156,6 +156,9 @@ const ItemInventory = {
 		category: 'grooming',
 		buyText: 'Would you like to buy shampoo?',
 		inventoryText: 'Would you like your pet to wash with shampoo?',
+		benefits: {
+			hygiene: 0.3
+		}
 	},
 	soap: {
 		name: 'soap',
@@ -164,6 +167,9 @@ const ItemInventory = {
 		category: 'grooming',
 		buyText: 'Would you like to buy soap?',
 		inventoryText: 'Would you like your pet to wash with soap?',
+		benefits: {
+			hygiene: 0.3
+		}
 	},
 }
 
