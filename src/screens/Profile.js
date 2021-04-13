@@ -12,6 +12,10 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
+import {playSound, soundEffectList} from "../components/audio.js";
+
+
+
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 import {INCREMENT_STAT} from "../redux/statTracker";
@@ -20,6 +24,7 @@ import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
 import {TIME_FEED_CHANGE} from "../redux/timeOfBars";
 import { StatsData } from '../components/StatsData';
+
 
 
 
@@ -152,6 +157,8 @@ const styles = StyleSheet.create({
 
 const PetProfile = () => {
 
+
+
     const dispatch = useDispatch();
     const petImgChoice = useSelector(state => state.petDetails[1]);
 
@@ -159,7 +166,9 @@ const PetProfile = () => {
     const selectedItem = useSelector(state=>state.selectedPetItem);
     const [textName, onChangeText] = React.useState('');
 
+    const itemList = () => {
 
+    }
 
 
 

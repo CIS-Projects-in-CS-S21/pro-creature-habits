@@ -39,6 +39,7 @@ import dailyTasksReducer from "./redux/dailyTasks";
 import taskFilterReducer from "./redux/taskFilter";
 import editDailyReducer from "./redux/editDailyTaskModal";
 import currentDayReducer from "./redux/currentDay";
+import weatherStatusReducer from "./redux/weatherStatus";
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import timeOfBarsReducer from './redux/timeOfBars';
@@ -78,7 +79,8 @@ const reducer = combineReducers({
 	taskFilter: taskFilterReducer,
 	dailyEditModal: editDailyReducer,
 	currentDay: currentDayReducer,
-	currentTimeArray: timeOfBarsReducer
+	currentTimeArray: timeOfBarsReducer,
+	weatherStatus: weatherStatusReducer
 });
 
 const rootReducer = (state, action) => {
@@ -102,6 +104,7 @@ const persistor = persistStore(store);
 
 const App = () => {
 	return (
+
 		<Provider store={store}>
 			<PersistGate persistor={persistor}>
 				<AppUnwrapped/>
