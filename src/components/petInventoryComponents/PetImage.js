@@ -42,11 +42,7 @@ const PetImage = (props) => {
     const dispatch = useDispatch();
 
     const petImgChoice = useSelector(state => state.petDetails.type);
-		const petEmote = useSelector(state => state.petDetails.emote);
-
-		console.log("PetEmote: " + petEmote);
-		console.log("\nPetImg: " + petImgChoice);
-
+	const petEmote = useSelector(state => state.petDetails.emote);
     const items = useSelector(state => state.petInv);
 	let names = [];
     for (const [key, value] of Object.entries(items)) {
