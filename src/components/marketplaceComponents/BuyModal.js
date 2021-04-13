@@ -89,6 +89,9 @@ const BuyModal = () => {
 		} else if (ItemInventory[item].category === 'toys') {
 			dispatch({type: ACH_PROGRESS, data: 'buy_toy'});
 			dispatch({type: SET_STAT, data: ['clothes_bought', achievements['buy_toy'].completed]})
+		} else if (ItemInventory[item].category === 'grooming') {
+			dispatch({type: ACH_PROGRESS, data: 'buy_grooming'});
+			dispatch({type: SET_STAT, data: ['grooming_bought', achievements['buy_grooming'].completed]})
 		} else {
 			dispatch({type: ACH_PROGRESS, data: 'buy_clothes'})
 			dispatch({type: SET_STAT, data: ['toys_bought', achievements['buy_clothes'].completed]})

@@ -6,6 +6,10 @@ import {persistReducer, persistStore} from "redux-persist";
 import {combineReducers, createStore} from "redux";
 import {RESET_BUTTON_PRESSED} from "./AppUnwrapped";
 import balanceReducer from "./redux/coinBalance";
+import hungerbarPointReducer from "./redux/hungerbarPoint";
+import funbarPointReducer from "./redux/funbarPoint";
+import hygienebarPointReducer from "./redux/hygienebarPoint"
+import healthBarReducer from './redux/healthBarPoint';
 import marketplaceInventoryReducer from "./redux/marketplaceInventory";
 import petInfoReducer from "./redux/petInfo";
 import petInventoryReducer from "./redux/petInventory";
@@ -35,8 +39,11 @@ import dailyTasksReducer from "./redux/dailyTasks";
 import taskFilterReducer from "./redux/taskFilter";
 import editDailyReducer from "./redux/editDailyTaskModal";
 import currentDayReducer from "./redux/currentDay";
+import weatherStatusReducer from "./redux/weatherStatus";
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import timeOfBarsReducer from './redux/timeOfBars';
+
 
 const reducer = combineReducers({
 	coins: balanceReducer,
@@ -54,6 +61,9 @@ const reducer = combineReducers({
 	userStats: statTrackerReducer,
 	petMV: petMVR,
 	selectedPetItem: selectedPetItemReducer,
+	fun:funbarPointReducer,
+	hunger: hungerbarPointReducer,
+	hygiene: hygienebarPointReducer,
 	firstLogin: loginReducer,
 	pin: pinReducer,
 	pintHint: hintReducer,
@@ -68,7 +78,9 @@ const reducer = combineReducers({
 	dailyTasks: dailyTasksReducer,
 	taskFilter: taskFilterReducer,
 	dailyEditModal: editDailyReducer,
-	currentDay: currentDayReducer
+	currentDay: currentDayReducer,
+	currentTimeArray: timeOfBarsReducer,
+	weatherStatus: weatherStatusReducer
 });
 
 const rootReducer = (state, action) => {
@@ -92,6 +104,7 @@ const persistor = persistStore(store);
 
 const App = () => {
 	return (
+
 		<Provider store={store}>
 			<PersistGate persistor={persistor}>
 				<AppUnwrapped/>

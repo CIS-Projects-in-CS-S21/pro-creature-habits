@@ -1,6 +1,6 @@
 import {View, StyleSheet, TouchableOpacity} from "react-native";
 import React from "react";
-import {Ionicons} from "@expo/vector-icons";
+import {Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import {useDispatch} from "react-redux";
 import {FILTER_ALL_PET, FILTER_PET} from "../../redux/petInventory";
 
@@ -60,6 +60,12 @@ const PetInventoryFilter = () => {
 				style={[styles.filterButton, petInvFilter === 'toys' && {backgroundColor: 'white'}]}
 			>
 				<Ionicons name='tennisball-sharp' color={petInvFilter === 'toys' ? filterColor : 'white'} size={iconSize}/>
+			</TouchableOpacity>
+			<TouchableOpacity
+				onPress={() => changeFilter('grooming')}
+				style={[styles.filterButton, petInvFilter === 'grooming' && {backgroundColor: 'white'}]}
+			>
+				<MaterialCommunityIcons name='spray-bottle' color={petInvFilter === 'grooming' ? filterColor : 'white'} size={iconSize}/>
 			</TouchableOpacity>
 		</View>
 	)
