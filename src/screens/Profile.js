@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable, TouchableOpacity, TextInput} from 'react-native';
+import { View, Text,ScrollView, StyleSheet, Image, Modal, Pressable, TouchableOpacity, TextInput, ActionSheetIOS} from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import {CHANGENAME} from "../redux/petInfo";
 import DropDownPicker from "react-native-dropdown-picker";
@@ -12,9 +12,19 @@ import {OFF_PET} from "../redux/petModalVisible";
 import {ItemInventory} from "../components/ItemInventory";
 import { showMessage } from "react-native-flash-message";
 import { Audio } from 'expo-av';
+import {playSound, soundEffectList} from "../components/audio.js";
+
+
+
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import {ON_PET} from "../redux/petModalVisible";
 import {INCREMENT_STAT} from "../redux/statTracker";
+import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
+import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
+import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
+import {TIME_FEED_CHANGE} from "../redux/timeOfBars";
+import { StatsData } from '../components/StatsData';
+
 
 
 
@@ -147,6 +157,8 @@ const styles = StyleSheet.create({
 
 const PetProfile = () => {
 
+
+
     const dispatch = useDispatch();
     const petImgChoice = useSelector(state => state.petDetails[1]);
 
@@ -154,8 +166,13 @@ const PetProfile = () => {
     const selectedItem = useSelector(state=>state.selectedPetItem);
     const [textName, onChangeText] = React.useState('');
 
+    const itemList = () => {
+
+    }
+
+
+
     const findImage = () => {
-        console.log(petImgChoice);
     	if (petImgChoice === "cat") {
     	    return require('../images/cat.png');
     	} else {
@@ -168,62 +185,62 @@ const PetProfile = () => {
 			return string[0].toUpperCase() + string.slice(1);
 		}
 
-	const handlePurchase = (item) => {
-			dispatch({type: OFF_PET});
-			if(ItemInventory[item].category === 'food') {
-				dispatch({type: SELECTED, data: 'select_food',thing: item});
-				dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
-				playSound();
-			} else if (ItemInventory[item].category === 'toys') {
-				dispatch({type: SELECTED, data: 'select_toy',thing: item});
-			} else if (ItemInventory[item].category === 'grooming') {
-				dispatch({type: SELECTED, data: 'select_grooming',thing: item});
-				dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
-			} else {
-				dispatch({type: SELECTED, data: 'select_clothes',thing: item});
-				dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
-			}
+    const handleSelection = (item) => {
+        dispatch({type: OFF_PET});
+        const currentTime = new Date();
+        if(ItemInventory[item].category === 'food') {
+			dispatch({type: SELECTED, data: 'select_food',thing: item});
+			dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
+			dispatch({type: TIME_FEED_CHANGE, data: currentTime});
+			dispatch({type: HUNGERBARINCREASE, data:2});
+			playSound();
+        } else if (ItemInventory[item].category === 'toys') {
+      	    dispatch({type: SELECTED, data: 'select_toy',thing: item});
+			dispatch({type: FUNBARINCREASE, data:3});
+        } else if (ItemInventory[item].category === 'grooming') {
+            dispatch({type: SELECTED, data: 'select_grooming',thing: item});
+            dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
+            dispatch({type: HYGIENEBARINCREASE, data:3});
+        } else {
+      		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
+      		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
+        }
 
-			showMessage({
-				message: `${upperCase(ItemInventory[item].name)} has been used`,
-				type: "success",
-				statusBarHeight: 52,
-			})
+        showMessage({
+      		message: `${upperCase(ItemInventory[item].name)} has been used`,
+        	type: "success",
+        	statusBarHeight: 52,
+            })
 		}
 
-	const editPet = (name) => {
-		dispatch({type: CHANGENAME, changes: name});
-		dispatch({type:"OFF_PET"});
 
-	}
+        const editPet = (name) => {
+            dispatch({type: CHANGENAME, changes: name});
+            dispatch({type:"OFF_PET"});
+		}
 
+        const [sound, setSound] = React.useState();
+            async function playSound() {
+            console.log('Loading Sound');
+            const { sound } = await Audio.Sound.createAsync(
+                 require('../components/ra.wav')
+             );
+             setSound(sound);
+              console.log('Playing Sound');
+                            await sound.playAsync(); }
+                          React.useEffect(() => {
+                            return sound
+                              ? () => {
+                                  console.log('Unloading Sound');
+                                  sound.unloadAsync(); }
+                              : undefined;
+                          }, [sound]);
 
-	const [sound, setSound] = React.useState();
-
-    async function playSound() {
-		console.log('Loading Sound');
-		const { sound } = await Audio.Sound.createAsync(
-		   require('../components/ra.wav')
-		);
-		setSound(sound);
-
-		console.log('Playing Sound');
-		await sound.playAsync(); }
-
-		React.useEffect(() => {
-			return sound
-			  ? () => {
-				  console.log('Unloading Sound');
-				  sound.unloadAsync(); }
-			  : undefined;
-			}, [sound]);
-
-    const onUpdate = () =>{
-    	dispatch({type: ON_PET,data:"edit"});
-    }
-
+              const onUpdate = () =>{
+                    dispatch({type: ON_PET,data:"edit"});
+               }
 	return (
-<ScrollView style={styles.container}>
+        <View style = {styles.container}>
             <View style = {styles.centeredView2}>
 				<View style={styles.imageContainer}>
 					<View style={{flexDirection: 'column', alignItems: 'center', paddingRight: 40}}>
@@ -266,7 +283,7 @@ const PetProfile = () => {
             					</Pressable>
             					    <Pressable
             							style={[styles.button, styles.buttonClose, {right: -30}]}
-            							onPress={() => handlePurchase(selectedItem)}
+            							onPress={() => handleSelection(selectedItem)}
             							>
             							<Text style={styles.textStyle}>Yes </Text>
             						</Pressable>
@@ -308,10 +325,10 @@ const PetProfile = () => {
                                     			</View>
             						}
             				</Modal>
+            				<ScrollView style={styles.container}>
 			<PetInventoryCards items={useSelector(state => state.petInv)}/>
-        </ScrollView>
-
-
+            </ScrollView>
+            </View>
 	);
 };
 

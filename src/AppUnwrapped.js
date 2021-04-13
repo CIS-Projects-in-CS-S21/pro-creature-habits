@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import {Image, Text, View, StyleSheet} from "react-native";
 import 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux'
-
+import {TIME_CHANGE} from "./redux/timeOfBars";
 
 
 import HomeTabs from "./components/HomeTabs";
@@ -18,6 +18,8 @@ import CreatePINScreen from "./screens/CreatePIN";
 import InputPINScreen from "./screens/InputPIN";
 import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
+import {SET} from "./redux/weatherStatus";
+
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
 
@@ -42,6 +44,8 @@ const AppUnwrapped = () => {
 	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 	const [temperature, setTemperature] = React.useState(null);
 	const [weather, setWeather] = React.useState(null);
+
+	const weatherStatusLog = useSelector(state => state.weatherStatus);
 	const dispatch = useDispatch();
 	const date = useSelector(state=>state.currentDay);
 
@@ -56,7 +60,15 @@ const AppUnwrapped = () => {
 					.then(json => {
 						setWeather(json.weather[0].icon);
 						setTemperature(json.main.temp);
+
+						dispatch({type: SET, status: json.weather[0].main});
+
+						//// DEBUG:
+						
+						console.log("Current weather status in reducer: " + weatherStatusLog);
 					});
+
+
 			}
 		);
 	};
@@ -67,6 +79,8 @@ const AppUnwrapped = () => {
 		getWeather();
 		const interval = setInterval(() => {
 			const day = new Date();
+			console.log("setting interval")
+			dispatch({type: TIME_CHANGE, data: day});
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
 			} else {

@@ -5,7 +5,8 @@ const ItemInventory = {
 		cost: 3,
 		category: 'food',
 		buyText: 'Would you like to buy a burger?',
-		inventoryText: 'Would you like to feed this burger to your pet?'
+		inventoryText: 'Would you like to feed this burger to your pet?',
+		pointValue: 3
 	},
 	shoes: {
 		name: 'shoes',
