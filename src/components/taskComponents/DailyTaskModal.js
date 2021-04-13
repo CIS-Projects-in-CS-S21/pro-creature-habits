@@ -6,6 +6,7 @@ import {DAILY_TASK_OFF} from "../../redux/dailyTaskModal";
 import React from "react";
 import {ADD_TASK_DAILY} from "../../redux/dailyTasks";
 import {RESET_DAYS} from "../../redux/daysChecked";
+import DifficultySelect from "./DifficultySelect";
 
 const styles = StyleSheet.create({
 	centeredView: {
@@ -48,11 +49,12 @@ const styles = StyleSheet.create({
 
 const DailyTaskModal = () => {
 	const days = useSelector(state => state.daysChecked);
+	const difficulty = useSelector(state => state.difficultyCheck);
 	const taskText = useSelector(state => state.taskInput);
 	const dispatch = useDispatch();
 
 	const onSubmit = (task) => {
-		dispatch({type: ADD_TASK_DAILY, data: [task, days]});
+		dispatch({type: ADD_TASK_DAILY, data: [task, days, difficulty]});
 		dispatch({type: SET_TASK_TEXT, data: ''});
 		dispatch({type: RESET_DAYS});
 		dispatch({type: DAILY_TASK_OFF});
@@ -75,6 +77,7 @@ const DailyTaskModal = () => {
 						placeholder='Type a new task'
 					/>
 					<CheckboxGroup/>
+					<DifficultySelect/>
 					<View style={styles.modalFooter}>
 						<Pressable
 							style={[styles.button, {marginRight: '20%'}]}
