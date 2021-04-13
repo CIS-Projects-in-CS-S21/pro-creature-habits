@@ -18,7 +18,7 @@ export default class Task extends BaseModel {
     return {
       id: { type: types.INTEGER, primary_key: true },
       name: { type: types.TEXT, not_null: true },
-      due: {type: types.TEXT, default: ""},
+      due: { type: types.NUMERIC },
       timestamp: { type: types.INTEGER, default: () => Date.now() }
     }
   }

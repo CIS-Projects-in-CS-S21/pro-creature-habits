@@ -10,7 +10,8 @@ const datedTasksReducer = (state = [], action) => {
 				{
 					task_name: action.data[0],
 					date: action.data[1],
-					completed: false
+					completed: false,
+					difficulty: action.data[2]
 				}];
 		case REMOVE_TASK_ONE:
 			return state.filter((element, index) => action.data !== index);
@@ -22,6 +23,7 @@ const datedTasksReducer = (state = [], action) => {
 			let editTasks = [...state];
 			editTasks[action.data[0]].task_name = action.data[1];
 			editTasks[action.data[0]].date = action.data[2];
+			editTasks[action.data[0]].difficulty = action.data[3];
 			return editTasks;
 		default:
 			return state;
