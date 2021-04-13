@@ -5,24 +5,22 @@ export const CHANGE_EMOTION = 'CHANGE_EMOTION';
 const defaultState = {
   name: "name",
   type: "dog",
-  emote: "happy"
+  emote: "neutral"
 }
-
-//let defaultState = ["name","dog","happy"];
 
 
 const petInfoObj = (state = defaultState, action) => {
-    //let copy = [...state];
+    let copy = {...state};
 
 	switch (action.type) {
     		case CHANGE:
     			return action.changes;
     	    case CHANGENAME:
-    	        state.name = action.changes;
-    	        return state.name;
+                copy.name = action.changes;
+    	        return copy;
     	    case CHANGE_EMOTION:
-    	        state.emote = action.changes;
-    	        return emote;
+    	        copy.emote = action.changes;
+    	        return copy;
     		default:
     			return state;
     	}

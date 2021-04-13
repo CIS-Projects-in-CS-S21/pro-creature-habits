@@ -45,10 +45,11 @@ button: {
   export const soundEffectList = {
     food_sound: require('../components/food_sound.wav'),
     moo: require('../components/moo.wav'),
-    something_old: require('../components/something_old.wav')
+    something_old: require('../components/something_old.wav'),
+    clothes_sound: require('../components/clothes_sound.wav')
   }
 
-  
+
 
   export async function playSound(listItem) {
 
