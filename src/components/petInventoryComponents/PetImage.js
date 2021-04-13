@@ -3,6 +3,7 @@ import {Image, Text, View, StyleSheet,ImageBackground, Animated} from "react-nat
 import {useDispatch, useSelector} from "react-redux";
 import ImageOverlay from "react-native-image-overlay";
 import {EAT} from "../../redux/petInventory";
+import {CHANGE_EMOTION} from "../../redux/petInfo";
 
 const styles = StyleSheet.create({
 	cardContainer: {
@@ -41,7 +42,9 @@ const PetImage = (props) => {
 
     const dispatch = useDispatch();
 
-    const petImgChoice = useSelector(state => state.petDetails[1]);
+    const petImgChoice = useSelector(state => state.petDetails.type);
+	const petEmote = useSelector(state => state.petDetails.emote);
+
     const items = useSelector(state => state.petInv);
 	let names = [];
     for (const [key, value] of Object.entries(items)) {
@@ -50,6 +53,7 @@ const PetImage = (props) => {
         }
 
     }
+
 
 const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -61,15 +65,65 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
         }).start();
     };
 
+    const hunger = useSelector(state => state.hunger);
+        const hygiene = useSelector(state => state.hygiene);
+        const fun = useSelector(state => state.fun);
+        if (hunger > 7 && hygiene > 7 && fun > 7) {
+            dispatch({type: CHANGE_EMOTION,changes:"happy"});
+        } else {
+            dispatch({type: CHANGE_EMOTION,changes:"neutral"});
+        }
+
+const EmoteImg = () => {
+
+
+
+	if(petEmote == "happy"){
+		if(petImgChoice == "cat"){
+			return(
+				<Image
+											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/cat_happy.gif")}
+			  />
+			)
+
+		}
+		if(petImgChoice == "dog"){
+			return(
+				<Image
+											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/dog_happy.gif")}
+				/>
+			)
+		}
+	}
+
+	if(petEmote == "neutral"){
+		if(petImgChoice == "cat"){
+			return(
+				<Image
+										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+										source={require("../../images/cat.png")}
+				/>
+			)
+		}
+		if(petImgChoice == "dog"){
+			return(
+				<Image
+										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+										source={require("../../images/dog.png")}
+				/>
+			)
+		}
+	}
+}
+
 
 
 
 	return (
 	<View>
-		<Image
-                        style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10}}
-                        source={(petImgChoice == "cat") ? require('../../images/cat.png') : require('../../images/dog.png')}
-         />
+		<EmoteImg />
          {names.map((name, index) => {
          return (
            <Image
@@ -78,6 +132,11 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
                                    key = {name}
            />
            )})}
+
+					 <Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/rain.gif')}
+					 />
 
        </View>
 	)

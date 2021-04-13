@@ -8,7 +8,7 @@ import {EDIT_ON} from "../../redux/editTaskModal";
 import {SET_TASK_TEXT} from "../../redux/taskInput";
 import {SET_DATE} from "../../redux/selectedDate";
 import {SET_INDEX} from "../../redux/taskEditIndex";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {INCREMENT_STAT} from "../../redux/statTracker";
 import {ACH_PROGRESS} from "../../redux/achievementsComplete";
 
@@ -32,6 +32,8 @@ const ListDatedItem = ({task, index}) => {
 	const iconSize = 30;
 	const taskDate = new Date(task.date).toString().split(" ").slice(0,4).join(" ");
 	const dispatch = useDispatch();
+	let reward = 5;
+	const difficulty = useSelector(state => state.difficultyCheck);
 
 	const onDelete = (index) => {
 		dispatch({type: REMOVE_TASK_ONE, data: index});
@@ -43,13 +45,22 @@ const ListDatedItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
+		if(difficulty === 'easy'){
+			reward = 3;
+		}
+		else if(difficulty === 'medium'){
+			reward = 5;
+		}
+		else{
+			reward = 10;
+		}
 		dispatch({type: COMPLETED_TASK_ONE, data: index});
-		dispatch({type: REWARD, data: 5});
+		dispatch({type: REWARD, data: reward});
 		dispatch({type: ACH_PROGRESS, data: 'complete_dated_task'});
 		dispatch({type: INCREMENT_STAT, data: 'dated_tasks_completed'});
 
 		showMessage({
-			message: '5 coins have been added to your coin balance',
+			message: reward + ' coins have been added to your coin balance',
 			type: "success",
 			statusBarHeight: 52,
 		});
@@ -79,6 +90,9 @@ const ListDatedItem = ({task, index}) => {
 				<Text style={{color: 'white', fontSize: 20, width: 195}} color='white'>{task.task_name}</Text>
 				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
 					{'Due: ' + taskDate}
+				</Text>
+				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
+					{'Difficulty: ' + task.difficulty}
 				</Text>
 			</View>
 			<View style = {{flexDirection:'row', marginRight: '5%', alignItems: 'center'}}>

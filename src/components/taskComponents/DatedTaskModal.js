@@ -7,6 +7,9 @@ import React from "react";
 import {SET_DATE} from "../../redux/selectedDate";
 import {ADD_TASK_ONE} from "../../redux/datedTasks";
 import {DAILY_TASK_OFF} from "../../redux/dailyTaskModal";
+import CheckboxGroup from "./CheckboxGroup";
+import DifficultyOptions from "../DifficultyOptions";
+import DifficultySelect from "./DifficultySelect";
 
 const styles = StyleSheet.create({
 	centeredView: {
@@ -50,10 +53,11 @@ const styles = StyleSheet.create({
 const DatedTaskModal = () => {
 	const taskText = useSelector(state => state.taskInput);
 	const date = useSelector(state => state.selectedDate);
+	const difficulty = useSelector(state => state.difficultyCheck);
 	const dispatch = useDispatch();
 
 	const onSubmit = (task) => {
-		dispatch({type: ADD_TASK_ONE, data: [task, date]});
+		dispatch({type: ADD_TASK_ONE, data: [task, date, difficulty]});
 		dispatch({type: SET_TASK_TEXT, data: ''});
 		dispatch({type: SET_DATE, data: new Date()});
 		dispatch({type: TASK_OFF});
@@ -88,8 +92,14 @@ const DatedTaskModal = () => {
 							width={275}
 							textStyle={{color: 'white'}}
 						/>
+
 					</View>
+					<View>
+						<Text style={{color: 'white', fontSize: 20, marginTop: 15}}>Choose a Difficulty Level:</Text>
+					</View>
+					<DifficultySelect/>
 					<View style={styles.modalFooter}>
+
 						<Pressable
 							style={[styles.button, {marginRight: '40%'}]}
 							onPress={() => dispatch({type: TASK_OFF})}
