@@ -6,7 +6,7 @@ const defaultState = {
   name: "name",
   type: "dog",
   emote: "happy"
-}\
+}
 
 
 const petInfoObj = (state = defaultState, action) => {

@@ -193,7 +193,7 @@ const PetProfile = () => {
 			dispatch({type: INCREMENT_STAT, data: 'pet_fed'})
 			dispatch({type: TIME_FEED_CHANGE, data: currentTime});
 			dispatch({type: HUNGERBARINCREASE, data:2});
-			playSound();
+			playSound(soundEffectList.food_sound);
         } else if (ItemInventory[item].category === 'toys') {
       	    dispatch({type: SELECTED, data: 'select_toy',thing: item});
 			dispatch({type: FUNBARINCREASE, data:3});
@@ -204,6 +204,7 @@ const PetProfile = () => {
         } else {
       		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
       		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
+          playSound(soundEffectList.clothes_sound);
         }
 
         showMessage({
@@ -219,7 +220,7 @@ const PetProfile = () => {
             dispatch({type:"OFF_PET"});
 		}
 
-        const [sound, setSound] = React.useState();
+        /* const [sound, setSound] = React.useState();
             async function playSound() {
             console.log('Loading Sound');
             const { sound } = await Audio.Sound.createAsync(
@@ -235,7 +236,7 @@ const PetProfile = () => {
                                   sound.unloadAsync(); }
                               : undefined;
                           }, [sound]);
-
+*/
               const onUpdate = () =>{
                     dispatch({type: ON_PET,data:"edit"});
                }
