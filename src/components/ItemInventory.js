@@ -6,6 +6,9 @@ const ItemInventory = {
 		category: 'food',
 		buyText: 'Would you like to buy a burger?',
 		inventoryText: 'Would you like to feed this burger to your pet?',
+		benefits: {
+			Hunger: 0.3
+		},
 		pointValue: 3
 	},
 	shoes: {
@@ -15,8 +18,10 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy shoes?',
 		inventoryText: 'Would you like your pet to wear these shoes?',
-		wearUri: require('../images/red_shoes.png')
-
+		wearUri: require('../images/red_shoes.png'),
+		benefits: {
+			Health: 0.2
+		}
 	},
 	pizza: {
 		name: 'pizza',
@@ -24,7 +29,10 @@ const ItemInventory = {
 		cost: 3,
 		category: 'food',
 		buyText: 'Would you like to buy pizza?',
-		inventoryText: 'Would you like to feed this pizza to your pet?'
+		inventoryText: 'Would you like to feed this pizza to your pet?',
+		benefits: {
+			Hunger: 0.3
+		}
 	},
 	carrot: {
 		name: 'carrot',
@@ -32,7 +40,10 @@ const ItemInventory = {
 		cost: 2,
 		category: 'food',
 		buyText: 'Would you like to buy a carrot?',
-		inventoryText: 'Would you like to feed this carrot to your pet?'
+		inventoryText: 'Would you like to feed this carrot to your pet?',
+		benefits: {
+			Hunger: 0.2
+		}
 	},
 	ball: {
 		name: 'ball',
@@ -40,7 +51,10 @@ const ItemInventory = {
 		cost: 8,
 		category: 'toys',
 		buyText: 'Would you like to buy a ball?',
-		inventoryText: 'Would you like your pet to play with this ball?'
+		inventoryText: 'Would you like your pet to play with this ball?',
+		benefits: {
+			Fun: 0.3
+		}
 	},
 	shirt: {
 		name: 'shirt',
@@ -49,7 +63,10 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a shirt?',
 		inventoryText: 'Would you like your pet to wear this shirt?',
-		wearUri: require('../images/white_shirt.png')
+		wearUri: require('../images/white_shirt.png'),
+		benefits: {
+			Health: 0.3
+		}
 	},
 	water: {
 		name: 'water',
@@ -57,7 +74,10 @@ const ItemInventory = {
 		cost: 2,
 		category: 'food',
 		buyText: 'Would you like to buy water?',
-		inventoryText: 'Would you like to give your pet a drink?'
+		inventoryText: 'Would you like to give your pet a drink?',
+		benefits: {
+			Hunger: 0.2
+		}
 	},
 	blue_shoes: {
 		name: 'blue shoes',
@@ -66,7 +86,10 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy blue shoes?',
 		inventoryText: 'Would you like your pet to wear these blue shoes?',
-		wearUri: require('../images/blue_shoes.png')
+		wearUri: require('../images/blue_shoes.png'),
+		benefits: {
+			Health: 0.2
+		}
 	},
 	black_shirt: {
 		name: 'black shirt',
@@ -75,7 +98,10 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a black shirt?',
 		inventoryText: 'Would you like your pet to wear this black shirt?',
-		wearUri: require('../images/black_shirt.png')
+		wearUri: require('../images/black_shirt.png'),
+		benefits: {
+			Health: 0.3
+		}
 	},
 	blue_shirt: {
 		name: 'blue shirt',
@@ -84,7 +110,10 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a blue shirt?',
 		inventoryText: 'Would you like your pet to wear this blue shirt?',
-		wearUri: require('../images/blue_shirt.png')
+		wearUri: require('../images/blue_shirt.png'),
+		benefits: {
+			Health: 0.3
+		}
 	},
 	red_ball: {
 		name: 'red ball',
@@ -92,7 +121,10 @@ const ItemInventory = {
 		cost: 10,
 		category: 'toys',
 		buyText: 'Would you like to buy a red ball?',
-		inventoryText: 'Would you like your pet to play with this red ball?'
+		inventoryText: 'Would you like your pet to play with this red ball?',
+		benefits: {
+			Fun: 0.3
+		}
 	},
 	black_ball: {
 		name: 'black ball',
@@ -100,7 +132,10 @@ const ItemInventory = {
 		cost: 10,
 		category: 'toys',
 		buyText: 'Would you like to buy a black ball?',
-		inventoryText: 'Would you like your pet to play with this black ball?'
+		inventoryText: 'Would you like your pet to play with this black ball?',
+		benefits: {
+			Fun: 0.3
+		}
 	},
 	black_shoes: {
 		name: 'black shoes',
@@ -109,7 +144,10 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy black shoes?',
 		inventoryText: 'Would you like your pet to wear these black shoes?',
-		wearUri: require('../images/black_shoes.png')
+		wearUri: require('../images/black_shoes.png'),
+		benefits: {
+			Fun: 0.3
+		}
 	},
 	shampoo: {
 		name: 'shampoo',
@@ -118,6 +156,9 @@ const ItemInventory = {
 		category: 'grooming',
 		buyText: 'Would you like to buy shampoo?',
 		inventoryText: 'Would you like your pet to wash with shampoo?',
+		benefits: {
+			hygiene: 0.3
+		}
 	},
 	soap: {
 		name: 'soap',
@@ -126,6 +167,9 @@ const ItemInventory = {
 		category: 'grooming',
 		buyText: 'Would you like to buy soap?',
 		inventoryText: 'Would you like your pet to wash with soap?',
+		benefits: {
+			hygiene: 0.3
+		}
 	},
 }
 
