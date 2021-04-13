@@ -22,7 +22,7 @@ import {INCREMENT_STAT} from "../redux/statTracker";
 import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
-import {TIME_FEED_CHANGE} from "../redux/timeOfBars";
+import {TIME_FEED_CHANGE,TIME_TOY_CHANGE,TIME_BATH_CHANGE} from "../redux/timeOfBars";
 import { StatsData } from '../components/StatsData';
 
 
@@ -160,25 +160,10 @@ const PetProfile = () => {
 
 
     const dispatch = useDispatch();
-    const petImgChoice = useSelector(state => state.petDetails[1]);
 
     /*TODO create selected pet item*/
     const selectedItem = useSelector(state=>state.selectedPetItem);
     const [textName, onChangeText] = React.useState('');
-
-    const itemList = () => {
-
-    }
-
-
-
-    const findImage = () => {
-    	if (petImgChoice === "cat") {
-    	    return require('../images/cat.png');
-    	} else {
-    	    return require('../images/dog.png');
-    	}
-    }
 
 
 	const upperCase = (string) => {
@@ -194,13 +179,18 @@ const PetProfile = () => {
 			dispatch({type: TIME_FEED_CHANGE, data: currentTime});
 			dispatch({type: HUNGERBARINCREASE, data:2});
 			playSound();
+
         } else if (ItemInventory[item].category === 'toys') {
       	    dispatch({type: SELECTED, data: 'select_toy',thing: item});
+      	    dispatch({type: TIME_TOY_CHANGE, data: currentTime});
 			dispatch({type: FUNBARINCREASE, data:3});
+
         } else if (ItemInventory[item].category === 'grooming') {
             dispatch({type: SELECTED, data: 'select_grooming',thing: item});
             dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
+            dispatch({type: TIME_BATH_CHANGE, data: currentTime});
             dispatch({type: HYGIENEBARINCREASE, data:3});
+
         } else {
       		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
       		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
@@ -244,10 +234,10 @@ const PetProfile = () => {
             <View style = {styles.centeredView2}>
 				<View style={styles.imageContainer}>
 					<View style={{flexDirection: 'column', alignItems: 'center', paddingRight: 40}}>
-						<PetImage items={useSelector(state => state.petInv)}/>
+						<PetImage/>
 						<View style={{flexDirection: 'row', alignItems: 'center'}}>
 							<Text style={styles.text}>
-								{useSelector(state => state.petDetails[0])}
+								{useSelector(state => state.petDetails.name)}
 							</Text>
 							<TouchableOpacity onPress={onUpdate}>
 								<MaterialCommunityIcons

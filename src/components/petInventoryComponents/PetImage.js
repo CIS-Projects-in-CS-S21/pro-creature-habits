@@ -43,6 +43,7 @@ const PetImage = (props) => {
 
     const petImgChoice = useSelector(state => state.petDetails.type);
 	const petEmote = useSelector(state => state.petDetails.emote);
+	
     const items = useSelector(state => state.petInv);
 	let names = [];
     for (const [key, value] of Object.entries(items)) {
@@ -63,10 +64,6 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
     };
 
 const EmoteImg = () => {
-
-	//const retImg;
-	console.log("PetEmote: " + petEmote);
-	console.log("\nPetImg: " + petImgChoice);
 
 
 	if(petEmote == "happy"){
