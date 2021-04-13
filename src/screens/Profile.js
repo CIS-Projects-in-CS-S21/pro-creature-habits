@@ -179,7 +179,7 @@ const PetProfile = () => {
 			dispatch({type: HUNGERBARINCREASE, data:2});
 			playSound(soundEffectList.food_sound);
         } else if (ItemInventory[item].category === 'toys') {
-      	    dispatch({type: SELECTED, data: 'select_toy',thing: item});
+      	    dispatch({type: SELECTED, data: 'select_toys',thing: item});
       	    dispatch({type: TIME_TOY_CHANGE, data: currentTime});
 			dispatch({type: FUNBARINCREASE, data:3});
 
