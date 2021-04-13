@@ -5,7 +5,7 @@ export const CHANGE_EMOTION = 'CHANGE_EMOTION';
 const defaultState = {
   name: "name",
   type: "dog",
-  emote: "happy"
+  emote: "neutral"
 }
 
 
