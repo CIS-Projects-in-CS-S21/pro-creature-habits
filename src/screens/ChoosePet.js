@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, Button, StyleSheet, Image, TextInput, TouchableHighlight, TouchableOpacity} from "react-native";
 import { useDispatch } from "react-redux";
 import {CHANGE} from "../redux/petInfo";
-import {TIME_FEED_CHANGE} from "../redux/timeOfBars"
+import {TIME_FEED_CHANGE, TIME_CHANGE} from "../redux/timeOfBars"
 
 
 const styles = StyleSheet.create({
