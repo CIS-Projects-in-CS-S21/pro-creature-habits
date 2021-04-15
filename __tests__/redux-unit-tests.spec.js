@@ -14,6 +14,49 @@ import editTaskReducer from '../src/redux/editTaskModal'
 import loginReducer from '../src/redux/firstLogin'
 import healthBarReducer from '../src/redux/healthBarPoint'
 import hintReducer from '../src/redux/hint'
+import hungerbarPointReducer from '../src/redux/hungerbarPoint'
+import hygienebarPointReducer from '../src/redux/hygienebarPoint'
+import marketplaceInventoryReducer from '../src/redux/marketplaceInventory'
+import marketplaceItemsBoughtReducer from '../src/redux/marketplaceItemsBought'
+import hungerReducer from "../src/redux/hungerbarPoint"
+import funReducer from "../src/redux/funbarPoint"
+
+describe ("Testing hunger bar point reducer", () => {
+
+    it('should return the initial state', () => {
+        expect(hungerReducer(undefined, {})).toEqual(5)
+    })
+
+    it('should handle HUNGERBARINCREASE', () => {
+        expect(hungerReducer(undefined, {type:"HUNGERBARINCREASE", data:2})).toEqual(7)
+    })
+
+    it('should handle HUNGERBARDECREASE', () => {
+        expect(hungerReducer(undefined, {type:"HUNGERBARDECREASE", data:2})).toEqual(3)
+    })
+    it('should not go below 0', () => {
+        expect(hungerReducer(3, {type:"HUNGERBARDECREASE", data:5})).toEqual(0)
+    })
+});
+
+describe ("Testing fun bar point reducer", () => {
+
+    it('should return the initial state', () => {
+        expect(funReducer(undefined, {})).toEqual(5)
+    })
+
+    it('should handle FUNBARINCREASE', () => {
+        expect(funReducer(undefined, {type:"FUNBARINCREASE", data:2})).toEqual(7)
+    })
+
+    it('should handle FUNBARDECREASE', () => {
+        expect(funReducer(undefined, {type:"FUNBARDECREASE", data:2})).toEqual(3)
+    })
+
+    it('should not go below 0', () => {
+        expect(funReducer(3, {type:"FUNBARDECREASE", data:5})).toEqual(0)
+    })
+});
 
 describe('Testing achievement filter',()=>{
     it('should return the initial state', () => {
@@ -198,3 +241,62 @@ describe('Testing hint',()=>{
         expect(hintReducer(undefined, {type:"CREATE_HINT",data:'this is a hint'})).toEqual('this is a hint');
     });
 });
+
+describe('Testing hunger bar point',()=>{
+    it('should return initial state', ()=>{
+        expect(hungerbarPointReducer(undefined,{})).toEqual(5)
+    });
+    it('should handle HUNGERBARINCREASE', () => {
+        expect(hungerbarPointReducer(undefined, {type:"HUNGERBARINCREASE",data:4})).toEqual(5+4);
+    });
+    it('should handle HUNGERBARINCREASE', () => {
+        expect(hungerbarPointReducer(undefined, {type:"HUNGERBARINCREASE",data:6})).toEqual(10);
+    });
+    it('should handle HUNGERBARDECREASE', () => {
+        expect(hungerbarPointReducer(undefined, {type:"HUNGERBARDECREASE",data:4})).toEqual(5-4);
+    });
+    it('should handle HUNGERBARDECREASE', () => {
+        expect(hungerbarPointReducer(undefined, {type:"HUNGERBARDECREASE",data:6})).toEqual(0);
+    });
+});
+
+describe('Testing hygeine bar point',()=>{
+    it('should return initial state', ()=>{
+        expect(hygienebarPointReducer(undefined,{})).toEqual(5)
+    });
+    it('should handle HYGIENEBARINCREASE', () => {
+        expect(hygienebarPointReducer(undefined, {type:"HYGIENEBARINCREASE",data:4})).toEqual(5+4);
+    });
+    it('should handle HYGIENEBARDECREASE', () => {
+        expect(hygienebarPointReducer(undefined, {type:"HYGIENEBARDECREASE",data:4})).toEqual(5-4);
+    });
+});
+
+describe('Testing marketplace inventory',()=>{
+    let defaultState = ['pizza', 'shoes', 'burger', 'shirt', 'carrot', 'ball', 'water', 'blue_shoes',
+					'black_shirt', 'blue_shirt', 'black_shoes', 'red_ball', 'black_ball',
+					'shampoo', 'soap'];
+    defaultState.sort();
+
+    it('should return initial state', ()=>{
+        expect(marketplaceInventoryReducer(undefined,{})).toEqual(defaultState)
+    });
+    it('should handle FILTER_ALL', () => {
+        expect(marketplaceInventoryReducer(undefined, {type:"FILTER_ALL"})).toEqual(defaultState);
+    });
+    it('should handle FITLER', () => {
+        expect(marketplaceInventoryReducer(undefined, {type:"FILTER",data:'food'})).toEqual(['burger','carrot','pizza','water']);
+    });
+});
+
+// describe('Testing marketplace items bought',()=>{
+//     it('should return initial state', ()=>{
+//         expect(marketplaceItemsBoughtReducer(undefined,{})).toEqual([])
+//     });
+//     it('should handle PURCHASE_GRAY', () => {
+//         expect(marketplaceItemsBoughtReducer(undefined, {type:"PURCHASE_GRAY",data:4})).toEqual(5+4);
+//     });
+//     it('should handle HYGIENEBARDECREASE', () => {
+//         expect(marketplaceItemsBoughtReducer(undefined, {type:"HYGIENEBARDECREASE",data:4})).toEqual(5-4);
+//     });
+// });
