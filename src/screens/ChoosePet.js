@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 
 
 
-const choosePetScreen = ({onSignUp}) => {
+const choosePetScreen = ({navigation}) => {
     const [text, onChangeText] = React.useState('');
     const [colorImage1, changeValue1] = React.useState('#402688');
     const [colorImage2, changeValue2] = React.useState('#402688');
@@ -133,7 +133,7 @@ const choosePetScreen = ({onSignUp}) => {
 				value={text}
             />
         <TouchableOpacity
-			onPress={() => {submitData(); onSignUp();}}
+			onPress={() => {submitData(); navigation.navigate('App Tutorial')}}
 			style={styles.button}
 		>
 			<Text style={{color: 'white', fontSize: 20}}>Submit</Text>
