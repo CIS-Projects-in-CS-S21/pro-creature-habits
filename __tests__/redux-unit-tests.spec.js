@@ -20,6 +20,22 @@ import marketplaceInventoryReducer from '../src/redux/marketplaceInventory'
 import marketplaceItemsBoughtReducer from '../src/redux/marketplaceItemsBought'
 import hungerReducer from "../src/redux/hungerbarPoint"
 import funReducer from "../src/redux/funbarPoint"
+import modalVisibleReducer from '../src/redux/modalVisible'
+import petInfoObj from '../src/redux/petInfo'
+import petInventoryReducer from '../src/redux/petInventory'
+import {ItemInventory} from "../src/components/ItemInventory";
+import petMVR from '../src/redux/petModalVisible'
+import selectedDateReducer from '../src/redux/selectedDate'
+import selectedMarketItemReducer from '../src/redux/selectedMarketItem'
+import selectedPetItemReducer from '../src/redux/selectedPetItem';
+import statsVisibleReducer from '../src/redux/statsVisible';
+import statTrackerReducer from '../src/redux/statTracker';
+import { StatsData } from '../src/components/StatsData';
+import taskEditIndexReducer from '../src/redux/taskEditIndex';
+import taskFilterReducer from '../src/redux/taskFilter';
+import taskInputReducer from '../src/redux/taskInput';
+import timeOfBarsReducer from '../src/redux/timeOfBars';
+import weatherStatusReducer from '../src/redux/weatherStatus';
 
 describe ("Testing hunger bar point reducer", () => {
 
@@ -289,14 +305,212 @@ describe('Testing marketplace inventory',()=>{
     });
 });
 
-// describe('Testing marketplace items bought',()=>{
+describe('Testing marketplace items bought',()=>{
+    it('should return initial state', ()=>{
+        expect(marketplaceItemsBoughtReducer(undefined,{})).toEqual([])
+    });
+    it('should handle PURCHASE_GRAY', () => {
+        expect(marketplaceItemsBoughtReducer(undefined, {type:"PURCHASE_GRAY",data:'pizza'})).toEqual([]);
+    });
+    it('should handle PURCHASE_GRAY', () => {
+        expect(marketplaceItemsBoughtReducer(undefined, {type:"PURCHASE_GRAY",data:'shampoo'})).toEqual([]);
+    });
+    it('should handle PURCHASE_GRAY', () => {
+        expect(marketplaceItemsBoughtReducer(undefined, {type:"PURCHASE_GRAY",data:'ball'})).toEqual(['ball']);
+    });
+});
+
+describe('Testing modal visible',()=>{
+    it('should return initial state', ()=>{
+        expect(modalVisibleReducer(undefined,{})).toEqual(false)
+    });
+    it('should handle OFF', () => {
+        expect(modalVisibleReducer(undefined, {type:"OFF"})).toEqual(false);
+    });
+    it('should handle ON', () => {
+        expect(modalVisibleReducer(undefined, {type:"ON"})).toEqual(true);
+    });
+});
+
+describe('Testing pet info',()=>{
+    const defaultState = {
+        name: "name",
+        type: "dog",
+        emote: "neutral"
+      }
+
+    it('should return initial state', ()=>{
+        expect(petInfoObj(undefined,{})).toEqual(defaultState)
+    });
+    it('should handle CHANGE', () => {
+        expect(petInfoObj(undefined, {type:"CHANGE",changes:'anything'})).toEqual('anything');
+    });
+    it('should handle CHANGENAME', () => {
+        expect(petInfoObj(undefined, {type:"CHANGENAME",changes:"Young MA"})).toEqual({"emote": "neutral", "name": "Young MA", "type": "dog"});
+    });
+
+    it('should handle CHANGE_EMOTION', () => {
+        expect(petInfoObj(undefined, {type:"CHANGE_EMOTION",changes:'hunger'})).toEqual({"emote": "hunger", "name": "name", "type": "dog"});
+    });
+});
+
+//pet inventory
+
+describe('Testing pet modal visible',()=>{
+    it('should return initial state', ()=>{
+        expect(petMVR(undefined,{})).toEqual('off')
+    });
+    it('should handle OFF_PET', () => {
+        expect(petMVR(undefined, {type:"OFF_PET"})).toEqual('off');
+    });
+    it('should handle ON_PET', () => {
+        expect(petMVR(undefined, {type:"ON_PET",data:'information'})).toEqual('information');
+    });
+});
+
+describe('Testing selected date',()=>{
+    it('should return initial state', ()=>{
+        sample = new Date()
+        expect(selectedDateReducer(undefined,{})).toEqual(sample)
+    });
+    sample = new Date()
+    it('should handle SET_DATE', () => {
+        expect(selectedDateReducer(undefined, {type:"SET_DATE",data:sample})).toEqual(sample);
+    });
+});
+
+describe('Testing selected market item',()=>{
+    it('should return initial state', ()=>{
+        expect(selectedMarketItemReducer(undefined,{})).toEqual('ball')
+    });
+    item = {name:'yoga_pants',cost:12}
+    it('should handle SELECT', () => {
+        expect(selectedMarketItemReducer(undefined, {type:"SELECT",data:item})).toEqual(item);
+    });
+});
+
+describe('Testing selected pet item',()=>{
+    it('should return initial state', ()=>{
+        expect(selectedPetItemReducer(undefined,{})).toEqual('ball')
+    });
+    item = {name:'yoga_pants',cost:12}
+    it('should handle SELECT_PET', () => {
+        expect(selectedPetItemReducer(undefined, {type:"SELECT_PET",data:item})).toEqual(item);
+    });
+});
+
+describe('Testing stats visible',()=>{
+    it('should return initial state', ()=>{
+        expect(statsVisibleReducer(undefined,{})).toEqual(false)
+    });
+    it('should handle STAT_ON', () => {
+        expect(statsVisibleReducer(undefined, {type:"STAT_ON"})).toEqual(true);
+    });
+    it('should handle STAT_OFF', () => {
+        expect(statsVisibleReducer(undefined, {type:"STAT_OFF"})).toEqual(false);
+    });
+});
+
+// describe('Testing stat tracker',()=>{
 //     it('should return initial state', ()=>{
-//         expect(marketplaceItemsBoughtReducer(undefined,{})).toEqual([])
+//         expect(statTrackerReducer(undefined,{})).toEqual(StatsData)
 //     });
-//     it('should handle PURCHASE_GRAY', () => {
-//         expect(marketplaceItemsBoughtReducer(undefined, {type:"PURCHASE_GRAY",data:4})).toEqual(5+4);
+//     it('should handle INCREMENT_STAT', () => {
+//         expected = {"clothes_bought": {"count": 0, "name": "Clothes bought"}, "clothes_changed": {"count": 0, "name": "Number of times pet has changed clothes"}, "daily_tasks_completed": {"count": 0, "name": "Daily tasks completed"}, "dated_tasks_completed": {"count": 
+//         0, "name": "Dated tasks completed"}, "days_logged_row": {"count": 0, "name": "Days logged on in a row"}, "food_bought": {"count": 0, "name": "Food bought"}, "grooming_bought": {"count": 0, "name": "Grooming supply bougth"}, "items_bought": {"count": 1, "name": "Items bought"}, "pet_fed": {"count": 0, "name": "Number of times pet has been fed"}, "pet_wash": {"count": 0, "name": "Number of times pet has been wash"}, "total_coins_gain": {"count": 0, "name": "Total coins gained"}, "total_coins_spent": {"count": 0, "name": "Total coins spent"}, "toys_bought": {"count": 0, "name": "Toys bought"}}
+//         expect(statTrackerReducer(undefined, {type:"INCREMENT_STAT",data:'items_bought'})).toEqual(expected); 
 //     });
-//     it('should handle HYGIENEBARDECREASE', () => {
-//         expect(marketplaceItemsBoughtReducer(undefined, {type:"HYGIENEBARDECREASE",data:4})).toEqual(5-4);
+//     it('should handle RESET_STAT', () => {
+//         expected = {"clothes_bought": {"count": 0, "name": "Clothes bought"}, "clothes_changed": {"count": 0, "name": "Number of times pet has changed clothes"}, "daily_tasks_completed": {"count": 0, "name": "Daily tasks completed"}, "dated_tasks_completed": {"count": 
+//         0, "name": "Dated tasks completed"}, "days_logged_row": {"count": 0, "name": "Days logged on in a row"}, "food_bought": {"count": 0, "name": "Food bought"}, "grooming_bought": {"count": 0, "name": "Grooming supply bougth"}, "items_bought": {"count": 0, "name": "Items bought"}, "pet_fed": {"count": 0, "name": "Number of times pet has been fed"}, "pet_wash": {"count": 0, "name": "Number of times pet has been wash"}, "total_coins_gain": {"count": 0, "name": "Total coins gained"}, "total_coins_spent": {"count": 0, "name": "Total coins spent"}, "toys_bought": {"count": 0, "name": "Toys bought"}}
+//         expect(statTrackerReducer(undefined, {type:"RESET_STAT",data:'items_bought'})).toEqual(expected);
+//     });
+//     const data = [
+//        {items_bought: {
+//            name:'Items bought',
+//            count:0,
+//        }},
+//        {toys_bought: {
+//         name:'Toys bought',
+//         count:0,
+//         }}
+//     ]
+//     it('should handle SET_STAT', () => {
+//         expect(statTrackerReducer(undefined, {type:"SET_STAT",data:data})).toEqual(expected);
+//     });
+//     it('should handle ADD_TO_STAT', () => {
+//         expect(statTrackerReducer(undefined, {type:"ADD_TO_STAT",data:data})).toEqual(false);
 //     });
 // });
+
+describe('Testing task edit index',()=>{
+    it('should return initial state', ()=>{
+        expect(taskEditIndexReducer(undefined,{})).toEqual(-1)
+    });
+    it('should handle SET_INDEX', () => {
+        expect(taskEditIndexReducer(undefined, {type:"SET_INDEX",data:3})).toEqual(3);
+    });
+});
+
+describe('Testing task filter',()=>{
+    it('should return initial state', ()=>{
+        expect(taskFilterReducer(undefined,{})).toEqual('daily')
+    });
+    it('should handle DAILY', () => {
+        expect(taskFilterReducer(undefined, {type:"DAILY"})).toEqual('daily');
+    });
+    it('should handle DATED', () => {
+        expect(taskFilterReducer(undefined, {type:"DATED"})).toEqual('dated');
+    });
+});
+
+describe('Testing task input',()=>{
+    it('should return initial state', ()=>{
+        expect(taskInputReducer(undefined,{})).toEqual('')
+    });
+    it('should handle SET_TASK_TEXT', () => {
+        expect(taskInputReducer(undefined, {type:"SET_TASK_TEXT",data:'some text'})).toEqual('some text');
+    });
+});
+
+describe('Testing time of bars',()=>{
+    it('should return initial state', ()=>{
+        expect(timeOfBarsReducer(undefined,{})).toEqual([new Date(),new Date(),new Date(),new Date()])
+    });
+    it('should handle TIME_CHANGE', () => {
+        state = [new Date(),new Date(),new Date(),new Date()]
+        x = new Date()
+        temp = [x,state[1],state[2],state[3]]
+        expect(timeOfBarsReducer(undefined, {type:"TIME_CHANGE",data:x})).toEqual(temp);
+    });
+    it('should handle TIME_FEED_CHANGE', () => {
+        state = [new Date(),new Date(),new Date(),new Date()]
+        x = new Date()
+        temp = [state[0],x,state[2],state[3]]
+        expect(timeOfBarsReducer(undefined, {type:"TIME_FEED_CHANGE",data:x})).toEqual(temp);
+    });
+    it('should handle TIME_TOY_CHANGE', () => {
+        state = [new Date(),new Date(),new Date(),new Date()]
+        x = new Date()
+        temp = [state[0],state[1],x,state[3]]
+        expect(timeOfBarsReducer(undefined, {type:"TIME_TOY_CHANGE",data:x})).toEqual(temp);
+    });
+    it('should handle TIME_BATH_CHANGE', () => {
+        state = [new Date(),new Date(),new Date(),new Date()]
+        x = new Date()
+        temp = [state[0],state[1],state[2],x]
+        expect(timeOfBarsReducer(undefined, {type:"TIME_BATH_CHANGE",data:x})).toEqual(temp);
+    });
+});
+
+describe('Testing weather status',()=>{
+    it('should return initial state', ()=>{
+        expect(weatherStatusReducer(undefined,{})).toEqual('null')
+    });
+    it('should handle SET', () => {
+        //There is information with json object about whether in json.weather[0].main, lets assume this is 'sunny'
+        expect(weatherStatusReducer(undefined, {type:"SET",status:'sunny'})).toEqual('sunny');
+    });
+});
+
+//THE END
