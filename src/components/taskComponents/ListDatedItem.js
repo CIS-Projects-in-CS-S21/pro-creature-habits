@@ -1,7 +1,7 @@
 import {Text, TouchableOpacity, View, StyleSheet} from "react-native";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 import React from "react";
-import {COMPLETED_TASK_ONE, REMOVE_TASK_ONE} from "../../redux/datedTasks";
+import {COMPLETED_TASK_ONE, LATE_TASK_ONE, REMOVE_TASK_ONE} from "../../redux/datedTasks";
 import {showMessage} from "react-native-flash-message";
 import {REWARD} from "../../redux/coinBalance";
 import {EDIT_ON} from "../../redux/editTaskModal";
@@ -43,16 +43,7 @@ const ListDatedItem = ({task, index}) => {
 	const dispatch = useDispatch();
 	let reward = 5;
 	const difficulty = task.difficulty;
-	const today = new Date();
-	const assignedDate = new Date(task.date);
-	const lateDate = new Date(assignedDate)
-	lateDate.setDate(lateDate.getDate() + 1)
-	let isLate = false;
 
-	if(today > (lateDate)){
-		//	dispatch({type: LATE_TASK_ONE, data: index});
-		isLate=true;
-	}
 
 
 	const onDelete = (index) => {
@@ -65,7 +56,7 @@ const ListDatedItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
-		if(isLate === false) {
+		if(task.isLate === false) {
 			if (difficulty === 'easy') {
 				reward = 3;
 			} else if (difficulty === 'medium') {
@@ -110,7 +101,7 @@ const ListDatedItem = ({task, index}) => {
 				/>
 			</TouchableOpacity>
 			<View style={{flexDirection: 'column', flexWrap: 'wrap'}}>
-				<Text style={[(isLate) ? styles.bgColorRed : styles.bgColorWhite]} color='white'>{task.task_name}</Text>
+				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>{task.task_name}</Text>
 				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
 					{'Due: ' + taskDate}
 				</Text>
