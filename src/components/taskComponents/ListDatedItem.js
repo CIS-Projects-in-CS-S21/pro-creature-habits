@@ -33,8 +33,7 @@ const ListDatedItem = ({task, index}) => {
 	const taskDate = new Date(task.date).toString().split(" ").slice(0,4).join(" ");
 	const dispatch = useDispatch();
 	let reward = 5;
-	const difficulty = useSelector(state => state.difficultyCheck);
-
+	const difficulty = task.difficulty;
 	const onDelete = (index) => {
 		dispatch({type: REMOVE_TASK_ONE, data: index});
 		showMessage({
