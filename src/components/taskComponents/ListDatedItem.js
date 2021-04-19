@@ -24,6 +24,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center'
+	},
+	bgColorRed:{
+		//backgroundColor: 'red',
+		color:'red'
+
+	},
+	bgColorWhite:{
+		//	backgroundColor: 'red',
+		color:'white'
 	}
 });
 
@@ -33,7 +42,18 @@ const ListDatedItem = ({task, index}) => {
 	const taskDate = new Date(task.date).toString().split(" ").slice(0,4).join(" ");
 	const dispatch = useDispatch();
 	let reward = 5;
-	const difficulty = useSelector(state => state.difficultyCheck);
+	const difficulty = task.difficulty;
+	const today = new Date();
+	const assignedDate = new Date(task.date);
+	const lateDate = new Date(assignedDate)
+	lateDate.setDate(lateDate.getDate() + 1)
+	let isLate = false;
+
+	if(today > (lateDate)){
+		//	dispatch({type: LATE_TASK_ONE, data: index});
+		isLate=true;
+	}
+
 
 	const onDelete = (index) => {
 		dispatch({type: REMOVE_TASK_ONE, data: index});
@@ -45,14 +65,17 @@ const ListDatedItem = ({task, index}) => {
 	}
 
 	const onComplete = (index) => {
-		if(difficulty === 'easy'){
-			reward = 3;
-		}
-		else if(difficulty === 'medium'){
-			reward = 5;
+		if(isLate === false) {
+			if (difficulty === 'easy') {
+				reward = 3;
+			} else if (difficulty === 'medium') {
+				reward = 5;
+			} else {
+				reward = 10;
+			}
 		}
 		else{
-			reward = 10;
+			reward = 0;
 		}
 		dispatch({type: COMPLETED_TASK_ONE, data: index});
 		dispatch({type: REWARD, data: reward});
@@ -87,7 +110,7 @@ const ListDatedItem = ({task, index}) => {
 				/>
 			</TouchableOpacity>
 			<View style={{flexDirection: 'column', flexWrap: 'wrap'}}>
-				<Text style={{color: 'white', fontSize: 20, width: 195}} color='white'>{task.task_name}</Text>
+				<Text style={[(isLate) ? styles.bgColorRed : styles.bgColorWhite]} color='white'>{task.task_name}</Text>
 				<Text style={{color: 'white', fontSize: 12, paddingTop: 5}} color='white'>
 					{'Due: ' + taskDate}
 				</Text>
