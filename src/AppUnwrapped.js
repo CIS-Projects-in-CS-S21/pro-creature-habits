@@ -5,8 +5,11 @@ import {Image, Text, View, StyleSheet} from "react-native";
 import 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux'
 import {TIME_CHANGE} from "./redux/timeOfBars";
-
-
+import TutorialScreen from './screens/Tutorial'
+import HomeTutorial from './screens/tutorialScreens/Home'
+import ProfileTutorial from './screens/tutorialScreens/Profile'
+import MarketplaceTutorial from './screens/tutorialScreens/Marketplace'
+import SettingsTutorial from './screens/tutorialScreens/Settings'
 import HomeTabs from "./components/HomeTabs";
 import GoogleSignUpScreen from "./screens/GoogleSignIn";
 import ChoosePet from "./screens/ChoosePet";
@@ -197,6 +200,56 @@ const AppUnwrapped = () => {
 					>
 						{(props) => (
 							<ChoosePet {...props} onSignUp={handleSignUp} />
+						)}
+					</Stack.Screen>
+                    <Stack.Screen
+						name="App Tutorial"
+						options={{
+							headerShown: false
+						}}
+					>
+						{(props) => (
+							<TutorialScreen {...props} onSignUp={handleSignUp} />
+						)}
+					</Stack.Screen>
+                    <Stack.Screen
+						name="Home Page"
+						options={{
+							headerShown: false
+						}}
+					>
+						{(props) => (
+							<HomeTutorial {...props} onSignUp={handleSignUp} />
+						)}
+					</Stack.Screen>
+                    <Stack.Screen
+						name="Profile Page"
+						options={{
+							headerShown: false
+						}}
+					>
+						{(props) => (
+							<ProfileTutorial {...props} onSignUp={handleSignUp} />
+						)}
+					</Stack.Screen>
+                    <Stack.Screen
+						name="Marketplace Page"
+						options={{
+							headerShown: false
+						}}
+					>
+						{(props) => (
+							<MarketplaceTutorial {...props} onSignUp={handleSignUp} />
+						)}
+					</Stack.Screen>
+                    <Stack.Screen
+						name="Settings Page"
+						options={{
+							headerShown: false
+						}}
+					>
+						{(props) => (
+							<SettingsTutorial {...props} onSignUp={handleSignUp} />
 						)}
 					</Stack.Screen>
 					<Stack.Screen name="Profile"

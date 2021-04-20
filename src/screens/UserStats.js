@@ -75,6 +75,7 @@ const StatsScreen = () => {
 				<View style={styles.modalHeader}>
 					<Text style={styles.modalHeaderText}>User Stats</Text>
 				</View>
+				<ScrollView style={{backgroundColor: '#406BE9'}}>
 				<View style={styles.bodyContainer}>
 					<View style={styles.statsContainer}>
 						{Object.keys(stats).map((stat, index) => {
@@ -109,6 +110,7 @@ const StatsScreen = () => {
 						<Text style={styles.text}>Close</Text>
 					</TouchableOpacity>
 				</View>
+				</ScrollView>
 			</Modal>
 		</View>
     );
