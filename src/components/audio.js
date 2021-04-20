@@ -56,7 +56,13 @@ button: {
 
     const soundObj = new Audio.Sound();
 
-    
+    async function onPlaybackStatusUpdate (playbackStatus) {
+      if(playbackStatus.didJustFinish){
+        console.log('\nSound Finish, unloading...');
+        await soundObj.unloadAsync();
+        console.log('\nUnloaded Sound!');
+      }
+    }
 
     console.log('Loading Sound');
     await soundObj.loadAsync(
@@ -64,7 +70,8 @@ button: {
         listItem
 
     );
-
+    
+    soundObj.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
     
 
     console.log('Playing Sound');
