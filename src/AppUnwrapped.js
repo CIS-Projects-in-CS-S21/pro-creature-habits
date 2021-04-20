@@ -23,6 +23,8 @@ import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
 import {SET} from "./redux/weatherStatus";
 import {UPDATE_DATED_TASKS} from "./redux/datedTasks";
+import {INC_DAYS_ROW, RESET_DAYS_ROW} from "./redux/daysInARow";
+import {INCREMENT_STAT, SET_STAT} from "./redux/statTracker";
 
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
@@ -68,7 +70,7 @@ const AppUnwrapped = () => {
 						dispatch({type: SET, status: json.weather[0].main});
 
 						//// DEBUG:
-						
+
 						console.log("Current weather status in reducer: " + weatherStatusLog);
 					});
 
@@ -83,20 +85,25 @@ const AppUnwrapped = () => {
 		getWeather();
 		const interval = setInterval(() => {
 			const day = new Date();
-			console.log("setting interval")
 			dispatch({type: TIME_CHANGE, data: day});
+			console.log([day.getDate(), day.getMonth(), day.getFullYear()].join(','), date)
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
 			} else {
 				console.log(false);
+				if (date === [day.getDate()-1, day.getMonth(), day.getFullYear()].join(',')) {
+					dispatch({type: INCREMENT_STAT, data: 'days_logged_row'});
+				} else {
+					dispatch({type: SET_STAT, data: ['days_logged_row', 1]});
+				}
 				dispatch({type: UPDATE_DATE});
 				dispatch({type: UPDATE_DAILY_TASKS});
 				dispatch({type: UPDATE_DATED_TASKS});
 			}
 			getWeather();
-		}, 60000);
+		}, 10000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [date]);
 
 
 	const handleSignIn = () => {

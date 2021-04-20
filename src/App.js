@@ -44,6 +44,7 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import difficultyCheckedReducer from "./redux/difficultyCheckedReducer";
 import timeOfBarsReducer from './redux/timeOfBars';
+import daysInARowReducer from "./redux/daysInARow";
 
 const reducer = combineReducers({
 	coins: balanceReducer,
@@ -81,8 +82,8 @@ const reducer = combineReducers({
 	currentDay: currentDayReducer,
 	difficultyCheck: difficultyCheckedReducer,
 	currentTimeArray: timeOfBarsReducer,
-	weatherStatus: weatherStatusReducer
-
+	weatherStatus: weatherStatusReducer,
+	daysRow: daysInARowReducer
 });
 
 const rootReducer = (state, action) => {

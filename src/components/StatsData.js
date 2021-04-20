@@ -29,7 +29,7 @@ const StatsData = {
 	},
 	days_logged_row: {
 		name: 'Days logged on in a row',
-		count: 0
+		count: 1
 	},
 	pet_fed: {
 		name: 'Number of times pet has been fed',
