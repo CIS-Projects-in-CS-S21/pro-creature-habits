@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     	},
     	healthbarContainer: {
     	    flexDirection:'column'
-
-    	},
+			
+		},
     	dropdownContainer: {
     		height: 40,
     		alignSelf: 'stretch',

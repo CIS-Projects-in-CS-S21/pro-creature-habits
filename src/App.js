@@ -64,6 +64,7 @@ const reducer = combineReducers({
 	fun:funbarPointReducer,
 	hunger: hungerbarPointReducer,
 	hygiene: hygienebarPointReducer,
+	health :healthBarReducer,
 	firstLogin: loginReducer,
 	pin: pinReducer,
 	pintHint: hintReducer,
