@@ -79,9 +79,9 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
 const WeatherOverlay = () =>{
 	
 	//test value, replace with redux state referenced above
-	const weatherTest = "Thunderstorm";
+	//const weatherTest = "Thunderstorm";
 	
-	switch(weatherTest){
+	switch(weather){
 		case "Rain":
 			return(
 				<Image
@@ -111,11 +111,13 @@ const WeatherOverlay = () =>{
 					 />
 				)
 		default:
-			return;
+			return null;
 	}
 }
 
 const EmoteImg = () => {
+
+	//const petEmoteTest = "sad";
 
 	switch(petEmote){
 		case "happy":
