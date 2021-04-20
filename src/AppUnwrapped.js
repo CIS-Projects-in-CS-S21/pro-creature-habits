@@ -80,6 +80,7 @@ const AppUnwrapped = () => {
 
 	React.useEffect(() => {
 		getWeather();
+		dispatch({type: TIME_CHANGE, data: new Date()});
 		const interval = setInterval(() => {
 			const day = new Date();
 			console.log("setting interval")

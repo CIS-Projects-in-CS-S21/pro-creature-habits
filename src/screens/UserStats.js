@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Modal, TouchableOpacity} from "react-native";
+import {Text, View, StyleSheet, Modal, TouchableOpacity, ScrollView} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
 import {STAT_OFF} from "../redux/statsVisible";
 

@@ -65,14 +65,14 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
         }).start();
     };
 
-    const hunger = useSelector(state => state.hunger);
+    /*const hunger = useSelector(state => state.hunger);
         const hygiene = useSelector(state => state.hygiene);
         const fun = useSelector(state => state.fun);
         if (hunger > 7 && hygiene > 7 && fun > 7) {
             dispatch({type: CHANGE_EMOTION,changes:"happy"});
         } else {
             dispatch({type: CHANGE_EMOTION,changes:"neutral"});
-        }
+        }*/
 
 const EmoteImg = () => {
 

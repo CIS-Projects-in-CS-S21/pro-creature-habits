@@ -16,6 +16,7 @@
     "@react-navigation/drawer": "^5.12.3",
     "@react-navigation/native": "^5.9.2",
     "@react-navigation/stack": "^5.14.4",
+    "@testing-library/jest-dom": "^5.11.10",
     "axios": "^0.21.1",
     "expo": "^40.0.1",
     "expo-av": "~8.7.0",
@@ -26,6 +27,7 @@
     "expo-sqlite-orm": "^1.5.6",
     "expo-status-bar": "~1.0.3",
     "expo-updates": "~0.4.0",
+    "jest-enzyme": "^7.1.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
@@ -59,12 +61,28 @@
   },
   "devDependencies": {
     "@babel/core": "~7.9.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^13.1.4",
     "babel-jest": "~25.2.6",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "jest": "~25.2.6",
+    "jest-expo": "^41.0.0",
+    "nock": "^13.0.11",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
+    "testEnvironment": "enzyme",
+    "testEnvironmentOptions": {
+      "enzymeAdapter": "react16"
+    },
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ]
   },
   "private": true
 }

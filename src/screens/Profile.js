@@ -23,7 +23,7 @@ import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
 import {TIME_FEED_CHANGE,TIME_TOY_CHANGE,TIME_BATH_CHANGE} from "../redux/timeOfBars";
 import { StatsData } from '../components/StatsData';
-
+import Notifications from "../../src/Notifications";
 
 
 
@@ -184,6 +184,7 @@ const PetProfile = () => {
 			dispatch({type: FUNBARINCREASE, data:3});
 
         } else if (ItemInventory[item].category === 'grooming') {
+            console.log("grooming")
             dispatch({type: SELECTED, data: 'select_grooming',thing: item});
             dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
             dispatch({type: TIME_BATH_CHANGE, data: currentTime});
@@ -251,7 +252,7 @@ const PetProfile = () => {
 					</View>
 				</View>
 			</View>
-
+            <Notifications/>
 			<PetInventoryFilter/>
 			<Modal
             	animationType="slide"

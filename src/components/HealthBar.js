@@ -49,6 +49,7 @@ const HealthBar = ({bar,progress}) => {
   const hunger = useSelector(state=>state.hunger);
   const fun = useSelector(state=>state.fun);
   const hygiene = useSelector(state=>state.hygiene);
+  console.log("hygiene "+hygiene);
   const dispatch = useDispatch();
   const array = useSelector(state=>state.currentTimeArray);
   const currTime = new Date (array[0]);
