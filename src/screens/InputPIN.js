@@ -40,6 +40,12 @@ const InputPINScreen = ({ onSignUp, navigation }) => {
 	const realPIN = useSelector(state => state.pin);
 	const hint = useSelector(state => state.pintHint);
 	console.log(realPIN);
+
+	/**
+	 * Navigates to Home Page if the user inputs the correct PIN
+	 *
+	 * @method onSubmit
+	 */
 	const onSubmit= () => {
 		if(pinInput == realPIN) {
 			onSignUp()
@@ -53,6 +59,11 @@ const InputPINScreen = ({ onSignUp, navigation }) => {
 		}
 	}
 
+	/**
+	 * Shows the hint the user created
+	 *
+	 * @method onForgot
+	 */
 	const onForgot= () =>{
 		showMessage({
 			message: hint,
