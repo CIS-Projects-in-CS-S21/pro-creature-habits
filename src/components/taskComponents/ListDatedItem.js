@@ -44,8 +44,6 @@ const ListDatedItem = ({task, index}) => {
 	let reward = 5;
 	const difficulty = task.difficulty;
 
-
-
 	const onDelete = (index) => {
 		dispatch({type: REMOVE_TASK_ONE, data: index});
 		showMessage({

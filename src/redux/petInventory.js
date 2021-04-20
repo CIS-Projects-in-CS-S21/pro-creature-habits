@@ -61,6 +61,11 @@ let copy = JSON.parse(JSON.stringify(state));
                     copy[action.thing].show = false;
                 }
 	        } else if (action.data == "select_toys") {
+	            for (const [key] of Object.entries(copy)) {
+                    if (copy[key].name.includes("ball")) {
+                        copy[key].wear = false;
+                    }
+                }
                 copy[action.thing].wear = true;
 	        } else if (action.data === "select_grooming"){
 				copy[action.thing].bought = copy[action.thing].bought - 1;
