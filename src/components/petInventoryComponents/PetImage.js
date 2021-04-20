@@ -45,6 +45,8 @@ const PetImage = (props) => {
     const petImgChoice = useSelector(state => state.petDetails.type);
 	const petEmote = useSelector(state => state.petDetails.emote);
 
+	const weather = useSelector(state => state.weatherStatus);
+
     const items = useSelector(state => state.petInv);
 	let names = [];
     for (const [key, value] of Object.entries(items)) {
@@ -74,48 +76,128 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
             dispatch({type: CHANGE_EMOTION,changes:"neutral"});
         }
 
+const WeatherOverlay = () =>{
+	
+	//test value, replace with redux state referenced above
+	const weatherTest = "Thunderstorm";
+	
+	switch(weatherTest){
+		case "Rain":
+			return(
+				<Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/rain.gif')}
+					 />
+			)
+		case "Thunderstorm":
+			return(
+				<View style={{position: 'absolute'}}>
+					<Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/rain.gif')}
+					 	/>
+					 
+					<Image
+							style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/thunder_trans.gif')}
+					/>
+				</View>
+			)
+		case "Clouds":
+				return(
+					<Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/cloudy_trans.gif')}
+					 />
+				)
+		default:
+			return;
+	}
+}
+
 const EmoteImg = () => {
 
+	switch(petEmote){
+		case "happy":
+			if(petImgChoice == "cat"){
+				return(
+					<Image
+												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+												source={require("../../images/cat_happy.gif")}
+				  />
+				)
+	
+			}
+			else{
+				return(
+					<Image
+												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+												source={require("../../images/dog_happy.gif")}
+					/>
+				)
+			}
+		
+		case "neutral":
+			if(petImgChoice == "cat"){
+				return(
+					<Image
+											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/cat.png")}
+					/>
+				)
+			}
+			else{
+				return(
+					<Image
+											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/dog.png")}
+					/>
+				)
+			}
+		case "sad":
+			if(petImgChoice == "cat"){
+				return(
+					<Image
+							style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+							source={require("../../images/cat_sad.gif")}
+					/>			
+				)
+			}
+			else{
+				return(
+					<Image
+							style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+							source={require("../../images/dog_sad.gif")}
+					/>
+				)
+			}
+		default:
+			if(petImgChoice == "cat"){
+				return(
+					<Image
+											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/cat.png")}
+					/>
+				)
+			}
+			else{
+				return(
+					<Image
+											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+											source={require("../../images/dog.png")}
+					/>
+				)
+			}
 
+	}
 
-	if(petEmote == "happy"){
-		if(petImgChoice == "cat"){
-			return(
-				<Image
-											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-											source={require("../../images/cat_happy.gif")}
-			  />
-			)
-
-		}
-		if(petImgChoice == "dog"){
-			return(
-				<Image
-											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-											source={require("../../images/dog_happy.gif")}
-				/>
-			)
-		}
+	/*if(petEmote == "happy"){
+		
 	}
 
 	if(petEmote == "neutral"){
-		if(petImgChoice == "cat"){
-			return(
-				<Image
-										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-										source={require("../../images/cat.png")}
-				/>
-			)
-		}
-		if(petImgChoice == "dog"){
-			return(
-				<Image
-										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-										source={require("../../images/dog.png")}
-				/>
-			)
-		}
-	}
+		
+	}*/
 }
 
 
@@ -133,10 +215,7 @@ const EmoteImg = () => {
            />
            )})}
 
-					 <Image
-					 		style={{width: 150,height: 150, position:'absolute'}}
-							source={require('../../images/rain.gif')}
-					 />
+					 <WeatherOverlay />
 
        </View>
 	)

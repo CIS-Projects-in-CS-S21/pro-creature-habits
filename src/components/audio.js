@@ -49,11 +49,14 @@ button: {
     clothes_sound: require('../components/clothes_sound.wav')
   }
 
+  
 
 
   export async function playSound(listItem) {
 
     const soundObj = new Audio.Sound();
+
+    
 
     console.log('Loading Sound');
     await soundObj.loadAsync(
@@ -62,10 +65,26 @@ button: {
 
     );
 
-
+    
 
     console.log('Playing Sound');
     await soundObj.playAsync();
+
+    /*const flag = false;
+
+    const statusTest = soundObj.getStatusAsync();
+    console.log(statusTest);
+    while(flag == false){
+      
+      const status = soundObj.getStatusAsync();
+      if(status.isPlaying == false){
+        console.log('\nSound finished, unloading...');
+        await soundObj.unloadAsync();
+        console.log('\nUnloaded Sound!');
+
+        flag = true;
+      }
+    }*/
 
     //await soundObj.unloadAsync();
   }
