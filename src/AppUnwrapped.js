@@ -22,6 +22,7 @@ import InputPINScreen from "./screens/InputPIN";
 import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
 import {SET} from "./redux/weatherStatus";
+import {UPDATE_DATED_TASKS} from "./redux/datedTasks";
 
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
@@ -90,6 +91,7 @@ const AppUnwrapped = () => {
 				console.log(false);
 				dispatch({type: UPDATE_DATE});
 				dispatch({type: UPDATE_DAILY_TASKS});
+				dispatch({type: UPDATE_DATED_TASKS});
 			}
 			getWeather();
 		}, 60000);

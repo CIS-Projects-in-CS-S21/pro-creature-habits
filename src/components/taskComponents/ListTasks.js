@@ -14,6 +14,7 @@ const ListTasks = () => {
 	const datedTasks = useSelector(state => state.datedTasks);
 	const datedTasksDue = datedTasks.filter(task => !task.completed);
 	const datedTasksCompleted = datedTasks.filter(task => task.completed);
+	const datedTasksLate = datedTasks.filter(task => task.isLate);
 
 	const dailyTasks = useSelector(state => state.dailyTasks);
 	const completedDailyTasks = dailyTasks.filter(task => task.status.completed);
@@ -30,7 +31,19 @@ const ListTasks = () => {
 			<View>
 				{datedTasksDue.length > 0 && <Text style={{fontSize: 30, color: 'white', padding: 20}}>To Do</Text>}
 				{datedTasks.map((task, index) => {
-					if (!task.completed) {
+					if (!task.completed && !task.isLate) {
+						return(
+							<ListDatedItem
+								key = {index}
+								task={task}
+								index={index}
+							/>
+						)
+					}
+				})}
+				{datedTasksLate.length > 0 && <Text style={{fontSize: 30, color: 'white', padding: 20}}>Late</Text>}
+				{datedTasks.map((task, index) => {
+					if (task.isLate && !task.complete) {
 						return(
 							<ListDatedItem
 								key = {index}
