@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {Image, Text, View, StyleSheet} from "react-native";
+import {Image, Text, View, StyleSheet, Keyboard} from "react-native";
 import 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux'
 import {TIME_CHANGE} from "./redux/timeOfBars";
@@ -24,7 +24,7 @@ import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
 import {SET} from "./redux/weatherStatus";
 
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
-
+import * as Notifications from 'expo-notifications';
 
 const Stack = createStackNavigator();
 
@@ -93,9 +93,33 @@ const AppUnwrapped = () => {
 				dispatch({type: UPDATE_DAILY_TASKS});
 			}
 			getWeather();
+			sendNotification();
 		}, 60000);
 		return () => clearInterval(interval);
 	}, []);
+
+
+    const sendNotification = () => {
+          const schedulingOptions = {
+            content: {
+              title: 'This is a notification',
+              body: 'This is the body',
+              sound: true,
+              priority: Notifications.AndroidNotificationPriority.HIGH,
+              color: "blue"
+            },
+            trigger: {
+              seconds: 1,
+            },
+          };
+          // Notifications show only when app is not active.
+          // (ie. another app being used or device's screen is locked)
+          Notifications.scheduleNotificationAsync(
+            schedulingOptions,
+          );
+
+
+    };
 
 
 	const handleSignIn = () => {
