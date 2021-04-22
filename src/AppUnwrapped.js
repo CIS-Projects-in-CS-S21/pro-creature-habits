@@ -16,16 +16,17 @@ import ChoosePet from "./screens/ChoosePet";
 import Profile from "./screens/Profile";
 import {API_WEATHER_KEY} from "./components/Keys";
 import FlashMessage from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 import IntroScreen from "./screens/Intro";
 import CreatePINScreen from "./screens/CreatePIN";
 import InputPINScreen from "./screens/InputPIN";
 import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
 import {SET} from "./redux/weatherStatus";
-
+import Constants from 'expo-constants';
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 import * as Notifications from 'expo-notifications';
-
+import * as Permissions from 'expo-permissions';
 const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
@@ -78,12 +79,30 @@ const AppUnwrapped = () => {
 
 
 
+    const askNotification = async () => {
+          // We need to ask for Notification permissions for ios devices
+          const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+          if (Constants.isDevice && status === 'granted')
+            console.log('Notification permissions granted.');
+    };
+
+    //add error catching for promimse rejection
+    askNotification();
+
+    Notifications.setNotificationHandler({
+              handleNotification: async () => ({
+                shouldShowAlert: true,
+                shouldPlaySound: true,
+                shouldSetBadge: false,
+              }),
+            });
+
 	React.useEffect(() => {
 		getWeather();
-		dispatch({type: TIME_CHANGE, data: new Date()});
+        dispatch({type: TIME_CHANGE, data: new Date()});
 		const interval = setInterval(() => {
 			const day = new Date();
-			console.log("setting interval")
+			console.log("setting interval "+day)
 			dispatch({type: TIME_CHANGE, data: day});
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
@@ -91,19 +110,19 @@ const AppUnwrapped = () => {
 				console.log(false);
 				dispatch({type: UPDATE_DATE});
 				dispatch({type: UPDATE_DAILY_TASKS});
+				sendNotification();
 			}
 			getWeather();
-			sendNotification();
 		}, 60000);
 		return () => clearInterval(interval);
-	}, []);
+	}, [date]);
 
 
     const sendNotification = () => {
           const schedulingOptions = {
             content: {
-              title: 'This is a notification',
-              body: 'This is the body',
+              title: 'Good morning!',
+              body: "It's a new day, why not do some tasks on your list?",
               sound: true,
               priority: Notifications.AndroidNotificationPriority.HIGH,
               color: "blue"
@@ -120,6 +139,8 @@ const AppUnwrapped = () => {
 
 
     };
+
+
 
 
 	const handleSignIn = () => {

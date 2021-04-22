@@ -24,9 +24,11 @@ const onSubmit = (seconds) => {
     schedulingOptions,
   );
 };
-const handleNotification = () => {
-  console.warn('ok! got your notif');
-};
+const handleNotification = async () => ({
+  shouldShowAlert: true,
+      shouldPlaySound: false,
+      shouldSetBadge: false,
+});
 
 const askNotification = async () => {
   // We need to ask for Notification permissions for ios devices

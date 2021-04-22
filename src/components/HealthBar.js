@@ -52,27 +52,41 @@ const HealthBar = ({bar,progress}) => {
   console.log("hygiene "+hygiene);
   const dispatch = useDispatch();
   const array = useSelector(state=>state.currentTimeArray);
-  const currTime = new Date (array[0]);
+  const currTime = array[0];
   const lastFedTime = array[1];
+  console.log("current time "+currTime)
+  console.log("FOOOOD "+array[1])
   const lastToyTime = array[2];
   const lastBathTime = array[3];
   const realCurrTime = new Date();
-  let timeDifFed = (currTime - new Date(lastFedTime))/360000
-  let timeDifBath = (currTime - new Date(lastBathTime))/360000
-  let timeDifToy = (currTime - new Date(lastToyTime))/360000
+  let timeDifFed = (realCurrTime - lastFedTime)/3600000
+  let timeDifBath = (realCurrTime - lastBathTime)/3600000
+  let timeDifToy = (realCurrTime - lastToyTime)/3600000
+  console.log("lastbath "+timeDifBath)
+  console.log("lasttoy "+timeDifToy)
+  console.log("lastfed "+timeDifFed)
+
+    console.log("TESTING HOW DATE WORDS "+(realCurrTime.getTime() + 5)+" ---- " +new Date(realCurrTime.getTime() + 2*3600000) + " " + 2)
+
+
   if (timeDifBath >= 24) {
-    let twefourMult = Math.floor(timeDifFed/24);
+    let twefourMult = Math.floor(timeDifBath/24);
     dispatch({type: HYGIENEBARDECREASE, data: twefourMult});
-    dispatch({type: TIME_BATH_CHANGE, data: new Date(currTime + (twefourMult*360000))});
+    dispatch({type: TIME_BATH_CHANGE, data: new Date(realCurrTime.getTime() + twefourMult*3600000)});
+    console.log("BATH "+new Date(realCurrTime.getTime() + twefourMult*3600000) + " " + twefourMult)
   } if (timeDifToy >= 12) {
-    let twelveMult = Math.floor(timeDifFed/12);
+    let twelveMult = Math.floor(timeDifToy/12);
     dispatch({type: FUNBARDECREASE, data:twelveMult});
-    dispatch({type: TIME_TOY_CHANGE, data: new Date(currTime + (twelveMult*360000))});
+    dispatch({type: TIME_TOY_CHANGE, data: new Date(realCurrTime.getTime() + twelveMult*3600000)});
+    console.log("TOY "+new Date(realCurrTime.getTime() + twelveMult*3600000) + " " + twelveMult)
   } if (timeDifFed >= 6) {
     let sixMult = Math.floor(timeDifFed/6);
     dispatch({type: HUNGERBARDECREASE, data:sixMult});
-    dispatch({type: TIME_FEED_CHANGE, data: new Date(currTime + (sixMult*360000))});
+    dispatch({type: TIME_FEED_CHANGE, data: new Date(realCurrTime.getTime() + sixMult*3600000)});
+    console.log("FED "+new Date(realCurrTime.getTime() + sixMult*3600000) + " " + sixMult)
   }
+
+
 
 	return (
 		<View style={styles.mainContainer}>

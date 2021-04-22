@@ -252,7 +252,6 @@ const PetProfile = () => {
 					</View>
 				</View>
 			</View>
-            <Notifications/>
 			<PetInventoryFilter/>
 			<Modal
             	animationType="slide"
