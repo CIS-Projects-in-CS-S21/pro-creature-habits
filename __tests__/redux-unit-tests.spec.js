@@ -474,32 +474,31 @@ describe('Testing task input',()=>{
 });
 
 describe('Testing time of bars',()=>{
-    it('should return initial state', ()=>{
-        expect(timeOfBarsReducer(undefined,{})).toEqual([new Date(),new Date(),new Date(),new Date()])
-    });
+    state = [new Date(),new Date(),new Date(),new Date()]
+
     it('should handle TIME_CHANGE', () => {
-        state = [new Date(),new Date(),new Date(),new Date()]
+
         x = new Date()
         temp = [x,state[1],state[2],state[3]]
-        expect(timeOfBarsReducer(undefined, {type:"TIME_CHANGE",data:x})).toEqual(temp);
+        expect(timeOfBarsReducer(state, {type:"TIME_CHANGE",data:x})).toEqual(temp);
     });
     it('should handle TIME_FEED_CHANGE', () => {
-        state = [new Date(),new Date(),new Date(),new Date()]
+
         x = new Date()
         temp = [state[0],x,state[2],state[3]]
-        expect(timeOfBarsReducer(undefined, {type:"TIME_FEED_CHANGE",data:x})).toEqual(temp);
+        expect(timeOfBarsReducer(state, {type:"TIME_FEED_CHANGE",data:x})).toEqual(temp);
     });
     it('should handle TIME_TOY_CHANGE', () => {
-        state = [new Date(),new Date(),new Date(),new Date()]
+
         x = new Date()
         temp = [state[0],state[1],x,state[3]]
-        expect(timeOfBarsReducer(undefined, {type:"TIME_TOY_CHANGE",data:x})).toEqual(temp);
+        expect(timeOfBarsReducer(state, {type:"TIME_TOY_CHANGE",data:x})).toEqual(temp);
     });
     it('should handle TIME_BATH_CHANGE', () => {
-        state = [new Date(),new Date(),new Date(),new Date()]
+
         x = new Date()
         temp = [state[0],state[1],state[2],x]
-        expect(timeOfBarsReducer(undefined, {type:"TIME_BATH_CHANGE",data:x})).toEqual(temp);
+        expect(timeOfBarsReducer(state, {type:"TIME_BATH_CHANGE",data:x})).toEqual(temp);
     });
 });
 
