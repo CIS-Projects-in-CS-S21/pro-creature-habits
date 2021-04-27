@@ -1,11 +1,12 @@
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import PetCard from '../src/components/petInventoryComponents/PetCard';
+import DifficultyOptions from '../src/components/DifficultyOptions'
 import Card from '../src/components/marketplaceComponents/Card'
 import * as enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
-
+import configureStore from 'redux-mock-store'
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -66,4 +67,22 @@ describe('<PetCard />', () => {
 //         const CardComponent = renderer.create(<Provider><Card item="burger" Ionicons={'checkmark'}/></Provider>).toJSON()
 //         expect(CardComponent).toMatchSnapshot();
 //     });
+// })
+
+
+// describe('<DifficultyOptions />',()=>{
+//     const initialState = { output: "null" }
+//     const mockStore = configureStore()
+//     let store
+
+//     it('renders correctly',()=>{
+//         store = mockStore(initialState)
+//         const diffopComponent = renderer.create(<Provider store={store}><DifficultyOptions /> </Provider>).toJSON()
+//         const tree = renderer.create(diffopComponent).toJSON();
+//         expect(tree).toMatchSnapshot();
+//         // expect(diffopComponent).toMatchSnapshot();
+//         // expect(diffopComponent).not.toBeNull();
+//         // expect(diffopComponent).toBeTruthy();
+        
+//     })
 // })
