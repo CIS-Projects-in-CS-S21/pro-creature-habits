@@ -24,6 +24,8 @@ import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
 import {SET} from "./redux/weatherStatus";
 import Constants from 'expo-constants';
+import {UPDATE_DATED_TASKS} from "./redux/datedTasks";
+
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
@@ -111,6 +113,7 @@ const AppUnwrapped = () => {
 				dispatch({type: UPDATE_DATE});
 				dispatch({type: UPDATE_DAILY_TASKS});
 				sendNotification();
+				dispatch({type: UPDATE_DATED_TASKS});
 			}
 			getWeather();
 		}, 60000);
