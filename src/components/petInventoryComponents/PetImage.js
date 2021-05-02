@@ -5,6 +5,8 @@ import ImageOverlay from "react-native-image-overlay";
 import {EAT} from "../../redux/petInventory";
 import {CHANGE_EMOTION} from "../../redux/petInfo";
 
+import CachedImage from 'react-native-expo-cached-image';
+
 const styles = StyleSheet.create({
 	cardContainer: {
 		borderWidth: 2,
@@ -126,7 +128,7 @@ const EmoteImg = () => {
 		<EmoteImg />
          {names.map((name, index) => {
          return (
-           <Image
+           <CachedImage
            style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10,position:'absolute'}}
                                    source = {items[name].wearUri}
                                    key = {name}
