@@ -128,7 +128,7 @@ const EmoteImg = () => {
 		<EmoteImg />
          {names.map((name, index) => {
          return (
-           <CachedImage
+           <Image
            style={{width: 150,height: 150,borderWidth: 5,borderRadius: 10,position:'absolute'}}
                                    source = {items[name].wearUri}
                                    key = {name}
