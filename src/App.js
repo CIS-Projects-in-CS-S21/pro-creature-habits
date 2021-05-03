@@ -45,7 +45,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import difficultyCheckedReducer from "./redux/difficultyCheckedReducer";
 import timeOfBarsReducer from './redux/timeOfBars';
 
-import {AppLoading} from "expo";
+import AppLoading from "expo-app-loading";
 import {cacheImages} from "./components/cacheImages.js";
 
 const reducer = combineReducers({
@@ -117,7 +117,10 @@ const App = () => {
 			require("./images/cat_happy.gif"),
 			require("./images/dog_happy.gif"),
 			require("./images/cat.png"),
-			require("./images/dog.png")
+			require("./images/dog.png"),
+			require('./images/rain.gif'),
+			require("./images/cat_sad.gif"),
+			require("./images/dog_sad.gif")
 		])
 
 		await Promise.all({...imageAssets});
