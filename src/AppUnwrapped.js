@@ -22,9 +22,17 @@ import CreatePINScreen from "./screens/CreatePIN";
 import InputPINScreen from "./screens/InputPIN";
 import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
-import {SET} from "./redux/weatherStatus";
+
+
 import Constants from 'expo-constants';
+
+import {SET_WEATHER} from "./redux/weatherStatus";
+
 import {UPDATE_DATED_TASKS} from "./redux/datedTasks";
+import {INC_DAYS_ROW, RESET_DAYS_ROW} from "./redux/daysInARow";
+import {INCREMENT_STAT, SET_STAT} from "./redux/statTracker";
+import {AUTHENTICATE} from "./redux/authenticated";
+import {SET_COLD, SET_HOT, SET_MILD} from "./redux/temperature";
 
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 import * as Notifications from 'expo-notifications';
@@ -47,30 +55,40 @@ const styles = StyleSheet.create({
 
 
 const AppUnwrapped = () => {
-	const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-	const [temperature, setTemperature] = React.useState(null);
 	const [weather, setWeather] = React.useState(null);
 
 	const weatherStatusLog = useSelector(state => state.weatherStatus);
 	const dispatch = useDispatch();
 	const date = useSelector(state=>state.currentDay);
+	const isAuthenticated = useSelector(state=>state.authenticated)
+	const temperature = useSelector(state=>state.temperature)
 
 	const getWeather = () => {
 		navigator.geolocation.getCurrentPosition(
 			position => {
 				fetch(
-					`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&` +
-					`lon=${position.coords.longitude}&appid=${API_WEATHER_KEY}&units=imperial`
+					`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&` +
+					`lon=${position.coords.longitude}&exclude=current,minutely,hourly,alerts&appid=${API_WEATHER_KEY}&units=imperial`
 				)
 					.then(res => res.json())
 					.then(json => {
-						setWeather(json.weather[0].icon);
-						setTemperature(json.main.temp);
-
-						dispatch({type: SET, status: json.weather[0].main});
+						setWeather(json.daily[0].weather[0].icon);
+						if(json.daily[0].temp.day <= 50) {
+							dispatch({type: SET_COLD})
+						} else if (json.daily[0].temp.day >= 80) {
+							dispatch({type: SET_HOT})
+						} else {
+							dispatch({type: SET_MILD})
+						}
+						const weatherToday = json.daily[0].weather[0].main;
+						if (weatherToday === 'Rain' || 'Thunderstorm' || 'Clear' || 'Clouds') {
+							dispatch({type: SET_WEATHER, status: weatherToday});
+						} else {
+							dispatch({type: SET_WEATHER, status: 'Clear'});
+						}
 
 						//// DEBUG:
-						
+
 						console.log("Current weather status in reducer: " + weatherStatusLog);
 					});
 
@@ -103,21 +121,25 @@ const AppUnwrapped = () => {
 		getWeather();
         dispatch({type: TIME_CHANGE, data: new Date()});
 		const interval = setInterval(() => {
+			console.log(weatherStatusLog, temperature);
 			const day = new Date();
-			console.log("setting interval "+day)
 			dispatch({type: TIME_CHANGE, data: day});
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
 			} else {
-				console.log("date "+date);
-				console.log("day "+day);
+				console.log(false);
+				if (date === [day.getDate()-1, day.getMonth(), day.getFullYear()].join(',')) {
+					dispatch({type: INCREMENT_STAT, data: 'days_logged_row'});
+				} else {
+					dispatch({type: SET_STAT, data: ['days_logged_row', 1]});
+				}
 				dispatch({type: UPDATE_DATE});
 				dispatch({type: UPDATE_DAILY_TASKS});
 				sendNotification();
 				dispatch({type: UPDATE_DATED_TASKS});
+				getWeather();
 			}
-			getWeather();
-		}, 60000);
+		}, 10000);
 		return () => clearInterval(interval);
 	}, [date]);
 
@@ -148,11 +170,11 @@ const AppUnwrapped = () => {
 
 
 	const handleSignIn = () => {
-		setIsAuthenticated(true);
+		dispatch({type: AUTHENTICATE});
 	};
 
 	const handleSignUp = () => {
-		setIsAuthenticated(true);
+		dispatch({type: AUTHENTICATE});
 	};
 
 	function getHeaderTitle(route) {
@@ -182,18 +204,38 @@ const AppUnwrapped = () => {
 						component={HomeTabs}
 						options={ ({ route}) => ({
 							headerTitle: () => (
-								<Text style={{fontSize: 25, color: 'white', marginBottom: 5}}>
+								<Text style={{fontSize: 30, color: 'white', marginBottom: 5}}>
 									{getHeaderTitle(route)}
 								</Text>
 							),
 							headerLeft: () => (
-								<View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', marginLeft: 10}}>
-									<Image style={{width: 40, height: 40, marginTop: 5 }}  source={{uri: `https://openweathermap.org/img/wn/${weather}@2x.png`}}/>
-									<Text style={{color: 'white', fontSize: 25, marginTop: 10, }}>{Math.round(temperature)}&deg;F</Text>
+								<View style={{
+									flex: 1,
+									flexDirection: 'row',
+									justifyContent: 'center',
+									marginLeft: 10,
+									borderRadius: 10,
+									margin: 7,
+									alignItems: 'center',
+									padding: 5,
+									backgroundColor: '#6d90f6',
+								}}>
+									<Image style={{width: 25, height: 40, marginRight: 5}}  source={{uri: `https://openweathermap.org/img/wn/${weather}@2x.png`}}/>
+									<Text style={{color: 'white', fontSize: 25 }}>{temperature}</Text>
 								</View>
 							),
 							headerRight: () => (
-								<View style={styles.balanceContainer}>
+								<View style={{
+									flex: 1,
+									flexDirection: 'row',
+									justifyContent: 'center',
+									marginLeft: 10,
+									borderRadius: 10,
+									margin: 7,
+									alignItems: 'center',
+									padding: 5,
+									backgroundColor: '#6d90f6',
+								}}>
 									<Text style={{fontSize: 25, color: 'white'}}>{useSelector(state=>state.coins)}</Text>
 									<Image
 										style={styles.coinImage}
