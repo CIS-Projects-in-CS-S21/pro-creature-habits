@@ -171,7 +171,7 @@ const PetProfile = () => {
 		}
 
 	const weather = useSelector(state=>weatherStatusReducer);
-	
+
 
     const handleSelection = (item) => {
         dispatch({type: OFF_PET});
