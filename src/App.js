@@ -45,6 +45,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import difficultyCheckedReducer from "./redux/difficultyCheckedReducer";
 import timeOfBarsReducer from './redux/timeOfBars';
 import daysInARowReducer from "./redux/daysInARow";
+import authenticatedReducer from "./redux/authenticated";
 
 const reducer = combineReducers({
 	coins: balanceReducer,
@@ -83,7 +84,8 @@ const reducer = combineReducers({
 	difficultyCheck: difficultyCheckedReducer,
 	currentTimeArray: timeOfBarsReducer,
 	weatherStatus: weatherStatusReducer,
-	daysRow: daysInARowReducer
+	daysRow: daysInARowReducer,
+	authenticated: authenticatedReducer
 });
 
 const rootReducer = (state, action) => {

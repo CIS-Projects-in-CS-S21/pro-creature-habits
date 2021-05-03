@@ -75,43 +75,38 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
         }
 
 const EmoteImg = () => {
-
-
-
-	if(petEmote == "happy"){
-		if(petImgChoice == "cat"){
+	if(petEmote === "happy"){
+		if(petImgChoice === "cat"){
 			return(
 				<Image
-											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-											source={require("../../images/cat_happy.gif")}
+					style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+					source={require("../../images/cat_happy.gif")}
 			  />
 			)
 
 		}
-		if(petImgChoice == "dog"){
+		else {
 			return(
 				<Image
-											style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-											source={require("../../images/dog_happy.gif")}
+					style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+					source={require("../../images/dog_happy.gif")}
 				/>
 			)
 		}
-	}
-
-	if(petEmote == "neutral"){
-		if(petImgChoice == "cat"){
+	} else if(petEmote === "neutral"){
+		if(petImgChoice === "cat"){
 			return(
 				<Image
-										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-										source={require("../../images/cat.png")}
+					style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+					source={require("../../images/cat.png")}
 				/>
 			)
 		}
-		if(petImgChoice == "dog"){
+		else {
 			return(
 				<Image
-										style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-										source={require("../../images/dog.png")}
+					style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
+					source={require("../../images/dog.png")}
 				/>
 			)
 		}
@@ -133,10 +128,10 @@ const EmoteImg = () => {
            />
            )})}
 
-					 <Image
-					 		style={{width: 150,height: 150, position:'absolute'}}
-							source={require('../../images/rain.gif')}
-					 />
+			 <Image
+					style={{width: 150,height: 150, position:'absolute'}}
+					source={require('../../images/rain.gif')}
+			 />
 
        </View>
 	)

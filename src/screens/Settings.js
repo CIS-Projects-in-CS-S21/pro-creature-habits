@@ -7,6 +7,7 @@ import {STAT_ON} from "../redux/statsVisible";
 import AchievementsScreen from "./Achievements";
 import StatsScreen from "./UserStats";
 import DifficultyOptions from "../components/DifficultyOptions";
+import {SIGN_OUT} from "../redux/authenticated";
 
 
 const styles = StyleSheet.create({
@@ -86,6 +87,7 @@ const SettingsScreen = () => {
 				<TouchableOpacity
 					style={[styles.button, {borderBottomWidth: 0, borderRadius: 5}]}
 					activeOpacity={0.8}
+					onPress={() => dispatch({type: SIGN_OUT})}
 				>
 					<Text style={styles.text}>Sign Out</Text>
 					<MaterialIcons name='logout' size={22} color='white'/>
