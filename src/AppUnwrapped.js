@@ -109,7 +109,8 @@ const AppUnwrapped = () => {
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
 			} else {
-				console.log(false);
+				console.log("date "+date);
+				console.log("day "+day);
 				dispatch({type: UPDATE_DATE});
 				dispatch({type: UPDATE_DAILY_TASKS});
 				sendNotification();

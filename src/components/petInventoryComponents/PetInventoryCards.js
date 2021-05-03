@@ -34,7 +34,7 @@ const PetInventoryCards = (items) => {
 
 	const onPress = (item) => {
 	    console.log("PRESSED ITEM "+item)
-	    if (!items.items[item].wear || items.items[item].category == 'food') {
+	    if (!items.items[item].wear || items.items[item].category == 'food' || items.items[item].category == 'grooming') {
             dispatch({type: ON_PET,data:'press'});
             dispatch({type: SELECT_PET, data: item})
         }

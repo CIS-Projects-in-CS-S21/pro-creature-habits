@@ -8,7 +8,7 @@ const curr = new Date();
 
 
 const timeOfBarsReducer = (state = [curr,curr,curr,curr], action) => {
-	let temp = [...state]
+    let temp = [...state]
 	switch (action.type) {
 		case TIME_FEED_CHANGE:
 		    temp[1] = action.data;
