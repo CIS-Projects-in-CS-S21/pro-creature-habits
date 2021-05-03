@@ -46,6 +46,7 @@ import difficultyCheckedReducer from "./redux/difficultyCheckedReducer";
 import timeOfBarsReducer from './redux/timeOfBars';
 import daysInARowReducer from "./redux/daysInARow";
 import authenticatedReducer from "./redux/authenticated";
+import temperatureReducer from "./redux/temperature";
 
 const reducer = combineReducers({
 	coins: balanceReducer,
@@ -85,7 +86,8 @@ const reducer = combineReducers({
 	currentTimeArray: timeOfBarsReducer,
 	weatherStatus: weatherStatusReducer,
 	daysRow: daysInARowReducer,
-	authenticated: authenticatedReducer
+	authenticated: authenticatedReducer,
+	temperature: temperatureReducer
 });
 
 const rootReducer = (state, action) => {

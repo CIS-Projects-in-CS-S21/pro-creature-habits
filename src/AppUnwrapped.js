@@ -26,6 +26,7 @@ import {UPDATE_DATED_TASKS} from "./redux/datedTasks";
 import {INC_DAYS_ROW, RESET_DAYS_ROW} from "./redux/daysInARow";
 import {INCREMENT_STAT, SET_STAT} from "./redux/statTracker";
 import {AUTHENTICATE} from "./redux/authenticated";
+import {SET_COLD, SET_HOT, SET_MILD} from "./redux/temperature";
 
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 
@@ -48,13 +49,13 @@ const styles = StyleSheet.create({
 
 
 const AppUnwrapped = () => {
-	const [temperature, setTemperature] = React.useState(null);
 	const [weather, setWeather] = React.useState(null);
 
 	const weatherStatusLog = useSelector(state => state.weatherStatus);
 	const dispatch = useDispatch();
 	const date = useSelector(state=>state.currentDay);
 	const isAuthenticated = useSelector(state=>state.authenticated)
+	const temperature = useSelector(state=>state.temperature)
 
 	const getWeather = () => {
 		navigator.geolocation.getCurrentPosition(
@@ -67,13 +68,18 @@ const AppUnwrapped = () => {
 					.then(json => {
 						setWeather(json.daily[0].weather[0].icon);
 						if(json.daily[0].temp.day <= 50) {
-							setTemperature('Cold');
+							dispatch({type: SET_COLD})
 						} else if (json.daily[0].temp.day >= 80) {
-							setTemperature('Hot');
+							dispatch({type: SET_HOT})
 						} else {
-							setTemperature('Mild');
+							dispatch({type: SET_MILD})
 						}
-						dispatch({type: SET_WEATHER, status: json.daily[0].weather[0].main});
+						const weatherToday = json.daily[0].weather[0].main;
+						if (weatherToday === 'Rain' || 'Thunderstorm' || 'Clear' || 'Clouds') {
+							dispatch({type: SET_WEATHER, status: weatherToday});
+						} else {
+							dispatch({type: SET_WEATHER, status: 'Clear'});
+						}
 
 						//// DEBUG:
 
@@ -90,9 +96,9 @@ const AppUnwrapped = () => {
 	React.useEffect(() => {
 		getWeather();
 		const interval = setInterval(() => {
+			console.log(weatherStatusLog, temperature);
 			const day = new Date();
 			dispatch({type: TIME_CHANGE, data: day});
-			console.log([day.getDate(), day.getMonth(), day.getFullYear()].join(','), date)
 			if (date === [day.getDate(), day.getMonth(), day.getFullYear()].join(',')) {
 				console.log(true);
 			} else {
