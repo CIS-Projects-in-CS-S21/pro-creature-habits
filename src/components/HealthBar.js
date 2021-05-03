@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
+import {INCREASE, DECREASE} from '../redux/healthBarPoint'
 import {TIME_FEED_CHANGE,TIME_BATH_CHANGE,TIME_TOY_CHANGE} from "../redux/timeOfBars";
 
 
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
      		shadowOffset: {width: 0, height: 1},
      		shadowOpacity: 0.8,
      		shadowRadius: 3,
-     		elevation: 11,
+     		//elevation: 11,
      		marginBottom: 10,
      },
 });
@@ -49,7 +50,7 @@ const HealthBar = ({bar,progress}) => {
   const hunger = useSelector(state=>state.hunger);
   const fun = useSelector(state=>state.fun);
   const hygiene = useSelector(state=>state.hygiene);
-  console.log("hygiene "+hygiene);
+  const health = useSelector(state=>state.health);
   const dispatch = useDispatch();
   const array = useSelector(state=>state.currentTimeArray);
   const currTime = array[0];
@@ -90,25 +91,30 @@ const HealthBar = ({bar,progress}) => {
 
 	return (
 		<View style={styles.mainContainer}>
-      <Text style={styles.textTitle}>Hunger</Text>
 			<View style={styles.container}>
+      <Text style={styles.textTitle}>Health</Text>
+					<Progress.Bar style={{margin: 10}} progress={health/10} width={100} height={10}
+					color={(health/10 > .7) ? '#4ab125' : 	(health/10 > .4) ? "#FFFF00" : "red"}
+					borderColor='white'/>
+    </View>
+			<View style={styles.container}>
+      <Text style={styles.textTitle}>Hunger</Text>
 					<Progress.Bar style={{margin: 10}} progress={hunger/10} width={100} height={10}
 					color={(hunger/10 > .7) ? '#4ab125' : 	(hunger/10 > .4) ? "#FFFF00" : "red"}
-					borderColor='white'/>
+		      borderColor='white'/>
 			</View>
-      <Text style={styles.textTitle}>Fun</Text>
       <View style={styles.container}>
+      <Text style={styles.textTitle}>Fun</Text>
 					<Progress.Bar style={{margin: 10}} progress={fun/10} width={100} height={10}
 					color={(fun/10 > .7) ? '#4ab125' : 	(fun/10 > .4) ? "#FFFF00" : "red"}
 					borderColor='white' />
-			</View>
+      </View>
+			<View style={styles.container}>
       <Text style={styles.textTitle}>Hygiene</Text>
-      <View style={styles.container}>
 					<Progress.Bar style={{margin: 10}} progress={hygiene/10} width={100} height={10}
 					color={(hygiene/10 > .7) ? '#4ab125' : 	(hygiene/10 > .4) ? "#FFFF00" : "red"}
 					borderColor='white'/>
-			</View>
-
+      </View>
 		</View>
 	)
 }
