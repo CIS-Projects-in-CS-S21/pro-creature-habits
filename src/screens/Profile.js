@@ -21,6 +21,7 @@ import {playSound, soundEffectList} from "../components/audio.js";
 import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
+import {INCREASE_HEALTH, DECREASE_HEALTH} from '../redux/healthBarPoint'
 import {TIME_FEED_CHANGE,TIME_TOY_CHANGE,TIME_BATH_CHANGE} from "../redux/timeOfBars";
 import { StatsData } from '../components/StatsData';
 import Notifications from "../../src/Notifications";
@@ -168,6 +169,9 @@ const PetProfile = () => {
 	const upperCase = (string) => {
 			return string[0].toUpperCase() + string.slice(1);
 		}
+
+	const weather = useSelector(state=>weatherStatusReducer);
+	
 
     const handleSelection = (item) => {
         dispatch({type: OFF_PET});
