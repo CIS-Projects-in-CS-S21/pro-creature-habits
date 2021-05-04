@@ -136,22 +136,22 @@ const WeatherImg = () => {
 		case "Rain":
 			return(
 				<Image
-					 		style={{width: 150,height: 150, position:'absolute'}}
+					 		style={{width: 150,height: 150, position:'absolute', borderRadius: 5}}
 							source={require('../../images/rain.gif')}
 					 />
 			);
-		case "Clouds":
+		case "Cloudy":
 			return(
 				<Image
-					 		style={{width: 150,height: 150, position:'absolute'}}
+					 		style={{width: 150,height: 150, position:'absolute', borderRadius: 5}}
 							source={require('../../images/clouds_trans.gif')}
 					 />
 			);
 		case "Thunderstorm":
 			return(
 				<Image
-					style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
-					source={require("../../images/cat.png")}
+					style={{width: 150, height: 150, position: 'absolute', borderRadius: 5}}
+					source={require("../../images/thunder_trans.gif")}
 				/>
 			);
 		default:
@@ -172,6 +172,7 @@ const WeatherImg = () => {
                                    key = {name}
            />
            )})}
+         <WeatherImg/>
        </View>
 	)
 }
