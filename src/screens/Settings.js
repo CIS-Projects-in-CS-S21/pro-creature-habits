@@ -11,7 +11,7 @@ import {SIGN_OUT} from "../redux/authenticated";
 import {SET_COLD, SET_HOT, SET_MILD} from "../redux/temperature";
 import {SET_WEATHER} from "../redux/weatherStatus";
 import {SET_IMG} from "../redux/weatherImg";
-
+import {INCREASE_HEALTH, DECREASE_HEALTH} from '../redux/healthBarPoint'
 
 const styles = StyleSheet.create({
 	container: {
@@ -61,6 +61,15 @@ const SettingsScreen = () => {
 	const dispatch = useDispatch();
 	const temp = useSelector(state=>state.temperature);
 	const weather = useSelector(state=>state.weatherStatus);
+    const currentInventory = useSelector(state=>state.petInv)
+    let currentShirtType = "";
+    for (const [key] of Object.entries(currentInventory)) {
+        if (key.includes('shirt') || key.includes('tank') || key.includes('coat')) {
+            if (currentInventory[key].wear) {
+                currentShirtType = currentInventory[key].weather;
+            }
+        }
+    }
 
 	return (
 		<ScrollView style={{backgroundColor: '#406BE9'}}>
@@ -103,7 +112,14 @@ const SettingsScreen = () => {
 					<TouchableOpacity
 						style={[styles.button, {borderRadius: 5, borderBottomRightRadius: 0, borderBottomLeftRadius: 0}]}
 						activeOpacity={0.8}
-						onPress={() => dispatch({type: SET_HOT})}
+						onPress={() => {
+						    dispatch({type: SET_HOT})
+                            if (currentShirtType != "hot") {
+                            	dispatch({type: DECREASE_HEALTH,data:5})
+                            } else {
+                            	dispatch({type: INCREASE_HEALTH,data:10})
+                            }
+						 }}
 					>
 						<Text style={styles.text}>Hot</Text>
 						{temp === 'Hot' &&
@@ -113,7 +129,14 @@ const SettingsScreen = () => {
 					<TouchableOpacity
 						style={styles.button}
 						activeOpacity={0.8}
-						onPress={() => dispatch({type: SET_MILD})}
+						onPress={() => {
+						dispatch({type: SET_MILD})
+                            if (currentShirtType != "mild") {
+                            	dispatch({type: DECREASE_HEALTH,data:5})
+                            } else {
+                            	dispatch({type: INCREASE_HEALTH,data:10})
+                            }
+						}}
 					>
 						<Text style={styles.text}>Mild</Text>
 						{temp === 'Mild' &&
@@ -123,7 +146,14 @@ const SettingsScreen = () => {
 					<TouchableOpacity
 						style={[styles.button, {borderBottomWidth: 0, borderRadius: 5, borderTopRightRadius: 0, borderTopLeftRadius: 0}]}
 						activeOpacity={0.8}
-						onPress={() => dispatch({type: SET_COLD})}
+						onPress={() => {
+						    dispatch({type: SET_COLD})
+                            if (currentShirtType != "cold") {
+                            	dispatch({type: DECREASE_HEALTH,data:5})
+                            } else {
+                            	dispatch({type: INCREASE_HEALTH,data:10})
+                            }
+						}}
 					>
 						<Text style={styles.text}>Cold</Text>
 						{temp === 'Cold' &&
@@ -165,6 +195,7 @@ const SettingsScreen = () => {
 						onPress={() => {
 							dispatch({type: SET_WEATHER, status: 'Thunderstorm'});
 							dispatch({type: SET_IMG, data: '11d'});
+
 						}}
 					>
 						<Text style={styles.text}>Thunderstorm</Text>

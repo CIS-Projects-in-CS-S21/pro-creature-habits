@@ -59,28 +59,21 @@ const PetImage = (props) => {
 const fadeAnim = useRef(new Animated.Value(0)).current;
 
 
-
-
-
 const EmoteImg = () => {
 
-
-const hunger = useSelector(state => state.hunger);
+        const hunger = useSelector(state => state.hunger);
         const hygiene = useSelector(state => state.hygiene);
         const fun = useSelector(state => state.fun);
         if (hunger > 7 && hygiene > 7 && fun > 7) {
             dispatch({type: CHANGE_EMOTION,changes:"happy"});
         }
-		if(hunger <= 3 && hygiene <= 3 && fun <= 3){
+		else if(hunger <= 3 && hygiene <= 3 && fun <= 3){
 			dispatch({type: CHANGE_EMOTION, changes: "sad"});
 		}
 		else {
             dispatch({type: CHANGE_EMOTION,changes:"neutral"});
         }
-
-const EmoteImg = () => {
-	const petEmoteTest = "happy";
-	switch(petEmoteTest){
+	switch(petEmote){
 		case "happy":
 			if(petImgChoice === "cat"){
 				return(
