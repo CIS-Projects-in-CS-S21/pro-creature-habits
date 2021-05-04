@@ -1,11 +1,7 @@
 import React, { useRef } from "react";
 import {Image, Text, View, StyleSheet,ImageBackground, Animated} from "react-native";
 import {useDispatch, useSelector} from "react-redux";
-import ImageOverlay from "react-native-image-overlay";
-import {EAT} from "../../redux/petInventory";
 import {CHANGE_EMOTION} from "../../redux/petInfo";
-
-
 
 const styles = StyleSheet.create({
 	cardContainer: {
@@ -61,21 +57,16 @@ const PetImage = (props) => {
 
 const fadeAnim = useRef(new Animated.Value(0)).current;
 
-    const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 5 seconds
-        Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 5000
-        }).start();
-    };
 
-    const hunger = useSelector(state => state.hunger);
+const EmoteImg = () => {
+
+        const hunger = useSelector(state => state.hunger);
         const hygiene = useSelector(state => state.hygiene);
         const fun = useSelector(state => state.fun);
         if (hunger > 7 && hygiene > 7 && fun > 7) {
             dispatch({type: CHANGE_EMOTION,changes:"happy"});
-        } 
-		if(hunger <= 3 && hygiene <= 3 && fun <= 3){
+        }
+		else if(hunger <= 3 && hygiene <= 3 && fun <= 3){
 			dispatch({type: CHANGE_EMOTION, changes: "sad"});
 		}
 		else {
@@ -87,7 +78,7 @@ const EmoteImg = () => {
 	const petEmoteTest = "happy";
 	switch(petEmote){
 		case "happy":
-			if(petImgChoice == "cat"){
+			if(petImgChoice === "cat"){
 				return(
 					<Image
 												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
@@ -95,9 +86,9 @@ const EmoteImg = () => {
 												
 				  />
 				)
-	
+
 			}
-			if(petImgChoice == "dog"){
+			else {
 				return(
 					<Image
 												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
@@ -106,9 +97,9 @@ const EmoteImg = () => {
 					/>
 				)
 			}
-		
+
 		case "neutral":
-			if(petImgChoice == "cat"){
+			if(petImgChoice === "cat"){
 				return(
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
@@ -117,7 +108,7 @@ const EmoteImg = () => {
 					/>
 				)
 			}
-			if(petImgChoice == "dog"){
+			else {
 				return(
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
@@ -127,7 +118,7 @@ const EmoteImg = () => {
 				)
 			}
 		case "sad":
-			if(petImgChoice == "cat"){
+			if(petImgChoice === "cat"){
 				return(
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
@@ -136,7 +127,7 @@ const EmoteImg = () => {
 					/>
 				)
 			}
-			if(petImgChoice == "dog"){
+			else {
 				return(
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
@@ -149,28 +140,28 @@ const EmoteImg = () => {
 }
 
 const WeatherImg = () => {
+
 	const weatherStatusTest = "Thunderstorm";
-	
-	
 	switch(weatherStatus){
 		case "Rain":
 			return(
 				<Image
-					 		style={{width: 150,height: 150, position:'absolute'}}
+					 		style={{width: 150,height: 150, position:'absolute', borderRadius: 5}}
 							source={require('../../images/rain.gif')}
 							cacheKey={"rainKey"}
 					 />
 			);
-		case "Clouds":
+		case "Cloudy":
 			return(
 				<Image
-					 		style={{width: 150,height: 150, position:'absolute'}}
+					 		style={{width: 150,height: 150, position:'absolute', borderRadius: 5}}
 							source={require('../../images/clouds_trans.gif')}
 					 		
 					 />
-			)
+			);
 		case "Thunderstorm":
 			return(
+
 			<View style={{width: 150, height: 150, position: 'absolute'}}>
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute'}}
@@ -185,8 +176,9 @@ const WeatherImg = () => {
 			</View>
 				
 			)
+
 		default:
-			return( null )
+			return null;
 	}
 }
 
@@ -203,9 +195,7 @@ const WeatherImg = () => {
                                    key = {name}
            />
            )})}
-		<WeatherImg />
-					 
-
+         <WeatherImg/>
        </View>
 	)
 }

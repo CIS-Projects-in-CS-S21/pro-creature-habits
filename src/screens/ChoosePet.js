@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
 
 const choosePetScreen = ({navigation}) => {
     const [text, onChangeText] = React.useState('');
-    const [colorImage1, changeValue1] = React.useState('#402688');
+    const [colorImage1, changeValue1] = React.useState('orange');
     const [colorImage2, changeValue2] = React.useState('#402688');
-    const [petChoice,changePet] = React.useState('');
+    const [petChoice,changePet] = React.useState("cat");
     const dispatch = useDispatch();
 
 

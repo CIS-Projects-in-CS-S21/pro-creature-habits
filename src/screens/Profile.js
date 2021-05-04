@@ -21,9 +21,10 @@ import {playSound, soundEffectList} from "../components/audio.js";
 import { HUNGERBARDECREASE,HUNGERBARINCREASE } from '../redux/hungerbarPoint';
 import {FUNBARINCREASE, FUNBARDECREASE} from '../redux/funbarPoint'
 import {HYGIENEBARINCREASE, HYGIENEBARDECREASE} from '../redux/hygienebarPoint'
+import {INCREASE_HEALTH, DECREASE_HEALTH} from '../redux/healthBarPoint'
 import {TIME_FEED_CHANGE,TIME_TOY_CHANGE,TIME_BATH_CHANGE} from "../redux/timeOfBars";
 import { StatsData } from '../components/StatsData';
-
+import Notifications from "../../src/Notifications";
 
 
 
@@ -81,8 +82,8 @@ const styles = StyleSheet.create({
     	},
     	healthbarContainer: {
     	    flexDirection:'column'
-
-    	},
+			
+		},
     	dropdownContainer: {
     		height: 40,
     		alignSelf: 'stretch',
@@ -169,6 +170,9 @@ const PetProfile = () => {
 			return string[0].toUpperCase() + string.slice(1);
 		}
 
+	const weather = useSelector(state=>state.weatherStatus);
+	const temperature = useSelector(state=>state.temperature);
+
     const handleSelection = (item) => {
         dispatch({type: OFF_PET});
         const currentTime = new Date();
@@ -184,6 +188,7 @@ const PetProfile = () => {
 			dispatch({type: FUNBARINCREASE, data:3});
 
         } else if (ItemInventory[item].category === 'grooming') {
+            console.log("grooming")
             dispatch({type: SELECTED, data: 'select_grooming',thing: item});
             dispatch({type: INCREMENT_STAT, data: 'pet_wash'})
             dispatch({type: TIME_BATH_CHANGE, data: currentTime});
@@ -193,6 +198,31 @@ const PetProfile = () => {
       		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
       		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
             playSound(soundEffectList.clothes_sound);
+
+
+            let clothtype = ItemInventory[item].weather;
+            if (item.includes('shirt') || item.includes('tank') || item.includes('coat')) {
+                if (temperature == "Cold") {
+                    if (clothtype == "cold") {
+                        dispatch({type: INCREASE_HEALTH,data:10})
+                    } else {
+                        dispatch({type: DECREASE_HEALTH,data:5})
+                    }
+                } else if (temperature == "Hot") {
+                    if (clothtype == "hot") {
+                        dispatch({type: INCREASE_HEALTH,data:10})
+                    } else {
+                        dispatch({type: DECREASE_HEALTH,data:5})
+                    }
+                } else {
+                    if (clothtype == "mild") {
+                        dispatch({type: INCREASE_HEALTH,data:10})
+                    } else {
+                        dispatch({type: DECREASE_HEALTH,data:5})
+                    }
+                }
+
+            }
         }
 
         showMessage({
@@ -251,7 +281,6 @@ const PetProfile = () => {
 					</View>
 				</View>
 			</View>
-
 			<PetInventoryFilter/>
 			<Modal
             	animationType="slide"

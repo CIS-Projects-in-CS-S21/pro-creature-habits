@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PetCard /> PetCard renders correctly 1`] = `null`;
+
+exports[`<PetCard /> petCard snapshot renders 1`] = `
+<View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(49,69,194,0.7)",
+        "borderColor": "white",
+        "borderRadius": 5,
+        "borderWidth": 3,
+        "elevation": 11,
+        "padding": 10,
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.8,
+        "shadowRadius": 3,
+      }
+    }
+  >
+    <Image
+      style={
+        Object {
+          "height": 75,
+          "shadowOffset": Object {
+            "height": 1,
+            "width": 0,
+          },
+          "shadowOpacity": 0.8,
+          "shadowRadius": 3,
+          "width": 75,
+        }
+      }
+    />
+  </View>
+</View>
+`;

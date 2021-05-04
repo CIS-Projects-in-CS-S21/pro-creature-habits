@@ -3,10 +3,8 @@ export const FILTER = 'FILTER';
 
 import {ItemInventory} from "../components/ItemInventory";
 
-let defaultState = ['pizza', 'shoes', 'burger', 'shirt', 'carrot', 'ball', 'water', 'blue_shoes',
-					'black_shirt', 'blue_shirt', 'black_shoes', 'red_ball', 'black_ball',
-					'shampoo', 'soap'];
-defaultState.sort();
+let defaultState = Object.keys(ItemInventory);
+
 
 const marketplaceInventoryReducer = (state=defaultState, action) => {
 	switch (action.type) {

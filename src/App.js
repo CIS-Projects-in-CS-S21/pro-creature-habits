@@ -44,6 +44,10 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import difficultyCheckedReducer from "./redux/difficultyCheckedReducer";
 import timeOfBarsReducer from './redux/timeOfBars';
+import daysInARowReducer from "./redux/daysInARow";
+import authenticatedReducer from "./redux/authenticated";
+import temperatureReducer from "./redux/temperature";
+import weatherImgReducer from "./redux/weatherImg";
 
 import AppLoading from "expo-app-loading";
 import {cacheImages} from "./components/cacheImages.js";
@@ -67,6 +71,7 @@ const reducer = combineReducers({
 	fun:funbarPointReducer,
 	hunger: hungerbarPointReducer,
 	hygiene: hygienebarPointReducer,
+	health :healthBarReducer,
 	firstLogin: loginReducer,
 	pin: pinReducer,
 	pintHint: hintReducer,
@@ -84,8 +89,11 @@ const reducer = combineReducers({
 	currentDay: currentDayReducer,
 	difficultyCheck: difficultyCheckedReducer,
 	currentTimeArray: timeOfBarsReducer,
-	weatherStatus: weatherStatusReducer
-
+	weatherStatus: weatherStatusReducer,
+	daysRow: daysInARowReducer,
+	authenticated: authenticatedReducer,
+	temperature: temperatureReducer,
+	weatherImg: weatherImgReducer
 });
 
 const rootReducer = (state, action) => {
@@ -109,7 +117,7 @@ const persistor = persistStore(store);
 
 const App = () => {
 	// Pre-cache assets such as images
-	
+
 	const [assetsLoaded, setAssetsLoaded] = React.useState(false);
 
 	const _loadAssetsAsync = async() => {
@@ -135,7 +143,7 @@ const App = () => {
 			/>
 		);
 	}
-	
+
 	// Now load main app...AppUnwrapped //
 	return (
 
