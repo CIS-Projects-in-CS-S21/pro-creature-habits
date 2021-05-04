@@ -192,7 +192,7 @@ const PetProfile = () => {
         } else {
       		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
       		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
-          playSound(soundEffectList.clothes_sound);
+            playSound(soundEffectList.clothes_sound);
         }
 
         showMessage({

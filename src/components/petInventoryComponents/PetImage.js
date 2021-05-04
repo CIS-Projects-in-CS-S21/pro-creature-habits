@@ -5,7 +5,7 @@ import ImageOverlay from "react-native-image-overlay";
 import {EAT} from "../../redux/petInventory";
 import {CHANGE_EMOTION} from "../../redux/petInfo";
 
-import CachedImage from 'react-native-expo-cached-image';
+
 
 const styles = StyleSheet.create({
 	cardContainer: {
@@ -85,13 +85,14 @@ const fadeAnim = useRef(new Animated.Value(0)).current;
 const EmoteImg = () => {
 
 	const petEmoteTest = "happy";
-	switch(petEmoteTest){
+	switch(petEmote){
 		case "happy":
 			if(petImgChoice == "cat"){
 				return(
 					<Image
 												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 												source={require("../../images/cat_happy.gif")}
+												
 				  />
 				)
 	
@@ -101,6 +102,7 @@ const EmoteImg = () => {
 					<Image
 												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 												source={require("../../images/dog_happy.gif")}
+												
 					/>
 				)
 			}
@@ -111,6 +113,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/cat.png")}
+											
 					/>
 				)
 			}
@@ -119,6 +122,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/dog.png")}
+											
 					/>
 				)
 			}
@@ -128,6 +132,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/cat_sad.gif")}
+											
 					/>
 				)
 			}
@@ -136,6 +141,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/dog_sad.gif")}
+											
 					/>
 				)
 			}
@@ -143,7 +149,7 @@ const EmoteImg = () => {
 }
 
 const WeatherImg = () => {
-	const weatherStatusTest = "Rain";
+	const weatherStatusTest = "Thunderstorm";
 	
 	
 	switch(weatherStatus){
@@ -152,6 +158,7 @@ const WeatherImg = () => {
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute'}}
 							source={require('../../images/rain.gif')}
+							cacheKey={"rainKey"}
 					 />
 			);
 		case "Clouds":
@@ -159,18 +166,21 @@ const WeatherImg = () => {
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute'}}
 							source={require('../../images/clouds_trans.gif')}
+					 		
 					 />
 			)
 		case "Thunderstorm":
 			return(
-			<View>
+			<View style={{width: 150, height: 150, position: 'absolute'}}>
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute'}}
-							source={require('../../images/thunder_trans.gif')}
+							source={ require('../../images/thunder_trans.gif')}
+							
 					 />
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute'}}
 							source={require('../../images/rain.gif')}
+							
 					 />
 			</View>
 				
