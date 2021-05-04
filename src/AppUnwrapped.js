@@ -23,7 +23,7 @@ import InputPINScreen from "./screens/InputPIN";
 import {UPDATE_DATE} from "./redux/currentDay";
 import {UPDATE_DAILY_TASKS} from "./redux/dailyTasks";
 
-
+import {INCREASE_HEALTH, DECREASE_HEALTH} from './redux/healthBarPoint'
 import Constants from 'expo-constants';
 
 import {SET_WEATHER} from "./redux/weatherStatus";
@@ -62,6 +62,18 @@ const AppUnwrapped = () => {
 	const date = useSelector(state=>state.currentDay);
 	const isAuthenticated = useSelector(state=>state.authenticated)
 	const temperature = useSelector(state=>state.temperature)
+    const currentInventory = useSelector(state=>state.petInv)
+    let currentShirtType = "";
+    for (const [key] of Object.entries(currentInventory)) {
+        console.log(key)
+        if (key.includes('shirt') || key.includes('tank') || key.includes('coat')) {
+        if (currentInventory[key].wear) {
+            currentShirtType = currentInventory[key].weather;
+            console.log("CURRENTLY WEARING "+key)
+        }
+        }
+    }
+
 
 	const getWeather = () => {
 		navigator.geolocation.getCurrentPosition(
@@ -75,10 +87,25 @@ const AppUnwrapped = () => {
 						setWeather(json.daily[0].weather[0].icon);
 						if(json.daily[0].temp.day <= 50) {
 							dispatch({type: SET_COLD})
+							if (currentShirtType != "cold") {
+							    dispatch({type: DECREASE_HEALTH,data:5})
+							} else {
+							    dispatch({type: INCREASE_HEALTH,data:10})
+							}
 						} else if (json.daily[0].temp.day >= 80) {
 							dispatch({type: SET_HOT})
+                            if (currentShirtType != "hot") {
+							    dispatch({type: DECREASE_HEALTH,data:5})
+							} else {
+							    dispatch({type: INCREASE_HEALTH,data:10})
+							}
 						} else {
 							dispatch({type: SET_MILD})
+                            if (currentShirtType != "mild") {
+							    dispatch({type: DECREASE_HEALTH,data:5})
+							} else {
+							    dispatch({type: INCREASE_HEALTH,data:10})
+							}
 						}
 						const weatherToday = json.daily[0].weather[0].main;
 						if (weatherToday === 'Rain' || 'Thunderstorm' || 'Clear' || 'Clouds') {

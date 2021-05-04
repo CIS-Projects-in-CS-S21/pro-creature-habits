@@ -4,7 +4,6 @@ import {useDispatch, useSelector} from "react-redux";
 import ImageOverlay from "react-native-image-overlay";
 import {EAT} from "../../redux/petInventory";
 import {CHANGE_EMOTION} from "../../redux/petInfo";
-import CachedImage from 'react-native-expo-cached-image';
 
 
 const styles = StyleSheet.create({

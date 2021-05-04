@@ -93,7 +93,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.2
 		},
-         		weather: "mild"
+        weather: "mild"
 	},
 	black_shoes: {
 		name: 'black shoes',
@@ -106,7 +106,7 @@ const ItemInventory = {
 		benefits: {
 			Fun: 0.3
 		},
-         		weather: "mild"
+        weather: "mild"
 	},
 	shirt: {
 		name: 'shirt',
@@ -119,7 +119,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-         		weather: "mild"
+        weather: "mild"
 	},
 	black_shirt: {
 		name: 'black shirt',
@@ -132,7 +132,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-         		weather: "mild"
+        weather: "mild"
 	},
 	blue_shirt: {
 		name: 'blue shirt',
@@ -145,7 +145,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-         		weather: "mild"
+        weather: "mild"
 	},
 	black_coat: {
 		name: 'black coat',
@@ -158,7 +158,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-        weather: "coldrain"
+        weather: "cold"
 	},
 	pink_coat: {
 		name: 'pink coat',
@@ -171,7 +171,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-                 weather: "coldrain"
+        weather: "cold"
 	},
 	blue_coat: {
 		name: 'blue coat',
@@ -184,7 +184,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-                 weather: "coldrain"
+        weather: "cold"
 	},
 	white_tank_top: {
 		name: 'white tank top',
@@ -197,7 +197,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-                 weather: "hot"
+        weather: "hot"
 	},
 	blue_tank_top: {
 		name: 'blue tank top',
@@ -210,7 +210,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-                 weather: "hot"
+        weather: "hot"
 	},
 	green_tank_top: {
 		name: 'green tank top',
@@ -223,7 +223,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-                 weather: "hot"
+        weather: "hot"
 	},
 	umbrella: {
 		name: 'umbrella',
@@ -236,7 +236,7 @@ const ItemInventory = {
 		benefits: {
 			Health: 0.3
 		},
-        weather: "coldrain"
+        weather: "rain"
 	},
 	ball: {
 		name: 'ball',

@@ -170,7 +170,8 @@ const PetProfile = () => {
 			return string[0].toUpperCase() + string.slice(1);
 		}
 
-	const weather = useSelector(state=>weatherStatusReducer);
+	const weather = useSelector(state=>state.weatherStatus);
+	const temperature = useSelector(state=>state.temperature);
 
     const handleSelection = (item) => {
         dispatch({type: OFF_PET});
@@ -196,7 +197,31 @@ const PetProfile = () => {
         } else {
       		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
       		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
-          playSound(soundEffectList.clothes_sound);
+            playSound(soundEffectList.clothes_sound);
+            let clothtype = ItemInventory[item].weather;
+            if (item.includes('shirt') || item.includes('tank') || item.includes('coat')) {
+                if (temperature == "Cold") {
+                    if (clothtype == "cold") {
+                        dispatch({type: INCREASE_HEALTH,data:10})
+                    } else {
+                        dispatch({type: DECREASE_HEALTH,data:5})
+                    }
+                } else if (temperature == "Hot") {
+                    if (clothtype == "hot") {
+                        dispatch({type: INCREASE_HEALTH,data:10})
+                    } else {
+                        dispatch({type: DECREASE_HEALTH,data:5})
+                    }
+                } else {
+                    if (clothtype == "mild") {
+                        dispatch({type: INCREASE_HEALTH,data:10})
+                    } else {
+                        dispatch({type: DECREASE_HEALTH,data:5})
+                    }
+                }
+
+            }
+
         }
 
         showMessage({
