@@ -198,6 +198,8 @@ const PetProfile = () => {
       		dispatch({type: SELECTED, data: 'select_clothes',thing: item})
       		dispatch({type: INCREMENT_STAT, data: 'clothes_changed'});
             playSound(soundEffectList.clothes_sound);
+
+
             let clothtype = ItemInventory[item].weather;
             if (item.includes('shirt') || item.includes('tank') || item.includes('coat')) {
                 if (temperature == "Cold") {
@@ -221,7 +223,6 @@ const PetProfile = () => {
                 }
 
             }
-
         }
 
         showMessage({

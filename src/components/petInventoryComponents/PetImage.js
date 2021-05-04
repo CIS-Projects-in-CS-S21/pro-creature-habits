@@ -3,7 +3,6 @@ import {Image, Text, View, StyleSheet,ImageBackground, Animated} from "react-nat
 import {useDispatch, useSelector} from "react-redux";
 import {CHANGE_EMOTION} from "../../redux/petInfo";
 
-
 const styles = StyleSheet.create({
 	cardContainer: {
 		borderWidth: 2,
@@ -73,6 +72,10 @@ const EmoteImg = () => {
 		else {
             dispatch({type: CHANGE_EMOTION,changes:"neutral"});
         }
+
+const EmoteImg = () => {
+
+	const petEmoteTest = "happy";
 	switch(petEmote){
 		case "happy":
 			if(petImgChoice === "cat"){
@@ -80,6 +83,7 @@ const EmoteImg = () => {
 					<Image
 												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 												source={require("../../images/cat_happy.gif")}
+												
 				  />
 				)
 
@@ -89,6 +93,7 @@ const EmoteImg = () => {
 					<Image
 												style = {{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 												source={require("../../images/dog_happy.gif")}
+												
 					/>
 				)
 			}
@@ -99,6 +104,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/cat.png")}
+											
 					/>
 				)
 			}
@@ -107,6 +113,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/dog.png")}
+											
 					/>
 				)
 			}
@@ -116,6 +123,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/cat_sad.gif")}
+											
 					/>
 				)
 			}
@@ -124,6 +132,7 @@ const EmoteImg = () => {
 					<Image
 											style={{width: 150, height: 150, borderWidth: 5, borderRadius: 10}}
 											source={require("../../images/dog_sad.gif")}
+											
 					/>
 				)
 			}
@@ -131,12 +140,15 @@ const EmoteImg = () => {
 }
 
 const WeatherImg = () => {
+
+	const weatherStatusTest = "Thunderstorm";
 	switch(weatherStatus){
 		case "Rain":
 			return(
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute', borderRadius: 5}}
 							source={require('../../images/rain.gif')}
+							cacheKey={"rainKey"}
 					 />
 			);
 		case "Cloudy":
@@ -144,15 +156,27 @@ const WeatherImg = () => {
 				<Image
 					 		style={{width: 150,height: 150, position:'absolute', borderRadius: 5}}
 							source={require('../../images/clouds_trans.gif')}
+					 		
 					 />
 			);
 		case "Thunderstorm":
 			return(
+
+			<View style={{width: 150, height: 150, position: 'absolute'}}>
 				<Image
-					style={{width: 150, height: 150, position: 'absolute', borderRadius: 5}}
-					source={require("../../images/thunder_trans.gif")}
-				/>
-			);
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={ require('../../images/thunder_trans.gif')}
+							
+					 />
+				<Image
+					 		style={{width: 150,height: 150, position:'absolute'}}
+							source={require('../../images/rain.gif')}
+							
+					 />
+			</View>
+				
+			)
+
 		default:
 			return null;
 	}

@@ -49,11 +49,20 @@ button: {
     clothes_sound: require('../components/clothes_sound.wav')
   }
 
+  
 
 
   export async function playSound(listItem) {
 
     const soundObj = new Audio.Sound();
+
+    async function onPlaybackStatusUpdate (playbackStatus) {
+      if(playbackStatus.didJustFinish){
+        console.log('\nSound Finish, unloading...');
+        await soundObj.unloadAsync();
+        console.log('\nUnloaded Sound!');
+      }
+    }
 
     console.log('Loading Sound');
     await soundObj.loadAsync(
@@ -61,11 +70,26 @@ button: {
         listItem
 
     );
-
-
+    
+    soundObj.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+    
 
     console.log('Playing Sound');
     await soundObj.playAsync();
+
+    /*const flag = false;
+    const statusTest = soundObj.getStatusAsync();
+    console.log(statusTest);
+    while(flag == false){
+      
+      const status = soundObj.getStatusAsync();
+      if(status.isPlaying == false){
+        console.log('\nSound finished, unloading...');
+        await soundObj.unloadAsync();
+        console.log('\nUnloaded Sound!');
+        flag = true;
+      }
+    }*/
 
     //await soundObj.unloadAsync();
   }
@@ -79,7 +103,6 @@ button: {
           sound.unloadAsync(); }
       : undefined;
   }, [sound]);
-
   return (
     <View style={styles.button}>
       <Button title="Play Sound" onPress={playSound} />
@@ -88,7 +111,6 @@ button: {
 }*/
 
 /*export function AudioPlayer() {}
-
 AudioPlayer.playSound = async function (
   source,
   initialStatus = { shouldPlay: true },
@@ -103,14 +125,10 @@ AudioPlayer.playSound = async function (
       onPlaybackStatusUpdate,
       downloadFirst
     );
-
     console.log(status);
-
     // Play the sound
     await sound.playAsync();
-
     console.log("Sound played! Unloading from memory...");
-
     // We are done...
     // Unload the sound from memory
     sound.unloadAsync();
