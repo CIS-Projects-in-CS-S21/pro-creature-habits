@@ -109,7 +109,7 @@ const persistor = persistStore(store);
 
 const App = () => {
 	// Pre-cache assets such as images
-	/*
+	
 	const [assetsLoaded, setAssetsLoaded] = React.useState(false);
 
 	const _loadAssetsAsync = async() => {
@@ -136,7 +136,7 @@ const App = () => {
 		);
 	}
 	
-	// Now load main app...AppUnwrapped //*/
+	// Now load main app...AppUnwrapped //
 	return (
 
 		<Provider store={store}>
