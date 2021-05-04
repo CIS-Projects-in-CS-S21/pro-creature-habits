@@ -67,25 +67,35 @@ let copy = JSON.parse(JSON.stringify(state));
                     }
                 }
                 copy[action.thing].wear = true;
-	        } else if (action.data === "select_grooming"){
+	        } else if (action.data == "select_grooming"){
+	        console.log("GROOOOMING + " + copy[action.thing].bought)
 				copy[action.thing].bought = copy[action.thing].bought - 1;
-				//copy[action.thing].wear = true;
-				if (copy[action.thing].bought !== 0) {copy[action.thing].show = true;}
+				copy[action.thing].wear = true;
+				if (copy[action.thing].bought != 0) {copy[action.thing].show = true;}
 				else {copy[action.thing].show = false;}
 	        } else {
 	            let type = "hat";
-                 if (action.thing.includes('shirt')) {
-                    type = "shirt"
-                 } else if (action.thing.includes('shoes')) {
-                    type = "shoes";
-                 }
-                 for (const [key] of Object.entries(copy)) {
-                     if (copy[key].name.includes(type)) {
-                         copy[key].wear = false;
-                     }
-                 }
-                 copy[action.thing].wear = true;
-             }
+                 if (action.thing.includes('shirt') || action.thing.includes('tank') || action.thing.includes('coat')) {
+
+                    for (const [key] of Object.entries(copy)) {
+                        if (copy[key].name.includes('shirt') || copy[key].name.includes('tank') || copy[key].name.includes('coat')) {
+                            copy[key].wear = false;
+                        }
+                    }
+                    } else {
+                        if (action.thing.includes('shoes')) {
+                        type = "shoes";
+                    }
+                    for (const [key] of Object.entries(copy)) {
+                        if (copy[key].name.includes(type)) {
+                            copy[key].wear = false;
+                        }
+                    }
+
+                    }
+                    copy[action.thing].wear = true;
+                }
+
 	        return copy;
 	        case EAT:
 	            copy[action.thing].wear = false;

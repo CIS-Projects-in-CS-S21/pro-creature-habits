@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Achievement /> achievement Filter snapshot matches tree 1`] = `null`;
+
+exports[`<Achievement /> achievement Filter snapshot renders 1`] = `<achievementsFilter />`;
+
+exports[`<Achievement /> marketplace Filter snapshot matches tree 1`] = `null`;
+
+exports[`<Achievement /> marketplace Filter snapshot renders 1`] = `<marketplaceFilter />`;
+
+exports[`<Achievement /> petInventory Filter snapshot matches tree 1`] = `null`;
+
+exports[`<Achievement /> petInventoryFilter snapshot renders 1`] = `<petInventoryFilter />`;

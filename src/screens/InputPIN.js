@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity} from "react-native";
-import UserInfo from "../databases/UserInfo";
 import {useSelector} from "react-redux";
 import {showMessage} from "react-native-flash-message";
 import {ItemInventory} from "../components/ItemInventory";

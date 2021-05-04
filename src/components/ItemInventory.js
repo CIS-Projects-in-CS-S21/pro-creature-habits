@@ -79,7 +79,8 @@ const ItemInventory = {
 		wearUri: require('../images/red_shoes.png'),
 		benefits: {
 			Health: 0.2
-		}
+		},
+		weather: "mild"
 	},
 	blue_shoes: {
 		name: 'blue shoes',
@@ -91,7 +92,8 @@ const ItemInventory = {
 		wearUri: require('../images/blue_shoes.png'),
 		benefits: {
 			Health: 0.2
-		}
+		},
+        weather: "mild"
 	},
 	black_shoes: {
 		name: 'black shoes',
@@ -103,7 +105,8 @@ const ItemInventory = {
 		wearUri: require('../images/black_shoes.png'),
 		benefits: {
 			Fun: 0.3
-		}
+		},
+        weather: "mild"
 	},
 	shirt: {
 		name: 'shirt',
@@ -115,7 +118,8 @@ const ItemInventory = {
 		wearUri: require('../images/white_shirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "mild"
 	},
 	black_shirt: {
 		name: 'black shirt',
@@ -127,7 +131,8 @@ const ItemInventory = {
 		wearUri: require('../images/black_shirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "mild"
 	},
 	blue_shirt: {
 		name: 'blue shirt',
@@ -139,7 +144,8 @@ const ItemInventory = {
 		wearUri: require('../images/blue_shirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "mild"
 	},
 	black_coat: {
 		name: 'black coat',
@@ -148,10 +154,11 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a black coat?',
 		inventoryText: 'Would you like your pet to wear this black coat?',
-		wearUri: require('../images/black_shoes.png'),
+		wearUri: require('../images/black_coat_shirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "cold"
 	},
 	pink_coat: {
 		name: 'pink coat',
@@ -160,10 +167,11 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a pink coat?',
 		inventoryText: 'Would you like your pet to wear this pink coat?',
-		wearUri: require('../images/black_shoes.png'),
+		wearUri: require('../images/pink_coat_shirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "cold"
 	},
 	blue_coat: {
 		name: 'blue coat',
@@ -172,10 +180,11 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a blue coat?',
 		inventoryText: 'Would you like your pet to wear this blue coat?',
-		wearUri: require('../images/black_shoes.png'),
+		wearUri: require('../images/blue_coat_shirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "cold"
 	},
 	white_tank_top: {
 		name: 'white tank top',
@@ -184,10 +193,11 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a white tank top?',
 		inventoryText: 'Would you like your pet to wear this white tank top?',
-		wearUri: require('../images/black_shoes.png'),
+		wearUri: require('../images/white_tshirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "hot"
 	},
 	blue_tank_top: {
 		name: 'blue tank top',
@@ -196,10 +206,11 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a blue tank top?',
 		inventoryText: 'Would you like your pet to wear this blue tank top?',
-		wearUri: require('../images/black_shoes.png'),
+		wearUri: require('../images/blue_tshirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "hot"
 	},
 	green_tank_top: {
 		name: 'green tank top',
@@ -208,10 +219,11 @@ const ItemInventory = {
 		category: 'clothes',
 		buyText: 'Would you like to buy a green tank top?',
 		inventoryText: 'Would you like your pet to wear this green tank top?',
-		wearUri: require('../images/black_shoes.png'),
+		wearUri: require('../images/green_tshirt.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "hot"
 	},
 	umbrella: {
 		name: 'umbrella',
@@ -223,7 +235,8 @@ const ItemInventory = {
 		wearUri: require('../images/black_shoes.png'),
 		benefits: {
 			Health: 0.3
-		}
+		},
+        weather: "rain"
 	},
 	ball: {
 		name: 'ball',

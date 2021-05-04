@@ -7,11 +7,12 @@ export const TIME_BATH_CHANGE = 'TIME_BATH_CHANGE';
 const curr = new Date();
 
 
-const timeOfBarsReducer = (state = [new Date(),new Date(),new Date(),new Date()], action) => {
-	let temp = [...state]
+const timeOfBarsReducer = (state = [curr,curr,curr,curr], action) => {
+    let temp = [...state]
 	switch (action.type) {
 		case TIME_FEED_CHANGE:
 		    temp[1] = action.data;
+		    console.log("fed at "+temp[1])
 			return temp;
 		case TIME_TOY_CHANGE:
         	temp[2] = action.data;
@@ -20,6 +21,7 @@ const timeOfBarsReducer = (state = [new Date(),new Date(),new Date(),new Date()]
 		    temp[3] = action.data;
 			return temp;
 		case TIME_CHANGE:
+		    console.log("reducer changing time "+action.data)
         	temp[0] = action.data;
         	return temp;
 		default:
