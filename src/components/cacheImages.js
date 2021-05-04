@@ -9,4 +9,9 @@ export function cacheImages(images){
             return Asset.fromModule(image).downloadAsync();
         }
     });
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> demo
