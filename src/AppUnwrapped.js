@@ -33,6 +33,7 @@ import {INC_DAYS_ROW, RESET_DAYS_ROW} from "./redux/daysInARow";
 import {INCREMENT_STAT, SET_STAT} from "./redux/statTracker";
 import {AUTHENTICATE} from "./redux/authenticated";
 import {SET_COLD, SET_HOT, SET_MILD} from "./redux/temperature";
+import {SET_IMG} from "./redux/weatherImg";
 
 export const RESET_BUTTON_PRESSED = 'RESET_BUTTON_PRESSED';
 import * as Notifications from 'expo-notifications';
@@ -55,9 +56,8 @@ const styles = StyleSheet.create({
 
 
 const AppUnwrapped = () => {
-	const [weather, setWeather] = React.useState(null);
-
 	const weatherStatusLog = useSelector(state => state.weatherStatus);
+	const weatherImage = useSelector(state=>state.weatherImg);
 	const dispatch = useDispatch();
 	const date = useSelector(state=>state.currentDay);
 	const isAuthenticated = useSelector(state=>state.authenticated)
@@ -84,7 +84,7 @@ const AppUnwrapped = () => {
 				)
 					.then(res => res.json())
 					.then(json => {
-						setWeather(json.daily[0].weather[0].icon);
+						dispatch({type: SET_IMG, data: json.daily[0].weather[0].icon});
 						if(json.daily[0].temp.day <= 50) {
 							dispatch({type: SET_COLD})
 							if (currentShirtType != "cold") {
@@ -145,8 +145,6 @@ const AppUnwrapped = () => {
             });
 
 	React.useEffect(() => {
-		getWeather();
-        dispatch({type: TIME_CHANGE, data: new Date()});
 		const interval = setInterval(() => {
 			console.log(weatherStatusLog, temperature);
 			const day = new Date();
@@ -168,7 +166,7 @@ const AppUnwrapped = () => {
 			}
 		}, 10000);
 		return () => clearInterval(interval);
-	}, [date]);
+	}, [date, weatherStatusLog, temperature]);
 
 
     const sendNotification = () => {
@@ -247,7 +245,7 @@ const AppUnwrapped = () => {
 									padding: 5,
 									backgroundColor: '#6d90f6',
 								}}>
-									<Image style={{width: 25, height: 40, marginRight: 5}}  source={{uri: `https://openweathermap.org/img/wn/${weather}@2x.png`}}/>
+									<Image style={{width: 25, height: 40, marginRight: 5}}  source={{uri: `https://openweathermap.org/img/wn/${weatherImage}@2x.png`}}/>
 									<Text style={{color: 'white', fontSize: 25 }}>{temperature}</Text>
 								</View>
 							),
