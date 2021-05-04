@@ -49,6 +49,9 @@ import authenticatedReducer from "./redux/authenticated";
 import temperatureReducer from "./redux/temperature";
 import weatherImgReducer from "./redux/weatherImg";
 
+import AppLoading from "expo-app-loading";
+import {cacheImages} from "./components/cacheImages.js";
+
 const reducer = combineReducers({
 	coins: balanceReducer,
 	shopItems: marketplaceInventoryReducer,
@@ -112,6 +115,35 @@ const persistor = persistStore(store);
 
 
 const App = () => {
+	// Pre-cache assets such as images
+	
+	const [assetsLoaded, setAssetsLoaded] = React.useState(false);
+
+	const _loadAssetsAsync = async() => {
+		const imageAssets = cacheImages([
+			require("./images/cat_happy.gif"),
+			require("./images/dog_happy.gif"),
+			require("./images/cat.png"),
+			require("./images/dog.png"),
+			require('./images/rain.gif'),
+			require("./images/cat_sad.gif"),
+			require("./images/dog_sad.gif")
+		])
+
+		await Promise.all({...imageAssets});
+	};
+
+	if(!assetsLoaded){
+		return(
+			<AppLoading
+				startAsync={_loadAssetsAsync}
+				onFinish={() => setAssetsLoaded(true)}
+				onError={console.warn}
+			/>
+		);
+	}
+	
+	// Now load main app...AppUnwrapped //
 	return (
 
 		<Provider store={store}>
